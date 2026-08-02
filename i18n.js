@@ -1,6 +1,6 @@
 window.DKG_I18N = {
   id: {
-    'nav.about': 'Tentang',
+    'nav.about': 'Tentang Kami',
     'nav.values': 'Nilai',
     'nav.business': 'Unit Bisnis',
     'nav.brands': 'Brand',
