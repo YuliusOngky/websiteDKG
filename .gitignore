@@ -1,0 +1,10 @@
+# Archives / drafts
+*.zip
+index(1).html
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

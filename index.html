@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PT Diana Karya Gemilang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+  :root{
+    --ink:#161513;
+    --charcoal:#2b2a27;
+    --paper:#f7f5f1;
+    --paper-2:#efece6;
+    --stone:#c9c4ba;
+    --line:#ddd8cf;
+    --brass:#9c8552;
+    --brass-soft:#b9a06b;
+    --muted:#7a766d;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'DM Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.18em;
+    font-size:11.5px;
+    color:var(--brass);
+    font-weight:600;
+    margin-bottom:14px;
+    display:inline-block;
+  }
+  a{color:inherit;}
+  section{position:relative;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:18px 0; transition:background .4s ease, padding .4s ease, border-color .4s ease;
+    border-bottom:1px solid transparent;
+  }
+  nav.scrolled, nav.open{
+    background:rgba(247,245,241,.94);
+    backdrop-filter:blur(12px);
+    padding:12px 0;
+    border-bottom-color:var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; max-width:1180px; margin:0 auto; padding:0 32px; gap:20px;}
+  .logo{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-size:18px; letter-spacing:.02em; text-decoration:none; z-index:102;}
+  .logo img{width:28px; height:28px; object-fit:contain;}
+  .nav-links{display:flex; gap:28px; font-size:13.5px; letter-spacing:.02em;}
+  .nav-links a{text-decoration:none; color:var(--charcoal); position:relative; padding-bottom:3px;}
+  .nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--brass);transition:width .3s ease;}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    border:1px solid var(--ink); padding:9px 20px; font-size:12.5px;
+    letter-spacing:.05em; text-decoration:none; text-transform:uppercase;
+    transition:background .3s ease,color .3s ease; white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--ink); color:var(--paper);}
+  .nav-actions{display:flex; align-items:center; gap:14px;}
+  .lang-switch{
+    display:inline-flex; align-items:center; gap:0;
+    border:1px solid var(--line); font-size:11.5px; letter-spacing:.08em;
+  }
+  .lang-switch button{
+    background:none; border:none; cursor:pointer; padding:7px 10px;
+    font-family:'DM Sans',sans-serif; font-size:11.5px; letter-spacing:.08em;
+    color:var(--muted); transition:background .2s ease, color .2s ease;
+  }
+  .lang-switch button.active{background:var(--ink); color:var(--paper);}
+  .burger{
+    display:none; flex-direction:column; gap:5px; cursor:pointer;
+    background:none; border:none; padding:8px; z-index:102;
+  }
+  .burger span{width:22px; height:1.5px; background:var(--ink); transition:transform .3s ease, opacity .3s ease; display:block;}
+  nav.open .burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  nav.open .burger span:nth-child(2){opacity:0;}
+  nav.open .burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+  /* HERO — plain cream + logo */
+  .hero{
+    min-height:100vh; display:flex; align-items:center;
+    position:relative; overflow:hidden;
+    padding-top:110px; padding-bottom:60px;
+    background:
+      radial-gradient(ellipse 900px 500px at 85% 20%, rgba(156,133,82,.12), transparent 60%),
+      var(--paper);
+  }
+  .hero-inner{
+    display:grid; grid-template-columns:1.15fr .85fr; gap:60px; align-items:center;
+    width:100%;
+  }
+  .hero .eyebrow{color:var(--brass);}
+  .hero h1{font-size:clamp(40px,6vw,74px); line-height:1.03;}
+  .hero h1 em{font-style:italic; color:var(--brass); font-weight:400;}
+  .hero p.lede{
+    margin-top:26px; max-width:590px; font-size:16.5px; line-height:1.7; color:var(--muted);
+  }
+  .hero-ctas{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap; align-items:center;}
+  .btn-primary{
+    background:var(--ink); color:var(--paper); text-decoration:none;
+    padding:15px 30px; font-size:13px; letter-spacing:.05em; text-transform:uppercase;
+    transition:background .3s ease, color .3s ease; display:inline-block;
+  }
+  .btn-primary:hover{background:var(--brass); color:var(--paper);}
+  .btn-ghost{
+    text-decoration:none; padding:15px 6px; font-size:13px; letter-spacing:.05em;
+    text-transform:uppercase; border-bottom:1px solid var(--ink); color:var(--ink);
+  }
+  .mark-wrap{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative; min-height:380px;
+  }
+  .mark-wrap img{
+    width:min(340px, 78%); height:auto; object-fit:contain; display:block;
+  }
+  .mark-label{
+    margin-top:28px;
+    font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+    max-width:320px; text-align:center; line-height:1.8;
+  }
+  .scroll-cue{
+    position:absolute; bottom:30px; left:32px; display:flex; align-items:center; gap:10px;
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
+  }
+  .scroll-cue .line{width:34px;height:1px;background:var(--muted);}
+
+  /* SECTION */
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(30px,4vw,44px); line-height:1.12;}
+  .section-pad{padding:120px 0;}
+  .section-pad.tight{padding:100px 0;}
+  .divider{height:1px; background:var(--line); border:none; margin:0;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:70px; align-items:start;}
+  .about-figure{
+    aspect-ratio:1; position:relative; border:1px solid var(--line); overflow:hidden;
+    background:var(--paper-2);
+  }
+  .about-figure img{width:100%; height:100%; object-fit:cover; display:block;}
+  .about-copy p{font-size:16px; line-height:1.85; color:var(--charcoal); margin:0 0 20px;}
+  .stat-row{display:flex; gap:48px; margin-top:36px; padding-top:32px; border-top:1px solid var(--line); flex-wrap:wrap;}
+  .stat b{font-family:'Fraunces',serif; font-size:30px; font-weight:500; display:block;}
+  .stat span{font-size:12.5px; color:var(--muted);}
+
+  .misi-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:26px; margin-top:30px;}
+  .misi-item{border-top:1px solid var(--line); padding-top:16px;}
+  .misi-num{font-family:'Fraunces',serif; font-style:italic; color:var(--brass); font-size:15px;}
+  .misi-item p{font-size:13.5px; line-height:1.65; color:var(--muted); margin:10px 0 0;}
+
+  /* VALUES */
+  .values-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--line); border:1px solid var(--line);}
+  .value-col{background:var(--paper); padding:36px 22px; text-align:left;}
+  .value-mark{font-family:'Fraunces',serif; font-style:italic; font-size:34px; color:var(--brass); display:block; margin-bottom:14px;}
+  .value-col h3{font-size:18px; margin-bottom:10px;}
+  .value-col p{font-size:13px; line-height:1.65; color:var(--muted); margin:0;}
+
+  /* BUSINESS */
+  .bisnis-strip{background:var(--ink); color:var(--paper);}
+  .bisnis-strip .eyebrow{color:var(--brass-soft);}
+  .bisnis-strip .section-head h2{color:var(--paper);}
+  .bisnis-strip .section-head p{color:#c8c4bb; margin:14px 0 0; font-size:15px; line-height:1.65;}
+  .unit-grid{display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid rgba(247,245,241,.15);}
+  .unit{
+    padding:44px 34px; border-right:1px solid rgba(247,245,241,.15);
+    min-height:340px; display:flex; flex-direction:column; justify-content:space-between;
+    transition:background .4s ease; position:relative; overflow:hidden;
+  }
+  .unit:last-child{border-right:none;}
+  .unit:hover{background:rgba(247,245,241,.05);}
+  .unit-num{font-size:12px; color:var(--brass-soft); letter-spacing:.1em;}
+  .unit h3{font-size:26px; color:var(--paper); margin:18px 0 10px;}
+  .unit p{font-size:14.5px; line-height:1.7; color:#bdb9b0; max-width:280px; margin:0;}
+  .unit-brands{font-size:12px; letter-spacing:.04em; color:var(--brass-soft); margin-top:14px;}
+  .unit-link{
+    margin-top:26px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+    display:inline-flex; align-items:center; gap:8px; color:var(--paper); text-decoration:none; cursor:pointer;
+  }
+  .unit-link svg{width:14px; transition:transform .3s ease;}
+  .extra-text{
+    max-height:0; overflow:hidden; opacity:0;
+    transition:max-height .4s ease, opacity .3s ease, margin-top .3s ease;
+  }
+  .unit.active .extra-text{max-height:220px; opacity:1; margin-top:12px;}
+  .unit.active .unit-link svg{transform:rotate(90deg);}
+
+  /* BRANDS */
+  .brands-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--line); border:1px solid var(--line);}
+  .brand-card{
+    background:var(--paper); padding:40px 28px; min-height:260px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    transition:background .35s ease;
+  }
+  .brand-card:hover{background:var(--paper-2);}
+  .brand-card .tag{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--brass);}
+  .brand-card h3{font-size:24px; margin:16px 0 10px;}
+  .brand-card p{font-size:14px; line-height:1.65; color:var(--muted); margin:0;}
+
+  /* PRODUCTS */
+  .showcase-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line);}
+  .showcase-grid.five{grid-template-columns:repeat(5,1fr);}
+  .showcase-item{
+    aspect-ratio:1/1.08; background:var(--paper);
+    display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+  }
+  .showcase-item img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform .6s ease;
+  }
+  .showcase-item:hover img{transform:scale(1.04);}
+  .showcase-item .cap{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:40px 16px 14px;
+    background:linear-gradient(transparent, rgba(22,21,19,.72));
+    color:var(--paper); font-size:14px; font-family:'Fraunces',serif; font-style:italic;
+  }
+  .showcase-item .cap small{
+    display:block; font-family:'DM Sans',sans-serif; font-style:normal;
+    font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; opacity:.8; margin-bottom:4px;
+  }
+
+  /* GALLERY atmospheric */
+  .gallery-grid{display:grid; grid-template-columns:1.2fr 1fr 1fr; grid-template-rows:auto auto; gap:2px; background:var(--line);}
+  .gallery-item{position:relative; overflow:hidden; background:var(--paper-2); min-height:240px;}
+  .gallery-item.wide{grid-row:span 2; min-height:500px;}
+  .gallery-item img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .7s ease;}
+  .gallery-item:hover img{transform:scale(1.05);}
+  .gallery-item .cap{
+    position:absolute; left:16px; bottom:14px;
+    font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--paper);
+    text-shadow:0 1px 8px rgba(0,0,0,.4);
+  }
+
+  /* BLOG */
+  .blog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:36px;}
+  .blog-card .blog-img{aspect-ratio:16/10; margin-bottom:20px; border:1px solid var(--line); overflow:hidden; background:var(--paper-2);}
+  .blog-card .blog-img img{width:100%; height:100%; object-fit:cover; display:block;}
+  .blog-card .tag{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass);}
+  .blog-card h3{font-size:19px; margin:10px 0 8px; line-height:1.4;}
+  .blog-card p{font-size:14px; color:var(--muted); line-height:1.6; margin:0;}
+
+  /* FAQ */
+  .faq-list{max-width:800px;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; cursor:pointer;
+    padding:26px 0; display:flex; align-items:center; justify-content:space-between; gap:16px;
+    font-family:'Fraunces',serif; font-size:19px; color:var(--ink);
+  }
+  .faq-q .plus{font-family:'DM Sans',sans-serif; font-size:20px; color:var(--brass); transition:transform .3s ease; flex-shrink:0;}
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  .faq-a p{font-size:15px; line-height:1.75; color:var(--muted); padding-bottom:26px; max-width:640px; margin:0;}
+
+  /* CONTACT */
+  .contact-strip{background:var(--paper-2);}
+  .contact-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:70px; align-items:center;}
+  .contact-copy h2{font-size:clamp(32px,4.5vw,50px); line-height:1.1;}
+  .contact-actions{display:flex; gap:18px; margin-top:32px; flex-wrap:wrap;}
+  .contact-meta{margin-top:28px; font-size:14px; color:var(--muted); line-height:1.8;}
+  .contact-address{
+    margin-top:28px; padding-top:24px; border-top:1px solid var(--line);
+    font-size:14.5px; color:var(--charcoal); line-height:1.75; max-width:420px;
+  }
+  .contact-address strong{
+    display:block; font-family:'Fraunces',serif; font-weight:500;
+    font-size:16px; margin-bottom:8px; color:var(--ink);
+  }
+  .footer-address{
+    margin-top:14px; font-size:13px; line-height:1.7; color:#a19d94; max-width:280px;
+  }
+  .contact-map{
+    aspect-ratio:4/3; border:1px solid var(--line); overflow:hidden;
+    background:var(--paper-2); position:relative; min-height:320px;
+  }
+  .contact-map #officeMap{width:100%; height:100%; min-height:320px; z-index:1;}
+  .map-open-btn{
+    position:absolute; left:50%; bottom:16px; transform:translateX(-50%);
+    z-index:2; background:var(--ink); color:var(--paper);
+    padding:12px 20px; font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    text-decoration:none; white-space:nowrap;
+    transition:background .3s ease;
+  }
+  .map-open-btn:hover{background:var(--brass);}
+  .leaflet-container{font-family:'DM Sans',sans-serif; cursor:pointer;}
+  .leaflet-popup-content-wrapper{
+    border-radius:0; box-shadow:none; border:1px solid var(--line);
+    font-size:13px; line-height:1.55; color:var(--ink);
+  }
+  .leaflet-popup-content{margin:12px 14px;}
+  .leaflet-popup-content strong{font-family:'Fraunces',serif; font-weight:500; display:block; margin-bottom:4px;}
+  .leaflet-popup-content a{color:var(--brass); font-weight:600;}
+  .leaflet-popup-tip{box-shadow:none;}
+  .leaflet-control-attribution{font-size:10px;}
+
+  footer{background:var(--ink); color:#a19d94; padding:60px 0 30px;}
+  .footer-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:30px; padding-bottom:40px; border-bottom:1px solid rgba(247,245,241,.12);}
+  .footer-logo{font-family:'Fraunces',serif; font-size:22px; color:var(--paper);}
+  .footer-cols{display:flex; gap:70px;}
+  .footer-col h4{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--paper); margin:0 0 16px; font-family:'DM Sans',sans-serif;}
+  .footer-col a{display:block; font-size:14px; color:#a19d94; text-decoration:none; margin-bottom:10px;}
+  .footer-col a:hover{color:var(--brass-soft);}
+  .footer-bottom{display:flex; justify-content:space-between; padding-top:24px; font-size:12.5px; flex-wrap:wrap; gap:10px;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:1100px){
+    .showcase-grid.five{grid-template-columns:repeat(3,1fr);}
+    .brands-grid{grid-template-columns:repeat(2,1fr);}
+    .gallery-grid{grid-template-columns:1fr 1fr; grid-template-rows:auto;}
+    .gallery-item.wide{grid-row:span 1; grid-column:span 2; min-height:320px;}
+  }
+  @media (max-width:1024px){
+    .unit-grid{grid-template-columns:repeat(2,1fr);}
+    .values-grid{grid-template-columns:repeat(3,1fr);}
+    .misi-grid{grid-template-columns:repeat(3,1fr);}
+    .nav-links, .nav-actions .nav-cta{display:none;}
+    .burger{display:flex;}
+    .nav-actions{gap:10px;}
+    .nav-actions .lang-switch{display:inline-flex;}
+    .mobile-panel{
+      display:none; position:fixed; inset:0; z-index:101;
+      background:rgba(247,245,241,.98); padding:100px 32px 40px;
+      flex-direction:column; gap:8px;
+    }
+    nav.open .mobile-panel{display:flex;}
+    .mobile-panel a{
+      text-decoration:none; font-size:22px; font-family:'Fraunces',serif;
+      padding:14px 0; border-bottom:1px solid var(--line); color:var(--ink);
+    }
+    .mobile-panel .mobile-cta{
+      margin-top:24px; text-align:center; border:1px solid var(--ink);
+      font-family:'DM Sans',sans-serif; font-size:13px; letter-spacing:.08em;
+      text-transform:uppercase; padding:16px;
+    }
+  }
+  @media (max-width:860px){
+    .about-grid{grid-template-columns:1fr;}
+    .unit-grid{grid-template-columns:1fr;}
+    .unit{border-right:none; border-bottom:1px solid rgba(247,245,241,.15);}
+    .values-grid{grid-template-columns:repeat(2,1fr);}
+    .misi-grid{grid-template-columns:1fr; gap:14px;}
+    .showcase-grid, .showcase-grid.five{grid-template-columns:repeat(2,1fr);}
+    .brands-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:1fr;}
+    .gallery-item.wide{grid-column:span 1; min-height:280px;}
+    .blog-grid{grid-template-columns:1fr; gap:44px;}
+    .contact-grid{grid-template-columns:1fr;}
+    .footer-top{flex-direction:column;}
+    .hero-inner{grid-template-columns:1fr; gap:40px;}
+    .mark-wrap{min-height:220px; order:-1;}
+    .mark-wrap img{width:min(220px, 55%);}
+    .scroll-cue{display:none;}
+  }
+  @media (min-width:1025px){
+    .mobile-panel{display:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <img src="images/logo-dkg.png" alt="">
+      Diana Karya Gemilang
+    </a>
+    <div class="nav-links">
+      <a href="#tentang" data-i18n="nav.about">Tentang</a>
+      <a href="#nilai" data-i18n="nav.values">Nilai</a>
+      <a href="#bisnis" data-i18n="nav.business">Unit Bisnis</a>
+      <a href="#brands" data-i18n="nav.brands">Brand</a>
+      <a href="#produk" data-i18n="nav.products">Produk</a>
+      <a href="#galeri" data-i18n="nav.gallery">Galeri</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="id" class="active">ID</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a href="#kontak" class="nav-cta" data-i18n="nav.contact">Hubungi Kami</a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#tentang" data-i18n="nav.about">Tentang</a>
+    <a href="#nilai" data-i18n="nav.values">Nilai</a>
+    <a href="#bisnis" data-i18n="nav.business">Unit Bisnis</a>
+    <a href="#brands" data-i18n="nav.brands">Brand</a>
+    <a href="#produk" data-i18n="nav.products">Produk</a>
+    <a href="#galeri" data-i18n="nav.gallery">Galeri</a>
+    <a href="#artikel" data-i18n="nav.articles">Artikel</a>
+    <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    <a href="#kontak" class="mobile-cta" data-i18n="nav.contact">Hubungi Kami</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="reveal in">
+      <span class="eyebrow">PT Diana Karya Gemilang</span>
+      <h1>Elevating <em>Lifestyle</em><br>Experiences</h1>
+      <p class="lede" data-i18n="hero.lede" data-i18n-html>PT Diana Karya Gemilang adalah perusahaan Indonesia yang berdedikasi meningkatkan pengalaman lifestyle melalui desain, craftsmanship, dan hospitality yang luar biasa.<br><br>Brand kami meliputi Elementi Domus dan Legnotura yang mengkhususkan diri pada manufaktur interior premium, serta Lenore Exquisite Dining dan Terrata Social Dining yang menghadirkan kuliner Western, Italian, Asian, dan Indonesian fusion yang dikurasi dengan cermat. Bersama, brand kami mencerminkan semangat craftsmanship, inovasi, dan kualitas yang abadi.</p>
+      <div class="hero-ctas">
+        <a href="#bisnis" class="btn-primary" data-i18n="hero.cta1">Jelajahi Unit Bisnis</a>
+        <a href="#tentang" class="btn-ghost" data-i18n="hero.cta2">Tentang Kami</a>
+      </div>
+    </div>
+    <div class="mark-wrap reveal in">
+      <img src="images/logo-dkg.png" alt="Logo PT Diana Karya Gemilang">
+      <span class="mark-label">Integrity · Excellence · Innovation · Collaboration · Sustainability</span>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span> <span data-i18n="hero.scroll">Gulir</span></div>
+</section>
+
+<section class="section-pad" id="tentang">
+  <div class="wrap about-grid">
+    <div class="about-figure reveal">
+      <img src="images/activities-opt.jpg" alt="Kegiatan PT Diana Karya Gemilang">
+    </div>
+    <div class="about-copy reveal">
+      <span class="eyebrow" data-i18n="about.eyebrow">Tentang Kami</span>
+      <h2 style="margin-bottom:24px;" data-i18n="about.title">Satu visi, disatukan lewat sinergi antar anak perusahaan.</h2>
+      <p data-i18n="about.p1">PT Diana Karya Gemilang merupakan perusahaan induk (holding company) yang membawahi berbagai unit usaha di bidang Lifestyle, Hospitality, Food &amp; Beverage, serta Manufacturing — didirikan dengan komitmen menghadirkan produk dan layanan premium yang memberikan nilai tambah bagi pelanggan, mitra usaha, serta masyarakat.</p>
+      <p data-i18n="about.p2" data-i18n-html>Dengan tata kelola perusahaan yang baik (<em style="font-family:'Fraunces',serif;">Good Corporate Governance</em>), sumber daya manusia yang profesional, serta budaya kerja yang berlandaskan integritas, kami berkomitmen tumbuh secara berkelanjutan dan bersaing di tingkat nasional maupun internasional.</p>
+      <div class="stat-row">
+        <div class="stat"><b>4</b><span data-i18n="about.stat1">Unit Bisnis</span></div>
+        <div class="stat"><b>4</b><span data-i18n="about.stat2">Brand Utama</span></div>
+        <div class="stat"><b>5</b><span data-i18n="about.stat3">Nilai Inti</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap reveal" style="margin-top:90px; padding-top:70px; border-top:1px solid var(--line);">
+    <span class="eyebrow" data-i18n="vision.eyebrow">Visi Perusahaan</span>
+    <div class="section-head" style="margin-bottom:0;">
+      <h2 data-i18n="vision.title">Menjadi Premium Lifestyle and Hospitality Group terkemuka di Indonesia dan kawasan regional.</h2>
+    </div>
+  </div>
+
+  <div class="wrap misi-block reveal" style="margin-top:70px; padding-top:70px; border-top:1px solid var(--line);">
+    <span class="eyebrow" data-i18n="mission.eyebrow">Misi Perusahaan</span>
+    <div class="misi-grid">
+      <div class="misi-item"><span class="misi-num">01</span><p data-i18n="mission.1">Mengembangkan portofolio bisnis premium yang berorientasi pada kualitas, inovasi, dan kepuasan pelanggan.</p></div>
+      <div class="misi-item"><span class="misi-num">02</span><p data-i18n="mission.2">Membangun budaya perusahaan yang menjunjung tinggi integritas, profesionalisme, dan kolaborasi.</p></div>
+      <div class="misi-item"><span class="misi-num">03</span><p data-i18n="mission.3">Menerapkan tata kelola perusahaan yang baik (GCG) dalam setiap aktivitas bisnis.</p></div>
+      <div class="misi-item"><span class="misi-num">04</span><p data-i18n="mission.4">Menciptakan pertumbuhan berkelanjutan melalui inovasi, efisiensi, dan pengembangan sumber daya manusia.</p></div>
+      <div class="misi-item"><span class="misi-num">05</span><p data-i18n="mission.5">Memberikan kontribusi positif bagi masyarakat, lingkungan, serta seluruh pemangku kepentingan.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad tight values-strip" id="nilai" style="background:var(--paper-2);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="values.eyebrow">Nilai Inti</span>
+      <h2 data-i18n="values.title">Lima pilar yang menjadi fondasi setiap keputusan kami.</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-col reveal"><span class="value-mark">I</span><h3>Integrity</h3><p data-i18n="values.integrity">Menjalankan bisnis secara jujur, transparan, dan menjunjung tinggi etika profesional.</p></div>
+      <div class="value-col reveal"><span class="value-mark">E</span><h3>Excellence</h3><p data-i18n="values.excellence">Berkomitmen memberikan kualitas terbaik di setiap produk, layanan, dan proses bisnis.</p></div>
+      <div class="value-col reveal"><span class="value-mark">I</span><h3>Innovation</h3><p data-i18n="values.innovation">Terus beradaptasi dan mendorong lahirnya ide baru yang memberi nilai tambah.</p></div>
+      <div class="value-col reveal"><span class="value-mark">C</span><h3>Collaboration</h3><p data-i18n="values.collaboration">Percaya bahwa keberhasilan dibangun lewat kerja sama dan sinergi antar pihak.</p></div>
+      <div class="value-col reveal"><span class="value-mark">S</span><h3>Sustainability</h3><p data-i18n="values.sustainability">Menyeimbangkan pertumbuhan ekonomi dengan tanggung jawab sosial dan lingkungan.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="bisnis-strip section-pad" id="bisnis">
+  <div class="wrap section-head">
+    <span class="eyebrow" data-i18n="business.eyebrow">Unit Bisnis</span>
+    <h2 data-i18n="business.title">Empat lini bisnis, satu standar kualitas premium.</h2>
+    <p data-i18n="business.lede">Hospitality, Food &amp; Beverage, Manufacturing, dan Lifestyle — dikelola secara sinergis di bawah PT Diana Karya Gemilang.</p>
+  </div>
+  <div class="unit-grid">
+    <div class="unit reveal">
+      <div>
+        <span class="unit-num">01</span>
+        <h3>Hospitality</h3>
+        <p data-i18n="business.h.desc">Pengembangan dan pengelolaan bisnis hospitality yang mengedepankan kenyamanan, kualitas pelayanan, dan pengalaman pelanggan.</p>
+        <div class="extra-text">
+          <p data-i18n="business.h.more">Layanan kami mencakup manajemen hotel boutique, resort eksklusif, serta strategi optimalisasi kepuasan tamu dengan standar internasional.</p>
+        </div>
+      </div>
+      <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="unit reveal">
+      <div>
+        <span class="unit-num">02</span>
+        <h3>Food &amp; Beverage</h3>
+        <p data-i18n="business.f.desc">Pengelolaan restoran dan konsep kuliner premium dengan standar pelayanan dan kualitas terbaik.</p>
+        <p class="unit-brands">Lenore · Terrata</p>
+        <div class="extra-text">
+          <p data-i18n="business.f.more">Kami menghadirkan inovasi menu berkelanjutan, manajemen rantai pasok kuliner, serta pengalaman bersantap eksklusif di setiap lini usaha.</p>
+        </div>
+      </div>
+      <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="unit reveal">
+      <div>
+        <span class="unit-num">03</span>
+        <h3>Manufacturing</h3>
+        <p data-i18n="business.m.desc">Produksi furnitur dan produk berkualitas tinggi dengan mengutamakan desain, presisi, serta inovasi.</p>
+        <p class="unit-brands">Elementi Domus · Legnotura</p>
+        <div class="extra-text">
+          <p data-i18n="business.m.more">Fasilitas manufaktur kami didukung oleh teknologi modern dan pengrajin berpengalaman untuk menghasilkan karya berestetika tinggi.</p>
+        </div>
+      </div>
+      <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="unit reveal">
+      <div>
+        <span class="unit-num">04</span>
+        <h3 data-i18n="business.l.title">Lifestyle Business</h3>
+        <p data-i18n="business.l.desc">Pengembangan bisnis yang mendukung gaya hidup modern, mengedepankan kualitas, estetika, dan kepuasan pelanggan.</p>
+        <div class="extra-text">
+          <p data-i18n="business.l.more">Menjangkau berbagai sektor ritel, kebugaran, dan hiburan yang dirancang untuk melengkapi kebutuhan gaya hidup eksklusif masa kini.</p>
+        </div>
+      </div>
+      <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="brands">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="brands.eyebrow">Brand Kami</span>
+      <h2 data-i18n="brands.title">Empat brand, satu semangat craftsmanship.</h2>
+    </div>
+    <div class="brands-grid">
+      <div class="brand-card reveal">
+        <div>
+          <span class="tag">Manufacturing</span>
+          <h3>Elementi Domus</h3>
+          <p data-i18n="brands.ed">Manufaktur interior premium — kitchen series dan solusi ruang yang mengutamakan detail serta material berkualitas.</p>
+        </div>
+      </div>
+      <div class="brand-card reveal">
+        <div>
+          <span class="tag">Manufacturing</span>
+          <h3>Legnotura</h3>
+          <p data-i18n="brands.lg">Spesialis wood panel dan finishing kayu yang menghadirkan tekstur, karakter, dan ketahanan untuk ruang premium.</p>
+        </div>
+      </div>
+      <div class="brand-card reveal">
+        <div>
+          <span class="tag">Food &amp; Beverage</span>
+          <h3>Lenore</h3>
+          <p data-i18n="brands.ln">Exquisite dining dengan kurasi rasa Western, Italian, dan fusion yang mengutamakan pengalaman bersantap yang refined.</p>
+        </div>
+      </div>
+      <div class="brand-card reveal">
+        <div>
+          <span class="tag">Food &amp; Beverage</span>
+          <h3>Terrata</h3>
+          <p data-i18n="brands.tr">Social dining yang hangat — Asian dan Indonesian fusion dalam suasana yang mengundang untuk berkumpul.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad tight" id="produk" style="background:var(--paper-2);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="products.eyebrow">Produk &amp; Layanan</span>
+      <h2 data-i18n="products.title">Showcase produk andalan dari lini manufaktur kami.</h2>
+    </div>
+  </div>
+  <div class="showcase-grid five">
+    <div class="showcase-item reveal">
+      <img src="images/product1.png" alt="UMA by Elementi Domus">
+      <div class="cap"><small>Elementi Domus</small>UMA — Kitchen Series</div>
+    </div>
+    <div class="showcase-item reveal">
+      <img src="images/product2.png" alt="Produk Elementi Domus">
+      <div class="cap"><small>Elementi Domus</small>Kitchen Collection</div>
+    </div>
+    <div class="showcase-item reveal">
+      <img src="images/product3.png" alt="Produk Elementi Domus">
+      <div class="cap"><small>Elementi Domus</small>Interior Series</div>
+    </div>
+    <div class="showcase-item reveal">
+      <img src="images/product4.png" alt="AVANI by Elementi Domus">
+      <div class="cap"><small>Elementi Domus</small>AVANI — Kitchen Series</div>
+    </div>
+    <div class="showcase-item reveal">
+      <img src="images/product5.png" alt="Wood Panel by Legnotura">
+      <div class="cap"><small>Legnotura</small>Wood Panel</div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="galeri">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="gallery.eyebrow">Galeri</span>
+      <h2 data-i18n="gallery.title">Atmosfer di balik workshop, dapur, dan ruang kami.</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide reveal">
+        <img src="images/gallery-01.JPG" alt="Furniture manufacturing">
+        <span class="cap" data-i18n="gallery.1">Manufaktur Furnitur</span>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="images/gallery-02.jpg" alt="Dining restaurant">
+        <span class="cap" data-i18n="gallery.2">Pengalaman Dining</span>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="images/gallery-03.jpg" alt="Exterior restaurant">
+        <span class="cap" data-i18n="gallery.3">Eksterior Restoran</span>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="images/PTDKG-activities-opt.jpg" alt="Aktivitas tim DKG">
+        <span class="cap" data-i18n="gallery.4">Aktivitas Tim</span>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="images/activities-opt.jpg" alt="Kegiatan perusahaan">
+        <span class="cap" data-i18n="gallery.5">Kegiatan Perusahaan</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad tight" id="artikel" style="background:var(--paper-2);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="articles.eyebrow">Artikel</span>
+      <h2 data-i18n="articles.title">Insight dan kabar terbaru dari grup kami.</h2>
+    </div>
+    <div class="blog-grid">
+      <article class="blog-card reveal">
+        <div class="blog-img"><img src="images/article-01.jpg" alt=""></div>
+        <span class="tag">Hospitality</span>
+        <h3 data-i18n="articles.a1.t">Standar servis premium di setiap unit kami</h3>
+        <p data-i18n="articles.a1.d">Bagaimana kami menjaga konsistensi pengalaman tamu di seluruh properti dan brand hospitality.</p>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-img"><img src="images/article-02.jpg" alt=""></div>
+        <span class="tag" data-i18n="articles.a2.tag">Kuliner</span>
+        <h3 data-i18n="articles.a2.t">Di balik konsep rasa setiap menu signature</h3>
+        <p data-i18n="articles.a2.d">Proses kurasi bahan dan resep yang menjadi identitas Lenore dan Terrata.</p>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-img"><img src="images/article-03.jpg" alt=""></div>
+        <span class="tag" data-i18n="articles.a3.tag">Perusahaan</span>
+        <h3 data-i18n="articles.a3.t">Arah ekspansi lini bisnis di 2026</h3>
+        <p data-i18n="articles.a3.d">Langkah strategis pengembangan unit usaha dan sinergi antar brand grup.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="faq.eyebrow">FAQ</span>
+      <h2 data-i18n="faq.title">Pertanyaan yang sering diajukan.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item open">
+        <button class="faq-q" type="button"><span data-i18n="faq.q1">Apa saja unit usaha di bawah PT Diana Karya Gemilang?</span> <span class="plus">+</span></button>
+        <div class="faq-a"><p data-i18n="faq.a1">PT Diana Karya Gemilang menaungi empat unit bisnis: Hospitality, Food &amp; Beverage, Manufacturing, dan Lifestyle — dengan brand utama Elementi Domus, Legnotura, Lenore Exquisite Dining, dan Terrata Social Dining.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button"><span data-i18n="faq.q2">Bagaimana cara menghubungi tim kami?</span> <span class="plus">+</span></button>
+        <div class="faq-a"><p data-i18n="faq.a2">Anda dapat menghubungi kami melalui WhatsApp atau email pada bagian Kontak di bawah, atau mengunjungi lokasi kami langsung.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button"><span data-i18n="faq.q3">Apakah tersedia informasi promo terbaru?</span> <span class="plus">+</span></button>
+        <div class="faq-a"><p data-i18n="faq.a3">Ya. Informasi promo dan penawaran khusus diperbarui secara berkala pada bagian Artikel serta kanal media sosial brand masing-masing.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button"><span data-i18n="faq.q4">Apa perbedaan Elementi Domus dan Legnotura?</span> <span class="plus">+</span></button>
+        <div class="faq-a"><p data-i18n="faq.a4">Elementi Domus berfokus pada high-end interior manufacturing seperti kitchen series, sementara Legnotura mengkhususkan diri pada wood panel dan finishing kayu untuk ruang premium.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad contact-strip" id="kontak">
+  <div class="wrap contact-grid">
+    <div class="contact-copy reveal">
+      <span class="eyebrow" data-i18n="contact.eyebrow">Kontak</span>
+      <h2 data-i18n="contact.title">Mari terhubung dengan kami.</h2>
+      <p style="margin-top:20px; color:var(--muted); font-size:15.5px; max-width:420px; line-height:1.7;" data-i18n="contact.lede">Untuk pertanyaan produk, kerja sama, atau reservasi, tim kami siap membantu.</p>
+      <div class="contact-actions">
+        <a href="https://wa.me/62811927359" class="btn-primary" id="waBtn" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="mailto:info@dianakaryagemilang.com" class="btn-ghost">Email</a>
+      </div>
+      <div class="contact-address">
+        <strong>PT. Diana Karya Gemilang</strong>
+        Fllow Coworking Square Lt. 2 DS-11, Gedung Midplaza 1<br>
+        Jl. Jendral Sudirman Kav 10-11<br>
+        Karet Tengsin, Jakarta Pusat 10220
+      </div>
+      <div class="contact-meta">
+        WhatsApp: <a href="https://wa.me/62811927359" target="_blank" rel="noopener">0811-927-359</a><br>
+        Email: info@dianakaryagemilang.com
+      </div>
+    </div>
+    <div class="contact-map reveal">
+      <div id="officeMap" role="application" aria-label="Peta lokasi PT Diana Karya Gemilang" data-i18n-aria="contact.mapAria"></div>
+      <a class="map-open-btn" id="openGoogleMaps" href="https://www.google.com/maps/search/?api=1&amp;query=Midplaza%201%20Jl.%20Jendral%20Sudirman%20Kav%2010-11%20Jakarta%20Pusat" target="_blank" rel="noopener" data-i18n="contact.map">Buka di Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad tight" style="background:var(--ink);">
+  <div class="wrap reveal" style="max-width:760px; text-align:center; margin:0 auto;">
+    <p style="font-family:'Fraunces',serif; font-style:italic; font-size:clamp(19px,2.4vw,25px); line-height:1.65; color:#e7e4dd; margin:0;">
+      “At PT Diana Karya Gemilang, we do not merely build businesses — we cultivate lasting value, meaningful experiences, and trusted relationships.”
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">PT Diana Karya Gemilang</div>
+        <p class="footer-address">
+          Fllow Coworking Square Lt. 2 DS-11, Gedung Midplaza 1<br>
+          Jl. Jendral Sudirman Kav 10-11<br>
+          Karet Tengsin, Jakarta Pusat 10220
+        </p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4 data-i18n="footer.nav">Navigasi</h4>
+          <a href="#tentang" data-i18n="nav.about">Tentang</a>
+          <a href="#bisnis" data-i18n="nav.business">Unit Bisnis</a>
+          <a href="#brands" data-i18n="nav.brands">Brand</a>
+          <a href="#produk" data-i18n="nav.products">Produk</a>
+          <a href="#artikel" data-i18n="nav.articles">Artikel</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.contact">Kontak</h4>
+          <a href="https://wa.me/62811927359" id="waFooter" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="mailto:info@dianakaryagemilang.com">Email</a>
+          <a href="#kontak" data-i18n="footer.location">Lokasi</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.rights">© 2026 PT Diana Karya Gemilang. Hak cipta dilindungi.</span>
+      <span data-i18n="footer.dev">dikembangkan oleh RM Studio</span>
+    </div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+  const nav = document.getElementById('nav');
+  const burger = document.getElementById('burger');
+  const mobilePanel = document.getElementById('mobilePanel');
+  let currentLang = localStorage.getItem('dkg-lang') || 'id';
+
+  function t(key) {
+    const pack = window.DKG_I18N[currentLang] || window.DKG_I18N.id;
+    return pack[key] || window.DKG_I18N.id[key] || key;
+  }
+
+  function applyLanguage(lang) {
+    currentLang = (lang === 'en') ? 'en' : 'id';
+    localStorage.setItem('dkg-lang', currentLang);
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll('.lang-switch button').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === currentLang);
+    });
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const val = t(key);
+      if (el.hasAttribute('data-i18n-html')) el.innerHTML = val;
+      else el.textContent = val;
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+    });
+    burger.setAttribute('aria-label', t('nav.menu'));
+    // Reset unit expand labels to "more" for closed, "less" for open
+    document.querySelectorAll('.unit').forEach(u => {
+      const label = u.querySelector('.link-label');
+      if (!label) return;
+      label.textContent = u.classList.contains('active') ? t('business.less') : t('business.more');
+    });
+    // Refresh open FAQ height after text change
+    document.querySelectorAll('.faq-item.open .faq-a').forEach(a => {
+      a.style.maxHeight = a.scrollHeight + 'px';
+    });
+    if (typeof updateMapPopup === 'function') updateMapPopup();
+  }
+
+  document.querySelectorAll('.lang-switch button').forEach(btn => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+  });
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  burger.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  mobilePanel.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  document.querySelectorAll('.unit-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parentUnit = this.closest('.unit');
+      const label = this.querySelector('.link-label');
+      const willOpen = !parentUnit.classList.contains('active');
+      document.querySelectorAll('.unit').forEach(u => {
+        u.classList.remove('active');
+        const l = u.querySelector('.link-label');
+        if (l) l.textContent = t('business.more');
+      });
+      if (willOpen) {
+        parentUnit.classList.add('active');
+        label.textContent = t('business.less');
+      }
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const answer = item.querySelector('.faq-a');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+  document.querySelectorAll('.faq-item.open .faq-a').forEach(a => {
+    a.style.maxHeight = a.scrollHeight + 'px';
+  });
+
+  /* Office map — preview OpenStreetMap; klik membuka Google Maps */
+  const officeLatLng = [-6.20965, 106.82155];
+  const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' +
+    encodeURIComponent('PT. Diana Karya Gemilang, Fllow Coworking Square Lt. 2 DS-11, Gedung Midplaza 1, Jl. Jendral Sudirman Kav 10-11, Karet Tengsin, Jakarta Pusat 10220');
+
+  const openGoogleMapsBtn = document.getElementById('openGoogleMaps');
+  openGoogleMapsBtn.href = googleMapsUrl;
+
+  const officeMap = L.map('officeMap', {
+    scrollWheelZoom: false,
+    zoomControl: true
+  }).setView(officeLatLng, 17);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+  }).addTo(officeMap);
+
+  function openGoogleMaps() {
+    window.open(googleMapsUrl, '_blank', 'noopener');
+  }
+
+  const marker = L.marker(officeLatLng).addTo(officeMap);
+
+  function updateMapPopup() {
+    marker.bindPopup(
+      '<strong>PT. Diana Karya Gemilang</strong>' +
+      'Fllow Coworking Square Lt. 2 DS-11<br>' +
+      'Gedung Midplaza 1<br>' +
+      'Jl. Jendral Sudirman Kav 10-11<br>' +
+      'Karet Tengsin, Jakarta Pusat 10220<br><br>' +
+      '<a href="' + googleMapsUrl + '" target="_blank" rel="noopener">' + t('contact.map') + ' →</a>'
+    );
+  }
+  updateMapPopup();
+  marker.openPopup();
+
+  marker.on('click', openGoogleMaps);
+  officeMap.on('click', (e) => {
+    if (e.originalEvent && e.originalEvent.target.closest('.leaflet-control')) return;
+    openGoogleMaps();
+  });
+  officeMap.on('mouseout', () => {
+    officeMap.scrollWheelZoom.disable();
+  });
+  officeMap.on('focus', () => officeMap.scrollWheelZoom.enable());
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        if (e.target.contains(document.getElementById('officeMap')) || e.target.id === 'officeMap' || e.target.classList.contains('contact-map')) {
+          setTimeout(() => officeMap.invalidateSize(), 200);
+        }
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  window.addEventListener('load', () => officeMap.invalidateSize());
+
+  applyLanguage(currentLang);
+</script>
+
+</body>
+</html>
