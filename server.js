@@ -135,6 +135,14 @@ app.get('/api/health', (_req, res) => {
   });
 });
 
+/* On Vercel, public/ is CDN; Express still may receive "/" — redirect to index */
+app.get('/', (_req, res) => {
+  if (process.env.VERCEL) {
+    return res.redirect(302, '/index.html');
+  }
+  res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
+});
+
 /* Local only: Vercel serves public/ via CDN and ignores express.static */
 if (!process.env.VERCEL) {
   app.use('/uploads', express.static(UPLOAD_DIR));
@@ -143,9 +151,6 @@ if (!process.env.VERCEL) {
     index: false,
     extensions: ['html']
   }));
-  app.get('/', (_req, res) => {
-    res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
-  });
 }
 
 app.use((err, _req, res, _next) => {
