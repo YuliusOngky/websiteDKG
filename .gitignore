@@ -8,3 +8,9 @@ Thumbs.db
 *.swp
 .vscode/
 .idea/
+
+# CMS / Node
+node_modules/
+.env
+uploads/*
+!uploads/.gitkeep

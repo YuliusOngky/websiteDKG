@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DKG CMS Admin</title>
+  <link rel="stylesheet" href="/admin/admin.css?v=5">
+</head>
+<body>
+  <div id="loginView" class="login-view">
+    <!-- Form klasik: jalan meski JS bermasalah -->
+    <form id="loginForm" class="login-card" method="POST" action="/api/auth/login-form">
+      <div class="login-brand">DKG CMS</div>
+      <h1>Admin Dashboard</h1>
+      <p>Masuk untuk mengelola konten &amp; SEO website.</p>
+      <label>Password
+        <input type="password" name="password" id="password" required autocomplete="current-password" placeholder="Password admin" value="">
+      </label>
+      <button type="submit">Masuk</button>
+      <p class="muted" style="font-size:12px;margin:0">
+        Buka: <code>http://localhost:3001/admin/</code><br>
+        Password default: <code>admin123</code>
+      </p>
+      <p id="loginError" class="error" hidden>Password salah. Coba: <code>admin123</code></p>
+    </form>
+  </div>
+
+  <div id="dashView" class="dash" hidden style="display:none">
+    <aside class="sidebar">
+      <div class="side-brand">
+        <strong>DKG CMS</strong>
+        <span>Dashboard</span>
+      </div>
+      <nav>
+        <button type="button" data-view="overview" class="nav-item active">Overview</button>
+        <button type="button" data-view="content" class="nav-item">Konten</button>
+        <button type="button" data-view="seo" class="nav-item">SEO</button>
+        <button type="button" data-view="settings" class="nav-item">Kontak &amp; Settings</button>
+        <button type="button" data-view="media" class="nav-item">Media</button>
+      </nav>
+      <div class="side-foot">
+        <a href="/" target="_blank" rel="noopener">Lihat Website</a>
+        <button type="button" id="logoutBtn">Keluar</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h2 id="pageTitle">Overview</h2>
+          <p id="pageSub" class="muted">Ringkasan konten website</p>
+        </div>
+        <div class="top-actions">
+          <span id="saveStatus" class="muted"></span>
+          <button type="button" id="saveBtn" class="btn-primary">Simpan Perubahan</button>
+        </div>
+      </header>
+
+      <section id="view-overview" class="panel">
+        <div class="cards">
+          <div class="card"><span>Artikel</span><b id="statArticles">0</b></div>
+          <div class="card"><span>FAQ</span><b id="statFaq">0</b></div>
+          <div class="card"><span>Produk</span><b id="statProducts">0</b></div>
+          <div class="card"><span>Terakhir disimpan</span><b id="statUpdated" class="small">—</b></div>
+        </div>
+        <div class="hint-box">
+          <p>Gunakan menu <strong>Konten</strong> untuk edit teks ID/EN, <strong>SEO</strong> untuk meta Google/sosial, dan <strong>Kontak &amp; Settings</strong> untuk WhatsApp/email/alamat.</p>
+        </div>
+      </section>
+
+      <section id="view-content" class="panel" hidden>
+        <div class="toolbar">
+          <label>Section
+            <select id="sectionSelect"></select>
+          </label>
+          <div class="lang-tabs" role="tablist">
+            <button type="button" class="lang-tab active" data-lang="id">ID</button>
+            <button type="button" class="lang-tab" data-lang="en">EN</button>
+          </div>
+        </div>
+        <div id="fieldsBox" class="fields"></div>
+      </section>
+
+      <section id="view-seo" class="panel" hidden>
+        <div class="toolbar">
+          <div class="lang-tabs" role="tablist">
+            <button type="button" class="lang-tab seo-lang active" data-lang="id">ID</button>
+            <button type="button" class="lang-tab seo-lang" data-lang="en">EN</button>
+          </div>
+        </div>
+        <div id="seoPreview" class="seo-preview"></div>
+        <div id="seoFields" class="fields"></div>
+      </section>
+
+      <section id="view-settings" class="panel" hidden>
+        <div id="settingsFields" class="fields"></div>
+      </section>
+
+      <section id="view-media" class="panel" hidden>
+        <div class="size-guide" style="margin-bottom:16px; max-width:720px;">
+          <strong>Ukuran yang disarankan</strong>
+          <ul>
+            <li><b>Produk</b> — 1000 × 1000 px (1:1), JPG/PNG, maks 2–3 MB</li>
+            <li><b>Galeri</b> — 1600 × 1000 px (landscape), JPG, maks 3 MB</li>
+            <li><b>Artikel</b> — 1200 × 750 px (16:10), JPG, maks 2 MB</li>
+            <li><b>SEO / OG Image</b> — 1200 × 630 px (di menu SEO → ogImage)</li>
+          </ul>
+          <p class="muted">Klik <b>Ganti gambar</b> pada item yang ingin diganti. Batas upload: 8 MB. Format: JPG, PNG, WEBP.</p>
+        </div>
+        <div id="mediaList" class="fields"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/admin/admin.js?v=5"></script>
+</body>
+</html>
