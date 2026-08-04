@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-04T13:09:25.060Z",
+  "updatedAt": "2026-08-04T19:33:18.285Z",
   "settings": {
     "email": "info@dianakaryagroup.com",
     "addressCompany": "PT Diana Karya Gemilang",
@@ -19,15 +19,15 @@
         "id": "prod-1",
         "slug": "uma-kitchen-series",
         "image": "images/product1.png",
-        "caption": "UMA — Kitchen Series",
+        "caption": "UMA â€” Kitchen Series",
         "brand": "Elementi Domus",
         "title": {
-          "id": "UMA — Kitchen Series",
-          "en": "UMA — Kitchen Series"
+          "id": "UMA â€” Kitchen Series",
+          "en": "UMA â€” Kitchen Series"
         },
         "body": {
-          "id": "Temukan seri dapur UMA dari Elementi Domus — desain abadi dengan craftsmanship premium untuk ruang hunian modern.",
-          "en": "Discover the UMA kitchen series by Elementi Domus — timeless design with premium craftsmanship for modern living spaces."
+          "id": "Temukan seri dapur UMA dari Elementi Domus â€” desain abadi dengan craftsmanship premium untuk ruang hunian modern.",
+          "en": "Discover the UMA kitchen series by Elementi Domus â€” timeless design with premium craftsmanship for modern living spaces."
         }
       },
       {
@@ -64,11 +64,11 @@
         "id": "prod-4",
         "slug": "avani-kitchen-series",
         "image": "images/product4.png",
-        "caption": "AVANI — Kitchen Series",
+        "caption": "AVANI â€” Kitchen Series",
         "brand": "Elementi Domus",
         "title": {
-          "id": "AVANI — Kitchen Series",
-          "en": "AVANI — Kitchen Series"
+          "id": "AVANI â€” Kitchen Series",
+          "en": "AVANI â€” Kitchen Series"
         },
         "body": {
           "id": "AVANI Kitchen Series menawarkan sistem dapur premium dengan detail desain yang teliti dan kualitas manufaktur unggul.",
@@ -172,8 +172,8 @@
           "en": "Lenore Exquisite Dining proudly marks a new milestone with the opening of its second location at Plaza Indonesia, one of Jakarta's most prestigious lifestyle destinations."
         },
         "body": {
-          "id": "Lenore Exquisite Dining dengan bangga menandai tonggak baru dengan pembukaan lokasi keduanya di Plaza Indonesia, salah satu destinasi lifestyle paling prestisius di Jakarta. Menyusul kesuksesan restoran flagship di Barito, ekspansi ini mencerminkan komitmen Lenore untuk membawa pengalaman kuliner khasnya ke audiens yang lebih luas.\n\nBerlokasi di Level 3 Plaza Indonesia, destinasi baru ini memperkenalkan Lenore Kitchen—ekspresi kontemporer dari filosofi Lenore, di mana masakan istimewa, craftsmanship yang halus, dan hospitality yang hangat bersatu dalam suasana yang hidup. Dirancang untuk business lunch maupun pertemuan sosial yang santai, ruang baru ini menawarkan pengalaman dining yang elevated di jantung kota.",
-          "en": "Lenore Exquisite Dining proudly marks a new milestone with the opening of its second location at Plaza Indonesia, one of Jakarta's most prestigious lifestyle destinations. Following the success of its flagship restaurant in Barito, this expansion reflects Lenore's commitment to bringing its signature culinary experience to a wider audience.\n\nLocated on Level 3 of Plaza Indonesia, the new destination introduces Lenore Kitchen—a contemporary expression of the Lenore philosophy, where exceptional cuisine, refined craftsmanship, and warm hospitality come together in a vibrant setting. Designed for both business lunches and relaxed social gatherings, the new space offers an elevated dining experience in the heart of the city."
+          "id": "Lenore Exquisite Dining dengan bangga menandai tonggak baru dengan pembukaan lokasi keduanya di Plaza Indonesia, salah satu destinasi lifestyle paling prestisius di Jakarta. Menyusul kesuksesan restoran flagship di Barito, ekspansi ini mencerminkan komitmen Lenore untuk membawa pengalaman kuliner khasnya ke audiens yang lebih luas.\n\nBerlokasi di Level 3 Plaza Indonesia, destinasi baru ini memperkenalkan Lenore Kitchenâ€”ekspresi kontemporer dari filosofi Lenore, di mana masakan istimewa, craftsmanship yang halus, dan hospitality yang hangat bersatu dalam suasana yang hidup. Dirancang untuk business lunch maupun pertemuan sosial yang santai, ruang baru ini menawarkan pengalaman dining yang elevated di jantung kota.",
+          "en": "Lenore Exquisite Dining proudly marks a new milestone with the opening of its second location at Plaza Indonesia, one of Jakarta's most prestigious lifestyle destinations. Following the success of its flagship restaurant in Barito, this expansion reflects Lenore's commitment to bringing its signature culinary experience to a wider audience.\n\nLocated on Level 3 of Plaza Indonesia, the new destination introduces Lenore Kitchenâ€”a contemporary expression of the Lenore philosophy, where exceptional cuisine, refined craftsmanship, and warm hospitality come together in a vibrant setting. Designed for both business lunches and relaxed social gatherings, the new space offers an elevated dining experience in the heart of the city."
         }
       },
       {
@@ -263,8 +263,8 @@
         "name": "Terrata Social Dining",
         "image": "images/gallery-03.jpg",
         "short": {
-          "id": "Ruang sosial di luar sekadar bersantap — koneksi dan kebersamaan.",
-          "en": "A social space beyond dining — connection and togetherness."
+          "id": "Ruang sosial di luar sekadar bersantap â€” koneksi dan kebersamaan.",
+          "en": "A social space beyond dining â€” connection and togetherness."
         },
         "body": {
           "id": "Dirancang sebagai ruang sosial di luar sekadar bersantap, Terrata menyatukan orang-orang melalui makanan lezat, lingkungan yang nyaman, dan pengalaman yang bermakna. Baik untuk bekerja, berkumpul, atau bersantai, setiap sudutnya diciptakan untuk menginspirasi koneksi dan kebersamaan.",
@@ -298,7 +298,7 @@
       "keywords": "Diana Karya Gemilang, Elementi Domus, Legnotura, Lenore, Terrata, hospitality, furniture",
       "canonical": "https://testingwebsite.web.id/",
       "ogTitle": "PT Diana Karya Gemilang",
-      "ogDescription": "Elevating Lifestyle Experiences — premium lifestyle & hospitality group.",
+      "ogDescription": "Elevating Lifestyle Experiences â€” premium lifestyle & hospitality group.",
       "ogImage": "https://testingwebsite.web.id/images/logo-dkg.png",
       "twitterCard": "summary_large_image",
       "robots": "index,follow",
@@ -310,7 +310,7 @@
       "keywords": "Diana Karya Gemilang, Elementi Domus, Legnotura, Lenore, Terrata, hospitality, furniture",
       "canonical": "https://testingwebsite.web.id/",
       "ogTitle": "PT Diana Karya Gemilang",
-      "ogDescription": "Elevating Lifestyle Experiences — premium lifestyle & hospitality group.",
+      "ogDescription": "Elevating Lifestyle Experiences â€” premium lifestyle & hospitality group.",
       "ogImage": "https://testingwebsite.web.id/images/logo-dkg.png",
       "twitterCard": "summary_large_image",
       "robots": "index,follow",
@@ -355,7 +355,7 @@
       "values.sustainability": "Menyeimbangkan pertumbuhan ekonomi dengan tanggung jawab sosial dan lingkungan.",
       "business.eyebrow": "Lini Bisnis",
       "business.title": "Tiga Lini Bisnis, Satu Standar Kualitas Premium",
-      "business.lede": "Manufacturing, Food & Beverage, and Hospitality — dikelola secara sinergis di bawah PT Diana Karya Gemilang.",
+      "business.lede": "Manufacturing, Food & Beverage, and Hospitality â€” dikelola secara sinergis di bawah PT Diana Karya Gemilang.",
       "business.h.desc": "Mengembangkan dan mengelola bisnis perhotelan yang didedikasikan untuk menyediakan akomodasi yang berkelas, layanan yang dipersonalisasi, dan pengalaman tamu yang luar biasa dengan standar kenyamanan dan kualitas tertinggi.",
       "business.h.more": "Layanan kami mencakup pengelolaan akomodasi premium serta strategi pengalaman tamu dengan standar layanan tinggi.",
       "business.f.desc": "Mengembangkan dan mengoperasikan restoran, kafe, dan konsep kuliner premium yang menyajikan masakan luar biasa, keramahan yang berkelas, dan pengalaman bersantap yang tak terlupakan.",
@@ -400,7 +400,7 @@
       "footer.nav": "Navigasi",
       "footer.contact": "Kontak",
       "footer.location": "Lokasi",
-      "footer.rights": "© 2026 PT Diana Karya Gemilang. Hak cipta dilindungi.",
+      "footer.rights": "Â© 2026 PT Diana Karya Gemilang. Hak cipta dilindungi.",
       "business.m.company": "PT Diana Gaharu Gemilang",
       "business.f.company": "PT Diana Boga Gemilang",
       "business.h.company": "PT Diana Grha Gemilang",
@@ -461,16 +461,16 @@
       "values.sustainability": "Balancing economic growth with social and environmental responsibility.",
       "business.eyebrow": "Business Lines",
       "business.title": "Three Business Lines, One Standard of Premium Quality",
-      "business.lede": "Manufacturing, Food & Beverage, and Hospitality — managed synergistically under PT Diana Karya Gemilang.",
+      "business.lede": "Manufacturing, Food & Beverage, and Hospitality â€” managed synergistically under PT Diana Karya Gemilang.",
       "business.h.desc": "Developing and managing hospitality businesses dedicated to providing refined accommodations, personalized service, and exceptional guest experiences with the highest standards of comfort and quality.",
       "business.h.more": "Our services include premium accommodation management and guest-experience strategies with high service standards.",
-      "business.f.desc": "Developing and operating premium restaurants, cafés, and culinary concepts that deliver exceptional cuisine, refined hospitality, and memorable dining experiences.",
+      "business.f.desc": "Developing and operating premium restaurants, cafÃ©s, and culinary concepts that deliver exceptional cuisine, refined hospitality, and memorable dining experiences.",
       "business.f.more": "We deliver sustainable menu innovation, culinary supply-chain management, and exclusive dining experiences across every business line.",
       "business.m.desc": "Designing and manufacturing premium furniture and interior solutions with a strong commitment to exceptional craftsmanship, precision engineering, innovative design, and outstanding customer service.",
       "business.m.more": "Our manufacturing facilities are supported by modern technology and experienced craftsmen to create works of high aesthetic quality.",
       "business.l.title": "Lifestyle Business",
       "business.l.desc": "Developing businesses that support modern lifestyles, prioritizing quality, aesthetics, and customer satisfaction.",
-      "business.l.more": "Reaching retail, wellness, and entertainment sectors designed to complete today’s exclusive lifestyle needs.",
+      "business.l.more": "Reaching retail, wellness, and entertainment sectors designed to complete todayâ€™s exclusive lifestyle needs.",
       "business.more": "Learn More",
       "business.less": "Show Less",
       "brands.eyebrow": "Our Brands",
@@ -506,7 +506,7 @@
       "footer.nav": "Navigation",
       "footer.contact": "Contact",
       "footer.location": "Location",
-      "footer.rights": "© 2026 PT Diana Karya Gemilang. All rights reserved.",
+      "footer.rights": "Â© 2026 PT Diana Karya Gemilang. All rights reserved.",
       "business.m.company": "PT Diana Gaharu Gemilang",
       "business.f.company": "PT Diana Boga Gemilang",
       "business.h.company": "PT Diana Grha Gemilang",
