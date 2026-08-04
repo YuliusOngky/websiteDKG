@@ -152,8 +152,12 @@ app.get('/api/health', async (_req, res) => {
   }
 });
 
-/* Serve homepage at / without redirect (better for SEO & Lighthouse) */
+/* Homepage: local serves the file; on Vercel public/ is CDN-only (not in lambda FS). */
 app.get('/', (_req, res) => {
+  if (process.env.VERCEL) {
+    // Prefer CDN static asset — sendFile('/var/task/public/...') fails with ENOENT.
+    return res.redirect(308, '/index.html');
+  }
   res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
 });
 
