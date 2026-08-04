@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DKG CMS Admin</title>
-  <link rel="stylesheet" href="/admin/admin.css?v=6">
+  <link rel="stylesheet" href="/admin/admin.css?v=7">
 </head>
 <body>
   <div id="loginView" class="login-view">
@@ -64,6 +64,26 @@
           <div class="card"><span>Galeri</span><b id="statGallery">0</b></div>
           <div class="card"><span>Artikel</span><b id="statArticles">0</b></div>
         </div>
+
+        <div class="health-panel">
+          <h3>Health &amp; SEO</h3>
+          <div class="cards health-cards">
+            <div class="card"><span>Status API</span><b id="healthOk" class="small">…</b></div>
+            <div class="card"><span>Storage</span><b id="healthStorage" class="small">…</b></div>
+            <div class="card"><span>Environment</span><b id="healthEnv" class="small">…</b></div>
+            <div class="card"><span>Site URL</span><b id="healthSiteUrl" class="small">…</b></div>
+          </div>
+          <div class="health-links">
+            <a id="linkSite" href="https://testingwebsite.web.id/" target="_blank" rel="noopener">Buka website</a>
+            <a id="linkPsi" href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Ftestingwebsite.web.id" target="_blank" rel="noopener">PageSpeed Insights</a>
+            <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google Search Console</a>
+            <a id="linkRobots" href="/robots.txt" target="_blank" rel="noopener">robots.txt</a>
+            <a id="linkSitemap" href="/sitemap.xml" target="_blank" rel="noopener">sitemap.xml</a>
+          </div>
+          <h4 class="checklist-title">Checklist SEO</h4>
+          <ul id="seoChecklist" class="seo-checklist"></ul>
+        </div>
+
         <div class="hint-box">
           <p>Phase 2: kelola Brand, Produk, Galeri, dan Artikel lewat menu khusus (tambah / edit / hapus, bilingual, ganti gambar). Batas carousel: Brand/Produk/Galeri 10, Artikel 15. Setelah simpan, refresh website publik.</p>
           <p class="muted" id="statUpdatedLine" style="margin-top:8px">Terakhir disimpan: —</p>
@@ -103,6 +123,7 @@
             <button type="button" class="lang-tab seo-lang" data-lang="en">EN</button>
           </div>
         </div>
+        <p class="seo-hint muted">Tips: title ~50–60 karakter · description ~150–160 karakter · canonical &amp; og:image sebaiknya URL absolut (https://…).</p>
         <div id="seoPreview" class="seo-preview"></div>
         <div id="seoFields" class="fields"></div>
       </section>
@@ -113,6 +134,6 @@
     </main>
   </div>
 
-  <script src="/admin/admin.js?v=6"></script>
+  <script src="/admin/admin.js?v=7"></script>
 </body>
 </html>

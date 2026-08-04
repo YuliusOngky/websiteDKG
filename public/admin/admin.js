@@ -24,8 +24,31 @@
   ];
 
   const SETTINGS_FIELDS = [
-    'phone', 'whatsapp', 'email', 'addressCompany', 'addressLine1', 'addressLine2', 'addressLine3', 'mapsQuery'
+    { key: 'phone', label: 'Telepon (PSTN)' },
+    { key: 'whatsapp', label: 'WhatsApp (08…)' },
+    { key: 'email', label: 'Email' },
+    { key: 'addressCompany', label: 'Nama perusahaan (alamat)' },
+    { key: 'addressLine1', label: 'Alamat baris 1' },
+    { key: 'addressLine2', label: 'Alamat baris 2' },
+    { key: 'addressLine3', label: 'Alamat baris 3' },
+    { key: 'mapsQuery', label: 'Query Google Maps' },
+    { key: 'siteUrl', label: 'Site URL (produksi)' },
+    { key: 'gaMeasurementId', label: 'GA4 Measurement ID (G-XXXX)' },
+    { key: 'gscVerification', label: 'Google Search Console verification code' }
   ];
+
+  const SEO_FIELD_META = {
+    title: { hint: 'Ideal 50–60 karakter' },
+    description: { hint: 'Ideal 150–160 karakter', long: true },
+    keywords: { hint: 'Pisahkan dengan koma', long: true },
+    canonical: { hint: 'URL absolut, contoh https://testingwebsite.web.id/' },
+    ogTitle: { hint: 'Judul Open Graph (sosial media)' },
+    ogDescription: { hint: 'Deskripsi Open Graph', long: true },
+    ogImage: { hint: 'URL absolut gambar share (https://…)' },
+    twitterCard: { hint: 'Biasanya summary_large_image' },
+    robots: { hint: 'Contoh: index,follow' },
+    siteName: { hint: 'Nama situs untuk og:site_name' }
+  };
 
   const ENTITY_META = {
     brands: {
@@ -191,6 +214,10 @@
     ).join('');
   }
 
+  function siteUrl() {
+    return String(content?.settings?.siteUrl || 'https://testingwebsite.web.id').replace(/\/$/, '');
+  }
+
   function renderOverview() {
     document.getElementById('statBrands').textContent = content.media?.brands?.length || 0;
     document.getElementById('statProducts').textContent = content.media?.products?.length || 0;
@@ -199,6 +226,84 @@
     document.getElementById('statUpdatedLine').textContent = content.updatedAt
       ? 'Terakhir disimpan: ' + new Date(content.updatedAt).toLocaleString('id-ID')
       : 'Terakhir disimpan: —';
+
+    const base = siteUrl();
+    const siteEl = document.getElementById('healthSiteUrl');
+    if (siteEl) siteEl.textContent = base;
+    const linkSite = document.getElementById('linkSite');
+    const linkPsi = document.getElementById('linkPsi');
+    if (linkSite) linkSite.href = base + '/';
+    if (linkPsi) {
+      linkPsi.href = 'https://pagespeed.web.dev/analysis?url=' + encodeURIComponent(base + '/');
+    }
+    renderSeoChecklist();
+    loadHealthStatus();
+  }
+
+  async function loadHealthStatus() {
+    const okEl = document.getElementById('healthOk');
+    const storageEl = document.getElementById('healthStorage');
+    const envEl = document.getElementById('healthEnv');
+    if (!okEl) return;
+    try {
+      const health = await api('/api/health');
+      okEl.textContent = health.ok ? 'OK' : 'ERROR';
+      okEl.classList.toggle('ok', !!health.ok);
+      okEl.classList.toggle('bad', !health.ok);
+      if (storageEl) storageEl.textContent = health.storage || '—';
+      if (envEl) envEl.textContent = health.env || '—';
+    } catch (err) {
+      okEl.textContent = 'Gagal';
+      okEl.classList.add('bad');
+      if (storageEl) storageEl.textContent = '—';
+      if (envEl) envEl.textContent = '—';
+    }
+  }
+
+  function checklistItem(ok, label, detail) {
+    return `<li class="${ok ? 'ok' : 'warn'}">
+      <span class="check-mark">${ok ? '✓' : '!'}</span>
+      <span><strong>${escapeHtml(label)}</strong>${detail ? ` — ${escapeHtml(detail)}` : ''}</span>
+    </li>`;
+  }
+
+  function renderSeoChecklist() {
+    const list = document.getElementById('seoChecklist');
+    if (!list || !content) return;
+    const seo = content.seo?.id || {};
+    const s = content.settings || {};
+    const titleLen = String(seo.title || '').length;
+    const descLen = String(seo.description || '').length;
+    const canonicalOk = /^https?:\/\//i.test(seo.canonical || '');
+    const ogAbs = /^https?:\/\//i.test(seo.ogImage || '');
+    const titleOk = titleLen >= 30 && titleLen <= 65;
+    const descOk = descLen >= 120 && descLen <= 170;
+    const gaOk = !s.gaMeasurementId || /^G-[A-Z0-9]+$/i.test(String(s.gaMeasurementId).trim());
+    const items = [
+      checklistItem(canonicalOk, 'Canonical URL', canonicalOk ? seo.canonical : 'Belum diisi / belum absolut'),
+      checklistItem(titleOk, 'Title panjang wajar', `${titleLen} karakter (ideal 50–60)`),
+      checklistItem(descOk, 'Description panjang wajar', `${descLen} karakter (ideal 150–160)`),
+      checklistItem(!!seo.ogImage, 'OG image terisi', seo.ogImage || 'Kosong'),
+      checklistItem(ogAbs, 'OG image absolut (https)', ogAbs ? 'OK' : 'Pakai URL penuh agar share sosial benar'),
+      checklistItem(!!s.siteUrl, 'Site URL di Settings', s.siteUrl || 'Kosong'),
+      checklistItem(!!s.gscVerification, 'Search Console verification', s.gscVerification ? 'Terisi' : 'Opsional — isi kode dari GSC'),
+      checklistItem(!!s.gaMeasurementId, 'GA4 Measurement ID', s.gaMeasurementId ? s.gaMeasurementId : 'Opsional — isi G-XXXX'),
+      checklistItem(gaOk, 'Format GA4 valid', gaOk ? 'OK' : 'Harus diawali G-')
+    ];
+    list.innerHTML = items.join('');
+
+    // Async reachability for robots/sitemap/favicon
+    Promise.all([
+      fetch('/robots.txt', { method: 'GET' }).then((r) => r.ok),
+      fetch('/sitemap.xml', { method: 'GET' }).then((r) => r.ok),
+      fetch('/favicon.ico', { method: 'GET' }).then((r) => r.ok)
+    ]).then(([robots, sitemap, favicon]) => {
+      list.insertAdjacentHTML('beforeend', [
+        checklistItem(robots, 'robots.txt reachable', robots ? '/robots.txt' : '404'),
+        checklistItem(sitemap, 'sitemap.xml reachable', sitemap ? '/sitemap.xml' : '404'),
+        checklistItem(favicon, 'favicon reachable', favicon ? '/favicon.ico' : '404')
+      ].join(''));
+    }).catch(() => {});
   }
 
   function isLongKey(key) {
@@ -232,19 +337,41 @@
     const seo = content.seo?.[seoLang] || {};
     document.getElementById('seoPreview').innerHTML = `
       <p class="g-title">${escapeHtml(seo.title || 'Judul SEO')}</p>
-      <p class="g-url">${escapeHtml(seo.canonical || 'https://example.com/')}</p>
+      <p class="g-url">${escapeHtml(seo.canonical || (siteUrl() + '/'))}</p>
       <p class="g-desc">${escapeHtml(seo.description || 'Meta description akan tampil di sini.')}</p>
     `;
     document.getElementById('seoFields').innerHTML = SEO_FIELDS.map((key) => {
       const val = seo[key] || '';
-      const long = key.includes('description') || key === 'keywords';
+      const meta = SEO_FIELD_META[key] || {};
+      const long = meta.long || key.includes('description') || key === 'keywords';
+      const len = String(val).length;
+      const showCount = key === 'title' || key === 'description' || key === 'ogTitle' || key === 'ogDescription';
       return `<div class="field">
-        <label for="seo-${key}">${key}</label>
+        <label for="seo-${key}">${key}${showCount ? ` <span class="char-count">(${len})</span>` : ''}</label>
+        ${meta.hint ? `<p class="field-hint muted">${escapeHtml(meta.hint)}</p>` : ''}
         ${long
           ? `<textarea id="seo-${key}" data-seo="${key}">${escapeHtml(val)}</textarea>`
           : `<input id="seo-${key}" data-seo="${key}" value="${escapeAttr(val)}">`}
       </div>`;
     }).join('');
+
+    document.querySelectorAll('#seoFields [data-seo]').forEach((el) => {
+      el.addEventListener('input', () => {
+        const key = el.getAttribute('data-seo');
+        if (!content.seo[seoLang]) content.seo[seoLang] = {};
+        content.seo[seoLang][key] = el.value;
+        const label = el.previousElementSibling?.previousElementSibling || el.closest('.field')?.querySelector('label');
+        const countEl = label?.querySelector('.char-count');
+        if (countEl) countEl.textContent = `(${el.value.length})`;
+        const previewTitle = document.querySelector('#seoPreview .g-title');
+        const previewUrl = document.querySelector('#seoPreview .g-url');
+        const previewDesc = document.querySelector('#seoPreview .g-desc');
+        const cur = content.seo[seoLang];
+        if (previewTitle) previewTitle.textContent = cur.title || 'Judul SEO';
+        if (previewUrl) previewUrl.textContent = cur.canonical || (siteUrl() + '/');
+        if (previewDesc) previewDesc.textContent = cur.description || 'Meta description akan tampil di sini.';
+      });
+    });
   }
 
   function collectSeo() {
@@ -256,13 +383,17 @@
 
   function renderSettings() {
     const s = content.settings || {};
-    document.getElementById('settingsFields').innerHTML = SETTINGS_FIELDS.map((key) => `<div class="field">
-      <label for="set-${key}">${key}</label>
-      <input id="set-${key}" data-set="${key}" value="${escapeAttr(s[key] || '')}">
+    document.getElementById('settingsFields').innerHTML = SETTINGS_FIELDS.map(({ key, label }) => `<div class="field">
+      <label for="set-${key}">${escapeHtml(label)}</label>
+      <input id="set-${key}" data-set="${key}" value="${escapeAttr(s[key] || '')}" placeholder="${key === 'gaMeasurementId' ? 'G-XXXXXXXX' : ''}">
+      ${key === 'gaMeasurementId' ? '<p class="field-hint muted">Kosongkan jika belum pakai Google Analytics. Aktif otomatis di website publik setelah disimpan.</p>' : ''}
+      ${key === 'gscVerification' ? '<p class="field-hint muted">Tempel kode verifikasi dari Google Search Console (meta content saja).</p>' : ''}
+      ${key === 'siteUrl' ? '<p class="field-hint muted">Dipakai untuk canonical, OG, dan link Health.</p>' : ''}
     </div>`).join('');
   }
 
   function collectSettings() {
+    if (!content.settings) content.settings = {};
     document.querySelectorAll('#settingsFields [data-set]').forEach((el) => {
       content.settings[el.getAttribute('data-set')] = el.value;
     });
@@ -530,14 +661,14 @@
     document.getElementById('view-' + view).hidden = false;
 
     const titles = {
-      overview: ['Overview', 'Ringkasan konten website'],
+      overview: ['Overview', 'Health, checklist SEO, dan ringkasan konten'],
       content: ['Konten', 'Edit teks bilingual per section (header section)'],
       brands: ['Brand Kami / Our Brand', 'CRUD brand — maks 10, klik → halaman detail'],
       products: ['Our Product Gallery', 'CRUD produk — maks 10, klik → halaman detail'],
       gallery: ['Galeri', 'CRUD galeri — maks 10, klik → lightbox'],
       articles: ['Artikel', 'CRUD artikel — maks 15, klik → halaman detail'],
-      seo: ['SEO', 'Title, description, Open Graph, robots'],
-      settings: ['Kontak & Settings', 'Telepon, email, alamat, maps']
+      seo: ['SEO', 'Title, description, Open Graph, robots — fokus pencarian Google'],
+      settings: ['Kontak & Settings', 'Telepon, email, alamat, GA4, Search Console']
     };
     pageTitle.textContent = titles[view][0];
     pageSub.textContent = titles[view][1];

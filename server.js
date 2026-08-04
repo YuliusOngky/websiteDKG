@@ -127,19 +127,33 @@ app.post('/api/upload', requireAuth, upload.single('file'), async (req, res) => 
   }
 });
 
-app.get('/api/health', (_req, res) => {
-  res.json({
-    ok: true,
-    storage: useBlob() ? 'vercel-blob' : 'filesystem',
-    env: isProd ? 'production' : 'development'
-  });
+app.get('/api/health', async (_req, res) => {
+  try {
+    const content = await readContent();
+    res.json({
+      ok: true,
+      storage: useBlob() ? 'vercel-blob' : 'filesystem',
+      env: isProd ? 'production' : 'development',
+      updatedAt: content.updatedAt || null,
+      counts: {
+        brands: content.media?.brands?.length || 0,
+        products: content.media?.products?.length || 0,
+        gallery: content.media?.gallery?.length || 0,
+        articles: content.media?.articles?.length || 0
+      }
+    });
+  } catch (err) {
+    res.status(500).json({
+      ok: false,
+      storage: useBlob() ? 'vercel-blob' : 'filesystem',
+      env: isProd ? 'production' : 'development',
+      error: err.message || 'Health check gagal'
+    });
+  }
 });
 
-/* On Vercel, public/ is CDN; Express still may receive "/" — redirect to index */
+/* Serve homepage at / without redirect (better for SEO & Lighthouse) */
 app.get('/', (_req, res) => {
-  if (process.env.VERCEL) {
-    return res.redirect(302, '/index.html');
-  }
   res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
 });
 

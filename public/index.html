@@ -14,6 +14,9 @@
 <meta property="og:description" id="seoOgDescription" content="Elevating Lifestyle Experiences">
 <meta property="og:image" id="seoOgImage" content="images/logo-dkg.png">
 <meta name="twitter:card" id="seoTwitterCard" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/logo-dkg-nav-2x.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
@@ -880,6 +883,21 @@
     else el.setAttribute(attr, value);
   }
 
+  function siteBaseUrl() {
+    const fromSettings = cmsContent?.settings?.siteUrl;
+    if (fromSettings) return String(fromSettings).replace(/\/$/, '');
+    if (typeof location !== 'undefined' && location.origin && !/localhost|127\.0\.0\.1/i.test(location.origin)) {
+      return location.origin.replace(/\/$/, '');
+    }
+    return 'https://testingwebsite.web.id';
+  }
+
+  function absoluteUrl(path) {
+    if (!path) return '';
+    if (/^https?:\/\//i.test(path)) return path;
+    return siteBaseUrl() + '/' + String(path).replace(/^\//, '');
+  }
+
   function applySeo(lang) {
     const seo = cmsContent?.seo?.[lang] || cmsContent?.seo?.id;
     if (!seo) return;
@@ -890,9 +908,39 @@
     setMeta('seoSiteName', 'content', seo.siteName);
     setMeta('seoOgTitle', 'content', seo.ogTitle || seo.title);
     setMeta('seoOgDescription', 'content', seo.ogDescription || seo.description);
-    setMeta('seoOgImage', 'content', seo.ogImage);
+    setMeta('seoOgImage', 'content', absoluteUrl(seo.ogImage || 'images/logo-dkg.png'));
     setMeta('seoTwitterCard', 'content', seo.twitterCard);
-    if (seo.canonical) setMeta('seoCanonical', 'href', seo.canonical);
+    const canonical = seo.canonical || (siteBaseUrl() + '/');
+    setMeta('seoCanonical', 'href', canonical);
+  }
+
+  function applyTracking() {
+    const s = cmsContent?.settings || {};
+    const gscCode = String(s.gscVerification || '').trim();
+    let gscMeta = document.getElementById('gscVerification');
+    if (gscCode) {
+      if (!gscMeta) {
+        gscMeta = document.createElement('meta');
+        gscMeta.id = 'gscVerification';
+        gscMeta.setAttribute('name', 'google-site-verification');
+        document.head.appendChild(gscMeta);
+      }
+      gscMeta.setAttribute('content', gscCode);
+    } else if (gscMeta) {
+      gscMeta.remove();
+    }
+
+    const gaId = String(s.gaMeasurementId || '').trim();
+    if (!gaId || !/^G-[A-Z0-9]+$/i.test(gaId) || window.__dkgGaLoaded) return;
+    window.__dkgGaLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', gaId);
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(gaId);
+    document.head.appendChild(script);
   }
 
   function phoneTelHref(phone) {
@@ -1028,6 +1076,7 @@
         };
       }
       applySettings();
+      applyTracking();
       applyMedia();
     } catch (err) {
       console.warn('CMS content fallback ke i18n lokal:', err.message);

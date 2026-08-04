@@ -8,7 +8,10 @@
     "addressLine3": "Jakarta Pusat, DKI Jakarta 10220",
     "mapsQuery": "PT Diana Karya Gemilang, Flow Coworking Space, Gedung Midplaza 1, Jl Jendral Sudirman Kav 10-11, Jakarta Pusat 10220",
     "phone": "+6221 573 5975",
-    "whatsapp": "0812345689"
+    "whatsapp": "0812345689",
+    "siteUrl": "https://testingwebsite.web.id",
+    "gaMeasurementId": "",
+    "gscVerification": ""
   },
   "media": {
     "products": [
@@ -293,10 +296,10 @@
       "title": "PT Diana Karya Gemilang",
       "description": "Grup perusahaan manufaktur, F&B, dan hospitality premium di Indonesia.",
       "keywords": "Diana Karya Gemilang, Elementi Domus, Legnotura, Lenore, Terrata, hospitality, furniture",
-      "canonical": "",
+      "canonical": "https://testingwebsite.web.id/",
       "ogTitle": "PT Diana Karya Gemilang",
       "ogDescription": "Elevating Lifestyle Experiences — premium lifestyle & hospitality group.",
-      "ogImage": "images/logo-dkg.png",
+      "ogImage": "https://testingwebsite.web.id/images/logo-dkg.png",
       "twitterCard": "summary_large_image",
       "robots": "index,follow",
       "siteName": "PT Diana Karya Gemilang"
@@ -305,10 +308,10 @@
       "title": "PT Diana Karya Gemilang",
       "description": "Premium manufacturing, F&B, and hospitality holding company in Indonesia.",
       "keywords": "Diana Karya Gemilang, Elementi Domus, Legnotura, Lenore, Terrata, hospitality, furniture",
-      "canonical": "",
+      "canonical": "https://testingwebsite.web.id/",
       "ogTitle": "PT Diana Karya Gemilang",
       "ogDescription": "Elevating Lifestyle Experiences — premium lifestyle & hospitality group.",
-      "ogImage": "images/logo-dkg.png",
+      "ogImage": "https://testingwebsite.web.id/images/logo-dkg.png",
       "twitterCard": "summary_large_image",
       "robots": "index,follow",
       "siteName": "PT Diana Karya Gemilang"
