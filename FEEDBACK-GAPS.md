@@ -138,25 +138,14 @@ Ringkasan: gap **teks/struktur yang bisa di-fix di kode sudah dikerjakan**. Yang
 - [x] Sesuaikan stats About (3 lini / 5 brand)
 - [x] Konfirmasi logo final vs Drive
 - [x] Tandai gap terbuka di website (`.dev-gap` / banner DEV)
+- [x] Hapus marker DEV dari UI publik (banner + badge) — About Drive image may still be placeholder in content
 
 ---
 
 ## Marker development di website
 
-Kelas CSS: `.dev-gap`, `.dev-gap-badge`, `.dev-gap-banner` di `public/index.html`.  
-Hapus sebelum production.
-
-| Lokasi | Label |
-|--------|--------|
-| Banner sticky atas | DEV — gap masih terbuka (Gambar Drive: About) |
-| `#tentang` About figure | GAP: gambar About (Drive) |
-| `#brands` | (section badge removed — De Diana’s Home photo in place) |
-| Kartu brand placeholder | GAP: foto brand (Drive) — only if `image` still contains `placeholder` |
-| `#produk` | (section badge removed — Product Gallery Drive marker closed) |
-| `#galeri` | (section badge removed — F&B eyebrow; H2 judul dihapus; marker Drive ditutup) |
-| `#artikel` | (section badge removed — teks lengkap; marker gambar ditutup) |
-
-Banner bisa ditutup (sessionStorage `dkg-dev-gap-dismissed`).
+**Removed from public UI** (banner sticky, `.dev-gap` / `.dev-gap-badge`, Tutup / sessionStorage dismiss, brand-card gap injection in `media-ui.js`).  
+About Drive image may still use a placeholder asset — that is OK without the DEV banner.
 
 ---
 

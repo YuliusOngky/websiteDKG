@@ -203,40 +203,6 @@
     color:var(--brass); opacity:.85;
   }
 
-  /* DEV GAP markers — remove before production */
-  .dev-gap-banner{
-    position:sticky; top:0; z-index:200; background:#1a1a1a; color:#f5f2eb;
-    font-family:'DM Sans',sans-serif; font-size:12.5px; line-height:1.45;
-    border-bottom:2px solid #c4a35a;
-  }
-  .dev-gap-banner[hidden]{display:none !important;}
-  .dev-gap-banner-inner{
-    max-width:1200px; margin:0 auto; padding:10px 24px; display:flex; gap:16px;
-    align-items:flex-start; justify-content:space-between;
-  }
-  .dev-gap-banner strong{color:#c4a35a; letter-spacing:.04em; text-transform:uppercase; font-size:11px;}
-  .dev-gap-banner ul{margin:4px 0 0; padding-left:18px; color:#d9d4c8;}
-  .dev-gap-banner li{margin:2px 0;}
-  .dev-gap-banner-close{
-    flex-shrink:0; background:transparent; border:1px solid #555; color:#f5f2eb;
-    font:inherit; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
-    padding:6px 10px; cursor:pointer;
-  }
-  .dev-gap-banner-close:hover{border-color:#c4a35a; color:#c4a35a;}
-  .dev-gap{position:relative;}
-  .dev-gap-badge{
-    display:inline-block; margin:0 0 14px; padding:5px 10px;
-    background:#1a1a1a; color:#f5f2eb; border-left:3px solid #c4a35a;
-    font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600;
-    letter-spacing:.04em; text-transform:uppercase; line-height:1.3;
-  }
-  .about-figure .dev-gap-badge,
-  .brand-card .dev-gap-badge{
-    position:absolute; top:10px; left:10px; z-index:3; margin:0;
-    max-width:calc(100% - 20px); box-shadow:0 2px 8px rgba(0,0,0,.25);
-  }
-  .brand-card{position:relative;}
-  body.dev-gap-dismissed .dev-gap-banner{display:none !important;}
   .unit-company{
     margin:10px 0 0; font-size:12.5px; letter-spacing:.04em; color:var(--brass-soft);
     font-weight:600;
@@ -539,18 +505,6 @@
 </head>
 <body>
 
-<div class="dev-gap-banner" id="devGapBanner" role="status">
-  <div class="dev-gap-banner-inner">
-    <div>
-      <strong>DEV — gap masih terbuka</strong>
-      <ul>
-        <li>Gambar Drive: About</li>
-      </ul>
-    </div>
-    <button type="button" class="dev-gap-banner-close" id="devGapDismiss">Tutup</button>
-  </div>
-</div>
-
 <nav id="nav">
   <div class="nav-inner">
     <a href="#" class="logo" aria-label="PT Diana Karya Gemilang">
@@ -614,8 +568,7 @@
 
 <section class="section-pad" id="tentang">
   <div class="wrap about-grid">
-    <div class="about-figure reveal dev-gap">
-      <span class="dev-gap-badge">GAP: gambar About (Drive)</span>
+    <div class="about-figure reveal">
       <img src="images/placeholder-about.svg" alt="PLACEHOLDER — ganti dengan gambar About dari Drive (.ai export)">
       <span class="placeholder-note">Placeholder About image — replace with Drive export</span>
     </div>
@@ -909,22 +862,6 @@
   const mobilePanel = document.getElementById('mobilePanel');
   let currentLang = localStorage.getItem('dkg-lang') || 'id';
   let cmsContent = null;
-
-  /* DEV gap banner — session dismiss */
-  (function initDevGapBanner() {
-    const banner = document.getElementById('devGapBanner');
-    const btn = document.getElementById('devGapDismiss');
-    if (!banner || !btn) return;
-    if (sessionStorage.getItem('dkg-dev-gap-dismissed') === '1') {
-      banner.hidden = true;
-      document.body.classList.add('dev-gap-dismissed');
-    }
-    btn.addEventListener('click', () => {
-      sessionStorage.setItem('dkg-dev-gap-dismissed', '1');
-      banner.hidden = true;
-      document.body.classList.add('dev-gap-dismissed');
-    });
-  })();
 
   let googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' +
     encodeURIComponent('PT Diana Karya Gemilang, Flow Coworking Space, Gedung Midplaza 1, Jl Jendral Sudirman Kav 10-11, Jakarta Pusat 10220');

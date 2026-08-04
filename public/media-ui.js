@@ -119,12 +119,7 @@
       const cat = bi(b.category, l);
       const short = bi(b.short, l);
       const img = b.image || 'images/placeholder-brand-dd.svg';
-      const isPlaceholder = /placeholder/i.test(img);
-      const gapBadge = isPlaceholder
-        ? '<span class="dev-gap-badge">GAP: foto brand (Drive)</span>'
-        : '';
-      return `<a class="brand-card reveal carousel-card${isPlaceholder ? ' dev-gap' : ''}" href="brand.html?slug=${encodeURIComponent(b.slug)}">
-        ${gapBadge}
+      return `<a class="brand-card reveal carousel-card" href="brand.html?slug=${encodeURIComponent(b.slug)}">
         <img class="brand-thumb" src="${escapeHtml(img)}" alt="${escapeHtml(b.name || '')}" loading="lazy">
         <span class="tag">${escapeHtml(cat)}</span>
         <h3>${escapeHtml(b.name || '')}</h3>

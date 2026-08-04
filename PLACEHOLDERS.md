@@ -2,12 +2,12 @@
 
 These files are temporary until final Drive assets are exported/uploaded.
 
-**Development:** remaining image gaps are visually marked on the site with `.dev-gap` / `.dev-gap-badge` and a top `DEV` banner (see `FEEDBACK-GAPS.md`). Remove those markers before production.
+**Note:** DEV gap banners/badges were removed from the public UI. Placeholder image files may still remain until Drive assets are uploaded.
 
-| Placeholder | Used for | Replace with | Site marker |
+| Placeholder | Used for | Replace with | Notes |
 |-------------|----------|--------------|-------------|
-| `public/images/placeholder-about.svg` | About section image | PNG/JPG export from Drive About folder | `#tentang` badge |
-| `public/images/placeholder-brand-dd.svg` | Default new brand image in CMS only (De Diana’s Home now uses `brand-de-dianas-home.png`) | — | Card badge only if path still contains `placeholder` |
+| `public/images/placeholder-about.svg` | About section image | PNG/JPG export from Drive About folder | Content placeholder only (no DEV badge) |
+| `public/images/placeholder-brand-dd.svg` | Default new brand image in CMS only (De Diana’s Home now uses `brand-de-dianas-home.png`) | — | No card badge |
 | `public/images/placeholder-logo.svg` | Not wired (site uses `logo-dkg*.png`; logo gap closed) | — | — |
 | `images/product1.png` (temporary stand-in) | Elementi Domus brand carousel image | Dedicated Elementi Domus brand photo | `#brands` / `#produk` |
 | `images/product5.png` (temporary stand-in) | Legnotura brand carousel image | Dedicated Legnotura brand photo | `#brands` / `#produk` |
@@ -29,7 +29,7 @@ These files are temporary until final Drive assets are exported/uploaded.
 - About stats numbers 3 / 5 / 5
 
 ## Phase 2 CMS note
-Replace images via Admin → Brand / Produk / Galeri / Artikel → Edit → Ganti gambar → Simpan item. Then remove matching `.dev-gap-badge` from `public/index.html` (and brand badge logic in `media-ui.js` once no placeholders remain).
+Replace images via Admin → Brand / Produk / Galeri / Artikel → Edit → Ganti gambar → Simpan item.
 
 ## Do not commit
 - `Diana Karya Group Image 1.ai` (~563 MB) — ignored via `.gitignore`
