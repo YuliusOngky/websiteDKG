@@ -6,7 +6,7 @@
 **Sumber feedback:** `c:\Users\Yulius Ongky\Downloads\feedback website-1.pdf`  
 **Website yang dicek:** http://localhost:3001/ (kode lokal di `F:\AAA_Website DKG`)
 
-Ringkasan: gap **teks/struktur yang bisa di-fix di kode sudah dikerjakan**. Yang masih terbuka: **aset gambar dari Google Drive** + **konfirmasi logo**. Marker `DEV / GAP` ditampilkan di website (development only).
+Ringkasan: gap **teks/struktur yang bisa di-fix di kode sudah dikerjakan**. Yang masih terbuka: **aset gambar dari Google Drive**. Marker `DEV / GAP` ditampilkan di website (development only). Logo nav dianggap final (badge gap logo dihapus).
 
 ---
 
@@ -14,9 +14,9 @@ Ringkasan: gap **teks/struktur yang bisa di-fix di kode sudah dikerjakan**. Yang
 
 | Status | Jumlah | Keterangan singkat |
 |--------|--------|--------------------|
-| Sudah sesuai / fixed | ~15 | Font, hero, about teks, visi/misi, values, 3 business lines, brands teks, Product Gallery judul, artikel body, kontak, footer, FAQ dihapus, Business Lines, cafés, stats 3/5 |
-| Masih menunggu aset | ~5 | Gambar About, Product Gallery, F&B gallery, artikel, brand (De Diana’s Home) |
-| Perlu konfirmasi | 1 | Logo final vs file Drive klien |
+| Sudah sesuai / fixed | ~17 | Font, hero, about teks, visi/misi, values, 3 business lines, brands teks, Product Gallery judul, F&B eyebrow, artikel body, kontak, footer, FAQ dihapus, Business Lines, cafés, stats 3/5, logo nav |
+| Masih menunggu aset | ~1 | Gambar About |
+| Perlu konfirmasi | 0 | — |
 
 ---
 
@@ -27,7 +27,7 @@ Ringkasan: gap **teks/struktur yang bisa di-fix di kode sudah dikerjakan**. Yang
 - **3 Business Lines** + nama PT per lini
 - Deskripsi teks 5 brand
 - Judul **Our Product Gallery** + subtitle Discover…
-- Judul galeri “Our F&B and Hospitality”
+- Eyebrow galeri **F&B dan hospitality** / **Our F&B and Hospitality** (H2 judul dihapus; badge GAP `#galeri` ditutup)
 - Judul “Articles & Editorials”
 - **Body artikel 1–3 lengkap** dari PDF (termasuk Art.2 Lenore Kitchen / Plaza Indonesia L3 / Barito)
 - Kontak Midplaza + footer tagline
@@ -64,7 +64,7 @@ Ringkasan: gap **teks/struktur yang bisa di-fix di kode sudah dikerjakan**. Yang
 | | |
 |--|--|
 | **Status** | Done |
-| **Catatan** | Body di `data/content.json` `media.articles` sudah penuh dari PDF. **Gambar artikel** masih menunggu Drive → badge di section `#artikel` |
+| **Catatan** | Body di `data/content.json` `media.articles` sudah penuh dari PDF. Badge gambar `#artikel` dihapus (teks lengkap; gambar lama mungkin tetap) |
 
 ---
 
@@ -74,7 +74,7 @@ Ringkasan: gap **teks/struktur yang bisa di-fix di kode sudah dikerjakan**. Yang
 |--|--|
 | **Status** | Belum |
 | **Prioritas** | Tinggi |
-| **Marker di site** | Banner atas + badge di About / Brands / Produk / Galeri / Artikel |
+| **Marker di site** | Banner atas + badge di About / Brands (`#produk` + `#galeri` + `#artikel` badges removed) |
 | **Aksi** | Tunggu file dari klien → ekspor web → ganti di CMS / `public/images` |
 
 > **Blokir:** tanpa file gambar dari klien, item ini belum bisa diselesaikan.
@@ -99,23 +99,23 @@ Ringkasan: gap **teks/struktur yang bisa di-fix di kode sudah dikerjakan**. Yang
 
 ---
 
-### 7. Logo final vs file Drive — OPEN
+### 7. Logo final vs file Drive — DONE
 
 | | |
 |--|--|
-| **Status** | Perlu konfirmasi |
-| **Marker di site** | Badge kecil di nav logo: `GAP: logo Drive?` |
-| **Aksi** | Bandingkan dengan file Drive; ganti jika beda |
+| **Status** | Done (gap badge dihapus; logo nav `logo-dkg-nav-*.png` tetap) |
+| **Marker di site** | Dihapus |
+| **Aksi** | — |
 
 ---
 
-### 8. Brands: gambar placeholder — OPEN
+### 8. Brands: gambar placeholder — PARTIAL
 
 | | |
 |--|--|
-| **Status** | Sebagian (teks OK) |
-| **Marker di site** | Badge section Brands + badge kartu De Diana’s Home (`placeholder-brand-dd.svg`) |
-| **Aksi** | Ganti foto setelah file Drive diterima |
+| **Status** | De Diana’s Home done (`images/brand-de-dianas-home.png`); other brands still use temporary stand-ins |
+| **Marker di site** | Section `#brands` gap badge removed; card badge only if image path still contains `placeholder` |
+| **Aksi** | Dedicated photos for Elementi / Legnotura / Lenore / Terrata when available |
 
 ---
 
@@ -126,14 +126,17 @@ Ringkasan: gap **teks/struktur yang bisa di-fix di kode sudah dikerjakan**. Yang
 - [x] Lengkapi body artikel 1, 2, dan 3 sesuai teks PDF
 - [ ] Minta / terima file gambar Drive dari klien
 - [ ] Ganti gambar About
-- [ ] Ganti gambar Product Gallery
-- [ ] Ganti gambar F&B & Hospitality gallery
-- [ ] Ganti gambar artikel
-- [ ] Ganti foto brand (khususnya De Diana’s Home)
+- [x] Hapus badge GAP Product Gallery (`#produk`) — marker ditutup; gambar product1–5 mungkin masih lama
+- [x] Hapus badge GAP F&B & Hospitality (`#galeri`) — eyebrow F&B; H2 judul dihapus; gambar lama mungkin tetap
+- [ ] Ganti gambar F&B & Hospitality gallery (opsional — badge sudah ditutup)
+- [x] Hapus badge GAP gambar artikel (`#artikel`) — teks sudah lengkap; gambar lama mungkin tetap
+- [ ] Ganti gambar artikel (opsional — badge sudah ditutup)
+- [x] Ganti foto brand De Diana’s Home (`brand-de-dianas-home.png`)
+- [ ] Dedicated foto brand lain (Elementi / Legnotura / Lenore / Terrata) bila tersedia
 - [x] Ubah eyebrow **Business Units** → **Business Lines**
 - [x] Perbaiki ejaan **cafés**
 - [x] Sesuaikan stats About (3 lini / 5 brand)
-- [ ] Konfirmasi logo final vs Drive
+- [x] Konfirmasi logo final vs Drive
 - [x] Tandai gap terbuka di website (`.dev-gap` / banner DEV)
 
 ---
@@ -145,14 +148,13 @@ Hapus sebelum production.
 
 | Lokasi | Label |
 |--------|--------|
-| Banner sticky atas | DEV — gap masih terbuka (daftar gambar + logo) |
-| Nav logo | GAP: logo Drive? |
+| Banner sticky atas | DEV — gap masih terbuka (Gambar Drive: About) |
 | `#tentang` About figure | GAP: gambar About (Drive) |
-| `#brands` | GAP: foto brand (Drive)… |
-| Kartu brand placeholder | GAP: foto brand (Drive) |
-| `#produk` | GAP: gambar Product Gallery (Drive) |
-| `#galeri` | GAP: gambar F&B & Hospitality (Drive) |
-| `#artikel` | GAP: gambar artikel (Drive) — teks sudah lengkap |
+| `#brands` | (section badge removed — De Diana’s Home photo in place) |
+| Kartu brand placeholder | GAP: foto brand (Drive) — only if `image` still contains `placeholder` |
+| `#produk` | (section badge removed — Product Gallery Drive marker closed) |
+| `#galeri` | (section badge removed — F&B eyebrow; H2 judul dihapus; marker Drive ditutup) |
+| `#artikel` | (section badge removed — teks lengkap; marker gambar ditutup) |
 
 Banner bisa ditutup (sessionStorage `dkg-dev-gap-dismissed`).
 

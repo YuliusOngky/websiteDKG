@@ -13,7 +13,7 @@
     products: ['products.eyebrow', 'products.title'],
     gallery: ['gallery.eyebrow', 'gallery.title'],
     articles: ['articles.eyebrow', 'articles.title'],
-    contact: ['contact.eyebrow', 'contact.title', 'contact.lede', 'contact.phoneLabel', 'contact.call', 'contact.map', 'contact.mapAria'],
+    contact: ['contact.eyebrow', 'contact.title', 'contact.lede', 'contact.phoneLabel', 'contact.call', 'contact.whatsapp', 'contact.map', 'contact.mapAria'],
     footer: ['footer.nav', 'footer.contact', 'footer.location', 'footer.tagline', 'footer.rights']
   };
 
@@ -24,7 +24,7 @@
   ];
 
   const SETTINGS_FIELDS = [
-    'phone', 'email', 'addressCompany', 'addressLine1', 'addressLine2', 'addressLine3', 'mapsQuery'
+    'phone', 'whatsapp', 'email', 'addressCompany', 'addressLine1', 'addressLine2', 'addressLine3', 'mapsQuery'
   ];
 
   const ENTITY_META = {

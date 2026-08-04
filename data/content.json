@@ -7,7 +7,8 @@
     "addressLine2": "Jl Jendral Sudirman Kav 10-11",
     "addressLine3": "Jakarta Pusat, DKI Jakarta 10220",
     "mapsQuery": "PT Diana Karya Gemilang, Flow Coworking Space, Gedung Midplaza 1, Jl Jendral Sudirman Kav 10-11, Jakarta Pusat 10220",
-    "phone": "+6221 573 5975"
+    "phone": "+6221 573 5975",
+    "whatsapp": "0812345689"
   },
   "media": {
     "products": [
@@ -133,7 +134,7 @@
       {
         "id": "art-1",
         "slug": "elementi-domus-grand-opening",
-        "image": "images/article-01.jpg",
+        "image": "images/article-elementi-grand-opening.jpg",
         "tag": {
           "id": "Hospitality",
           "en": "Hospitality"
@@ -154,7 +155,7 @@
       {
         "id": "art-2",
         "slug": "lenore-plaza-indonesia",
-        "image": "images/article-02.jpg",
+        "image": "images/article-lenore-plaza.jpg",
         "tag": {
           "id": "Kuliner",
           "en": "Culinary"
@@ -175,7 +176,7 @@
       {
         "id": "art-3",
         "slug": "terrata-sound-session",
-        "image": "images/article-03.jpg",
+        "image": "images/article-sound-session-terrata.jpg",
         "tag": {
           "id": "Perusahaan",
           "en": "Company"
@@ -275,7 +276,7 @@
           "en": "Hospitality"
         },
         "name": "De Diana's Home",
-        "image": "images/placeholder-brand-dd.svg",
+        "image": "images/brand-de-dianas-home.png",
         "short": {
           "id": "Hospitality premium dengan kenyamanan dan layanan personal.",
           "en": "Premium hospitality with comfort and personalized service."
@@ -316,12 +317,12 @@
   "i18n": {
     "id": {
       "nav.about": "Tentang Kami",
-      "nav.values": "Nilai",
-      "nav.business": "Lini Bisnis",
-      "nav.brands": "Brand",
-      "nav.products": "Produk",
-      "nav.gallery": "Galeri",
-      "nav.articles": "Artikel",
+      "nav.values": "Nilai Utama",
+      "nav.business": "Unit Bisnis",
+      "nav.brands": "Label Produk",
+      "nav.products": "Produk Kami",
+      "nav.gallery": "F&B dan Hospitality",
+      "nav.articles": "Artikel & Editorial",
       "nav.contact": "Hubungi Kami",
       "nav.menu": "Menu",
       "hero.lede": "PT Diana Karya Gemilang adalah perusahaan Indonesia yang berdedikasi meningkatkan pengalaman lifestyle melalui desain, craftsmanship, dan hospitality yang luar biasa.<br><br>Portofolio kami meliputi Elementi Domus dan Legnotura, yang mengkhususkan diri dalam pembuatan interior kelas atas; Lenore Exquisite Dining dan Terrata Social Dining, yang menawarkan masakan fusion Barat, Italia, Asia, dan Indonesia yang dikurasi dengan cermat; dan De Diana's Home, merek perhotelan kami yang berdedikasi untuk menyediakan akomodasi mewah dengan kenyamanan, layanan personal, dan pengalaman tamu yang tak terlupakan.<br><br>Bersama-sama, merek-merek kami mencerminkan semangat yang sama untuk keahlian, inovasi, dan kualitas abadi.",
@@ -371,7 +372,7 @@
       "brands.tr": "Dirancang sebagai ruang sosial di luar sekadar bersantap, Terrata menyatukan orang-orang melalui makanan lezat, lingkungan yang nyaman, dan pengalaman yang bermakna. Baik untuk bekerja, berkumpul, atau bersantai, setiap sudutnya diciptakan untuk menginspirasi koneksi dan kebersamaan.",
       "products.eyebrow": "Galeri Produk Kami",
       "products.title": "Temukan pilihan produk terbaik kami yang merepresentasikan inovasi, kualitas, dan keahlian di seluruh divisi manufaktur.",
-      "gallery.eyebrow": "Galeri",
+      "gallery.eyebrow": "F&B dan hospitality",
       "gallery.title": "Our F&B and Hospitality",
       "gallery.1": "Manufaktur Furnitur",
       "gallery.2": "Pengalaman Dining",
@@ -408,6 +409,7 @@
       "brands.dd.cat": "Perhotelan",
       "contact.phoneLabel": "Telp",
       "contact.call": "Telepon",
+      "contact.whatsapp": "WhatsApp",
       "footer.tagline": "Elevating Lifestyle Experiences",
       "ui.back": "Kembali",
       "ui.prev": "Sebelumnya",
@@ -422,11 +424,11 @@
     "en": {
       "nav.about": "About Us",
       "nav.values": "Core Values",
-      "nav.business": "Business Lines",
-      "nav.brands": "Brands",
-      "nav.products": "Products",
-      "nav.gallery": "Galleries",
-      "nav.articles": "Articles",
+      "nav.business": "Business Units",
+      "nav.brands": "Our Brand",
+      "nav.products": "Our Product",
+      "nav.gallery": "Our F&B and Hospitality",
+      "nav.articles": "Articles & Editorials",
       "nav.contact": "Contact Us",
       "nav.menu": "Menu",
       "hero.lede": "PT Diana Karya Gemilang is an Indonesian company dedicated to elevating lifestyle experiences through exceptional design, craftsmanship, and hospitality.<br><br>Our portfolio includes Elementi Domus and Legnotura, specializing in high-end interior manufacturing; Lenore Exquisite Dining and Terrata Social Dining, offering thoughtfully curated Western, Italian, Asian, and Indonesian fusion cuisine; and De Diana's Home, our hospitality brand dedicated to providing refined accommodations with comfort, personalized service, and memorable guest experiences.<br><br>Together, our brands reflect a shared passion for craftsmanship, innovation, and timeless quality.",
@@ -476,7 +478,7 @@
       "brands.tr": "Designed as a social space beyond dining, Terrata brings people together through great food, comfortable surroundings, and meaningful experiences. Whether for work, gatherings, or leisure, every corner is created to inspire connection and togetherness.",
       "products.eyebrow": "Our Product Gallery",
       "products.title": "Discover a selection of our finest products, representing innovation, quality, and expertise across our manufacturing divisions.",
-      "gallery.eyebrow": "Galleries",
+      "gallery.eyebrow": "Our F&B and Hospitality",
       "gallery.title": "Our F&B and Hospitality",
       "gallery.1": "Furniture Manufacturing",
       "gallery.2": "Dining Experience",
@@ -513,6 +515,7 @@
       "brands.dd.cat": "Hospitality",
       "contact.phoneLabel": "Tel",
       "contact.call": "Call",
+      "contact.whatsapp": "WhatsApp",
       "footer.tagline": "Elevating Lifestyle Experiences",
       "ui.back": "Back",
       "ui.prev": "Previous",
