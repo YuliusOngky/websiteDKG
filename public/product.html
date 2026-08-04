@@ -22,7 +22,6 @@
           <button type="button" data-lang="id" class="active">ID</button>
           <button type="button" data-lang="en">EN</button>
         </div>
-        <a class="back-link" href="index.html#produk" data-i18n="ui.back">Kembali</a>
       </div>
     </div>
   </header>
@@ -48,6 +47,12 @@
           <h1>${esc(title)}</h1>
           ${item.image ? `<figure class="detail-hero square"><img src="${esc(item.image)}" alt="${esc(title)}"></figure>` : ''}
           <div class="detail-body">${esc(body).replace(/\n/g, '<br>')}</div>
+          <p class="detail-back-wrap">
+            <a class="back-link back-link-below" href="index.html#produk">
+              <span class="back-arrow" aria-hidden="true">←</span>
+              <span data-back-label>${esc(DKGMedia.t('ui.back'))}</span>
+            </a>
+          </p>
         `;
       }
     });

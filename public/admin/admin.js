@@ -2,7 +2,7 @@
   const LIMITS = { brands: 10, products: 10, gallery: 10, articles: 15 };
 
   const SECTIONS = {
-    nav: ['nav.about', 'nav.values', 'nav.business', 'nav.brands', 'nav.products', 'nav.gallery', 'nav.articles', 'nav.faq', 'nav.contact', 'nav.menu'],
+    nav: ['nav.about', 'nav.values', 'nav.business', 'nav.brands', 'nav.products', 'nav.gallery', 'nav.articles', 'nav.contact', 'nav.menu'],
     hero: ['hero.lede', 'hero.cta1', 'hero.cta2', 'hero.scroll'],
     about: ['about.eyebrow', 'about.title', 'about.p1', 'about.p2', 'about.stat1', 'about.stat2', 'about.stat3'],
     vision: ['vision.eyebrow', 'vision.title'],
@@ -13,9 +13,8 @@
     products: ['products.eyebrow', 'products.title'],
     gallery: ['gallery.eyebrow', 'gallery.title'],
     articles: ['articles.eyebrow', 'articles.title'],
-    faq: ['faq.eyebrow', 'faq.title', 'faq.q1', 'faq.a1', 'faq.q2', 'faq.a2', 'faq.q3', 'faq.a3', 'faq.q4', 'faq.a4'],
-    contact: ['contact.eyebrow', 'contact.title', 'contact.lede', 'contact.phoneLabel', 'contact.map', 'contact.mapAria'],
-    footer: ['footer.nav', 'footer.contact', 'footer.location', 'footer.tagline', 'footer.rights', 'footer.dev']
+    contact: ['contact.eyebrow', 'contact.title', 'contact.lede', 'contact.phoneLabel', 'contact.call', 'contact.map', 'contact.mapAria'],
+    footer: ['footer.nav', 'footer.contact', 'footer.location', 'footer.tagline', 'footer.rights']
   };
 
   const SEO_FIELDS = [
@@ -25,7 +24,7 @@
   ];
 
   const SETTINGS_FIELDS = [
-    'phone', 'whatsapp', 'email', 'addressCompany', 'addressLine1', 'addressLine2', 'addressLine3', 'mapsQuery'
+    'phone', 'email', 'addressCompany', 'addressLine1', 'addressLine2', 'addressLine3', 'mapsQuery'
   ];
 
   const ENTITY_META = {
@@ -534,11 +533,11 @@
       overview: ['Overview', 'Ringkasan konten website'],
       content: ['Konten', 'Edit teks bilingual per section (header section)'],
       brands: ['Brand Kami / Our Brand', 'CRUD brand — maks 10, klik → halaman detail'],
-      products: ['Produk & Layanan', 'CRUD produk — maks 10, klik → halaman detail'],
+      products: ['Our Product Gallery', 'CRUD produk — maks 10, klik → halaman detail'],
       gallery: ['Galeri', 'CRUD galeri — maks 10, klik → lightbox'],
       articles: ['Artikel', 'CRUD artikel — maks 15, klik → halaman detail'],
       seo: ['SEO', 'Title, description, Open Graph, robots'],
-      settings: ['Kontak & Settings', 'WhatsApp, email, alamat, maps']
+      settings: ['Kontak & Settings', 'Telepon, email, alamat, maps']
     };
     pageTitle.textContent = titles[view][0];
     pageSub.textContent = titles[view][1];
