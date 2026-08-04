@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DKG CMS Admin</title>
-  <link rel="stylesheet" href="/admin/admin.css?v=5">
+  <link rel="stylesheet" href="/admin/admin.css?v=6">
 </head>
 <body>
   <div id="loginView" class="login-view">
-    <!-- Form klasik: jalan meski JS bermasalah -->
     <form id="loginForm" class="login-card" method="POST" action="/api/auth/login-form">
       <div class="login-brand">DKG CMS</div>
       <h1>Admin Dashboard</h1>
@@ -18,8 +17,7 @@
       </label>
       <button type="submit">Masuk</button>
       <p class="muted" style="font-size:12px;margin:0">
-        Buka: <code>/admin/</code> di domain Anda atau <code>http://localhost:3001/admin/</code> lokal<br>
-        Password default: <code>admin123</code>
+        Buka: <code>/admin/</code> · Password default: <code>admin123</code>
       </p>
       <p id="loginError" class="error" hidden>Password salah. Coba: <code>admin123</code></p>
     </form>
@@ -29,14 +27,17 @@
     <aside class="sidebar">
       <div class="side-brand">
         <strong>DKG CMS</strong>
-        <span>Dashboard</span>
+        <span>Phase 2</span>
       </div>
       <nav>
         <button type="button" data-view="overview" class="nav-item active">Overview</button>
         <button type="button" data-view="content" class="nav-item">Konten</button>
+        <button type="button" data-view="brands" class="nav-item">Brand Kami</button>
+        <button type="button" data-view="products" class="nav-item">Produk &amp; Layanan</button>
+        <button type="button" data-view="gallery" class="nav-item">Galeri</button>
+        <button type="button" data-view="articles" class="nav-item">Artikel</button>
         <button type="button" data-view="seo" class="nav-item">SEO</button>
         <button type="button" data-view="settings" class="nav-item">Kontak &amp; Settings</button>
-        <button type="button" data-view="media" class="nav-item">Media</button>
       </nav>
       <div class="side-foot">
         <a href="/" target="_blank" rel="noopener">Lihat Website</a>
@@ -58,13 +59,14 @@
 
       <section id="view-overview" class="panel">
         <div class="cards">
-          <div class="card"><span>Artikel</span><b id="statArticles">0</b></div>
-          <div class="card"><span>FAQ</span><b id="statFaq">0</b></div>
+          <div class="card"><span>Brand</span><b id="statBrands">0</b></div>
           <div class="card"><span>Produk</span><b id="statProducts">0</b></div>
-          <div class="card"><span>Terakhir disimpan</span><b id="statUpdated" class="small">—</b></div>
+          <div class="card"><span>Galeri</span><b id="statGallery">0</b></div>
+          <div class="card"><span>Artikel</span><b id="statArticles">0</b></div>
         </div>
         <div class="hint-box">
-          <p>Gunakan menu <strong>Konten</strong> untuk edit teks ID/EN, <strong>SEO</strong> untuk meta Google/sosial, dan <strong>Kontak &amp; Settings</strong> untuk WhatsApp/email/alamat.</p>
+          <p>Phase 2: kelola Brand, Produk, Galeri, dan Artikel lewat menu khusus (tambah / edit / hapus, bilingual, ganti gambar). Batas carousel: Brand/Produk/Galeri 10, Artikel 15. Setelah simpan, refresh website publik.</p>
+          <p class="muted" id="statUpdatedLine" style="margin-top:8px">Terakhir disimpan: —</p>
         </div>
       </section>
 
@@ -81,6 +83,19 @@
         <div id="fieldsBox" class="fields"></div>
       </section>
 
+      <section id="view-brands" class="panel" hidden>
+        <div id="entity-brands" class="entity-root"></div>
+      </section>
+      <section id="view-products" class="panel" hidden>
+        <div id="entity-products" class="entity-root"></div>
+      </section>
+      <section id="view-gallery" class="panel" hidden>
+        <div id="entity-gallery" class="entity-root"></div>
+      </section>
+      <section id="view-articles" class="panel" hidden>
+        <div id="entity-articles" class="entity-root"></div>
+      </section>
+
       <section id="view-seo" class="panel" hidden>
         <div class="toolbar">
           <div class="lang-tabs" role="tablist">
@@ -95,23 +110,9 @@
       <section id="view-settings" class="panel" hidden>
         <div id="settingsFields" class="fields"></div>
       </section>
-
-      <section id="view-media" class="panel" hidden>
-        <div class="size-guide" style="margin-bottom:16px; max-width:720px;">
-          <strong>Ukuran yang disarankan</strong>
-          <ul>
-            <li><b>Produk</b> — 1000 × 1000 px (1:1), JPG/PNG, maks 2–3 MB</li>
-            <li><b>Galeri</b> — 1600 × 1000 px (landscape), JPG, maks 3 MB</li>
-            <li><b>Artikel</b> — 1200 × 750 px (16:10), JPG, maks 2 MB</li>
-            <li><b>SEO / OG Image</b> — 1200 × 630 px (di menu SEO → ogImage)</li>
-          </ul>
-          <p class="muted">Klik <b>Ganti gambar</b> pada item yang ingin diganti. Batas upload: 8 MB. Format: JPG, PNG, WEBP.</p>
-        </div>
-        <div id="mediaList" class="fields"></div>
-      </section>
     </main>
   </div>
 
-  <script src="/admin/admin.js?v=5"></script>
+  <script src="/admin/admin.js?v=6"></script>
 </body>
 </html>

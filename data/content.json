@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-04T12:37:09.539Z",
+  "updatedAt": "2026-08-04T13:09:25.060Z",
   "settings": {
     "whatsapp": "62811927359",
     "email": "info@dianakaryagroup.com",
@@ -13,72 +13,278 @@
   "media": {
     "products": [
       {
+        "id": "prod-1",
+        "slug": "uma-kitchen-series",
         "image": "images/product1.png",
         "caption": "UMA — Kitchen Series",
-        "brand": "Elementi Domus"
+        "brand": "Elementi Domus",
+        "title": {
+          "id": "UMA — Kitchen Series",
+          "en": "UMA — Kitchen Series"
+        },
+        "body": {
+          "id": "Temukan seri dapur UMA dari Elementi Domus — desain abadi dengan craftsmanship premium untuk ruang hunian modern.",
+          "en": "Discover the UMA kitchen series by Elementi Domus — timeless design with premium craftsmanship for modern living spaces."
+        }
       },
       {
+        "id": "prod-2",
+        "slug": "kitchen-collection",
         "image": "images/product2.png",
         "caption": "Kitchen Collection",
-        "brand": "Elementi Domus"
+        "brand": "Elementi Domus",
+        "title": {
+          "id": "Kitchen Collection",
+          "en": "Kitchen Collection"
+        },
+        "body": {
+          "id": "Koleksi dapur Elementi Domus menghadirkan solusi interior berkelas dengan material dan finishing berkualitas tinggi.",
+          "en": "The Elementi Domus kitchen collection delivers refined interior solutions with high-quality materials and finishes."
+        }
       },
       {
+        "id": "prod-3",
+        "slug": "interior-series",
         "image": "images/product3.png",
         "caption": "Interior Series",
-        "brand": "Elementi Domus"
+        "brand": "Elementi Domus",
+        "title": {
+          "id": "Interior Series",
+          "en": "Interior Series"
+        },
+        "body": {
+          "id": "Seri interior Elementi Domus menggabungkan estetika dan fungsi untuk menciptakan ruang yang elegan dan nyaman.",
+          "en": "The Elementi Domus interior series combines aesthetics and function to create elegant, comfortable spaces."
+        }
       },
       {
+        "id": "prod-4",
+        "slug": "avani-kitchen-series",
         "image": "images/product4.png",
         "caption": "AVANI — Kitchen Series",
-        "brand": "Elementi Domus"
+        "brand": "Elementi Domus",
+        "title": {
+          "id": "AVANI — Kitchen Series",
+          "en": "AVANI — Kitchen Series"
+        },
+        "body": {
+          "id": "AVANI Kitchen Series menawarkan sistem dapur premium dengan detail desain yang teliti dan kualitas manufaktur unggul.",
+          "en": "The AVANI Kitchen Series offers a premium kitchen system with meticulous design detail and superior manufacturing quality."
+        }
       },
       {
+        "id": "prod-5",
+        "slug": "wood-panel",
         "image": "images/product5.png",
         "caption": "Wood Panel",
-        "brand": "Legnotura"
+        "brand": "Legnotura",
+        "title": {
+          "id": "Wood Panel",
+          "en": "Wood Panel"
+        },
+        "body": {
+          "id": "Panel kayu Legnotura diproduksi dengan komitmen inovasi dan keberlanjutan untuk aplikasi interior premium.",
+          "en": "Legnotura wood panels are produced with a commitment to innovation and sustainability for premium interior applications."
+        }
       }
     ],
     "gallery": [
       {
+        "id": "gal-1",
         "image": "images/gallery-01.JPG",
-        "captionKey": "gallery.1"
+        "title": {
+          "id": "Manufaktur Furnitur",
+          "en": "Furniture Manufacturing"
+        }
       },
       {
+        "id": "gal-2",
         "image": "images/gallery-02.jpg",
-        "captionKey": "gallery.2"
+        "title": {
+          "id": "Pengalaman Dining",
+          "en": "Dining Experience"
+        }
       },
       {
+        "id": "gal-3",
         "image": "images/gallery-03.jpg",
-        "captionKey": "gallery.3"
+        "title": {
+          "id": "Eksterior Restoran",
+          "en": "Restaurant Exterior"
+        }
       },
       {
+        "id": "gal-4",
         "image": "images/PTDKG-activities-opt.jpg",
-        "captionKey": "gallery.4"
+        "title": {
+          "id": "Aktivitas Tim",
+          "en": "Team Activities"
+        }
       },
       {
+        "id": "gal-5",
         "image": "images/activities-opt.jpg",
-        "captionKey": "gallery.5"
+        "title": {
+          "id": "Kegiatan Perusahaan",
+          "en": "Company Activities"
+        }
       }
     ],
     "articles": [
       {
+        "id": "art-1",
+        "slug": "elementi-domus-grand-opening",
         "image": "images/article-01.jpg",
-        "tagKey": null,
-        "tagFixed": "Hospitality",
-        "titleKey": "articles.a1.t",
-        "descKey": "articles.a1.d"
+        "tag": {
+          "id": "Hospitality",
+          "en": "Hospitality"
+        },
+        "title": {
+          "id": "Elementi Domus Grand Opening & Private Viewing",
+          "en": "Elementi Domus Grand Opening & Private Viewing"
+        },
+        "summary": {
+          "id": "Elementi Domus proudly celebrated the official Grand Opening and Private Viewing of our showroom in Barito, South Jakarta, marking an important milestone in the brand's journey of design excellence and innovation.",
+          "en": "Elementi Domus proudly celebrated the official Grand Opening and Private Viewing of our showroom in Barito, South Jakarta, marking an important milestone in the brand's journey of design excellence and innovation."
+        },
+        "body": {
+          "id": "Elementi Domus proudly celebrated the official Grand Opening and Private Viewing of our showroom in Barito, South Jakarta, marking an important milestone in the brand's journey of design excellence and innovation.\n\nAcara ini menandai langkah penting dalam perjalanan brand menuju keunggulan desain dan inovasi di pasar interior premium Indonesia.",
+          "en": "Elementi Domus proudly celebrated the official Grand Opening and Private Viewing of our showroom in Barito, South Jakarta, marking an important milestone in the brand's journey of design excellence and innovation.\n\nThe event marked an important milestone in the brand's journey toward design excellence and innovation in Indonesia's premium interior market."
+        }
       },
       {
+        "id": "art-2",
+        "slug": "lenore-plaza-indonesia",
         "image": "images/article-02.jpg",
-        "tagKey": "articles.a2.tag",
-        "titleKey": "articles.a2.t",
-        "descKey": "articles.a2.d"
+        "tag": {
+          "id": "Kuliner",
+          "en": "Culinary"
+        },
+        "title": {
+          "id": "Lenore Exquisite Dining Expands with a Second Destination at Plaza Indonesia",
+          "en": "Lenore Exquisite Dining Expands with a Second Destination at Plaza Indonesia"
+        },
+        "summary": {
+          "id": "Lenore Exquisite Dining proudly marks a new milestone with the opening of its second location at Plaza Indonesia, one of Jakarta's most prestigious lifestyle destinations.",
+          "en": "Lenore Exquisite Dining proudly marks a new milestone with the opening of its second location at Plaza Indonesia, one of Jakarta's most prestigious lifestyle destinations."
+        },
+        "body": {
+          "id": "Lenore Exquisite Dining proudly marks a new milestone with the opening of its second location at Plaza Indonesia, one of Jakarta's most prestigious lifestyle destinations.\n\nLokasi baru ini memperkuat kehadiran Lenore di destinasi lifestyle paling prestisius di Jakarta.",
+          "en": "Lenore Exquisite Dining proudly marks a new milestone with the opening of its second location at Plaza Indonesia, one of Jakarta's most prestigious lifestyle destinations.\n\nThe new location strengthens Lenore's presence at one of Jakarta's most prestigious lifestyle destinations."
+        }
       },
       {
+        "id": "art-3",
+        "slug": "terrata-sound-session",
         "image": "images/article-03.jpg",
-        "tagKey": "articles.a3.tag",
-        "titleKey": "articles.a3.t",
-        "descKey": "articles.a3.d"
+        "tag": {
+          "id": "Perusahaan",
+          "en": "Company"
+        },
+        "title": {
+          "id": "Sound Session every Friday at Terrata Social Dining",
+          "en": "Sound Session every Friday at Terrata Social Dining"
+        },
+        "summary": {
+          "id": "Every Friday at 7 PM, Terrata Social Dining comes alive with Sound Session, a weekly live music experience that brings together great music, exceptional food, and meaningful connections.",
+          "en": "Every Friday at 7 PM, Terrata Social Dining comes alive with Sound Session, a weekly live music experience that brings together great music, exceptional food, and meaningful connections."
+        },
+        "body": {
+          "id": "Every Friday at 7 PM, Terrata Social Dining comes alive with Sound Session, a weekly live music experience that brings together great music, exceptional food, and meaningful connections.\n\nSound Session menghadirkan musik live mingguan yang menyatukan makanan istimewa dan koneksi yang bermakna.",
+          "en": "Every Friday at 7 PM, Terrata Social Dining comes alive with Sound Session, a weekly live music experience that brings together great music, exceptional food, and meaningful connections.\n\nSound Session delivers a weekly live music experience that brings together exceptional food and meaningful connections."
+        }
+      }
+    ],
+    "brands": [
+      {
+        "id": "brand-elementi-domus",
+        "slug": "elementi-domus",
+        "category": {
+          "id": "Manufaktur",
+          "en": "Manufacture"
+        },
+        "name": "Elementi Domus",
+        "image": "images/product1.png",
+        "short": {
+          "id": "Furnitur kelas atas dengan desain berkelas dan kualitas produk kelas satu.",
+          "en": "High-end furniture with tasteful design and first-class product quality."
+        },
+        "body": {
+          "id": "Elementi Domus adalah pilihan utama untuk furnitur kelas atas dengan desain yang berkelas dan indah, serta kualitas produk kelas satu. Elementi Domus menghadirkan desain yang abadi sekaligus berwawasan ke depan. Setiap kreasi mencerminkan komitmen terhadap keunikan, kualitas, dan inovasi, menetapkan standar baru dalam sistem furnitur dan solusi hunian.",
+          "en": "The preferred choice for high-end furniture by providing tasteful and exquisite designs, first-class product quality. Elementi Domus delivers designs that are both timeless and forward-thinking. Every creation reflects a commitment to uniqueness, quality, and innovation, setting new standards in furniture systems and living solutions."
+        }
+      },
+      {
+        "id": "brand-legnotura",
+        "slug": "legnotura",
+        "category": {
+          "id": "Manufaktur",
+          "en": "Manufacture"
+        },
+        "name": "Legnotura",
+        "image": "images/product5.png",
+        "short": {
+          "id": "Pabrik kayu terkemuka untuk panel kayu berorientasi ekspor.",
+          "en": "Premier wood factory specializing in export-oriented wood panels."
+        },
+        "body": {
+          "id": "Pabrik kayu terkemuka di Indonesia yang berspesialisasi dalam panel kayu berorientasi ekspor. Di Legnotura, kami bangga dengan komitmen kami terhadap inovasi dan keberlanjutan, menciptakan panel kayu dari bahan daur ulang dan bahan-bahan mutakhir.",
+          "en": "Premier Indonesian wood factory specializing in export-oriented wood panels. At Legnotura, we take pride in our commitment to innovation and sustainability, crafting wood panels from recycled and cutting-edge materials."
+        }
+      },
+      {
+        "id": "brand-lenore",
+        "slug": "lenore-exquisite-dining",
+        "category": {
+          "id": "Makanan & Minuman",
+          "en": "Food & Beverage"
+        },
+        "name": "Lenore Exquisite Dining",
+        "image": "images/gallery-02.jpg",
+        "short": {
+          "id": "Filosofi bersantap mewah yang menerangi indera.",
+          "en": "A fine-dining philosophy that illuminates the senses."
+        },
+        "body": {
+          "id": "Terinspirasi oleh nama \"Lenore\" yang berarti cahaya atau yang terang, filosofi kami berpusat pada penerangan indera dan perayaan seni bersantap mewah.",
+          "en": "Inspired by the name \"Lenore\" which means light or the bright one, our philosophy revolves around illuminating the senses and celebrating the art of fine dining."
+        }
+      },
+      {
+        "id": "brand-terrata",
+        "slug": "terrata-social-dining",
+        "category": {
+          "id": "Makanan & Minuman",
+          "en": "Food & Beverage"
+        },
+        "name": "Terrata Social Dining",
+        "image": "images/gallery-03.jpg",
+        "short": {
+          "id": "Ruang sosial di luar sekadar bersantap — koneksi dan kebersamaan.",
+          "en": "A social space beyond dining — connection and togetherness."
+        },
+        "body": {
+          "id": "Dirancang sebagai ruang sosial di luar sekadar bersantap, Terrata menyatukan orang-orang melalui makanan lezat, lingkungan yang nyaman, dan pengalaman yang bermakna. Baik untuk bekerja, berkumpul, atau bersantai, setiap sudutnya diciptakan untuk menginspirasi koneksi dan kebersamaan.",
+          "en": "Designed as a social space beyond dining, Terrata brings people together through great food, comfortable surroundings, and meaningful experiences. Whether for work, gatherings, or leisure, every corner is created to inspire connection and togetherness."
+        }
+      },
+      {
+        "id": "brand-de-dianas-home",
+        "slug": "de-dianas-home",
+        "category": {
+          "id": "Perhotelan",
+          "en": "Hospitality"
+        },
+        "name": "De Diana's Home",
+        "image": "images/placeholder-brand-dd.svg",
+        "short": {
+          "id": "Hospitality premium dengan kenyamanan dan layanan personal.",
+          "en": "Premium hospitality with comfort and personalized service."
+        },
+        "body": {
+          "id": "Rasakan arti sebenarnya dari kenyamanan hidup bersama kami. Bersantai, rileks, dan nikmati gaya hidup yang dirancang sesuai kebutuhan Anda, di mana kenyamanan dan kemudahan menyatu dengan sempurna.",
+          "en": "Experience the true meaning of comfort living with us. Relax, unwind, and enjoy lifestyle designed around your needs, where comfort and convenience come together seamlessly."
+        }
       }
     ]
   },
@@ -215,7 +421,16 @@
       "brands.tr.cat": "Makanan & Minuman",
       "brands.dd.cat": "Perhotelan",
       "contact.phoneLabel": "Telp",
-      "footer.tagline": "PT Diana Karya Gemilang — Elevating Lifestyle Experiences"
+      "footer.tagline": "PT Diana Karya Gemilang — Elevating Lifestyle Experiences",
+      "ui.back": "Kembali",
+      "ui.prev": "Sebelumnya",
+      "ui.next": "Berikutnya",
+      "ui.close": "Tutup",
+      "ui.readMore": "Selengkapnya",
+      "ui.notFound": "Konten tidak ditemukan.",
+      "detail.brand": "Brand",
+      "detail.product": "Produk",
+      "detail.article": "Artikel"
     },
     "en": {
       "nav.about": "About Us",
@@ -323,7 +538,16 @@
       "brands.tr.cat": "Food & Beverage",
       "brands.dd.cat": "Hospitality",
       "contact.phoneLabel": "Tel",
-      "footer.tagline": "PT Diana Karya Gemilang — Elevating Lifestyle Experiences"
+      "footer.tagline": "PT Diana Karya Gemilang — Elevating Lifestyle Experiences",
+      "ui.back": "Back",
+      "ui.prev": "Previous",
+      "ui.next": "Next",
+      "ui.close": "Close",
+      "ui.readMore": "Read more",
+      "ui.notFound": "Content not found.",
+      "detail.brand": "Brand",
+      "detail.product": "Product",
+      "detail.article": "Article"
     }
   }
 }

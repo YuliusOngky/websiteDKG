@@ -105,7 +105,16 @@ window.DKG_I18N = {
     "brands.tr.cat": "Makanan & Minuman",
     "brands.dd.cat": "Perhotelan",
     "contact.phoneLabel": "Telp",
-    "footer.tagline": "PT Diana Karya Gemilang — Elevating Lifestyle Experiences"
+    "footer.tagline": "PT Diana Karya Gemilang — Elevating Lifestyle Experiences",
+    "ui.back": "Kembali",
+    "ui.prev": "Sebelumnya",
+    "ui.next": "Berikutnya",
+    "ui.close": "Tutup",
+    "ui.readMore": "Selengkapnya",
+    "ui.notFound": "Konten tidak ditemukan.",
+    "detail.brand": "Brand",
+    "detail.product": "Produk",
+    "detail.article": "Artikel"
   },
   "en": {
     "nav.about": "About Us",
@@ -213,6 +222,15 @@ window.DKG_I18N = {
     "brands.tr.cat": "Food & Beverage",
     "brands.dd.cat": "Hospitality",
     "contact.phoneLabel": "Tel",
-    "footer.tagline": "PT Diana Karya Gemilang — Elevating Lifestyle Experiences"
+    "footer.tagline": "PT Diana Karya Gemilang — Elevating Lifestyle Experiences",
+    "ui.back": "Back",
+    "ui.prev": "Previous",
+    "ui.next": "Next",
+    "ui.close": "Close",
+    "ui.readMore": "Read more",
+    "ui.notFound": "Content not found.",
+    "detail.brand": "Brand",
+    "detail.product": "Product",
+    "detail.article": "Article"
   }
 };

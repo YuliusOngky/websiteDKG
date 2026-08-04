@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand — PT Diana Karya Gemilang</title>
+<meta name="description" content="Brand detail — PT Diana Karya Gemilang">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="detail.css">
+</head>
+<body>
+  <header class="detail-top">
+    <div class="wrap detail-nav">
+      <a class="logo" href="index.html">
+        <img src="images/logo-dkg.png" alt="DKG" width="28" height="28">
+        <span>Diana Karya Gemilang</span>
+      </a>
+      <div class="detail-actions">
+        <div class="lang-switch">
+          <button type="button" data-lang="id" class="active">ID</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="detail-main wrap" id="detailRoot">
+    <p class="detail-loading">Loading…</p>
+  </main>
+
+  <script src="i18n.js"></script>
+  <script src="media-ui.js"></script>
+  <script src="detail.js"></script>
+  <script>
+    DKGDetail.mount({
+      type: 'brand',
+      collection: 'brands',
+      backHref: 'index.html#brands',
+      render(item, l, bi, esc) {
+        const cat = bi(item.category, l);
+        const body = bi(item.body, l);
+        return `
+          <p class="eyebrow">${esc(cat || DKGMedia.t('detail.brand'))}</p>
+          <h1>${esc(item.name || '')}</h1>
+          ${item.image ? `<figure class="detail-hero"><img src="${esc(item.image)}" alt="${esc(item.name || '')}"></figure>` : ''}
+          <div class="detail-body">${esc(body).replace(/\n/g, '<br>')}</div>
+          <p class="detail-back-wrap">
+            <a class="back-link back-link-below" href="index.html#brands">
+              <span class="back-arrow" aria-hidden="true">←</span>
+              <span data-back-label>${esc(DKGMedia.t('ui.back'))}</span>
+            </a>
+          </p>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+/**
+ * Shared Phase 2 helpers: bilingual fields, carousel, lightbox, detail lookup.
+ */
+(function (global) {
+  const LIMITS = { brands: 10, products: 10, gallery: 10, articles: 15 };
+
+  function lang() {
+    return localStorage.getItem('dkg-lang') === 'en' ? 'en' : 'id';
+  }
+
+  function bi(field, l) {
+    if (field == null) return '';
+    if (typeof field === 'string') return field;
+    const use = l || lang();
+    return field[use] || field.id || field.en || '';
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function t(key) {
+    const pack = (global.DKG_I18N && (global.DKG_I18N[lang()] || global.DKG_I18N.id)) || {};
+    const fallback = (global.DKG_I18N && global.DKG_I18N.id) || {};
+    return pack[key] || fallback[key] || key;
+  }
+
+  function limitList(arr, type) {
+    const max = LIMITS[type] || 10;
+    return (arr || []).slice(0, max);
+  }
+
+  function initCarousel(root) {
+    if (!root) return;
+    const track = root.querySelector('.carousel-track');
+    const prev = root.querySelector('[data-carousel-prev]');
+    const next = root.querySelector('[data-carousel-next]');
+    if (!track) return;
+
+    function step() {
+      const card = track.querySelector(':scope > *');
+      return card ? card.getBoundingClientRect().width + 2 : track.clientWidth * 0.8;
+    }
+
+    function updateButtons() {
+      const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth - 2);
+      if (prev) prev.disabled = track.scrollLeft <= 2 || maxScroll <= 0;
+      if (next) next.disabled = track.scrollLeft >= maxScroll || maxScroll <= 0;
+    }
+
+    if (!root.dataset.carouselReady) {
+      root.dataset.carouselReady = '1';
+      if (prev) {
+        prev.addEventListener('click', () => {
+          track.scrollBy({ left: -step(), behavior: 'smooth' });
+        });
+      }
+      if (next) {
+        next.addEventListener('click', () => {
+          track.scrollBy({ left: step(), behavior: 'smooth' });
+        });
+      }
+      track.addEventListener('scroll', updateButtons, { passive: true });
+      window.addEventListener('resize', updateButtons);
+    }
+    updateButtons();
+  }
+
+  function ensureLightbox() {
+    let lb = document.getElementById('dkgLightbox');
+    if (lb) return lb;
+    lb = document.createElement('div');
+    lb.id = 'dkgLightbox';
+    lb.className = 'lightbox';
+    lb.hidden = true;
+    lb.innerHTML = `
+      <div class="lightbox-backdrop" data-lightbox-close></div>
+      <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Gallery">
+        <button type="button" class="lightbox-close" data-lightbox-close aria-label="Close">&times;</button>
+        <img class="lightbox-img" alt="">
+        <p class="lightbox-cap"></p>
+      </div>`;
+    document.body.appendChild(lb);
+    lb.addEventListener('click', (e) => {
+      if (e.target.closest('[data-lightbox-close]')) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lb.hidden) closeLightbox();
+    });
+    return lb;
+  }
+
+  function openLightbox(src, caption) {
+    const lb = ensureLightbox();
+    const img = lb.querySelector('.lightbox-img');
+    const cap = lb.querySelector('.lightbox-cap');
+    img.src = src;
+    img.alt = caption || '';
+    cap.textContent = caption || '';
+    lb.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    const lb = document.getElementById('dkgLightbox');
+    if (!lb) return;
+    lb.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  function renderBrands(container, brands, l) {
+    if (!container) return;
+    const list = limitList(brands, 'brands');
+    container.innerHTML = list.map((b) => {
+      const cat = bi(b.category, l);
+      const short = bi(b.short, l);
+      const img = b.image || 'images/placeholder-brand-dd.svg';
+      return `<a class="brand-card reveal carousel-card" href="brand.html?slug=${encodeURIComponent(b.slug)}">
+        <img class="brand-thumb" src="${escapeHtml(img)}" alt="${escapeHtml(b.name || '')}" loading="lazy">
+        <span class="tag">${escapeHtml(cat)}</span>
+        <h3>${escapeHtml(b.name || '')}</h3>
+        <p>${escapeHtml(short)}</p>
+      </a>`;
+    }).join('');
+  }
+
+  function renderProducts(container, products, l) {
+    if (!container) return;
+    const list = limitList(products, 'products');
+    container.innerHTML = list.map((p) => {
+      const title = bi(p.title, l) || p.caption || '';
+      const brand = p.brand || '';
+      return `<a class="showcase-item reveal carousel-card" href="product.html?slug=${encodeURIComponent(p.slug)}">
+        <img src="${escapeHtml(p.image || '')}" alt="${escapeHtml(title)}" loading="lazy">
+        <div class="cap"><small>${escapeHtml(brand)}</small><span>${escapeHtml(title)}</span></div>
+      </a>`;
+    }).join('');
+  }
+
+  function renderGallery(container, gallery, l) {
+    if (!container) return;
+    const list = limitList(gallery, 'gallery');
+    container.innerHTML = list.map((g, i) => {
+      const title = bi(g.title, l);
+      const wide = i === 0 ? ' wide' : '';
+      return `<button type="button" class="gallery-item${wide} reveal carousel-card" data-gallery-src="${escapeHtml(g.image || '')}" data-gallery-cap="${escapeHtml(title)}">
+        <img src="${escapeHtml(g.image || '')}" alt="${escapeHtml(title)}" loading="lazy">
+        <span class="cap">${escapeHtml(title)}</span>
+      </button>`;
+    }).join('');
+
+    container.querySelectorAll('[data-gallery-src]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        openLightbox(btn.getAttribute('data-gallery-src'), btn.getAttribute('data-gallery-cap'));
+      });
+    });
+  }
+
+  function renderArticles(container, articles, l) {
+    if (!container) return;
+    const list = limitList(articles, 'articles');
+    container.innerHTML = list.map((a) => {
+      const tag = bi(a.tag, l);
+      const title = bi(a.title, l);
+      const summary = bi(a.summary, l);
+      return `<a class="blog-card reveal carousel-card" href="article.html?slug=${encodeURIComponent(a.slug)}">
+        <div class="blog-img"><img src="${escapeHtml(a.image || '')}" alt="${escapeHtml(title)}" loading="lazy"></div>
+        <span class="tag">${escapeHtml(tag)}</span>
+        <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(summary)}</p>
+      </a>`;
+    }).join('');
+  }
+
+  function findBySlug(list, slug) {
+    const s = String(slug || '').toLowerCase();
+    return (list || []).find((item) => String(item.slug || '').toLowerCase() === s) || null;
+  }
+
+  function querySlug() {
+    return new URLSearchParams(location.search).get('slug') || '';
+  }
+
+  global.DKGMedia = {
+    LIMITS,
+    lang,
+    bi,
+    escapeHtml,
+    t,
+    limitList,
+    initCarousel,
+    openLightbox,
+    closeLightbox,
+    renderBrands,
+    renderProducts,
+    renderGallery,
+    renderArticles,
+    findBySlug,
+    querySlug
+  };
+})(window);

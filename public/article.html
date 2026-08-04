@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article — PT Diana Karya Gemilang</title>
+<meta name="description" content="Article detail — PT Diana Karya Gemilang">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="detail.css">
+</head>
+<body>
+  <header class="detail-top">
+    <div class="wrap detail-nav">
+      <a class="logo" href="index.html">
+        <img src="images/logo-dkg.png" alt="DKG" width="28" height="28">
+        <span>Diana Karya Gemilang</span>
+      </a>
+      <div class="detail-actions">
+        <div class="lang-switch">
+          <button type="button" data-lang="id" class="active">ID</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+        <a class="back-link" href="index.html#artikel" data-i18n="ui.back">Kembali</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="detail-main wrap" id="detailRoot">
+    <p class="detail-loading">Loading…</p>
+  </main>
+
+  <script src="i18n.js"></script>
+  <script src="media-ui.js"></script>
+  <script src="detail.js"></script>
+  <script>
+    DKGDetail.mount({
+      type: 'article',
+      collection: 'articles',
+      backHref: 'index.html#artikel',
+      render(item, l, bi, esc) {
+        const tag = bi(item.tag, l);
+        const title = bi(item.title, l);
+        const summary = bi(item.summary, l);
+        const body = bi(item.body, l);
+        return `
+          <p class="eyebrow">${esc(tag || DKGMedia.t('detail.article'))}</p>
+          <h1>${esc(title)}</h1>
+          ${summary ? `<p class="detail-lede">${esc(summary)}</p>` : ''}
+          ${item.image ? `<figure class="detail-hero"><img src="${esc(item.image)}" alt="${esc(title)}"></figure>` : ''}
+          <div class="detail-body">${esc(body).replace(/\n/g, '<br>')}</div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>
