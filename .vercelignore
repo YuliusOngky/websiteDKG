@@ -1,0 +1,14 @@
+Diana Karya Group Image 1.ai
+*.ai
+*.docx
+*.pdf
+*.zip
+node_modules
+.env
+.vercel
+uploads
+PLACEHOLDERS.md
+_tmp_*
+CMS Admin*
+index(1).html
+images-*.zip
