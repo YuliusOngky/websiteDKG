@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-08-04T19:33:18.285Z",
+  "updatedAt": "2026-08-04T19:50:48.032Z",
   "settings": {
     "email": "info@dianakaryagroup.com",
     "addressCompany": "PT Diana Karya Gemilang",
     "addressLine1": "Flow Coworking Space, Gedung Midplaza 1",
-    "addressLine2": "Jl Jendral Sudirman Kav 10-11",
+    "addressLine2": "Jl Jendral Sudirman Kav 100",
     "addressLine3": "Jakarta Pusat, DKI Jakarta 10220",
     "mapsQuery": "PT Diana Karya Gemilang, Flow Coworking Space, Gedung Midplaza 1, Jl Jendral Sudirman Kav 10-11, Jakarta Pusat 10220",
     "phone": "+6221 573 5975",
@@ -422,7 +422,8 @@
       "ui.notFound": "Konten tidak ditemukan.",
       "detail.brand": "Brand",
       "detail.product": "Produk",
-      "detail.article": "Artikel"
+      "detail.article": "Artikel",
+      "hero.scroll": ""
     },
     "en": {
       "nav.about": "About Us",

@@ -132,6 +132,15 @@
       .replace(/^-|-$/g, '');
   }
 
+  /** Resolve CMS image paths for <img> under /admin/ (relative paths would break). */
+  function mediaUrl(path) {
+    const p = String(path || '').trim();
+    if (!p) return '';
+    if (/^(https?:|data:|blob:)/i.test(p)) return p;
+    if (p.startsWith('/')) return p;
+    return '/' + p.replace(/^\.\//, '');
+  }
+
   async function api(url, options = {}) {
     const res = await fetch(url, {
       credentials: 'same-origin',
@@ -427,7 +436,7 @@
 
     const rows = list.map((item, i) => `
       <div class="entity-row">
-        <img class="entity-thumb" src="${escapeAttr(item.image || '')}" alt="" onerror="this.style.opacity=.25">
+        <img class="entity-thumb" src="${escapeAttr(mediaUrl(item.image))}" alt="" onerror="this.style.opacity=.25">
         <div class="entity-meta">
           <strong>${escapeHtml(itemLabel(type, item))}</strong>
           <span class="muted">${escapeHtml(item.slug || item.id || '')}</span>
@@ -529,16 +538,20 @@
       </div>
       <div class="entity-editor">
         <div class="media-card">
-          <img class="media-thumb wide" src="${escapeAttr(item.image || '')}" alt="" onerror="this.style.opacity=.3">
+          <div class="media-preview-frame ratio-${type === 'products' ? 'square' : 'wide'}" id="mediaPreviewFrame">
+            <img class="media-thumb wide" id="entityImagePreview" src="${escapeAttr(mediaUrl(item.image))}" alt="Preview gambar" onerror="this.style.opacity=.3">
+            <span class="media-preview-badge">Preview terpasang</span>
+          </div>
           <div class="media-meta">
             <label>Gambar</label>
             <p class="media-hint">${escapeHtml(meta.hint)}</p>
+            <p class="media-hint">Ganti gambar → atur zoom/posisi di canvas, lalu potong sesuai rasio tampilan website.</p>
             <div class="media-actions">
               <input type="file" accept="image/*" hidden id="entityFile">
               <button type="button" class="btn-primary" id="entityUploadBtn">Ganti gambar</button>
               <p class="media-status" id="entityUploadStatus"></p>
             </div>
-            <input data-plain="image" value="${escapeAttr(item.image || '')}" placeholder="Path / URL gambar">
+            <input data-plain="image" id="entityImagePath" value="${escapeAttr(item.image || '')}" placeholder="Path / URL gambar">
           </div>
         </div>
         ${extra}
@@ -594,31 +607,212 @@
     });
 
     const fileInput = document.getElementById('entityFile');
+    const pathInput = document.getElementById('entityImagePath');
+    const previewImg = document.getElementById('entityImagePreview');
+
+    pathInput?.addEventListener('input', () => {
+      if (previewImg) {
+        previewImg.style.opacity = '1';
+        previewImg.src = mediaUrl(pathInput.value);
+      }
+    });
+
     document.getElementById('entityUploadBtn')?.addEventListener('click', () => fileInput?.click());
     fileInput?.addEventListener('change', async () => {
       const file = fileInput.files?.[0];
       const status = document.getElementById('entityUploadStatus');
       if (!file) return;
-      status.textContent = 'Mengunggah...';
+      status.className = 'media-status';
+      status.textContent = 'Membuka editor gambar...';
       try {
+        const cropped = await openImageCropper(file, type);
+        if (!cropped) {
+          status.textContent = 'Dibatalkan.';
+          return;
+        }
+        status.textContent = 'Mengunggah...';
         const fd = new FormData();
-        fd.append('file', file);
+        fd.append('file', cropped, cropped.name || 'crop.jpg');
         const res = await fetch('/api/upload', { method: 'POST', body: fd, credentials: 'same-origin' });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Upload gagal');
         content.media[type][index].image = data.path;
-        const imgInput = root.querySelector('[data-plain="image"]');
-        if (imgInput) imgInput.value = data.path;
-        const thumb = root.querySelector('.media-thumb');
-        if (thumb) thumb.src = data.path + '?t=' + Date.now();
+        if (pathInput) pathInput.value = data.path;
+        if (previewImg) {
+          previewImg.style.opacity = '1';
+          const src = mediaUrl(data.path);
+          previewImg.src = src + (src.includes('?') ? '&' : '?') + 't=' + Date.now();
+        }
         status.className = 'media-status ok';
-        status.textContent = 'Gambar diganti. Klik Simpan item.';
+        status.textContent = 'Gambar dipotong & dipasang. Klik Simpan item.';
       } catch (err) {
         status.className = 'media-status err';
         status.textContent = err.message;
       } finally {
         fileInput.value = '';
       }
+    });
+  }
+
+  const CROP_PRESETS = {
+    brands: { ratio: 16 / 10, outW: 1600, outH: 1000, label: '16:10 · 1600×1000' },
+    products: { ratio: 1, outW: 1000, outH: 1000, label: '1:1 · 1000×1000' },
+    gallery: { ratio: 16 / 10, outW: 1600, outH: 1000, label: '16:10 · 1600×1000' },
+    articles: { ratio: 16 / 10, outW: 1200, outH: 750, label: '16:10 · 1200×750' }
+  };
+
+  function openImageCropper(file, type) {
+    const preset = CROP_PRESETS[type] || CROP_PRESETS.brands;
+    const modal = document.getElementById('cropModal');
+    const canvas = document.getElementById('cropCanvas');
+    const zoomInput = document.getElementById('cropZoom');
+    const ratioLabel = document.getElementById('cropRatioLabel');
+    const applyBtn = document.getElementById('cropApplyBtn');
+    const cancelBtn = document.getElementById('cropCancelBtn');
+    if (!modal || !canvas) return Promise.reject(new Error('Editor gambar tidak tersedia'));
+
+    return new Promise((resolve) => {
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      let scale = 1;
+      let offsetX = 0;
+      let offsetY = 0;
+      let dragging = false;
+      let lastX = 0;
+      let lastY = 0;
+      let settled = false;
+
+      function finish(result) {
+        if (settled) return;
+        settled = true;
+        URL.revokeObjectURL(url);
+        modal.hidden = true;
+        document.body.classList.remove('crop-open');
+        cleanup();
+        resolve(result);
+      }
+
+      function cleanup() {
+        canvas.onpointerdown = null;
+        canvas.onpointermove = null;
+        canvas.onpointerup = null;
+        canvas.onpointerleave = null;
+        zoomInput.oninput = null;
+        applyBtn.onclick = null;
+        cancelBtn.onclick = null;
+      }
+
+      function fitCanvas() {
+        const maxW = Math.min(720, window.innerWidth - 48);
+        const viewH = Math.round(maxW / preset.ratio);
+        canvas.width = maxW;
+        canvas.height = viewH;
+      }
+
+      function coverScale() {
+        return Math.max(canvas.width / img.width, canvas.height / img.height);
+      }
+
+      function draw() {
+        const base = coverScale();
+        const s = base * scale;
+        const drawW = img.width * s;
+        const drawH = img.height * s;
+        // Clamp offsets so canvas stays covered
+        const minX = canvas.width - drawW;
+        const minY = canvas.height - drawH;
+        offsetX = Math.min(0, Math.max(minX, offsetX));
+        offsetY = Math.min(0, Math.max(minY, offsetY));
+
+        ctx.fillStyle = '#1a1916';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, offsetX, offsetY, drawW, drawH);
+
+        // Frame guide
+        ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(1, 1, canvas.width - 2, canvas.height - 2);
+      }
+
+      function exportCropped() {
+        const out = document.createElement('canvas');
+        out.width = preset.outW;
+        out.height = preset.outH;
+        const octx = out.getContext('2d');
+        const base = coverScale();
+        const s = base * scale;
+        // Map canvas viewport back to source image
+        const sx = -offsetX / s;
+        const sy = -offsetY / s;
+        const sw = canvas.width / s;
+        const sh = canvas.height / s;
+        octx.fillStyle = '#fff';
+        octx.fillRect(0, 0, out.width, out.height);
+        octx.drawImage(img, sx, sy, sw, sh, 0, 0, out.width, out.height);
+        return new Promise((res, rej) => {
+          out.toBlob((blob) => {
+            if (!blob) return rej(new Error('Gagal memotong gambar'));
+            const nameBase = String(file.name || 'image').replace(/\.[^.]+$/, '');
+            res(new File([blob], nameBase + '-crop.jpg', { type: 'image/jpeg' }));
+          }, 'image/jpeg', 0.9);
+        });
+      }
+
+      img.onload = () => {
+        fitCanvas();
+        scale = 1;
+        zoomInput.value = '100';
+        const base = coverScale();
+        offsetX = (canvas.width - img.width * base) / 2;
+        offsetY = (canvas.height - img.height * base) / 2;
+        ratioLabel.textContent = preset.label;
+        document.getElementById('cropHint').textContent =
+          'Geser gambar & atur zoom. Area di dalam bingkai akan dipotong ke ' + preset.label + '.';
+        modal.hidden = false;
+        document.body.classList.add('crop-open');
+        draw();
+      };
+      img.onerror = () => finish(null);
+      img.src = url;
+
+      zoomInput.oninput = () => {
+        scale = Number(zoomInput.value) / 100;
+        draw();
+      };
+
+      canvas.onpointerdown = (e) => {
+        dragging = true;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        canvas.setPointerCapture(e.pointerId);
+      };
+      canvas.onpointermove = (e) => {
+        if (!dragging) return;
+        offsetX += e.clientX - lastX;
+        offsetY += e.clientY - lastY;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        draw();
+      };
+      canvas.onpointerup = () => { dragging = false; };
+      canvas.onpointerleave = () => { dragging = false; };
+
+      cancelBtn.onclick = () => finish(null);
+      applyBtn.onclick = async () => {
+        try {
+          applyBtn.disabled = true;
+          applyBtn.textContent = 'Memproses...';
+          const fileOut = await exportCropped();
+          finish(fileOut);
+        } catch (err) {
+          setStatus(err.message, false);
+          finish(null);
+        } finally {
+          applyBtn.disabled = false;
+          applyBtn.textContent = 'Potong & pasang';
+        }
+      };
     });
   }
 

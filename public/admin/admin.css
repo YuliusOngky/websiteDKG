@@ -288,9 +288,39 @@ button, input, select, textarea {
   padding: 14px;
   background: #faf8f4;
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: minmax(180px, 280px) 1fr;
   gap: 14px;
   align-items: start;
+}
+.media-preview-frame {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--line);
+  background: #fff;
+  overflow: hidden;
+}
+.media-preview-frame.ratio-wide {
+  aspect-ratio: 16 / 10;
+}
+.media-preview-frame.ratio-square {
+  aspect-ratio: 1 / 1;
+}
+.media-preview-frame .media-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  display: block;
+}
+.media-preview-badge {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  background: rgba(22, 21, 19, 0.78);
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
 }
 .media-thumb {
   width: 120px;
@@ -301,7 +331,7 @@ button, input, select, textarea {
   display: block;
 }
 .media-thumb.wide {
-  height: 80px;
+  height: auto;
 }
 .media-meta { display: grid; gap: 8px; }
 .media-actions {
@@ -317,6 +347,61 @@ button, input, select, textarea {
 .media-status { font-size: 12px; color: var(--muted); margin: 0; }
 .media-status.ok { color: var(--ok); }
 .media-status.err { color: var(--err); }
+
+.crop-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(16, 15, 13, 0.62);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+.crop-modal[hidden] { display: none !important; }
+body.crop-open { overflow: hidden; }
+.crop-dialog {
+  width: min(780px, 100%);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+.crop-header h3 { margin: 0 0 4px; font-size: 18px; }
+.crop-stage-wrap {
+  background: #1a1916;
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+#cropCanvas {
+  max-width: 100%;
+  cursor: grab;
+  touch-action: none;
+  display: block;
+}
+#cropCanvas:active { cursor: grabbing; }
+.crop-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  align-items: center;
+  justify-content: space-between;
+}
+.crop-zoom-label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+}
+.crop-zoom-label input { width: min(240px, 50vw); }
+.crop-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
 .status-ok { color: var(--ok); }
 .status-err { color: var(--err); }
 
