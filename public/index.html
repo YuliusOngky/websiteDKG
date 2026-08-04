@@ -166,14 +166,27 @@
   }
   .about-figure img{width:100%; height:100%; object-fit:cover; display:block;}
   .about-copy p{font-size:16px; line-height:1.85; color:var(--charcoal); margin:0 0 20px;}
-  .stat-row{display:flex; gap:48px; margin-top:36px; padding-top:32px; border-top:1px solid var(--line); flex-wrap:wrap;}
+  .stat-row{display:none;}
   .stat b{font-family:'Fraunces',serif; font-size:30px; font-weight:500; display:block;}
   .stat span{font-size:12.5px; color:var(--muted);}
 
   .misi-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:26px; margin-top:30px;}
   .misi-item{border-top:1px solid var(--line); padding-top:16px;}
-  .misi-num{font-family:'Fraunces',serif; font-style:italic; color:var(--brass); font-size:15px;}
-  .misi-item p{font-size:13.5px; line-height:1.65; color:var(--muted); margin:10px 0 0;}
+  .misi-num{font-family:'Fraunces',serif; font-style:italic; color:var(--brass); font-size:18px; font-weight:500;}
+  .misi-item p{font-size:15.5px; line-height:1.7; color:var(--charcoal); margin:12px 0 0; font-weight:500;}
+  .placeholder-note{
+    display:block; margin-top:10px; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--brass); opacity:.85;
+  }
+  .unit-company{
+    margin:10px 0 0; font-size:12.5px; letter-spacing:.04em; color:var(--brass-soft);
+    font-weight:600;
+  }
+  .contact-phone{
+    display:block; margin:18px 0 0; font-size:15px; color:var(--ink); text-decoration:none; font-weight:500;
+  }
+  .contact-phone:hover{color:var(--brass);}
+  .footer-tagline{margin:8px 0 0; font-size:13px; color:#c8c4bb; max-width:320px;}
 
   /* VALUES */
   .values-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--line); border:1px solid var(--line);}
@@ -187,7 +200,7 @@
   .bisnis-strip .eyebrow{color:var(--brass-soft);}
   .bisnis-strip .section-head h2{color:var(--paper);}
   .bisnis-strip .section-head p{color:#c8c4bb; margin:14px 0 0; font-size:15px; line-height:1.65;}
-  .unit-grid{display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid rgba(247,245,241,.15);}
+  .unit-grid{display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(247,245,241,.15);}
   .unit{
     padding:44px 34px; border-right:1px solid rgba(247,245,241,.15);
     min-height:340px; display:flex; flex-direction:column; justify-content:space-between;
@@ -212,7 +225,11 @@
   .unit.active .unit-link svg{transform:rotate(90deg);}
 
   /* BRANDS */
-  .brands-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--line); border:1px solid var(--line);}
+  .brands-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); border:1px solid var(--line);}
+  .brand-card .brand-thumb{
+    width:100%; height:140px; object-fit:cover; display:block; margin-bottom:18px;
+    background:#ece8e1; border:1px dashed rgba(166,124,62,.45);
+  }
   .brand-card{
     background:var(--paper); padding:40px 28px; min-height:260px;
     display:flex; flex-direction:column; justify-content:space-between;
@@ -467,7 +484,8 @@
 <section class="section-pad" id="tentang">
   <div class="wrap about-grid">
     <div class="about-figure reveal">
-      <img src="images/activities-opt.jpg" alt="Kegiatan PT Diana Karya Gemilang">
+      <img src="images/placeholder-about.svg" alt="PLACEHOLDER — ganti dengan gambar About dari Drive (.ai export)">
+      <span class="placeholder-note">Placeholder About image — replace with Drive export</span>
     </div>
     <div class="about-copy reveal">
       <span class="eyebrow" data-i18n="about.eyebrow">Tentang Kami</span>
@@ -527,10 +545,12 @@
     <div class="unit reveal">
       <div>
         <span class="unit-num">01</span>
-        <h3>Hospitality</h3>
-        <p data-i18n="business.h.desc">Pengembangan dan pengelolaan bisnis hospitality yang mengedepankan kenyamanan, kualitas pelayanan, dan pengalaman pelanggan.</p>
+        <h3>Manufacturing</h3>
+        <p class="unit-company" data-i18n="business.m.company">PT Diana Gaharu Gemilang</p>
+        <p data-i18n="business.m.desc">Merancang dan memproduksi furnitur dan solusi interior premium dengan komitmen kuat terhadap keahlian luar biasa, teknik presisi, desain inovatif, dan layanan pelanggan yang luar biasa.</p>
+        <p class="unit-brands">Elementi Domus · Legnotura</p>
         <div class="extra-text">
-          <p data-i18n="business.h.more">Layanan kami mencakup manajemen hotel boutique, resort eksklusif, serta strategi optimalisasi kepuasan tamu dengan standar internasional.</p>
+          <p data-i18n="business.m.more">Fasilitas manufaktur kami didukung oleh teknologi modern dan pengrajin berpengalaman untuk menciptakan karya-karya berkualitas estetika tinggi.</p>
         </div>
       </div>
       <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
@@ -541,10 +561,11 @@
       <div>
         <span class="unit-num">02</span>
         <h3>Food &amp; Beverage</h3>
-        <p data-i18n="business.f.desc">Pengelolaan restoran dan konsep kuliner premium dengan standar pelayanan dan kualitas terbaik.</p>
+        <p class="unit-company" data-i18n="business.f.company">PT Diana Boga Gemilang</p>
+        <p data-i18n="business.f.desc">Mengembangkan dan mengoperasikan restoran, kafe, dan konsep kuliner premium yang menyajikan masakan luar biasa, keramahan yang berkelas, dan pengalaman bersantap yang tak terlupakan.</p>
         <p class="unit-brands">Lenore · Terrata</p>
         <div class="extra-text">
-          <p data-i18n="business.f.more">Kami menghadirkan inovasi menu berkelanjutan, manajemen rantai pasok kuliner, serta pengalaman bersantap eksklusif di setiap lini usaha.</p>
+          <p data-i18n="business.f.more">Kami menghadirkan inovasi menu berkelanjutan, manajemen rantai pasokan kuliner, dan pengalaman bersantap eksklusif di setiap lini bisnis.</p>
         </div>
       </div>
       <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
@@ -554,24 +575,12 @@
     <div class="unit reveal">
       <div>
         <span class="unit-num">03</span>
-        <h3>Manufacturing</h3>
-        <p data-i18n="business.m.desc">Produksi furnitur dan produk berkualitas tinggi dengan mengutamakan desain, presisi, serta inovasi.</p>
-        <p class="unit-brands">Elementi Domus · Legnotura</p>
+        <h3>Hospitality</h3>
+        <p class="unit-company" data-i18n="business.h.company">PT Diana Grha Gemilang</p>
+        <p data-i18n="business.h.desc">Mengembangkan dan mengelola bisnis perhotelan yang didedikasikan untuk menyediakan akomodasi yang berkelas, layanan yang dipersonalisasi, dan pengalaman tamu yang luar biasa dengan standar kenyamanan dan kualitas tertinggi.</p>
+        <p class="unit-brands">De Diana's Home</p>
         <div class="extra-text">
-          <p data-i18n="business.m.more">Fasilitas manufaktur kami didukung oleh teknologi modern dan pengrajin berpengalaman untuk menghasilkan karya berestetika tinggi.</p>
-        </div>
-      </div>
-      <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-    <div class="unit reveal">
-      <div>
-        <span class="unit-num">04</span>
-        <h3 data-i18n="business.l.title">Lifestyle Business</h3>
-        <p data-i18n="business.l.desc">Pengembangan bisnis yang mendukung gaya hidup modern, mengedepankan kualitas, estetika, dan kepuasan pelanggan.</p>
-        <div class="extra-text">
-          <p data-i18n="business.l.more">Menjangkau berbagai sektor ritel, kebugaran, dan hiburan yang dirancang untuk melengkapi kebutuhan gaya hidup eksklusif masa kini.</p>
+          <p data-i18n="business.h.more">Layanan kami mencakup pengelolaan akomodasi premium serta strategi pengalaman tamu dengan standar layanan tinggi.</p>
         </div>
       </div>
       <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
@@ -585,35 +594,44 @@
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow" data-i18n="brands.eyebrow">Brand Kami</span>
-      <h2 data-i18n="brands.title">Empat brand, satu semangat craftsmanship.</h2>
+      <h2 data-i18n="brands.title">Manufacture, Food &amp; Beverage, dan Hospitality.</h2>
     </div>
     <div class="brands-grid">
       <div class="brand-card reveal">
         <div>
-          <span class="tag">Manufacturing</span>
+          <span class="tag" data-i18n="brands.ed.cat">Manufaktur</span>
           <h3>Elementi Domus</h3>
-          <p data-i18n="brands.ed">Manufaktur interior premium — kitchen series dan solusi ruang yang mengutamakan detail serta material berkualitas.</p>
+          <p data-i18n="brands.ed">Elementi Domus adalah pilihan utama untuk furnitur kelas atas dengan desain yang berkelas dan indah, serta kualitas produk kelas satu.</p>
         </div>
       </div>
       <div class="brand-card reveal">
         <div>
-          <span class="tag">Manufacturing</span>
+          <span class="tag" data-i18n="brands.lg.cat">Manufaktur</span>
           <h3>Legnotura</h3>
-          <p data-i18n="brands.lg">Spesialis wood panel dan finishing kayu yang menghadirkan tekstur, karakter, dan ketahanan untuk ruang premium.</p>
+          <p data-i18n="brands.lg">Pabrik kayu terkemuka di Indonesia yang berspesialisasi dalam panel kayu berorientasi ekspor.</p>
         </div>
       </div>
       <div class="brand-card reveal">
         <div>
-          <span class="tag">Food &amp; Beverage</span>
-          <h3>Lenore</h3>
-          <p data-i18n="brands.ln">Exquisite dining dengan kurasi rasa Western, Italian, dan fusion yang mengutamakan pengalaman bersantap yang refined.</p>
+          <span class="tag" data-i18n="brands.ln.cat">Makanan &amp; Minuman</span>
+          <h3>Lenore Exquisite Dining</h3>
+          <p data-i18n="brands.ln">Terinspirasi oleh nama "Lenore" yang berarti cahaya atau yang terang, filosofi kami berpusat pada penerangan indera dan perayaan seni bersantap mewah.</p>
         </div>
       </div>
       <div class="brand-card reveal">
         <div>
-          <span class="tag">Food &amp; Beverage</span>
-          <h3>Terrata</h3>
-          <p data-i18n="brands.tr">Social dining yang hangat — Asian dan Indonesian fusion dalam suasana yang mengundang untuk berkumpul.</p>
+          <span class="tag" data-i18n="brands.tr.cat">Makanan &amp; Minuman</span>
+          <h3>Terrata Social Dining</h3>
+          <p data-i18n="brands.tr">Dirancang sebagai ruang sosial di luar sekadar bersantap, Terrata menyatukan orang-orang melalui makanan lezat, lingkungan yang nyaman, dan pengalaman yang bermakna.</p>
+        </div>
+      </div>
+      <div class="brand-card reveal">
+        <div>
+          <img class="brand-thumb" src="images/placeholder-brand-dd.svg" alt="PLACEHOLDER De Diana's Home">
+          <span class="tag" data-i18n="brands.dd.cat">Perhotelan</span>
+          <h3>De Diana's Home</h3>
+          <p data-i18n="brands.dd">Rasakan arti sebenarnya dari kenyamanan hidup bersama kami. Bersantai, rileks, dan nikmati gaya hidup yang dirancang sesuai kebutuhan Anda.</p>
+          <span class="placeholder-note">Placeholder brand image — replace later</span>
         </div>
       </div>
     </div>
@@ -757,11 +775,12 @@
           Email
         </a>
       </div>
+      <a class="contact-phone" id="phoneBtn" href="tel:+62215735975">Telp : +6221 573 5975</a>
       <div class="contact-address">
-        <strong>PT. Diana Karya Gemilang</strong>
-        Fllow Coworking Square Lt. 2 DS-11, Gedung Midplaza 1<br>
-        Jl. Jendral Sudirman Kav 10-11<br>
-        Karet Tengsin, Jakarta Pusat 10220
+        <strong>PT Diana Karya Gemilang</strong>
+        Flow Coworking Space, Gedung Midplaza 1<br>
+        Jl Jendral Sudirman Kav 10-11<br>
+        Jakarta Pusat, DKI Jakarta 10220
       </div>
       <div class="contact-meta">
         <a class="wa-inline" href="https://wa.me/62811927359" target="_blank" rel="noopener">
@@ -790,10 +809,11 @@
     <div class="footer-top">
       <div>
         <div class="footer-logo">PT Diana Karya Gemilang</div>
+        <p class="footer-tagline" data-i18n="footer.tagline">PT Diana Karya Gemilang — Elevating Lifestyle Experiences</p>
         <p class="footer-address">
-          Fllow Coworking Square Lt. 2 DS-11, Gedung Midplaza 1<br>
-          Jl. Jendral Sudirman Kav 10-11<br>
-          Karet Tengsin, Jakarta Pusat 10220
+          Flow Coworking Space, Gedung Midplaza 1<br>
+          Jl Jendral Sudirman Kav 10-11<br>
+          Jakarta Pusat, DKI Jakarta 10220
         </p>
       </div>
       <div class="footer-cols">
@@ -832,7 +852,7 @@
   let currentLang = localStorage.getItem('dkg-lang') || 'id';
   let cmsContent = null;
   let googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' +
-    encodeURIComponent('PT. Diana Karya Gemilang, Fllow Coworking Square Lt. 2 DS-11, Gedung Midplaza 1, Jl. Jendral Sudirman Kav 10-11, Karet Tengsin, Jakarta Pusat 10220');
+    encodeURIComponent('PT Diana Karya Gemilang, Flow Coworking Space, Gedung Midplaza 1, Jl Jendral Sudirman Kav 10-11, Jakarta Pusat 10220');
   let mailToUrl = 'mailto:info@dianakaryagroup.com?subject=' +
     encodeURIComponent('Inquiry - PT Diana Karya Gemilang');
 
@@ -893,6 +913,13 @@
       if (el) el.setAttribute('href', mailToUrl);
     });
     if (emailText) emailText.textContent = s.email || emailText.textContent;
+
+    const phoneBtn = document.getElementById('phoneBtn');
+    if (phoneBtn && s.phone) {
+      const digits = String(s.phone).replace(/[^\d+]/g, '');
+      phoneBtn.href = 'tel:' + digits.replace(/\s+/g, '');
+      phoneBtn.textContent = 'Telp : ' + s.phone;
+    }
 
     const addr = document.querySelector('.contact-address');
     if (addr) {

@@ -6,14 +6,14 @@
     vision: ['vision.eyebrow', 'vision.title'],
     mission: ['mission.eyebrow', 'mission.1', 'mission.2', 'mission.3', 'mission.4', 'mission.5'],
     values: ['values.eyebrow', 'values.title', 'values.integrity', 'values.excellence', 'values.innovation', 'values.collaboration', 'values.sustainability'],
-    business: ['business.eyebrow', 'business.title', 'business.lede', 'business.h.desc', 'business.h.more', 'business.f.desc', 'business.f.more', 'business.m.desc', 'business.m.more', 'business.l.title', 'business.l.desc', 'business.l.more', 'business.more', 'business.less'],
-    brands: ['brands.eyebrow', 'brands.title', 'brands.ed', 'brands.lg', 'brands.ln', 'brands.tr'],
+    business: ['business.eyebrow', 'business.title', 'business.lede', 'business.m.company', 'business.m.desc', 'business.m.more', 'business.f.company', 'business.f.desc', 'business.f.more', 'business.h.company', 'business.h.desc', 'business.h.more', 'business.more', 'business.less'],
+    brands: ['brands.eyebrow', 'brands.title', 'brands.ed.cat', 'brands.ed', 'brands.lg.cat', 'brands.lg', 'brands.ln.cat', 'brands.ln', 'brands.tr.cat', 'brands.tr', 'brands.dd.cat', 'brands.dd'],
     products: ['products.eyebrow', 'products.title'],
     gallery: ['gallery.eyebrow', 'gallery.title', 'gallery.1', 'gallery.2', 'gallery.3', 'gallery.4', 'gallery.5'],
     articles: ['articles.eyebrow', 'articles.title', 'articles.a1.t', 'articles.a1.d', 'articles.a2.tag', 'articles.a2.t', 'articles.a2.d', 'articles.a3.tag', 'articles.a3.t', 'articles.a3.d'],
     faq: ['faq.eyebrow', 'faq.title', 'faq.q1', 'faq.a1', 'faq.q2', 'faq.a2', 'faq.q3', 'faq.a3', 'faq.q4', 'faq.a4'],
-    contact: ['contact.eyebrow', 'contact.title', 'contact.lede', 'contact.map', 'contact.mapAria'],
-    footer: ['footer.nav', 'footer.contact', 'footer.location', 'footer.rights', 'footer.dev']
+    contact: ['contact.eyebrow', 'contact.title', 'contact.lede', 'contact.phoneLabel', 'contact.map', 'contact.mapAria'],
+    footer: ['footer.nav', 'footer.contact', 'footer.location', 'footer.tagline', 'footer.rights', 'footer.dev']
   };
 
   const SEO_FIELDS = [
@@ -23,7 +23,7 @@
   ];
 
   const SETTINGS_FIELDS = [
-    'whatsapp', 'email', 'addressCompany', 'addressLine1', 'addressLine2', 'addressLine3', 'mapsQuery'
+    'phone', 'whatsapp', 'email', 'addressCompany', 'addressLine1', 'addressLine2', 'addressLine3', 'mapsQuery'
   ];
 
   let content = null;

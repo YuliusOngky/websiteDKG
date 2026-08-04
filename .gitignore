@@ -1,6 +1,11 @@
 # Archives / drafts
 *.zip
+*.ai
+*.docx
+*.pdf
 index(1).html
+Diana Karya Group Image 1.ai
+_tmp_*
 
 # OS / editor
 .DS_Store

@@ -1,0 +1,7 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <rect width="1600" height="1000" fill="#ece8e1"/>
+  <rect x="40" y="40" width="1520" height="920" fill="none" stroke="#a67c3e" stroke-width="3" stroke-dasharray="14 10"/>
+  <text x="800" y="470" text-anchor="middle" font-family="Georgia, serif" font-size="42" fill="#2c2a26">PLACEHOLDER — About Image</text>
+  <text x="800" y="530" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#a67c3e">Export PNG/JPG from Diana Karya Group Image 1.ai</text>
+  <text x="800" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#6b6760">Replace public/images/placeholder-about.svg</text>
+</svg>

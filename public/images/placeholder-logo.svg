@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="400" height="120" viewBox="0 0 400 120">
+  <rect width="400" height="120" fill="#f7f5f1"/>
+  <rect x="8" y="8" width="384" height="104" fill="none" stroke="#a67c3e" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="200" y="58" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#2c2a26">PLACEHOLDER LOGO</text>
+  <text x="200" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#a67c3e">Replace with Drive logo file</text>
+</svg>
