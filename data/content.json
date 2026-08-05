@@ -1,12 +1,13 @@
 {
-  "updatedAt": "2026-08-04T19:50:48.032Z",
+  "updatedAt": "2026-08-05T18:15:00.000Z",
   "settings": {
     "email": "info@dianakaryagroup.com",
     "addressCompany": "PT Diana Karya Gemilang",
-    "addressLine1": "Flow Coworking Space, Gedung Midplaza 1",
-    "addressLine2": "Jl Jendral Sudirman Kav 100",
-    "addressLine3": "Jakarta Pusat, DKI Jakarta 10220",
-    "mapsQuery": "PT Diana Karya Gemilang, Flow Coworking Space, Gedung Midplaza 1, Jl Jendral Sudirman Kav 10-11, Jakarta Pusat 10220",
+    "addressLine1": "Flow Coworking Space, Lt.2 DS-11.",
+    "addressLine2": "Gedung Midplaza 1",
+    "addressLine3": "Jl. Jenderal Sudirman No. Kav 10-11",
+    "addressLine4": "Jakarta Pusat, DKI Jakarta 10220",
+    "mapsQuery": "PT Diana Karya Gemilang, Flow Coworking Space, Lt.2 DS-11, Gedung Midplaza 1, Jl. Jenderal Sudirman No. Kav 10-11, Jakarta Pusat, DKI Jakarta 10220",
     "phone": "+6221 573 5975",
     "whatsapp": "0812345689",
     "siteUrl": "https://testingwebsite.web.id",
@@ -19,15 +20,15 @@
         "id": "prod-1",
         "slug": "uma-kitchen-series",
         "image": "images/product1.png",
-        "caption": "UMA â€” Kitchen Series",
+        "caption": "UMA — Kitchen Series",
         "brand": "Elementi Domus",
         "title": {
-          "id": "UMA â€” Kitchen Series",
-          "en": "UMA â€” Kitchen Series"
+          "id": "UMA — Kitchen Series",
+          "en": "UMA — Kitchen Series"
         },
         "body": {
-          "id": "Temukan seri dapur UMA dari Elementi Domus â€” desain abadi dengan craftsmanship premium untuk ruang hunian modern.",
-          "en": "Discover the UMA kitchen series by Elementi Domus â€” timeless design with premium craftsmanship for modern living spaces."
+          "id": "Temukan seri dapur UMA dari Elementi Domus — desain abadi dengan craftsmanship premium untuk ruang hunian modern.",
+          "en": "Discover the UMA kitchen series by Elementi Domus — timeless design with premium craftsmanship for modern living spaces."
         }
       },
       {
@@ -64,11 +65,11 @@
         "id": "prod-4",
         "slug": "avani-kitchen-series",
         "image": "images/product4.png",
-        "caption": "AVANI â€” Kitchen Series",
+        "caption": "AVANI — Kitchen Series",
         "brand": "Elementi Domus",
         "title": {
-          "id": "AVANI â€” Kitchen Series",
-          "en": "AVANI â€” Kitchen Series"
+          "id": "AVANI — Kitchen Series",
+          "en": "AVANI — Kitchen Series"
         },
         "body": {
           "id": "AVANI Kitchen Series menawarkan sistem dapur premium dengan detail desain yang teliti dan kualitas manufaktur unggul.",
@@ -172,8 +173,8 @@
           "en": "Lenore Exquisite Dining proudly marks a new milestone with the opening of its second location at Plaza Indonesia, one of Jakarta's most prestigious lifestyle destinations."
         },
         "body": {
-          "id": "Lenore Exquisite Dining dengan bangga menandai tonggak baru dengan pembukaan lokasi keduanya di Plaza Indonesia, salah satu destinasi lifestyle paling prestisius di Jakarta. Menyusul kesuksesan restoran flagship di Barito, ekspansi ini mencerminkan komitmen Lenore untuk membawa pengalaman kuliner khasnya ke audiens yang lebih luas.\n\nBerlokasi di Level 3 Plaza Indonesia, destinasi baru ini memperkenalkan Lenore Kitchenâ€”ekspresi kontemporer dari filosofi Lenore, di mana masakan istimewa, craftsmanship yang halus, dan hospitality yang hangat bersatu dalam suasana yang hidup. Dirancang untuk business lunch maupun pertemuan sosial yang santai, ruang baru ini menawarkan pengalaman dining yang elevated di jantung kota.",
-          "en": "Lenore Exquisite Dining proudly marks a new milestone with the opening of its second location at Plaza Indonesia, one of Jakarta's most prestigious lifestyle destinations. Following the success of its flagship restaurant in Barito, this expansion reflects Lenore's commitment to bringing its signature culinary experience to a wider audience.\n\nLocated on Level 3 of Plaza Indonesia, the new destination introduces Lenore Kitchenâ€”a contemporary expression of the Lenore philosophy, where exceptional cuisine, refined craftsmanship, and warm hospitality come together in a vibrant setting. Designed for both business lunches and relaxed social gatherings, the new space offers an elevated dining experience in the heart of the city."
+          "id": "Lenore Exquisite Dining dengan bangga menandai tonggak baru dengan pembukaan lokasi keduanya di Plaza Indonesia, salah satu destinasi lifestyle paling prestisius di Jakarta. Menyusul kesuksesan restoran flagship di Barito, ekspansi ini mencerminkan komitmen Lenore untuk membawa pengalaman kuliner khasnya ke audiens yang lebih luas.\n\nBerlokasi di Level 3 Plaza Indonesia, destinasi baru ini memperkenalkan Lenore Kitchen—ekspresi kontemporer dari filosofi Lenore, di mana masakan istimewa, craftsmanship yang halus, dan hospitality yang hangat bersatu dalam suasana yang hidup. Dirancang untuk business lunch maupun pertemuan sosial yang santai, ruang baru ini menawarkan pengalaman dining yang elevated di jantung kota.",
+          "en": "Lenore Exquisite Dining proudly marks a new milestone with the opening of its second location at Plaza Indonesia, one of Jakarta's most prestigious lifestyle destinations. Following the success of its flagship restaurant in Barito, this expansion reflects Lenore's commitment to bringing its signature culinary experience to a wider audience.\n\nLocated on Level 3 of Plaza Indonesia, the new destination introduces Lenore Kitchen—a contemporary expression of the Lenore philosophy, where exceptional cuisine, refined craftsmanship, and warm hospitality come together in a vibrant setting. Designed for both business lunches and relaxed social gatherings, the new space offers an elevated dining experience in the heart of the city."
         }
       },
       {
@@ -207,7 +208,9 @@
           "en": "Manufacture"
         },
         "name": "Elementi Domus",
-        "image": "images/product1.png",
+        "image": "images/brand-elementi-domus.jpg",
+        "websiteUrl": "https://testingwebsite.web.id/index.html",
+        "websiteLogo": "",
         "short": {
           "id": "Furnitur kelas atas dengan desain berkelas dan kualitas produk kelas satu.",
           "en": "High-end furniture with tasteful design and first-class product quality."
@@ -225,7 +228,9 @@
           "en": "Manufacture"
         },
         "name": "Legnotura",
-        "image": "images/product5.png",
+        "image": "images/brand-legnotura.jpg",
+        "instagramUrl": "https://www.instagram.com/",
+        "instagramLogo": "",
         "short": {
           "id": "Pabrik kayu terkemuka untuk panel kayu berorientasi ekspor.",
           "en": "Premier wood factory specializing in export-oriented wood panels."
@@ -243,7 +248,9 @@
           "en": "Food & Beverage"
         },
         "name": "Lenore Exquisite Dining",
-        "image": "images/gallery-02.jpg",
+        "image": "images/brand-lenore.jpg",
+        "instagramUrl": "https://www.instagram.com/",
+        "instagramLogo": "",
         "short": {
           "id": "Filosofi bersantap mewah yang menerangi indera.",
           "en": "A fine-dining philosophy that illuminates the senses."
@@ -261,10 +268,12 @@
           "en": "Food & Beverage"
         },
         "name": "Terrata Social Dining",
-        "image": "images/gallery-03.jpg",
+        "image": "images/brand-terrata.jpg",
+        "instagramUrl": "https://www.instagram.com/",
+        "instagramLogo": "",
         "short": {
-          "id": "Ruang sosial di luar sekadar bersantap â€” koneksi dan kebersamaan.",
-          "en": "A social space beyond dining â€” connection and togetherness."
+          "id": "Ruang sosial di luar sekadar bersantap — koneksi dan kebersamaan.",
+          "en": "A social space beyond dining — connection and togetherness."
         },
         "body": {
           "id": "Dirancang sebagai ruang sosial di luar sekadar bersantap, Terrata menyatukan orang-orang melalui makanan lezat, lingkungan yang nyaman, dan pengalaman yang bermakna. Baik untuk bekerja, berkumpul, atau bersantai, setiap sudutnya diciptakan untuk menginspirasi koneksi dan kebersamaan.",
@@ -279,7 +288,9 @@
           "en": "Hospitality"
         },
         "name": "De Diana's Home",
-        "image": "images/brand-de-dianas-home.png",
+        "image": "images/brand-de-dianas-home.jpg",
+        "instagramUrl": "https://www.instagram.com/",
+        "instagramLogo": "",
         "short": {
           "id": "Hospitality premium dengan kenyamanan dan layanan personal.",
           "en": "Premium hospitality with comfort and personalized service."
@@ -298,7 +309,7 @@
       "keywords": "Diana Karya Gemilang, Elementi Domus, Legnotura, Lenore, Terrata, hospitality, furniture",
       "canonical": "https://testingwebsite.web.id/",
       "ogTitle": "PT Diana Karya Gemilang",
-      "ogDescription": "Elevating Lifestyle Experiences â€” premium lifestyle & hospitality group.",
+      "ogDescription": "Elevating Lifestyle Experiences — premium lifestyle & hospitality group.",
       "ogImage": "https://testingwebsite.web.id/images/logo-dkg.png",
       "twitterCard": "summary_large_image",
       "robots": "index,follow",
@@ -310,7 +321,7 @@
       "keywords": "Diana Karya Gemilang, Elementi Domus, Legnotura, Lenore, Terrata, hospitality, furniture",
       "canonical": "https://testingwebsite.web.id/",
       "ogTitle": "PT Diana Karya Gemilang",
-      "ogDescription": "Elevating Lifestyle Experiences â€” premium lifestyle & hospitality group.",
+      "ogDescription": "Elevating Lifestyle Experiences — premium lifestyle & hospitality group.",
       "ogImage": "https://testingwebsite.web.id/images/logo-dkg.png",
       "twitterCard": "summary_large_image",
       "robots": "index,follow",
@@ -355,7 +366,7 @@
       "values.sustainability": "Menyeimbangkan pertumbuhan ekonomi dengan tanggung jawab sosial dan lingkungan.",
       "business.eyebrow": "Lini Bisnis",
       "business.title": "Tiga Lini Bisnis, Satu Standar Kualitas Premium",
-      "business.lede": "Manufacturing, Food & Beverage, and Hospitality â€” dikelola secara sinergis di bawah PT Diana Karya Gemilang.",
+      "business.lede": "",
       "business.h.desc": "Mengembangkan dan mengelola bisnis perhotelan yang didedikasikan untuk menyediakan akomodasi yang berkelas, layanan yang dipersonalisasi, dan pengalaman tamu yang luar biasa dengan standar kenyamanan dan kualitas tertinggi.",
       "business.h.more": "Layanan kami mencakup pengelolaan akomodasi premium serta strategi pengalaman tamu dengan standar layanan tinggi.",
       "business.f.desc": "Mengembangkan dan mengoperasikan restoran, kafe, dan konsep kuliner premium yang menyajikan masakan luar biasa, keramahan yang berkelas, dan pengalaman bersantap yang tak terlupakan.",
@@ -368,13 +379,12 @@
       "business.more": "Selengkapnya",
       "business.less": "Tampilkan Lebih Sedikit",
       "brands.eyebrow": "Brand Kami",
-      "brands.title": "Manufacture, Food & Beverage, dan Hospitality.",
+      "brands.title": "",
       "brands.ed": "Elementi Domus adalah pilihan utama untuk furnitur kelas atas dengan desain yang berkelas dan indah, serta kualitas produk kelas satu. Elementi Domus menghadirkan desain yang abadi sekaligus berwawasan ke depan. Setiap kreasi mencerminkan komitmen terhadap keunikan, kualitas, dan inovasi, menetapkan standar baru dalam sistem furnitur dan solusi hunian.",
       "brands.lg": "Pabrik kayu terkemuka di Indonesia yang berspesialisasi dalam panel kayu berorientasi ekspor. Di Legnotura, kami bangga dengan komitmen kami terhadap inovasi dan keberlanjutan, menciptakan panel kayu dari bahan daur ulang dan bahan-bahan mutakhir.",
       "brands.ln": "Terinspirasi oleh nama \"Lenore\" yang berarti cahaya atau yang terang, filosofi kami berpusat pada penerangan indera dan perayaan seni bersantap mewah.",
       "brands.tr": "Dirancang sebagai ruang sosial di luar sekadar bersantap, Terrata menyatukan orang-orang melalui makanan lezat, lingkungan yang nyaman, dan pengalaman yang bermakna. Baik untuk bekerja, berkumpul, atau bersantai, setiap sudutnya diciptakan untuk menginspirasi koneksi dan kebersamaan.",
       "products.eyebrow": "Galeri Produk Kami",
-      "products.title": "Temukan pilihan produk terbaik kami yang merepresentasikan inovasi, kualitas, dan keahlian di seluruh divisi manufaktur.",
       "gallery.eyebrow": "F&B dan hospitality",
       "gallery.title": "Our F&B and Hospitality",
       "gallery.1": "Manufaktur Furnitur",
@@ -412,7 +422,6 @@
       "brands.dd.cat": "Perhotelan",
       "contact.phoneLabel": "Telp",
       "contact.call": "Telepon",
-      "contact.whatsapp": "WhatsApp",
       "footer.tagline": "Elevating Lifestyle Experiences",
       "ui.back": "Kembali",
       "ui.prev": "Sebelumnya",
@@ -462,26 +471,25 @@
       "values.sustainability": "Balancing economic growth with social and environmental responsibility.",
       "business.eyebrow": "Business Lines",
       "business.title": "Three Business Lines, One Standard of Premium Quality",
-      "business.lede": "Manufacturing, Food & Beverage, and Hospitality â€” managed synergistically under PT Diana Karya Gemilang.",
+      "business.lede": "",
       "business.h.desc": "Developing and managing hospitality businesses dedicated to providing refined accommodations, personalized service, and exceptional guest experiences with the highest standards of comfort and quality.",
       "business.h.more": "Our services include premium accommodation management and guest-experience strategies with high service standards.",
-      "business.f.desc": "Developing and operating premium restaurants, cafÃ©s, and culinary concepts that deliver exceptional cuisine, refined hospitality, and memorable dining experiences.",
+      "business.f.desc": "Developing and operating premium restaurants, cafés, and culinary concepts that deliver exceptional cuisine, refined hospitality, and memorable dining experiences.",
       "business.f.more": "We deliver sustainable menu innovation, culinary supply-chain management, and exclusive dining experiences across every business line.",
       "business.m.desc": "Designing and manufacturing premium furniture and interior solutions with a strong commitment to exceptional craftsmanship, precision engineering, innovative design, and outstanding customer service.",
       "business.m.more": "Our manufacturing facilities are supported by modern technology and experienced craftsmen to create works of high aesthetic quality.",
       "business.l.title": "Lifestyle Business",
       "business.l.desc": "Developing businesses that support modern lifestyles, prioritizing quality, aesthetics, and customer satisfaction.",
-      "business.l.more": "Reaching retail, wellness, and entertainment sectors designed to complete todayâ€™s exclusive lifestyle needs.",
+      "business.l.more": "Reaching retail, wellness, and entertainment sectors designed to complete today’s exclusive lifestyle needs.",
       "business.more": "Learn More",
       "business.less": "Show Less",
       "brands.eyebrow": "Our Brands",
-      "brands.title": "Manufacture, Food & Beverage, and Hospitality.",
+      "brands.title": "",
       "brands.ed": "The preferred choice for high-end furniture by providing tasteful and exquisite designs, first-class product quality. Elementi Domus delivers designs that are both timeless and forward-thinking. Every creation reflects a commitment to uniqueness, quality, and innovation, setting new standards in furniture systems and living solutions.",
       "brands.lg": "Premier Indonesian wood factory specializing in export-oriented wood panels. At Legnotura, we take pride in our commitment to innovation and sustainability, crafting wood panels from recycled and cutting-edge materials.",
       "brands.ln": "Inspired by the name \"Lenore\" which means light or the bright one, our philosophy revolves around illuminating the senses and celebrating the art of fine dining.",
       "brands.tr": "Designed as a social space beyond dining, Terrata brings people together through great food, comfortable surroundings, and meaningful experiences. Whether for work, gatherings, or leisure, every corner is created to inspire connection and togetherness.",
       "products.eyebrow": "Our Product Gallery",
-      "products.title": "Discover a selection of our finest products, representing innovation, quality, and expertise across our manufacturing divisions.",
       "gallery.eyebrow": "Our F&B and Hospitality",
       "gallery.title": "Our F&B and Hospitality",
       "gallery.1": "Furniture Manufacturing",
@@ -499,7 +507,7 @@
       "articles.a3.tag": "Company",
       "articles.a3.t": "Sound Session every Friday at Terrata Social Dining",
       "articles.a3.d": "Every Friday at 7 PM, Terrata Social Dining comes alive with Sound Session, a weekly live music experience that brings together great music, exceptional food, and meaningful connections.",
-      "contact.eyebrow": "Contact",
+      "contact.eyebrow": "Contact us",
       "contact.title": "Let's connect with us.",
       "contact.lede": "Reach us by phone, email, or visit our office.",
       "contact.map": "Open in Google Maps",
@@ -519,7 +527,6 @@
       "brands.dd.cat": "Hospitality",
       "contact.phoneLabel": "Tel",
       "contact.call": "Call",
-      "contact.whatsapp": "WhatsApp",
       "footer.tagline": "Elevating Lifestyle Experiences",
       "ui.back": "Back",
       "ui.prev": "Previous",

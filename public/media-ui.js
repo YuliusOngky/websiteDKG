@@ -70,6 +70,8 @@
     updateButtons();
   }
 
+  let lightboxReturnFocus = null;
+
   function ensureLightbox() {
     let lb = document.getElementById('dkgLightbox');
     if (lb) return lb;
@@ -79,30 +81,53 @@
     lb.hidden = true;
     lb.innerHTML = `
       <div class="lightbox-backdrop" data-lightbox-close></div>
-      <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Gallery">
+      <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Image preview">
         <button type="button" class="lightbox-close" data-lightbox-close aria-label="Close">&times;</button>
         <img class="lightbox-img" alt="">
-        <p class="lightbox-cap"></p>
+        <p class="lightbox-cap" hidden></p>
       </div>`;
     document.body.appendChild(lb);
     lb.addEventListener('click', (e) => {
       if (e.target.closest('[data-lightbox-close]')) closeLightbox();
     });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !lb.hidden) closeLightbox();
+      if (lb.hidden) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeLightbox();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const focusables = lb.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      const list = Array.from(focusables).filter((el) => !el.disabled && el.getAttribute('aria-hidden') !== 'true');
+      if (!list.length) return;
+      const first = list[0];
+      const last = list[list.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     });
     return lb;
   }
 
-  function openLightbox(src, caption) {
+  function openLightbox(src, caption, alt) {
     const lb = ensureLightbox();
     const img = lb.querySelector('.lightbox-img');
     const cap = lb.querySelector('.lightbox-cap');
+    const closeBtn = lb.querySelector('.lightbox-close');
+    lightboxReturnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     img.src = src;
-    img.alt = caption || '';
-    cap.textContent = caption || '';
+    const text = caption || '';
+    img.alt = alt || text || '';
+    cap.textContent = text;
+    cap.hidden = !text;
     lb.hidden = false;
     document.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
   }
 
   function closeLightbox() {
@@ -110,6 +135,47 @@
     if (!lb) return;
     lb.hidden = true;
     document.body.style.overflow = '';
+    const img = lb.querySelector('.lightbox-img');
+    if (img) img.removeAttribute('src');
+    if (lightboxReturnFocus && typeof lightboxReturnFocus.focus === 'function') {
+      lightboxReturnFocus.focus();
+    }
+    lightboxReturnFocus = null;
+  }
+
+  /** Open lightbox on click / keyboard; ignore when the pointer moved (carousel swipe). */
+  function bindLightboxTrigger(el, getSrc, getCaption, getAlt) {
+    if (!el) return;
+    let startX = 0;
+    let startY = 0;
+    let dragging = false;
+    const THRESHOLD = 8;
+
+    el.addEventListener('pointerdown', (e) => {
+      if (e.button != null && e.button !== 0) return;
+      startX = e.clientX;
+      startY = e.clientY;
+      dragging = false;
+    });
+    el.addEventListener('pointermove', (e) => {
+      if (Math.abs(e.clientX - startX) > THRESHOLD || Math.abs(e.clientY - startY) > THRESHOLD) {
+        dragging = true;
+      }
+    });
+    el.addEventListener('click', (e) => {
+      if (dragging) {
+        e.preventDefault();
+        e.stopPropagation();
+        dragging = false;
+        return;
+      }
+      const src = typeof getSrc === 'function' ? getSrc(el) : getSrc;
+      if (!src) return;
+      e.preventDefault();
+      const caption = typeof getCaption === 'function' ? getCaption(el) : (getCaption || '');
+      const alt = typeof getAlt === 'function' ? getAlt(el) : getAlt;
+      openLightbox(src, caption, alt);
+    });
   }
 
   function renderBrands(container, brands, l) {
@@ -133,12 +199,20 @@
     const list = limitList(products, 'products');
     container.innerHTML = list.map((p) => {
       const title = bi(p.title, l) || p.caption || '';
-      const brand = p.brand || '';
-      return `<a class="showcase-item reveal carousel-card" href="product.html?slug=${encodeURIComponent(p.slug)}">
-        <img src="${escapeHtml(p.image || '')}" alt="${escapeHtml(title)}" loading="lazy">
-        <div class="cap"><small>${escapeHtml(brand)}</small><span>${escapeHtml(title)}</span></div>
-      </a>`;
+      const src = p.image || '';
+      return `<button type="button" class="showcase-item reveal carousel-card" data-product-src="${escapeHtml(src)}" aria-label="${escapeHtml(title || 'View image')}">
+        <img src="${escapeHtml(src)}" alt="${escapeHtml(title)}" loading="lazy">
+      </button>`;
     }).join('');
+
+    container.querySelectorAll('[data-product-src]').forEach((btn) => {
+      bindLightboxTrigger(
+        btn,
+        () => btn.getAttribute('data-product-src'),
+        () => '',
+        () => btn.querySelector('img')?.getAttribute('alt') || ''
+      );
+    });
   }
 
   function renderGallery(container, gallery, l) {
@@ -147,16 +221,19 @@
     container.innerHTML = list.map((g, i) => {
       const title = bi(g.title, l);
       const wide = i === 0 ? ' wide' : '';
-      return `<button type="button" class="gallery-item${wide} reveal carousel-card" data-gallery-src="${escapeHtml(g.image || '')}" data-gallery-cap="${escapeHtml(title)}">
-        <img src="${escapeHtml(g.image || '')}" alt="${escapeHtml(title)}" loading="lazy">
-        <span class="cap">${escapeHtml(title)}</span>
+      const src = g.image || '';
+      return `<button type="button" class="gallery-item${wide} reveal carousel-card" data-gallery-src="${escapeHtml(src)}" aria-label="${escapeHtml(title || 'View image')}">
+        <img src="${escapeHtml(src)}" alt="${escapeHtml(title)}" loading="lazy">
       </button>`;
     }).join('');
 
     container.querySelectorAll('[data-gallery-src]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        openLightbox(btn.getAttribute('data-gallery-src'), btn.getAttribute('data-gallery-cap'));
-      });
+      bindLightboxTrigger(
+        btn,
+        () => btn.getAttribute('data-gallery-src'),
+        () => '',
+        () => btn.querySelector('img')?.getAttribute('alt') || ''
+      );
     });
   }
 

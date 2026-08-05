@@ -23,15 +23,15 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <style>
   :root{
-    --ink:#161513;
+    --ink:#000000;
     --charcoal:#2b2a27;
-    --paper:#f7f5f1;
-    --paper-2:#efece6;
+    --paper:#ffffff;
+    --paper-2:#f7f5f1;
     --stone:#c9c4ba;
-    --line:#ddd8cf;
-    --brass:#9c8552;
-    --brass-soft:#b9a06b;
-    --muted:#7a766d;
+    --line:#e8e4dc;
+    --brass:#b48040;
+    --brass-soft:#eac17f;
+    --muted:#6f6b63;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -67,56 +67,100 @@
     padding:18px 0; transition:background .4s ease, padding .4s ease, border-color .4s ease;
     border-bottom:1px solid transparent;
   }
-  nav.scrolled, nav.open{
-    background:rgba(247,245,241,.94);
+  nav.scrolled{
+    background:rgba(255,255,255,.94);
     backdrop-filter:blur(12px);
     padding:12px 0;
     border-bottom-color:var(--line);
   }
+  /* No backdrop-filter while open: it creates a containing block that
+     shrinks position:fixed .mobile-panel to the nav bar instead of the viewport. */
+  nav.open{
+    background:transparent;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    padding:12px 0;
+    border-bottom-color:transparent;
+  }
   .nav-inner{
     display:flex; align-items:center; justify-content:space-between;
-    max-width:1180px; margin:0 auto; padding:0 32px; gap:20px;
+    max-width:1400px; margin:0 auto; padding:0 28px; gap:16px;
     min-height:56px;
+    position:relative; z-index:102;
   }
   .logo{
     display:flex; align-items:center; align-self:center;
-    text-decoration:none; z-index:102; line-height:0; flex-shrink:0;
+    text-decoration:none; line-height:0; flex-shrink:0;
+    max-width:min(240px, 42vw);
   }
   .logo img{
-    height:56px; width:auto; max-width:min(436px, 64vw);
+    height:56px; width:auto; max-width:100%;
     object-fit:contain; object-position:left center; display:block;
     image-rendering:auto;
-    -webkit-backface-visibility:hidden;
-    backface-visibility:hidden;
-    transform:translateZ(0);
   }
   @media (max-width: 720px){
-    .nav-inner{min-height:47px;}
-    .logo img{height:47px; max-width:min(342px, 70vw);}
+    .nav-inner{min-height:47px; padding:0 20px;}
+    .logo{max-width:min(200px, 58vw);}
+    .logo img{height:47px;}
     .nav-links{height:47px;}
   }
   .nav-links{
     display:flex; align-items:center; align-self:center;
-    gap:28px; font-size:13.5px; letter-spacing:.02em; height:56px;
+    gap:clamp(20px, 2.4vw, 44px); font-size:12.5px; letter-spacing:.02em; height:56px;
+    flex:1 1 auto; justify-content:flex-end; min-width:0;
   }
-  .nav-links a{
+  .nav-actions{
+    display:flex; align-items:center; align-self:center; gap:14px;
+    flex-shrink:0;
+  }
+  .nav-links > a,
+  .nav-item-has-sub > .nav-sub-head > .nav-sub-trigger{
     text-decoration:none; color:var(--charcoal); position:relative;
-    display:inline-flex; align-items:center; height:100%;
-    padding:0; line-height:1.2;
+    display:inline-flex; align-items:center; height:100%; gap:6px;
+    padding:0; line-height:1.2; white-space:nowrap; flex-shrink:0;
   }
-  .nav-links a::after{
+  .nav-links > a::after,
+  .nav-item-has-sub > .nav-sub-head > .nav-sub-trigger::after{
     content:''; position:absolute; left:0; bottom:10px;
     width:0; height:1px; background:var(--brass); transition:width .3s ease;
   }
-  .nav-links a:hover::after{width:100%;}
-  .nav-cta{
-    border:1px solid var(--ink); padding:9px 20px; font-size:12.5px;
-    letter-spacing:.05em; text-decoration:none; text-transform:uppercase;
-    transition:background .3s ease,color .3s ease; white-space:nowrap;
-    display:inline-flex; align-items:center;
+  .nav-links > a:hover::after,
+  .nav-item-has-sub:hover > .nav-sub-head > .nav-sub-trigger::after,
+  .nav-item-has-sub:focus-within > .nav-sub-head > .nav-sub-trigger::after{width:100%;}
+  .nav-item-has-sub{
+    position:relative; display:inline-flex; align-items:center; height:100%; flex-shrink:0;
   }
-  .nav-cta:hover{background:var(--ink); color:var(--paper);}
-  .nav-actions{display:flex; align-items:center; align-self:center; gap:14px;}
+  .nav-sub-head{
+    display:inline-flex; align-items:center; height:100%; gap:5px;
+  }
+  .nav-sub-trigger{
+    gap:5px; background:none; border:none; cursor:pointer;
+    font:inherit; letter-spacing:inherit; color:inherit;
+  }
+  .nav-sub-chevron{
+    display:inline-block; width:0; height:0; margin-top:1px;
+    border-left:3.5px solid transparent; border-right:3.5px solid transparent;
+    border-top:4px solid currentColor; opacity:.7;
+    transition:transform .2s ease;
+  }
+  .nav-item-has-sub:hover .nav-sub-chevron,
+  .nav-item-has-sub:focus-within .nav-sub-chevron,
+  .nav-item-has-sub.is-open .nav-sub-chevron{transform:rotate(180deg);}
+  .nav-submenu{
+    display:none; position:absolute; top:100%; left:50%; transform:translateX(-50%);
+    min-width:220px; padding:8px 0; margin-top:0;
+    background:#fff; border:1px solid var(--line);
+    box-shadow:0 12px 28px rgba(0,0,0,.08); z-index:120;
+    flex-direction:column; gap:0;
+  }
+  .nav-item-has-sub:hover .nav-submenu,
+  .nav-item-has-sub:focus-within .nav-submenu{display:flex;}
+  .nav-submenu a{
+    display:block; padding:10px 16px; text-decoration:none;
+    color:var(--charcoal); white-space:nowrap; font-size:12.5px; line-height:1.35;
+  }
+  .nav-submenu a:hover{color:var(--brass); background:rgba(180,128,64,.06);}
+  .nav-sub-toggle{display:none;}
   .lang-switch{
     display:inline-flex; align-items:center; gap:0;
     border:1px solid var(--line); font-size:11.5px; letter-spacing:.08em;
@@ -129,7 +173,7 @@
   .lang-switch button.active{background:var(--ink); color:var(--paper);}
   .burger{
     display:none; flex-direction:column; gap:5px; cursor:pointer;
-    background:none; border:none; padding:8px; z-index:102;
+    background:none; border:none; padding:8px; position:relative; z-index:1;
   }
   .burger span{width:22px; height:1.5px; background:var(--ink); transition:transform .3s ease, opacity .3s ease; display:block;}
   nav.open .burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
@@ -142,14 +186,13 @@
     position:relative; overflow:hidden;
     padding-top:110px; padding-bottom:60px;
     background:
-      radial-gradient(ellipse 900px 500px at 85% 20%, rgba(156,133,82,.12), transparent 60%),
+      radial-gradient(ellipse 900px 500px at 85% 20%, rgba(180,128,64,.12), transparent 60%),
       var(--paper);
   }
   .hero-inner{
     display:grid; grid-template-columns:1.15fr .85fr; gap:60px; align-items:center;
     width:100%;
   }
-  .hero .eyebrow{color:var(--brass);}
   .hero h1{font-size:clamp(40px,6vw,74px); line-height:1.03;}
   .hero h1 em{font-style:italic; color:var(--brass); font-weight:400;}
   .hero p.lede{
@@ -181,6 +224,7 @@
   /* SECTION */
   .section-head{max-width:640px; margin-bottom:56px;}
   .section-head h2{font-size:clamp(30px,4vw,44px); line-height:1.12;}
+  .section-head h2.title-spacer{min-height:calc(1.12em * 2); margin:0; visibility:hidden;}
   .section-pad{padding:120px 0;}
   .section-pad.tight{padding:100px 0;}
   .divider{height:1px; background:var(--line); border:none; margin:0;}
@@ -223,15 +267,15 @@
   .bisnis-strip{background:var(--ink); color:var(--paper);}
   .bisnis-strip .eyebrow{color:var(--brass-soft);}
   .bisnis-strip .section-head h2{color:var(--paper);}
-  .bisnis-strip .section-head p{color:#c8c4bb; margin:14px 0 0; font-size:15px; line-height:1.65;}
-  .unit-grid{display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(247,245,241,.15);}
+  .bisnis-strip .section-head p{color:#c8c4bb; margin:14px 0 0; font-size:15px; line-height:1.65; min-height:calc(1.65em * 2);}
+  .unit-grid{display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(255,255,255,.15);}
   .unit{
-    padding:44px 34px; border-right:1px solid rgba(247,245,241,.15);
+    padding:44px 34px; border-right:1px solid rgba(255,255,255,.15);
     min-height:340px; display:flex; flex-direction:column; justify-content:space-between;
     transition:background .4s ease; position:relative; overflow:hidden;
   }
   .unit:last-child{border-right:none;}
-  .unit:hover{background:rgba(247,245,241,.05);}
+  .unit:hover{background:rgba(255,255,255,.05);}
   .unit-num{font-size:12px; color:var(--brass-soft); letter-spacing:.1em;}
   .unit h3{font-size:26px; color:var(--paper); margin:18px 0 10px;}
   .unit p{font-size:14.5px; line-height:1.7; color:#bdb9b0; max-width:280px; margin:0;}
@@ -310,7 +354,9 @@
 
   /* PRODUCTS */
   #produk .carousel-stage{--carousel-media-h:calc(min(260px, 70vw) * 1.08);}
-  #productsTrack .showcase-item{flex-basis:min(260px, 70vw);}
+  #productsTrack .showcase-item{
+    flex-basis:min(260px, 70vw); border:none; padding:0; font:inherit; text-align:left; cursor:pointer; color:inherit;
+  }
   .showcase-item{
     aspect-ratio:1/1.08; background:var(--paper);
     display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
@@ -320,16 +366,6 @@
     transition:transform .6s ease;
   }
   .showcase-item:hover img{transform:scale(1.04);}
-  .showcase-item .cap{
-    position:absolute; left:0; right:0; bottom:0;
-    padding:40px 16px 14px;
-    background:linear-gradient(transparent, rgba(22,21,19,.72));
-    color:var(--paper); font-size:14px; font-family:'Fraunces',serif; font-style:italic;
-  }
-  .showcase-item .cap small{
-    display:block; font-family:'DM Sans',sans-serif; font-style:normal;
-    font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; opacity:.8; margin-bottom:4px;
-  }
 
   /* GALLERY */
   #galeri .carousel-stage{--carousel-media-h:max(280px, calc(min(360px, 80vw) * 10 / 16));}
@@ -339,11 +375,6 @@
   }
   .gallery-item img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .7s ease; min-height:280px;}
   .gallery-item:hover img{transform:scale(1.05);}
-  .gallery-item .cap{
-    position:absolute; left:16px; bottom:14px;
-    font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--paper);
-    text-shadow:0 1px 8px rgba(0,0,0,.4);
-  }
 
   /* BLOG */
   #artikel .carousel-stage{--carousel-media-h:calc(min(340px, 78vw) * 10 / 16);}
@@ -357,7 +388,7 @@
   /* LIGHTBOX */
   .lightbox{position:fixed; inset:0; z-index:200; display:grid; place-items:center; padding:24px;}
   .lightbox[hidden]{display:none !important;}
-  .lightbox-backdrop{position:absolute; inset:0; background:rgba(22,21,19,.78);}
+  .lightbox-backdrop{position:absolute; inset:0; background:rgba(0,0,0,.78);}
   .lightbox-dialog{
     position:relative; z-index:1; max-width:min(960px, 96vw); max-height:90vh;
     display:flex; flex-direction:column; align-items:center; gap:14px;
@@ -371,10 +402,10 @@
 
   /* CONTACT */
   .contact-strip{background:var(--paper-2);}
+  .contact-strip .eyebrow{text-transform:none; letter-spacing:.08em;}
   .contact-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:70px; align-items:center;}
   .contact-copy h2{font-size:clamp(32px,4.5vw,50px); line-height:1.1;}
-  .contact-actions{display:flex; gap:18px; margin-top:32px; flex-wrap:wrap; align-items:flex-start;}
-  .contact-phone-stack{display:flex; flex-direction:column; gap:10px; align-items:stretch;}
+  .contact-actions{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; align-items:stretch;}
   .btn-call{
     background:var(--brass) !important; color:var(--paper) !important;
     display:inline-flex; align-items:center; gap:10px;
@@ -382,15 +413,6 @@
   }
   .btn-call:hover{background:var(--ink) !important; color:var(--paper) !important;}
   .btn-call .phone-icon{width:18px; height:18px; flex-shrink:0; fill:currentColor;}
-  .btn-wa{
-    display:inline-flex; align-items:center; gap:10px;
-    background:#25D366; color:#fff !important;
-    border:1px solid #25D366; padding:15px 30px;
-    font-size:13px; letter-spacing:.02em; text-transform:none;
-    text-decoration:none; transition:background .3s ease, border-color .3s ease, color .3s ease;
-  }
-  .btn-wa:hover{background:#128C7E; border-color:#128C7E; color:#fff !important;}
-  .btn-wa .wa-icon{width:18px; height:18px; flex-shrink:0; fill:currentColor;}
   .btn-email{
     display:inline-flex; align-items:center; gap:10px;
     background:var(--ink); color:var(--paper) !important;
@@ -401,7 +423,6 @@
   .btn-email:hover{background:var(--brass); border-color:var(--brass); color:var(--paper) !important;}
   .btn-email .mail-icon{width:18px; height:18px; flex-shrink:0; fill:currentColor;}
   .btn-call #callBtnLabel,
-  .btn-wa #waBtnLabel,
   .btn-email #emailBtnLabel{font-variant-numeric:tabular-nums;}
   .phone-inline{
     display:inline-flex; align-items:center; gap:6px;
@@ -409,13 +430,10 @@
   }
   .phone-inline:hover{color:var(--brass);}
   .phone-inline .phone-icon,
-  .phone-inline .wa-icon,
   .phone-inline .mail-icon,
   .phone-inline .pin-icon{width:16px; height:16px; flex-shrink:0; fill:currentColor;}
   .footer-col .phone-inline{color:#c8c2b6; margin-bottom:10px;}
   .footer-col .phone-inline:hover{color:var(--brass);}
-  .footer-col .wa-inline .wa-icon{fill:#25D366;}
-  .footer-col .wa-inline:hover{color:#25D366;}
   .contact-address{
     margin-top:28px; padding-top:24px; border-top:1px solid var(--line);
     font-size:14.5px; color:var(--charcoal); line-height:1.75; max-width:420px;
@@ -444,7 +462,16 @@
   .leaflet-control-attribution{font-size:10px;}
 
   footer{background:var(--ink); color:#a19d94; padding:60px 0 30px;}
-  .footer-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:30px; padding-bottom:40px; border-bottom:1px solid rgba(247,245,241,.12);}
+  .footer-quote-band{background:var(--ink); padding:48px 0 40px;}
+  .footer-lockup{
+    display:block;
+    margin:0 auto;
+    width:min(420px,72vw);
+    height:auto;
+    max-height:280px;
+    object-fit:contain;
+  }
+  .footer-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:30px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.12);}
   .footer-logo{font-family:'Fraunces',serif; font-size:22px; color:var(--paper);}
   .footer-cols{display:flex; gap:70px;}
   .footer-col h4{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--paper); margin:0 0 16px; font-family:'DM Sans',sans-serif;}
@@ -461,34 +488,71 @@
     #productsTrack .showcase-item{flex-basis:min(240px, 68vw);}
     #produk .carousel-stage{--carousel-media-h:calc(min(240px, 68vw) * 1.08);}
   }
+  /* Mid desktop: tighten nav labels before hamburger kicks in */
+  @media (max-width:1200px){
+    .logo{max-width:min(200px, 36vw);}
+    .nav-links{font-size:12px; gap:clamp(14px, 1.6vw, 28px);}
+  }
   @media (max-width:1024px){
     .unit-grid{grid-template-columns:repeat(2,1fr);}
     .values-grid{grid-template-columns:repeat(3,1fr);}
     .misi-grid{grid-template-columns:repeat(3,1fr);}
-    .nav-links, .nav-actions .nav-cta{display:none;}
+    .logo{max-width:min(180px, 32vw);}
+  }
+  /* Hamburger only on tablet/phone — keep horizontal links while hero is still 2-col */
+  @media (max-width:900px){
+    .nav-links{display:none;}
     .burger{display:flex;}
     .nav-actions{gap:10px;}
     .nav-actions .lang-switch{display:inline-flex;}
+    .logo{max-width:min(200px, 58vw);}
     .mobile-panel{
       display:none; position:fixed; inset:0; z-index:101;
-      background:rgba(247,245,241,.98); padding:100px 32px 40px;
+      background:#ffffff; padding:100px 32px 40px;
       flex-direction:column; gap:8px;
+      overflow-y:auto; -webkit-overflow-scrolling:touch;
     }
     nav.open .mobile-panel{display:flex;}
-    .mobile-panel a{
+    .mobile-panel > a,
+    .mobile-panel .nav-sub-trigger{
       text-decoration:none; font-size:22px; font-family:'Fraunces',serif;
       padding:14px 0; border-bottom:1px solid var(--line); color:var(--ink);
+      display:block;
     }
-    .mobile-panel .mobile-cta{
-      margin-top:24px; text-align:center; border:1px solid var(--ink);
-      font-family:'DM Sans',sans-serif; font-size:13px; letter-spacing:.08em;
-      text-transform:uppercase; padding:16px;
+    .mobile-panel .nav-item-has-sub{
+      display:flex; flex-direction:column; align-items:stretch; height:auto;
+      border-bottom:1px solid var(--line);
+    }
+    .mobile-panel .nav-sub-head{
+      display:flex; align-items:center; gap:8px;
+    }
+    .mobile-panel .nav-sub-trigger{
+      flex:1; border-bottom:none; padding:14px 0;
+    }
+    .mobile-panel .nav-sub-toggle{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:44px; height:44px; flex-shrink:0;
+      background:none; border:none; cursor:pointer; color:var(--ink);
+      margin-right:-8px;
+    }
+    .mobile-panel .nav-sub-toggle .nav-sub-chevron{
+      border-left-width:5px; border-right-width:5px; border-top-width:6px;
+    }
+    .mobile-panel .nav-submenu{
+      display:none !important; position:static; transform:none; left:auto; top:auto;
+      min-width:0; width:100%; margin:0; padding:0 0 8px 12px;
+      border:none; box-shadow:none; background:transparent;
+    }
+    .mobile-panel .nav-item-has-sub.is-open .nav-submenu{display:flex !important;}
+    .mobile-panel .nav-submenu a{
+      font-size:17px; font-family:'DM Sans',sans-serif;
+      padding:10px 0; border-bottom:none; color:var(--charcoal);
     }
   }
   @media (max-width:860px){
     .about-grid{grid-template-columns:1fr;}
     .unit-grid{grid-template-columns:1fr;}
-    .unit{border-right:none; border-bottom:1px solid rgba(247,245,241,.15);}
+    .unit{border-right:none; border-bottom:1px solid rgba(255,255,255,.15);}
     .values-grid{grid-template-columns:repeat(2,1fr);}
     .misi-grid{grid-template-columns:1fr; gap:14px;}
     .carousel-head{flex-direction:column; align-items:flex-start;}
@@ -501,7 +565,7 @@
     .mark-wrap{min-height:220px; order:-1;}
     .mark-wrap img{width:min(220px, 55%);}
   }
-  @media (min-width:1025px){
+  @media (min-width:901px){
     .mobile-panel{display:none !important;}
   }
 </style>
@@ -522,18 +586,27 @@
     <div class="nav-links">
       <a href="#tentang" data-i18n="nav.about">Tentang Kami</a>
       <a href="#nilai" data-i18n="nav.values">Nilai Utama</a>
-      <a href="#bisnis" data-i18n="nav.business">Unit Bisnis</a>
-      <a href="#brands" data-i18n="nav.brands">Label Produk</a>
-      <a href="#produk" data-i18n="nav.products">Produk Kami</a>
-      <a href="#galeri" data-i18n="nav.gallery">F&amp;B dan Hospitality</a>
+      <div class="nav-item-has-sub">
+        <div class="nav-sub-head">
+          <a href="#bisnis" class="nav-sub-trigger" aria-haspopup="true">
+            <span data-i18n="nav.business">Unit Bisnis</span>
+            <span class="nav-sub-chevron nav-sub-chevron-inline" aria-hidden="true"></span>
+          </a>
+        </div>
+        <div class="nav-submenu" role="menu">
+          <a href="#brands" role="menuitem" data-i18n="nav.brands">Label Produk</a>
+          <a href="#produk" role="menuitem" data-i18n="nav.products">Produk Kami</a>
+          <a href="#galeri" role="menuitem" data-i18n="nav.gallery">F&amp;B dan Hospitality</a>
+        </div>
+      </div>
       <a href="#artikel" data-i18n="nav.articles">Artikel &amp; Editorial</a>
+      <a href="#kontak" data-i18n="nav.contact">Hubungi Kami</a>
     </div>
     <div class="nav-actions">
       <div class="lang-switch" role="group" aria-label="Language">
         <button type="button" data-lang="id" class="active">ID</button>
         <button type="button" data-lang="en">EN</button>
       </div>
-      <a href="#kontak" class="nav-cta" data-i18n="nav.contact">Hubungi Kami</a>
       <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -542,19 +615,27 @@
   <div class="mobile-panel" id="mobilePanel">
     <a href="#tentang" data-i18n="nav.about">Tentang Kami</a>
     <a href="#nilai" data-i18n="nav.values">Nilai Utama</a>
-    <a href="#bisnis" data-i18n="nav.business">Unit Bisnis</a>
-    <a href="#brands" data-i18n="nav.brands">Label Produk</a>
-    <a href="#produk" data-i18n="nav.products">Produk Kami</a>
-    <a href="#galeri" data-i18n="nav.gallery">F&amp;B dan Hospitality</a>
+    <div class="nav-item-has-sub" data-nav-sub>
+      <div class="nav-sub-head">
+        <a href="#bisnis" class="nav-sub-trigger" data-i18n="nav.business">Unit Bisnis</a>
+        <button type="button" class="nav-sub-toggle" aria-expanded="false" data-i18n-aria="nav.business" aria-label="Unit Bisnis">
+          <span class="nav-sub-chevron" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="nav-submenu" role="menu">
+        <a href="#brands" role="menuitem" data-i18n="nav.brands">Label Produk</a>
+        <a href="#produk" role="menuitem" data-i18n="nav.products">Produk Kami</a>
+        <a href="#galeri" role="menuitem" data-i18n="nav.gallery">F&amp;B dan Hospitality</a>
+      </div>
+    </div>
     <a href="#artikel" data-i18n="nav.articles">Artikel &amp; Editorial</a>
-    <a href="#kontak" class="mobile-cta" data-i18n="nav.contact">Hubungi Kami</a>
+    <a href="#kontak" data-i18n="nav.contact">Hubungi Kami</a>
   </div>
 </nav>
 
 <section class="hero">
   <div class="wrap hero-inner">
     <div class="reveal in">
-      <span class="eyebrow">PT Diana Karya Gemilang</span>
       <h1>Elevating <em>Lifestyle</em><br>Experiences</h1>
       <p class="lede" data-i18n="hero.lede" data-i18n-html>PT Diana Karya Gemilang adalah perusahaan Indonesia yang berdedikasi meningkatkan pengalaman lifestyle melalui desain, craftsmanship, dan hospitality yang luar biasa.<br><br>Portofolio kami meliputi Elementi Domus dan Legnotura, yang mengkhususkan diri dalam pembuatan interior kelas atas; Lenore Exquisite Dining dan Terrata Social Dining, yang menawarkan masakan fusion Barat, Italia, Asia, dan Indonesia yang dikurasi dengan cermat; dan De Diana's Home, merek perhotelan kami yang berdedikasi untuk menyediakan akomodasi mewah dengan kenyamanan, layanan personal, dan pengalaman tamu yang tak terlupakan.<br><br>Bersama-sama, merek-merek kami mencerminkan semangat yang sama untuk keahlian, inovasi, dan kualitas abadi.</p>
       <div class="hero-ctas">
@@ -627,7 +708,7 @@
   <div class="wrap section-head">
     <span class="eyebrow" data-i18n="business.eyebrow">Lini Bisnis</span>
     <h2 data-i18n="business.title">Tiga Lini Bisnis, Satu Standar Kualitas Premium</h2>
-    <p data-i18n="business.lede">Hospitality, Food &amp; Beverage, Manufacturing, dan Lifestyle — dikelola secara sinergis di bawah PT Diana Karya Gemilang.</p>
+    <p aria-hidden="true"></p>
   </div>
   <div class="unit-grid">
     <div class="unit reveal">
@@ -681,7 +762,7 @@
       <div class="carousel-head">
         <div class="section-head reveal">
           <span class="eyebrow" data-i18n="brands.eyebrow">Brand Kami</span>
-          <h2 data-i18n="brands.title">Manufacture, Food &amp; Beverage, dan Hospitality.</h2>
+          <h2 class="title-spacer" aria-hidden="true"></h2>
         </div>
       </div>
       <div class="carousel-stage">
@@ -703,7 +784,6 @@
       <div class="carousel-head">
         <div class="section-head reveal">
           <span class="eyebrow" data-i18n="products.eyebrow">Galeri Produk Kami</span>
-          <h2 data-i18n="products.title">Temukan pilihan produk terbaik kami yang merepresentasikan inovasi, kualitas, dan keahlian di seluruh divisi manufaktur.</h2>
         </div>
       </div>
       <div class="carousel-stage">
@@ -768,16 +848,10 @@
       <h2 data-i18n="contact.title">Mari terhubung dengan kami.</h2>
       <p style="margin-top:20px; color:var(--muted); font-size:15.5px; max-width:420px; line-height:1.7;" data-i18n="contact.lede">Untuk pertanyaan produk, kerja sama, atau reservasi, tim kami siap membantu.</p>
       <div class="contact-actions">
-        <div class="contact-phone-stack">
-          <a href="tel:+62215735975" class="btn-primary btn-call" id="callBtn" aria-label="Telepon +6221 573 5975">
-            <svg class="phone-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-            <span id="callBtnLabel">+6221 573 5975</span>
-          </a>
-          <a href="https://wa.me/62812345689" class="btn-wa" id="waBtn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp 0812345689">
-            <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span id="waBtnLabel">0812345689</span>
-          </a>
-        </div>
+        <a href="tel:+62215735975" class="btn-primary btn-call" id="callBtn" aria-label="Telepon +6221 573 5975">
+          <svg class="phone-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span id="callBtnLabel">+6221 573 5975</span>
+        </a>
         <a href="mailto:info@dianakaryagroup.com?subject=Inquiry%20-%20PT%20Diana%20Karya%20Gemilang"
            class="btn-email"
            id="emailBtn"
@@ -789,8 +863,9 @@
       </div>
       <div class="contact-address">
         <strong>PT Diana Karya Gemilang</strong>
-        Flow Coworking Space, Gedung Midplaza 1<br>
-        Jl Jendral Sudirman Kav 10-11<br>
+        Flow Coworking Space, Lt.2 DS-11.<br>
+        Gedung Midplaza 1<br>
+        Jl. Jenderal Sudirman No. Kav 10-11<br>
         Jakarta Pusat, DKI Jakarta 10220
       </div>
     </div>
@@ -800,11 +875,17 @@
   </div>
 </section>
 
-<section class="section-pad tight" style="background:var(--ink);">
-  <div class="wrap reveal" style="max-width:760px; text-align:center; margin:0 auto;">
-    <p style="font-family:'Fraunces',serif; font-style:italic; font-size:clamp(19px,2.4vw,25px); line-height:1.65; color:#e7e4dd; margin:0;">
-      “At PT Diana Karya Gemilang, we do not merely build businesses — we cultivate lasting value, meaningful experiences, and trusted relationships.”
-    </p>
+<section class="footer-quote-band">
+  <div class="wrap reveal">
+    <img
+      class="footer-lockup"
+      src="images/logo-dkg-footer-lockup.png"
+      srcset="images/logo-dkg-footer-lockup.png 1x, images/logo-dkg-footer-lockup-2x.png 2x"
+      width="1273"
+      height="915"
+      alt="PT Diana Karya Gemilang — Elevating Lifestyle Experiences"
+      decoding="async"
+    >
   </div>
 </section>
 
@@ -815,8 +896,9 @@
         <div class="footer-logo">PT Diana Karya Gemilang</div>
         <p class="footer-tagline" data-i18n="footer.tagline">Elevating Lifestyle Experiences</p>
         <p class="footer-address">
-          Flow Coworking Space, Gedung Midplaza 1<br>
-          Jl Jendral Sudirman Kav 10-11<br>
+          Flow Coworking Space, Lt.2 DS-11.<br>
+          Gedung Midplaza 1<br>
+          Jl. Jenderal Sudirman No. Kav 10-11<br>
           Jakarta Pusat, DKI Jakarta 10220
         </p>
       </div>
@@ -834,10 +916,6 @@
           <a class="phone-inline" href="tel:+62215735975" id="callFooter" aria-label="Telepon">
             <svg class="phone-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
             <span data-i18n="contact.call">Telepon</span>
-          </a>
-          <a class="phone-inline wa-inline" href="https://wa.me/62812345689" id="waFooter" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-            <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span data-i18n="contact.whatsapp">WhatsApp</span>
           </a>
           <a class="phone-inline" href="mailto:info@dianakaryagroup.com" id="emailFooter" aria-label="Email">
             <svg class="mail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -867,7 +945,7 @@
   let cmsContent = null;
 
   let googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' +
-    encodeURIComponent('PT Diana Karya Gemilang, Flow Coworking Space, Gedung Midplaza 1, Jl Jendral Sudirman Kav 10-11, Jakarta Pusat 10220');
+    encodeURIComponent('PT Diana Karya Gemilang, Flow Coworking Space, Lt.2 DS-11, Gedung Midplaza 1, Jl. Jenderal Sudirman No. Kav 10-11, Jakarta Pusat, DKI Jakarta 10220');
   let mailToUrl = 'mailto:info@dianakaryagroup.com?subject=' +
     encodeURIComponent('Inquiry - PT Diana Karya Gemilang');
 
@@ -948,20 +1026,10 @@
     return digits ? 'tel:' + digits : 'tel:+62215735975';
   }
 
-  function whatsappMeHref(wa) {
-    let digits = String(wa || '').replace(/\D/g, '');
-    if (!digits) return 'https://wa.me/62812345689';
-    if (digits.startsWith('0')) digits = '62' + digits.slice(1);
-    else if (!digits.startsWith('62')) digits = '62' + digits;
-    return 'https://wa.me/' + digits;
-  }
-
   function applySettings() {
     const s = cmsContent?.settings;
     if (!s) return;
     const telUrl = phoneTelHref(s.phone);
-    const waNumber = s.whatsapp || s.whatsappNumber || '0812345689';
-    const waUrl = whatsappMeHref(waNumber);
     mailToUrl = `mailto:${s.email || 'info@dianakaryagroup.com'}?subject=` +
       encodeURIComponent('Inquiry - PT Diana Karya Gemilang');
     googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' +
@@ -976,20 +1044,6 @@
     if (callBtn && s.phone) {
       callBtn.setAttribute('aria-label', (t('contact.call') || 'Telepon') + ' ' + s.phone);
       if (callBtnLabel) callBtnLabel.textContent = s.phone;
-    }
-
-    const waBtn = document.getElementById('waBtn');
-    const waBtnLabel = document.getElementById('waBtnLabel');
-    const waFooter = document.getElementById('waFooter');
-    [waBtn, waFooter].forEach(el => {
-      if (el) el.href = waUrl;
-    });
-    if (waBtnLabel) waBtnLabel.textContent = waNumber;
-    if (waBtn) {
-      waBtn.setAttribute('aria-label', (t('contact.whatsapp') || 'WhatsApp') + ' ' + waNumber);
-    }
-    if (waFooter) {
-      waFooter.setAttribute('aria-label', (t('contact.whatsapp') || 'WhatsApp') + ' ' + waNumber);
     }
 
     const emailBtn = document.getElementById('emailBtn');
@@ -1007,11 +1061,11 @@
 
     const addr = document.querySelector('.contact-address');
     if (addr) {
-      addr.innerHTML = `<strong>${s.addressCompany || ''}</strong>${s.addressLine1 || ''}<br>${s.addressLine2 || ''}<br>${s.addressLine3 || ''}`;
+      addr.innerHTML = `<strong>${s.addressCompany || ''}</strong>${s.addressLine1 || ''}<br>${s.addressLine2 || ''}<br>${s.addressLine3 || ''}<br>${s.addressLine4 || ''}`;
     }
     const footAddr = document.querySelector('.footer-address');
     if (footAddr) {
-      footAddr.innerHTML = `${s.addressLine1 || ''}<br>${s.addressLine2 || ''}<br>${s.addressLine3 || ''}`;
+      footAddr.innerHTML = `${s.addressLine1 || ''}<br>${s.addressLine2 || ''}<br>${s.addressLine3 || ''}<br>${s.addressLine4 || ''}`;
     }
   }
 
@@ -1097,11 +1151,45 @@
     document.body.style.overflow = open ? 'hidden' : '';
   });
 
+  const mobileNavMq = window.matchMedia('(max-width:900px)');
+  function closeNavSubmenus() {
+    document.querySelectorAll('.nav-item-has-sub.is-open').forEach((item) => {
+      item.classList.remove('is-open');
+      const toggle = item.querySelector('.nav-sub-toggle');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    });
+  }
+  function closeMobileNav() {
+    nav.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    closeNavSubmenus();
+  }
+  function onMobileNavMqChange(e) {
+    if (!e.matches) closeMobileNav();
+  }
+  if (typeof mobileNavMq.addEventListener === 'function') {
+    mobileNavMq.addEventListener('change', onMobileNavMqChange);
+  } else if (typeof mobileNavMq.addListener === 'function') {
+    mobileNavMq.addListener(onMobileNavMqChange);
+  }
+
+  mobilePanel.querySelectorAll('.nav-sub-toggle').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = btn.closest('.nav-item-has-sub');
+      if (!item) return;
+      const open = !item.classList.contains('is-open');
+      closeNavSubmenus();
+      item.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
   mobilePanel.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-      nav.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      closeMobileNav();
     });
   });
 
@@ -1159,15 +1247,17 @@
 
   function updateMapPopup() {
     const s = cmsContent?.settings;
-    const company = s?.addressCompany || 'PT. Diana Karya Gemilang';
-    const line1 = s?.addressLine1 || 'Fllow Coworking Square Lt. 2 DS-11';
-    const line2 = s?.addressLine2 || 'Gedung Midplaza 1 / Jl. Jendral Sudirman Kav 10-11';
-    const line3 = s?.addressLine3 || 'Karet Tengsin, Jakarta Pusat 10220';
+    const company = s?.addressCompany || 'PT Diana Karya Gemilang';
+    const line1 = s?.addressLine1 || 'Flow Coworking Space, Lt.2 DS-11.';
+    const line2 = s?.addressLine2 || 'Gedung Midplaza 1';
+    const line3 = s?.addressLine3 || 'Jl. Jenderal Sudirman No. Kav 10-11';
+    const line4 = s?.addressLine4 || 'Jakarta Pusat, DKI Jakarta 10220';
     marker.bindPopup(
       '<strong>' + company + '</strong>' +
       line1 + '<br>' +
       line2 + '<br>' +
-      line3 + '<br><br>' +
+      line3 + '<br>' +
+      line4 + '<br><br>' +
       '<a href="' + googleMapsUrl + '" target="_blank" rel="noopener">' + t('contact.map') + ' →</a>'
     );
   }

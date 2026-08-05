@@ -41,11 +41,56 @@
       render(item, l, bi, esc) {
         const cat = bi(item.category, l);
         const body = bi(item.body, l);
+        const igGlyph = `<img class="brand-ext-logo" src="images/instagram-icon.svg" alt="Instagram" width="40" height="40">`;
+
+        function formatExtDisplay(url) {
+          let display = url;
+          try {
+            const u = new URL(url);
+            const path = u.pathname.replace(/\/$/, '');
+            display = u.host.replace(/^www\./, '') + (path === '' || path === '/' ? '' : path);
+          } catch (_) { /* keep raw */ }
+          return display;
+        }
+
+        function extRow(opts) {
+          const url = String(opts.url || '').trim();
+          if (!url) return '';
+          const logoSrc = String(opts.logo || '').trim();
+          const mark = logoSrc
+            ? `<img class="brand-ext-logo" src="${esc(logoSrc)}" alt="${esc(opts.alt || item.name || '')}">`
+            : (opts.fallbackMark || `<span class="brand-ext-name">${esc(item.name || 'Link')}</span>`);
+          return `
+          <div class="brand-ext-wrap">
+            <a class="brand-ext" href="${esc(url)}" target="_blank" rel="noopener noreferrer">
+              ${mark}
+              <span class="brand-ext-url">${esc(formatExtDisplay(url))}</span>
+            </a>
+          </div>`;
+        }
+
+        const websiteBlock = extRow({
+          url: item.websiteUrl,
+          logo: item.websiteLogo,
+          alt: item.name || 'Website',
+          fallbackMark: `<span class="brand-ext-name">${esc(item.name || 'Website')}</span>`
+        });
+        const instagramBlock = extRow({
+          url: item.instagramUrl,
+          logo: item.instagramLogo,
+          alt: 'Instagram',
+          fallbackMark: igGlyph
+        });
+        const externalBlock = (websiteBlock || instagramBlock)
+          ? `<div class="brand-ext-stack">${websiteBlock}${instagramBlock}</div>`
+          : '';
+
         return `
           <p class="eyebrow">${esc(cat || DKGMedia.t('detail.brand'))}</p>
           <h1>${esc(item.name || '')}</h1>
           ${item.image ? `<figure class="detail-hero"><img src="${esc(item.image)}" alt="${esc(item.name || '')}"></figure>` : ''}
           <div class="detail-body">${esc(body).replace(/\n/g, '<br>')}</div>
+          ${externalBlock}
           <p class="detail-back-wrap">
             <a class="back-link back-link-below" href="index.html#brands">
               <span class="back-arrow" aria-hidden="true">←</span>

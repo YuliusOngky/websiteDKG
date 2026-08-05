@@ -10,10 +10,10 @@
     values: ['values.eyebrow', 'values.title', 'values.integrity', 'values.excellence', 'values.innovation', 'values.collaboration', 'values.sustainability'],
     business: ['business.eyebrow', 'business.title', 'business.lede', 'business.m.company', 'business.m.desc', 'business.m.more', 'business.f.company', 'business.f.desc', 'business.f.more', 'business.h.company', 'business.h.desc', 'business.h.more', 'business.more', 'business.less'],
     brands: ['brands.eyebrow', 'brands.title'],
-    products: ['products.eyebrow', 'products.title'],
+    products: ['products.eyebrow'],
     gallery: ['gallery.eyebrow', 'gallery.title'],
     articles: ['articles.eyebrow', 'articles.title'],
-    contact: ['contact.eyebrow', 'contact.title', 'contact.lede', 'contact.phoneLabel', 'contact.call', 'contact.whatsapp', 'contact.map', 'contact.mapAria'],
+    contact: ['contact.eyebrow', 'contact.title', 'contact.lede', 'contact.phoneLabel', 'contact.call', 'contact.map', 'contact.mapAria'],
     footer: ['footer.nav', 'footer.contact', 'footer.location', 'footer.tagline', 'footer.rights']
   };
 
@@ -31,6 +31,7 @@
     { key: 'addressLine1', label: 'Alamat baris 1' },
     { key: 'addressLine2', label: 'Alamat baris 2' },
     { key: 'addressLine3', label: 'Alamat baris 3' },
+    { key: 'addressLine4', label: 'Alamat baris 4' },
     { key: 'mapsQuery', label: 'Query Google Maps' },
     { key: 'siteUrl', label: 'Site URL (produksi)' },
     { key: 'gaMeasurementId', label: 'GA4 Measurement ID (G-XXXX)' },
@@ -61,6 +62,10 @@
         category: { id: '', en: '' },
         name: '',
         image: 'images/placeholder-brand-dd.svg',
+        websiteUrl: '',
+        websiteLogo: '',
+        instagramUrl: '',
+        instagramLogo: '',
         short: { id: '', en: '' },
         body: { id: '', en: '' }
       })
@@ -504,6 +509,26 @@
         ${fieldBi('category', 'Kategori (ID/EN — ganti tab bahasa)', biVal(item.category, editLang))}
         ${fieldBi('short', 'Ringkasan singkat', biVal(item.short, editLang), 2)}
         ${fieldBi('body', 'Deskripsi lengkap (halaman detail)', biVal(item.body, editLang), 8)}
+        <div class="field">
+          <label>Website eksternal (URL)</label>
+          <input data-plain="websiteUrl" value="${escapeAttr(item.websiteUrl || '')}" placeholder="https://contoh.com">
+          <p class="field-hint muted">Kosongkan sampai URL siap. Jika diisi, tampil link logo + alamat di halaman detail (tab baru).</p>
+        </div>
+        <div class="field">
+          <label>Logo website (opsional)</label>
+          <input data-plain="websiteLogo" value="${escapeAttr(item.websiteLogo || '')}" placeholder="images/logo-elementi.svg">
+          <p class="field-hint muted">Path gambar logo kecil. Kosong = tampilkan nama brand sebagai teks.</p>
+        </div>
+        <div class="field">
+          <label>Instagram (URL)</label>
+          <input data-plain="instagramUrl" value="${escapeAttr(item.instagramUrl || '')}" placeholder="https://www.instagram.com/handle">
+          <p class="field-hint muted">Kosongkan sampai handle siap. Jika diisi, tampil ikon Instagram + alamat di halaman detail (tab baru), bisa berdampingan dengan website.</p>
+        </div>
+        <div class="field">
+          <label>Logo Instagram (opsional)</label>
+          <input data-plain="instagramLogo" value="${escapeAttr(item.instagramLogo || '')}" placeholder="images/logo-instagram.svg">
+          <p class="field-hint muted">Path gambar logo kecil. Kosong = ikon Instagram bawaan (glyph).</p>
+        </div>
       `;
     } else if (type === 'products') {
       extra = `
