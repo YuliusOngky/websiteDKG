@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-05T18:15:00.000Z",
+  "updatedAt": "2026-08-06T03:15:35.766Z",
   "settings": {
     "email": "info@dianakaryagroup.com",
     "addressCompany": "PT Diana Karya Gemilang",
@@ -218,7 +218,9 @@
         "body": {
           "id": "Elementi Domus adalah pilihan utama untuk furnitur kelas atas dengan desain yang berkelas dan indah, serta kualitas produk kelas satu. Elementi Domus menghadirkan desain yang abadi sekaligus berwawasan ke depan. Setiap kreasi mencerminkan komitmen terhadap keunikan, kualitas, dan inovasi, menetapkan standar baru dalam sistem furnitur dan solusi hunian.",
           "en": "The preferred choice for high-end furniture by providing tasteful and exquisite designs, first-class product quality. Elementi Domus delivers designs that are both timeless and forward-thinking. Every creation reflects a commitment to uniqueness, quality, and innovation, setting new standards in furniture systems and living solutions."
-        }
+        },
+        "instagramUrl": "",
+        "instagramLogo": ""
       },
       {
         "id": "brand-legnotura",
