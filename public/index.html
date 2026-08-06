@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
 <link rel="apple-touch-icon" href="/images/logo-dkg-nav-2x.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <style>
   :root{
@@ -40,11 +40,12 @@
     background:var(--paper);
     color:var(--ink);
     font-family:'DM Sans',sans-serif;
+    font-weight:400;
     -webkit-font-smoothing:antialiased;
   }
   h1,h2,h3,.serif{
-    font-family:'Fraunces',serif;
-    font-weight:500;
+    font-family:'DM Sans',sans-serif;
+    font-weight:700;
     letter-spacing:-0.01em;
     margin:0;
   }
@@ -194,7 +195,7 @@
     width:100%;
   }
   .hero h1{font-size:clamp(40px,6vw,74px); line-height:1.03;}
-  .hero h1 em{font-style:italic; color:var(--brass); font-weight:400;}
+  .hero h1 em{font-style:italic; color:var(--brass); font-weight:700;}
   .hero p.lede{
     margin-top:26px; max-width:590px; font-size:16.5px; line-height:1.7; color:var(--muted);
   }
@@ -238,12 +239,12 @@
   .about-figure img{width:100%; height:100%; object-fit:cover; display:block;}
   .about-copy p{font-size:16px; line-height:1.85; color:var(--charcoal); margin:0 0 20px;}
   .stat-row{display:none;}
-  .stat b{font-family:'Fraunces',serif; font-size:30px; font-weight:500; display:block;}
+  .stat b{font-family:'DM Sans',sans-serif; font-size:30px; font-weight:700; display:block;}
   .stat span{font-size:12.5px; color:var(--muted);}
 
   .misi-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:26px; margin-top:30px;}
   .misi-item{border-top:1px solid var(--line); padding-top:16px;}
-  .misi-num{font-family:'Fraunces',serif; font-style:italic; color:var(--brass); font-size:18px; font-weight:500;}
+  .misi-num{font-family:'DM Sans',sans-serif; font-style:normal; color:var(--brass); font-size:18px; font-weight:700;}
   .misi-item p{font-size:15.5px; line-height:1.7; color:var(--charcoal); margin:12px 0 0; font-weight:500;}
   .placeholder-note{
     display:block; margin-top:10px; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
@@ -254,12 +255,11 @@
     margin:10px 0 0; font-size:12.5px; letter-spacing:.04em; color:var(--brass-soft);
     font-weight:600;
   }
-  .footer-tagline{margin:8px 0 0; font-size:13px; color:#c8c4bb; max-width:320px;}
 
   /* VALUES */
   .values-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--line); border:1px solid var(--line);}
   .value-col{background:var(--paper); padding:36px 22px; text-align:left;}
-  .value-mark{font-family:'Fraunces',serif; font-style:italic; font-size:34px; color:var(--brass); display:block; margin-bottom:14px;}
+  .value-mark{font-family:'DM Sans',sans-serif; font-style:normal; font-size:34px; font-weight:700; color:var(--brass); display:block; margin-bottom:14px;}
   .value-col h3{font-size:18px; margin-bottom:10px;}
   .value-col p{font-size:13px; line-height:1.65; color:var(--muted); margin:0;}
 
@@ -268,17 +268,20 @@
   .bisnis-strip .eyebrow{color:var(--brass-soft);}
   .bisnis-strip .section-head h2{color:var(--paper);}
   .bisnis-strip .section-head p{color:#c8c4bb; margin:14px 0 0; font-size:15px; line-height:1.65; min-height:calc(1.65em * 2);}
-  .unit-grid{display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(255,255,255,.15);}
+  .unit-grid{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    border-top:1px solid rgba(255,255,255,.15);
+  }
   .unit{
-    padding:44px 34px; border-right:1px solid rgba(255,255,255,.15);
-    min-height:340px; display:flex; flex-direction:column; justify-content:space-between;
+    padding:36px 28px; border-right:1px solid rgba(255,255,255,.15);
+    min-height:320px; display:flex; flex-direction:column; justify-content:space-between;
     transition:background .4s ease; position:relative; overflow:hidden;
   }
   .unit:last-child{border-right:none;}
   .unit:hover{background:rgba(255,255,255,.05);}
   .unit-num{font-size:12px; color:var(--brass-soft); letter-spacing:.1em;}
   .unit h3{font-size:26px; color:var(--paper); margin:18px 0 10px;}
-  .unit p{font-size:14.5px; line-height:1.7; color:#bdb9b0; max-width:280px; margin:0;}
+  .unit p{font-size:14.5px; line-height:1.7; color:#bdb9b0; max-width:none; margin:0;}
   .unit-brands{font-size:12px; letter-spacing:.04em; color:var(--brass-soft); margin-top:14px;}
   .unit-link{
     margin-top:26px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
@@ -328,8 +331,9 @@
     min-width:0;
   }
   .carousel-track{
-    display:flex; gap:2px; overflow-x:auto; scroll-snap-type:x mandatory;
+    display:flex; gap:2px; overflow-x:auto; scroll-snap-type:x proximity;
     scrollbar-width:none; -ms-overflow-style:none; background:var(--line);
+    -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain;
   }
   .carousel-track::-webkit-scrollbar{display:none;}
   .carousel-card{scroll-snap-align:start; flex:0 0 auto; text-decoration:none; color:inherit;}
@@ -385,19 +389,161 @@
   .blog-card h3{font-size:19px; margin:10px 0 8px; line-height:1.4; padding:0 4px;}
   .blog-card p{font-size:14px; color:var(--muted); line-height:1.6; margin:0; padding:0 4px;}
 
-  /* LIGHTBOX */
-  .lightbox{position:fixed; inset:0; z-index:200; display:grid; place-items:center; padding:24px;}
+  /* LIGHTBOX — MacBook-style cover flow */
+  .lightbox{position:fixed; inset:0; z-index:200; display:grid; place-items:center; padding:24px 16px;}
   .lightbox[hidden]{display:none !important;}
-  .lightbox-backdrop{position:absolute; inset:0; background:rgba(0,0,0,.78);}
+  .lightbox-backdrop{position:absolute; inset:0; background:rgba(0,0,0,.82);}
   .lightbox-dialog{
-    position:relative; z-index:1; max-width:min(960px, 96vw); max-height:90vh;
-    display:flex; flex-direction:column; align-items:center; gap:14px;
+    position:relative; z-index:1; width:min(1200px, 96vw); max-height:92vh;
+    display:flex; flex-direction:column; align-items:center; gap:16px;
   }
-  .lightbox-img{max-width:100%; max-height:78vh; object-fit:contain; display:block; background:var(--paper);}
+  .lightbox-stage{
+    --lb-drag:0px;
+    --lb-ease:cubic-bezier(.05,.7,.1,1);
+    --lb-dur:1.2s;
+    position:relative; width:100%; height:min(72vh, 640px);
+    display:grid; place-items:center;
+    perspective:1400px;
+    touch-action:pan-y;
+    user-select:none;
+    -webkit-user-select:none;
+  }
+  .lightbox-slide{
+    position:absolute; inset:auto; margin:0; padding:0; border:none; background:none;
+    display:grid; place-items:center; cursor:pointer;
+    transition:
+      transform var(--lb-dur) var(--lb-ease),
+      opacity var(--lb-dur) var(--lb-ease),
+      filter var(--lb-dur) var(--lb-ease);
+    will-change:transform, opacity, filter;
+  }
+  .lightbox-stage.is-dragging .lightbox-slide{
+    transition:none;
+  }
+  .lightbox-stage.is-snapping .lightbox-slide,
+  .lightbox-stage.is-morph-next .lightbox-slide,
+  .lightbox-stage.is-morph-prev .lightbox-slide{
+    transition:
+      transform var(--lb-dur) var(--lb-ease),
+      opacity var(--lb-dur) var(--lb-ease),
+      filter var(--lb-dur) var(--lb-ease);
+  }
+  .lightbox-stage.is-settling .lightbox-slide{
+    transition:none !important;
+    animation:none !important;
+  }
+  .lightbox-slide img{
+    display:block; max-height:min(68vh, 600px); max-width:min(52vw, 720px);
+    width:auto; height:auto; object-fit:contain;
+    background:var(--paper);
+    border-radius:12px;
+    box-shadow:0 28px 60px rgba(0,0,0,.48);
+    pointer-events:none;
+    -webkit-user-drag:none;
+  }
+  .lightbox-slide.is-current{
+    z-index:3; cursor:grab;
+    transform:translate3d(var(--lb-drag),0,0) scale(1);
+    opacity:1; filter:none;
+  }
+  .lightbox-slide.is-current.is-animating{
+    animation:lightboxFloat 1.2s cubic-bezier(.05,.7,.1,1);
+  }
+  .lightbox-slide.is-current:active,
+  .lightbox-stage.is-dragging .lightbox-slide.is-current{cursor:grabbing;}
+  .lightbox-slide.is-prev,
+  .lightbox-slide.is-next{
+    z-index:1; opacity:.36; filter:blur(3px) brightness(.7);
+  }
+  /* Side previews: pushed out so not cramped against center */
+  .lightbox-slide.is-prev{
+    transform:translate3d(calc(-72% + var(--lb-drag)), 0, 0) scale(.69);
+  }
+  .lightbox-slide.is-next{
+    transform:translate3d(calc(72% + var(--lb-drag)), 0, 0) scale(.69);
+  }
+  /* Morph step: slides glide into new roles (no mid-flight src swap) */
+  .lightbox-stage.is-morph-next .lightbox-slide.is-current{
+    z-index:1; cursor:pointer;
+    transform:translate3d(calc(-72% + var(--lb-drag)), 0, 0) scale(.69);
+    opacity:.36; filter:blur(3px) brightness(.7);
+  }
+  .lightbox-stage.is-morph-next .lightbox-slide.is-next{
+    z-index:3; cursor:grab;
+    transform:translate3d(var(--lb-drag), 0, 0) scale(1);
+    opacity:1; filter:none;
+  }
+  .lightbox-stage.is-morph-next .lightbox-slide.is-prev{
+    z-index:0;
+    transform:translate3d(calc(-118% + var(--lb-drag)), 0, 0) scale(.55);
+    opacity:0; filter:blur(5px) brightness(.45);
+  }
+  .lightbox-stage.is-morph-prev .lightbox-slide.is-current{
+    z-index:1; cursor:pointer;
+    transform:translate3d(calc(72% + var(--lb-drag)), 0, 0) scale(.69);
+    opacity:.36; filter:blur(3px) brightness(.7);
+  }
+  .lightbox-stage.is-morph-prev .lightbox-slide.is-prev{
+    z-index:3; cursor:grab;
+    transform:translate3d(var(--lb-drag), 0, 0) scale(1);
+    opacity:1; filter:none;
+  }
+  .lightbox-stage.is-morph-prev .lightbox-slide.is-next{
+    z-index:0;
+    transform:translate3d(calc(118% + var(--lb-drag)), 0, 0) scale(.55);
+    opacity:0; filter:blur(5px) brightness(.45);
+  }
+  /* Hover: float toward center + lift — disabled while dragging/snapping/morphing */
+  .lightbox.is-multi .lightbox-stage:not(.is-dragging):not(.is-snapping):not(.is-morph-next):not(.is-morph-prev) .lightbox-slide.is-prev:hover{
+    z-index:2; opacity:.72;
+    filter:blur(1.5px) brightness(.9);
+    transform:translate3d(calc(-56% + var(--lb-drag)), -12px, 0) scale(.79);
+  }
+  .lightbox.is-multi .lightbox-stage:not(.is-dragging):not(.is-snapping):not(.is-morph-next):not(.is-morph-prev) .lightbox-slide.is-next:hover{
+    z-index:2; opacity:.72;
+    filter:blur(1.5px) brightness(.9);
+    transform:translate3d(calc(56% + var(--lb-drag)), -12px, 0) scale(.79);
+  }
+  .lightbox-stage:not(.is-dragging):not(.is-snapping):not(.is-morph-next):not(.is-morph-prev) .lightbox-slide.is-current:hover{
+    transform:translate3d(var(--lb-drag),-10px,0) scale(1.03);
+  }
+  .lightbox:not(.is-multi) .lightbox-slide.is-prev,
+  .lightbox:not(.is-multi) .lightbox-slide.is-next{display:none;}
   .lightbox-cap{margin:0; color:var(--paper); font-size:13px; letter-spacing:.08em; text-transform:uppercase;}
+  .lightbox-count{margin:0; color:rgba(255,255,255,.72); font-size:12px; letter-spacing:.08em;}
   .lightbox-close{
-    position:absolute; top:-40px; right:0; background:none; border:none; color:var(--paper);
+    position:absolute; top:-8px; right:0; z-index:5;
+    background:none; border:none; color:var(--paper);
     font-size:32px; cursor:pointer; line-height:1;
+  }
+  /* Arrow nav removed — navigate via side preview / swipe */
+  .lightbox-nav{display:none !important;}
+  @keyframes lightboxFloat{
+    from{transform:translate3d(var(--lb-drag),14px,0) scale(.98); opacity:.55;}
+    to{transform:translate3d(var(--lb-drag),0,0) scale(1); opacity:1;}
+  }
+  @media (max-width:720px){
+    .lightbox-slide.is-prev{transform:translate3d(calc(-56% + var(--lb-drag)), 0, 0) scale(.62);}
+    .lightbox-slide.is-next{transform:translate3d(calc(56% + var(--lb-drag)), 0, 0) scale(.62);}
+    .lightbox-stage.is-morph-next .lightbox-slide.is-current{
+      transform:translate3d(calc(-56% + var(--lb-drag)), 0, 0) scale(.62);
+    }
+    .lightbox-stage.is-morph-prev .lightbox-slide.is-current{
+      transform:translate3d(calc(56% + var(--lb-drag)), 0, 0) scale(.62);
+    }
+    .lightbox-stage.is-morph-next .lightbox-slide.is-prev{
+      transform:translate3d(calc(-100% + var(--lb-drag)), 0, 0) scale(.5);
+    }
+    .lightbox-stage.is-morph-prev .lightbox-slide.is-next{
+      transform:translate3d(calc(100% + var(--lb-drag)), 0, 0) scale(.5);
+    }
+    .lightbox.is-multi .lightbox-stage:not(.is-dragging):not(.is-snapping):not(.is-morph-next):not(.is-morph-prev) .lightbox-slide.is-prev:hover{
+      transform:translate3d(calc(-42% + var(--lb-drag)), -8px, 0) scale(.72);
+    }
+    .lightbox.is-multi .lightbox-stage:not(.is-dragging):not(.is-snapping):not(.is-morph-next):not(.is-morph-prev) .lightbox-slide.is-next:hover{
+      transform:translate3d(calc(42% + var(--lb-drag)), -8px, 0) scale(.72);
+    }
+    .lightbox-slide img{max-width:min(72vw, 480px); max-height:56vh; border-radius:10px;}
   }
 
   /* CONTACT */
@@ -439,7 +585,7 @@
     font-size:14.5px; color:var(--charcoal); line-height:1.75; max-width:420px;
   }
   .contact-address strong{
-    display:block; font-family:'Fraunces',serif; font-weight:500;
+    display:block; font-family:'DM Sans',sans-serif; font-weight:700;
     font-size:16px; margin-bottom:8px; color:var(--ink);
   }
   .footer-address{
@@ -456,7 +602,7 @@
     font-size:13px; line-height:1.55; color:var(--ink);
   }
   .leaflet-popup-content{margin:12px 14px;}
-  .leaflet-popup-content strong{font-family:'Fraunces',serif; font-weight:500; display:block; margin-bottom:4px;}
+  .leaflet-popup-content strong{font-family:'DM Sans',sans-serif; font-weight:700; display:block; margin-bottom:4px;}
   .leaflet-popup-content a{color:var(--brass); font-weight:600;}
   .leaflet-popup-tip{box-shadow:none;}
   .leaflet-control-attribution{font-size:10px;}
@@ -464,15 +610,51 @@
   footer{background:var(--ink); color:#a19d94; padding:60px 0 30px;}
   .footer-quote-band{background:var(--ink); padding:48px 0 40px;}
   .footer-lockup{
-    display:block;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
     margin:0 auto;
-    width:min(420px,72vw);
-    height:auto;
-    max-height:280px;
-    object-fit:contain;
+    max-width:min(960px, 94vw);
+    color:#FFFFFF;
+  }
+  .footer-lockup-name{
+    margin:0;
+    font-family:'DM Sans',sans-serif;
+    font-weight:700;
+    font-size:clamp(12px, 1.55vw, 17px);
+    letter-spacing:.04em;
+    line-height:1.4;
+    text-transform:none;
+    color:#FFFFFF;
+  }
+  .footer-lockup-sep{
+    color:rgba(255,255,255,.45);
+    font-weight:500;
+    margin:0 .15em;
+  }
+  .footer-lockup-tag{
+    display:inline;
+    font-weight:600;
+    font-size:.88em;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#EAC17F;
+    white-space:nowrap;
+  }
+  @media (max-width:640px){
+    .footer-lockup-name{
+      font-size:clamp(11px, 3.2vw, 14px);
+      letter-spacing:.03em;
+    }
+    .footer-lockup-tag{
+      white-space:normal;
+      letter-spacing:.1em;
+    }
   }
   .footer-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:30px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.12);}
-  .footer-logo{font-family:'Fraunces',serif; font-size:22px; color:var(--paper);}
+  .footer-logo{font-family:'DM Sans',sans-serif; font-weight:700; font-size:22px; color:#FFFFFF;}
   .footer-cols{display:flex; gap:70px;}
   .footer-col h4{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--paper); margin:0 0 16px; font-family:'DM Sans',sans-serif;}
   .footer-col a{display:block; font-size:14px; color:#a19d94; text-decoration:none; margin-bottom:10px;}
@@ -515,7 +697,7 @@
     nav.open .mobile-panel{display:flex;}
     .mobile-panel > a,
     .mobile-panel .nav-sub-trigger{
-      text-decoration:none; font-size:22px; font-family:'Fraunces',serif;
+      text-decoration:none; font-size:22px; font-family:'DM Sans',sans-serif; font-weight:700;
       padding:14px 0; border-bottom:1px solid var(--line); color:var(--ink);
       display:block;
     }
@@ -585,11 +767,10 @@
     </a>
     <div class="nav-links">
       <a href="#tentang" data-i18n="nav.about">Tentang Kami</a>
-      <a href="#nilai" data-i18n="nav.values">Nilai Utama</a>
       <div class="nav-item-has-sub">
         <div class="nav-sub-head">
           <a href="#bisnis" class="nav-sub-trigger" aria-haspopup="true">
-            <span data-i18n="nav.business">Unit Bisnis</span>
+            <span data-i18n="nav.business">Lini Bisnis</span>
             <span class="nav-sub-chevron nav-sub-chevron-inline" aria-hidden="true"></span>
           </a>
         </div>
@@ -604,8 +785,8 @@
     </div>
     <div class="nav-actions">
       <div class="lang-switch" role="group" aria-label="Language">
-        <button type="button" data-lang="id" class="active">ID</button>
-        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="en" class="active">EN</button>
+        <button type="button" data-lang="id">ID</button>
       </div>
       <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -614,11 +795,10 @@
   </div>
   <div class="mobile-panel" id="mobilePanel">
     <a href="#tentang" data-i18n="nav.about">Tentang Kami</a>
-    <a href="#nilai" data-i18n="nav.values">Nilai Utama</a>
     <div class="nav-item-has-sub" data-nav-sub>
       <div class="nav-sub-head">
-        <a href="#bisnis" class="nav-sub-trigger" data-i18n="nav.business">Unit Bisnis</a>
-        <button type="button" class="nav-sub-toggle" aria-expanded="false" data-i18n-aria="nav.business" aria-label="Unit Bisnis">
+        <a href="#bisnis" class="nav-sub-trigger" data-i18n="nav.business">Lini Bisnis</a>
+        <button type="button" class="nav-sub-toggle" aria-expanded="false" data-i18n-aria="nav.business" aria-label="Lini Bisnis">
           <span class="nav-sub-chevron" aria-hidden="true"></span>
         </button>
       </div>
@@ -653,14 +833,13 @@
 <section class="section-pad" id="tentang">
   <div class="wrap about-grid">
     <div class="about-figure reveal">
-      <img src="images/placeholder-about.svg" alt="PLACEHOLDER — ganti dengan gambar About dari Drive (.ai export)">
-      <span class="placeholder-note">Placeholder About image — replace with Drive export</span>
+      <img src="images/about-building.jpg" alt="Gedung PT Diana Karya Gemilang dengan papan nama emas">
     </div>
     <div class="about-copy reveal">
       <span class="eyebrow" data-i18n="about.eyebrow">Tentang Kami</span>
       <h2 style="margin-bottom:24px;" data-i18n="about.title">Satu visi, disatukan lewat sinergi antar anak perusahaan.</h2>
       <p data-i18n="about.p1">PT Diana Karya Gemilang merupakan perusahaan induk (holding company) yang membawahi berbagai unit usaha di bidang Lifestyle, Hospitality, Food &amp; Beverage, serta Manufacturing — didirikan dengan komitmen menghadirkan produk dan layanan premium yang memberikan nilai tambah bagi pelanggan, mitra usaha, serta masyarakat.</p>
-      <p data-i18n="about.p2" data-i18n-html>Dengan tata kelola perusahaan yang baik (<em style="font-family:'Fraunces',serif;">Good Corporate Governance</em>), sumber daya manusia yang profesional, serta budaya kerja yang berlandaskan integritas, kami berkomitmen tumbuh secara berkelanjutan dan bersaing di tingkat nasional maupun internasional.</p>
+      <p data-i18n="about.p2" data-i18n-html>Dengan tata kelola perusahaan yang baik (<em>Good Corporate Governance</em>), sumber daya manusia yang profesional, serta budaya kerja yang berlandaskan integritas, kami berkomitmen tumbuh secara berkelanjutan dan bersaing di tingkat nasional maupun internasional.</p>
       <div class="stat-row">
         <div class="stat"><b>3</b><span data-i18n="about.stat1">Lini Bisnis</span></div>
         <div class="stat"><b>5</b><span data-i18n="about.stat2">Brand Utama</span></div>
@@ -705,12 +884,13 @@
 </section>
 
 <section class="bisnis-strip section-pad" id="bisnis">
-  <div class="wrap section-head">
-    <span class="eyebrow" data-i18n="business.eyebrow">Lini Bisnis</span>
-    <h2 data-i18n="business.title">Tiga Lini Bisnis, Satu Standar Kualitas Premium</h2>
-    <p aria-hidden="true"></p>
-  </div>
-  <div class="unit-grid">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="business.eyebrow">Lini Bisnis</span>
+      <h2 data-i18n="business.title">Tiga Lini Bisnis, Satu Standar Kualitas Premium</h2>
+      <p aria-hidden="true"></p>
+    </div>
+    <div class="unit-grid">
     <div class="unit reveal">
       <div>
         <span class="unit-num">01</span>
@@ -752,6 +932,7 @@
       <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
       </a>
+    </div>
     </div>
   </div>
 </section>
@@ -846,7 +1027,6 @@
     <div class="contact-copy reveal">
       <span class="eyebrow" data-i18n="contact.eyebrow">Kontak</span>
       <h2 data-i18n="contact.title">Mari terhubung dengan kami.</h2>
-      <p style="margin-top:20px; color:var(--muted); font-size:15.5px; max-width:420px; line-height:1.7;" data-i18n="contact.lede">Untuk pertanyaan produk, kerja sama, atau reservasi, tim kami siap membantu.</p>
       <div class="contact-actions">
         <a href="tel:+62215735975" class="btn-primary btn-call" id="callBtn" aria-label="Telepon +6221 573 5975">
           <svg class="phone-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
@@ -877,15 +1057,9 @@
 
 <section class="footer-quote-band">
   <div class="wrap reveal">
-    <img
-      class="footer-lockup"
-      src="images/logo-dkg-footer-lockup.png"
-      srcset="images/logo-dkg-footer-lockup.png 1x, images/logo-dkg-footer-lockup-2x.png 2x"
-      width="1273"
-      height="915"
-      alt="PT Diana Karya Gemilang — Elevating Lifestyle Experiences"
-      decoding="async"
-    >
+    <div class="footer-lockup" role="img" aria-label="PT Diana Karya Gemilang — Elevating Lifestyle Experiences">
+      <p class="footer-lockup-name">PT Diana Karya Gemilang <span class="footer-lockup-sep">-</span> <span class="footer-lockup-tag">ELEVATING LIFESTYLE EXPERIENCES</span></p>
+    </div>
   </div>
 </section>
 
@@ -894,7 +1068,6 @@
     <div class="footer-top">
       <div>
         <div class="footer-logo">PT Diana Karya Gemilang</div>
-        <p class="footer-tagline" data-i18n="footer.tagline">Elevating Lifestyle Experiences</p>
         <p class="footer-address">
           Flow Coworking Space, Lt.2 DS-11.<br>
           Gedung Midplaza 1<br>
@@ -906,10 +1079,9 @@
         <div class="footer-col">
           <h4 data-i18n="footer.nav">Navigasi</h4>
           <a href="#tentang" data-i18n="nav.about">Tentang Kami</a>
-          <a href="#bisnis" data-i18n="nav.business">Unit Bisnis</a>
-          <a href="#brands" data-i18n="nav.brands">Label Produk</a>
-          <a href="#produk" data-i18n="nav.products">Produk Kami</a>
+          <a href="#bisnis" data-i18n="footer.businessLine">Lini Bisnis</a>
           <a href="#artikel" data-i18n="nav.articles">Artikel &amp; Editorial</a>
+          <a href="#kontak" data-i18n="nav.contact">Hubungi Kami</a>
         </div>
         <div class="footer-col">
           <h4 data-i18n="footer.contact">Kontak</h4>
@@ -929,7 +1101,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span data-i18n="footer.rights">© 2026 PT Diana Karya Gemilang. Hak cipta dilindungi.</span>
+      <span data-i18n="footer.rights">&copy; 2026 PT Diana Karya Gemilang. Hak cipta dilindungi.</span>
     </div>
   </div>
 </footer>
@@ -941,7 +1113,7 @@
   const nav = document.getElementById('nav');
   const burger = document.getElementById('burger');
   const mobilePanel = document.getElementById('mobilePanel');
-  let currentLang = localStorage.getItem('dkg-lang') || 'id';
+  let currentLang = localStorage.getItem('dkg-lang') === 'id' ? 'id' : 'en';
   let cmsContent = null;
 
   let googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' +

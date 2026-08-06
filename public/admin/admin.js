@@ -13,8 +13,8 @@
     products: ['products.eyebrow'],
     gallery: ['gallery.eyebrow', 'gallery.title'],
     articles: ['articles.eyebrow', 'articles.title'],
-    contact: ['contact.eyebrow', 'contact.title', 'contact.lede', 'contact.phoneLabel', 'contact.call', 'contact.map', 'contact.mapAria'],
-    footer: ['footer.nav', 'footer.contact', 'footer.location', 'footer.tagline', 'footer.rights']
+    contact: ['contact.eyebrow', 'contact.title', 'contact.phoneLabel', 'contact.call', 'contact.map', 'contact.mapAria'],
+    footer: ['footer.nav', 'footer.businessLine', 'footer.contact', 'footer.location', 'footer.tagline', 'footer.rights']
   };
 
   const SEO_FIELDS = [

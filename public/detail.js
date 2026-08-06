@@ -40,7 +40,7 @@
     let item = null;
 
     function paint() {
-      const l = setLang(localStorage.getItem('dkg-lang') || 'id');
+      const l = setLang(localStorage.getItem('dkg-lang') === 'id' ? 'id' : 'en');
       applyStaticI18n();
       if (!item) {
         root.innerHTML = `<p class="detail-empty">${M.escapeHtml(M.t('ui.notFound'))}</p>`;

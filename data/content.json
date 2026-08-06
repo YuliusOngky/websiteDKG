@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-06T03:15:35.766Z",
+  "updatedAt": "2026-08-06T07:46:01.441Z",
   "settings": {
     "email": "info@dianakaryagroup.com",
     "addressCompany": "PT Diana Karya Gemilang",
@@ -18,119 +18,111 @@
     "products": [
       {
         "id": "prod-1",
-        "slug": "uma-kitchen-series",
-        "image": "images/product1.png",
-        "caption": "UMA — Kitchen Series",
+        "slug": "kitchen",
+        "image": "images/product-gallery-1.png",
+        "caption": "Kitchen",
         "brand": "Elementi Domus",
         "title": {
-          "id": "UMA — Kitchen Series",
-          "en": "UMA — Kitchen Series"
+          "id": "Dapur",
+          "en": "Kitchen"
         },
         "body": {
-          "id": "Temukan seri dapur UMA dari Elementi Domus — desain abadi dengan craftsmanship premium untuk ruang hunian modern.",
-          "en": "Discover the UMA kitchen series by Elementi Domus — timeless design with premium craftsmanship for modern living spaces."
+          "id": "Dapur",
+          "en": "Kitchen"
         }
       },
       {
         "id": "prod-2",
-        "slug": "kitchen-collection",
-        "image": "images/product2.png",
-        "caption": "Kitchen Collection",
+        "slug": "kitchen-2",
+        "image": "images/product-gallery-2.png",
+        "caption": "Kitchen",
         "brand": "Elementi Domus",
         "title": {
-          "id": "Kitchen Collection",
-          "en": "Kitchen Collection"
+          "id": "Dapur",
+          "en": "Kitchen"
         },
         "body": {
-          "id": "Koleksi dapur Elementi Domus menghadirkan solusi interior berkelas dengan material dan finishing berkualitas tinggi.",
-          "en": "The Elementi Domus kitchen collection delivers refined interior solutions with high-quality materials and finishes."
+          "id": "Dapur",
+          "en": "Kitchen"
         }
       },
       {
         "id": "prod-3",
-        "slug": "interior-series",
-        "image": "images/product3.png",
-        "caption": "Interior Series",
+        "slug": "closet",
+        "image": "images/product-gallery-3.png",
+        "caption": "Closet",
         "brand": "Elementi Domus",
         "title": {
-          "id": "Interior Series",
-          "en": "Interior Series"
+          "id": "Lemari",
+          "en": "Closet"
         },
         "body": {
-          "id": "Seri interior Elementi Domus menggabungkan estetika dan fungsi untuk menciptakan ruang yang elegan dan nyaman.",
-          "en": "The Elementi Domus interior series combines aesthetics and function to create elegant, comfortable spaces."
+          "id": "Lemari",
+          "en": "Closet"
         }
       },
       {
         "id": "prod-4",
-        "slug": "avani-kitchen-series",
-        "image": "images/product4.png",
-        "caption": "AVANI — Kitchen Series",
+        "slug": "closet-2",
+        "image": "images/product-gallery-4.png",
+        "caption": "Closet",
         "brand": "Elementi Domus",
         "title": {
-          "id": "AVANI — Kitchen Series",
-          "en": "AVANI — Kitchen Series"
+          "id": "Lemari",
+          "en": "Closet"
         },
         "body": {
-          "id": "AVANI Kitchen Series menawarkan sistem dapur premium dengan detail desain yang teliti dan kualitas manufaktur unggul.",
-          "en": "The AVANI Kitchen Series offers a premium kitchen system with meticulous design detail and superior manufacturing quality."
+          "id": "Lemari",
+          "en": "Closet"
         }
       },
       {
         "id": "prod-5",
-        "slug": "wood-panel",
-        "image": "images/product5.png",
-        "caption": "Wood Panel",
-        "brand": "Legnotura",
+        "slug": "bedroom",
+        "image": "images/product-gallery-5.png",
+        "caption": "Bedroom",
+        "brand": "Elementi Domus",
         "title": {
-          "id": "Wood Panel",
-          "en": "Wood Panel"
+          "id": "Kamar Tidur",
+          "en": "Bedroom"
         },
         "body": {
-          "id": "Panel kayu Legnotura diproduksi dengan komitmen inovasi dan keberlanjutan untuk aplikasi interior premium.",
-          "en": "Legnotura wood panels are produced with a commitment to innovation and sustainability for premium interior applications."
+          "id": "Kamar Tidur",
+          "en": "Bedroom"
         }
       }
     ],
     "gallery": [
       {
         "id": "gal-1",
-        "image": "images/gallery-01.JPG",
+        "image": "images/fnb-gallery-1.png",
         "title": {
-          "id": "Manufaktur Furnitur",
-          "en": "Furniture Manufacturing"
+          "id": "Dining",
+          "en": "Dining"
         }
       },
       {
         "id": "gal-2",
-        "image": "images/gallery-02.jpg",
+        "image": "images/fnb-gallery-2.png",
         "title": {
-          "id": "Pengalaman Dining",
-          "en": "Dining Experience"
+          "id": "Kamar",
+          "en": "Room"
         }
       },
       {
         "id": "gal-3",
-        "image": "images/gallery-03.jpg",
+        "image": "images/fnb-gallery-3.png",
         "title": {
-          "id": "Eksterior Restoran",
-          "en": "Restaurant Exterior"
+          "id": "Eksterior",
+          "en": "Exterior"
         }
       },
       {
         "id": "gal-4",
-        "image": "images/PTDKG-activities-opt.jpg",
+        "image": "images/fnb-gallery-4.png",
         "title": {
-          "id": "Aktivitas Tim",
-          "en": "Team Activities"
-        }
-      },
-      {
-        "id": "gal-5",
-        "image": "images/activities-opt.jpg",
-        "title": {
-          "id": "Kegiatan Perusahaan",
-          "en": "Company Activities"
+          "id": "Restoran",
+          "en": "Restaurant"
         }
       }
     ],
@@ -138,7 +130,7 @@
       {
         "id": "art-1",
         "slug": "elementi-domus-grand-opening",
-        "image": "images/article-elementi-grand-opening.jpg",
+        "image": "images/article-elementi.png",
         "tag": {
           "id": "Hospitality",
           "en": "Hospitality"
@@ -159,7 +151,7 @@
       {
         "id": "art-2",
         "slug": "lenore-plaza-indonesia",
-        "image": "images/article-lenore-plaza.jpg",
+        "image": "images/article-lenore.png",
         "tag": {
           "id": "Kuliner",
           "en": "Culinary"
@@ -180,7 +172,7 @@
       {
         "id": "art-3",
         "slug": "terrata-sound-session",
-        "image": "images/article-sound-session-terrata.jpg",
+        "image": "images/article-terrata.png",
         "tag": {
           "id": "Perusahaan",
           "en": "Company"
@@ -334,14 +326,14 @@
     "id": {
       "nav.about": "Tentang Kami",
       "nav.values": "Nilai Utama",
-      "nav.business": "Unit Bisnis",
+      "nav.business": "Lini Bisnis",
       "nav.brands": "Label Produk",
       "nav.products": "Produk Kami",
       "nav.gallery": "F&B dan Hospitality",
       "nav.articles": "Artikel & Editorial",
       "nav.contact": "Hubungi Kami",
       "nav.menu": "Menu",
-      "hero.lede": "PT Diana Karya Gemilang adalah perusahaan Indonesia yang berdedikasi meningkatkan pengalaman lifestyle melalui desain, craftsmanship, dan hospitality yang luar biasa.<br><br>Portofolio kami meliputi Elementi Domus dan Legnotura, yang mengkhususkan diri dalam pembuatan interior kelas atas; Lenore Exquisite Dining dan Terrata Social Dining, yang menawarkan masakan fusion Barat, Italia, Asia, dan Indonesia yang dikurasi dengan cermat; dan De Diana's Home, merek perhotelan kami yang berdedikasi untuk menyediakan akomodasi mewah dengan kenyamanan, layanan personal, dan pengalaman tamu yang tak terlupakan.<br><br>Bersama-sama, merek-merek kami mencerminkan semangat yang sama untuk keahlian, inovasi, dan kualitas abadi.",
+      "hero.lede": "101111111PT Diana Karya Gemilang adalah perusahaan Indonesia yang berdedikasi meningkatkan pengalaman lifestyle melalui desain, craftsmanship, dan hospitality yang luar biasa.<br><br>Portofolio kami meliputi Elementi Domus dan Legnotura, yang mengkhususkan diri dalam pembuatan interior kelas atas; Lenore Exquisite Dining dan Terrata Social Dining, yang menawarkan masakan fusion Barat, Italia, Asia, dan Indonesia yang dikurasi dengan cermat; dan De Diana's Home, merek perhotelan kami yang berdedikasi untuk menyediakan akomodasi mewah dengan kenyamanan, layanan personal, dan pengalaman tamu yang tak terlupakan.<br><br>Bersama-sama, merek-merek kami mencerminkan semangat yang sama untuk keahlian, inovasi, dan kualitas abadi.",
       "hero.cta1": "Jelajahi Lini Bisnis",
       "hero.cta2": "Tentang Kami",
       "about.eyebrow": "Tentang Kami",
@@ -389,11 +381,10 @@
       "products.eyebrow": "Galeri Produk Kami",
       "gallery.eyebrow": "F&B dan hospitality",
       "gallery.title": "Our F&B and Hospitality",
-      "gallery.1": "Manufaktur Furnitur",
-      "gallery.2": "Pengalaman Dining",
-      "gallery.3": "Eksterior Restoran",
-      "gallery.4": "Aktivitas Tim",
-      "gallery.5": "Kegiatan Perusahaan",
+      "gallery.1": "Dining",
+      "gallery.2": "Kamar",
+      "gallery.3": "Eksterior",
+      "gallery.4": "Restoran",
       "articles.eyebrow": "Artikel & Editorial",
       "articles.title": "Articles & Editorials",
       "articles.a1.t": "Elementi Domus Grand Opening & Private Viewing",
@@ -406,13 +397,13 @@
       "articles.a3.d": "Setiap Jumat pukul 19.00, Terrata Social Dining hidup dengan Sound Session, pengalaman musik live mingguan yang menyatukan musik hebat, makanan istimewa, dan koneksi yang bermakna.",
       "contact.eyebrow": "Kontak",
       "contact.title": "Mari terhubung dengan kami.",
-      "contact.lede": "Hubungi kami melalui telepon, email, atau kunjungi kantor kami.",
       "contact.map": "Buka di Google Maps",
       "contact.mapAria": "Peta lokasi PT Diana Karya Gemilang",
       "footer.nav": "Navigasi",
+      "footer.businessLine": "Lini Bisnis",
       "footer.contact": "Kontak",
       "footer.location": "Lokasi",
-      "footer.rights": "Â© 2026 PT Diana Karya Gemilang. Hak cipta dilindungi.",
+      "footer.rights": "\u00A9 2026 PT Diana Karya Gemilang. Hak cipta dilindungi.",
       "business.m.company": "PT Diana Gaharu Gemilang",
       "business.f.company": "PT Diana Boga Gemilang",
       "business.h.company": "PT Diana Grha Gemilang",
@@ -439,7 +430,7 @@
     "en": {
       "nav.about": "About Us",
       "nav.values": "Core Values",
-      "nav.business": "Business Units",
+      "nav.business": "Business Lines",
       "nav.brands": "Our Brand",
       "nav.products": "Our Product",
       "nav.gallery": "Our F&B and Hospitality",
@@ -476,7 +467,7 @@
       "business.lede": "",
       "business.h.desc": "Developing and managing hospitality businesses dedicated to providing refined accommodations, personalized service, and exceptional guest experiences with the highest standards of comfort and quality.",
       "business.h.more": "Our services include premium accommodation management and guest-experience strategies with high service standards.",
-      "business.f.desc": "Developing and operating premium restaurants, cafés, and culinary concepts that deliver exceptional cuisine, refined hospitality, and memorable dining experiences.",
+      "business.f.desc": "Developing and operating premium restaurants, cafes, and culinary concepts that deliver exceptional cuisine, refined hospitality, and memorable dining experiences.",
       "business.f.more": "We deliver sustainable menu innovation, culinary supply-chain management, and exclusive dining experiences across every business line.",
       "business.m.desc": "Designing and manufacturing premium furniture and interior solutions with a strong commitment to exceptional craftsmanship, precision engineering, innovative design, and outstanding customer service.",
       "business.m.more": "Our manufacturing facilities are supported by modern technology and experienced craftsmen to create works of high aesthetic quality.",
@@ -494,11 +485,10 @@
       "products.eyebrow": "Our Product Gallery",
       "gallery.eyebrow": "Our F&B and Hospitality",
       "gallery.title": "Our F&B and Hospitality",
-      "gallery.1": "Furniture Manufacturing",
-      "gallery.2": "Dining Experience",
-      "gallery.3": "Restaurant Exterior",
-      "gallery.4": "Team Activities",
-      "gallery.5": "Company Activities",
+      "gallery.1": "Dining",
+      "gallery.2": "Room",
+      "gallery.3": "Exterior",
+      "gallery.4": "Restaurant",
       "articles.eyebrow": "Articles & Editorials",
       "articles.title": "Articles & Editorials",
       "articles.a1.t": "Elementi Domus Grand Opening & Private Viewing",
@@ -509,15 +499,15 @@
       "articles.a3.tag": "Company",
       "articles.a3.t": "Sound Session every Friday at Terrata Social Dining",
       "articles.a3.d": "Every Friday at 7 PM, Terrata Social Dining comes alive with Sound Session, a weekly live music experience that brings together great music, exceptional food, and meaningful connections.",
-      "contact.eyebrow": "Contact us",
+      "contact.eyebrow": "Contact Us",
       "contact.title": "Let's connect with us.",
-      "contact.lede": "Reach us by phone, email, or visit our office.",
       "contact.map": "Open in Google Maps",
       "contact.mapAria": "Map location of PT Diana Karya Gemilang",
       "footer.nav": "Navigation",
+      "footer.businessLine": "Business Line",
       "footer.contact": "Contact",
       "footer.location": "Location",
-      "footer.rights": "Â© 2026 PT Diana Karya Gemilang. All rights reserved.",
+      "footer.rights": "\u00A9 2026 PT Diana Karya Gemilang. All rights reserved.",
       "business.m.company": "PT Diana Gaharu Gemilang",
       "business.f.company": "PT Diana Boga Gemilang",
       "business.h.company": "PT Diana Grha Gemilang",
