@@ -4,7 +4,7 @@
   const SECTIONS = {
     nav: ['nav.about', 'nav.values', 'nav.business', 'nav.brands', 'nav.products', 'nav.gallery', 'nav.articles', 'nav.contact', 'nav.menu'],
     hero: ['hero.lede', 'hero.cta1', 'hero.cta2', 'hero.scroll'],
-    about: ['about.eyebrow', 'about.title', 'about.p1', 'about.p2', 'about.stat1', 'about.stat2', 'about.stat3'],
+    about: ['about.eyebrow', 'about.title', 'about.p1', 'about.p2'],
     vision: ['vision.eyebrow', 'vision.title'],
     mission: ['mission.eyebrow', 'mission.1', 'mission.2', 'mission.3', 'mission.4', 'mission.5'],
     values: ['values.eyebrow', 'values.title', 'values.integrity', 'values.excellence', 'values.innovation', 'values.collaboration', 'values.sustainability'],

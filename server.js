@@ -49,6 +49,25 @@ app.use(cookieSession({
   secure: isProd
 }));
 
+const CSP = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'none'",
+  "script-src 'self' 'unsafe-inline' https://unpkg.com https://www.googletagmanager.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data: blob: https://*.tile.openstreetmap.org https://unpkg.com",
+  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com"
+].join('; ');
+
+app.use((req, res, next) => {
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Content-Security-Policy', CSP);
+  next();
+});
+
 app.use((req, res, next) => {
   const blocked = [
     '/.env', '/server.js', '/package.json', '/package-lock.json',

@@ -238,9 +238,6 @@
   }
   .about-figure img{width:100%; height:100%; object-fit:cover; display:block;}
   .about-copy p{font-size:16px; line-height:1.85; color:var(--charcoal); margin:0 0 20px;}
-  .stat-row{display:none;}
-  .stat b{font-family:'DM Sans',sans-serif; font-size:30px; font-weight:700; display:block;}
-  .stat span{font-size:12.5px; color:var(--muted);}
 
   .misi-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:26px; margin-top:30px;}
   .misi-item{border-top:1px solid var(--line); padding-top:16px;}
@@ -331,7 +328,7 @@
     min-width:0;
   }
   .carousel-track{
-    display:flex; gap:2px; overflow-x:auto; scroll-snap-type:x proximity;
+    display:flex; gap:2px; overflow-x:auto; scroll-snap-type:x mandatory;
     scrollbar-width:none; -ms-overflow-style:none; background:var(--line);
     -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain;
   }
@@ -381,8 +378,8 @@
   .gallery-item:hover img{transform:scale(1.05);}
 
   /* BLOG */
-  #artikel .carousel-stage{--carousel-media-h:calc(min(340px, 78vw) * 10 / 16);}
-  #articlesTrack .blog-card{flex-basis:min(340px, 78vw); background:var(--paper); padding:0 0 8px;}
+  #artikel .carousel-stage{--carousel-media-h:calc(min(328px, 78vw) * 10 / 16);}
+  #articlesTrack .blog-card{flex-basis:min(328px, 78vw); background:var(--paper); padding:0 0 8px;}
   .blog-card .blog-img{aspect-ratio:16/10; margin-bottom:20px; border:1px solid var(--line); overflow:hidden; background:var(--paper-2);}
   .blog-card .blog-img img{width:100%; height:100%; object-fit:cover; display:block;}
   .blog-card .tag{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); display:inline-block; padding:0 4px;}
@@ -837,32 +834,27 @@
     </div>
     <div class="about-copy reveal">
       <span class="eyebrow" data-i18n="about.eyebrow">Tentang Kami</span>
-      <h2 style="margin-bottom:24px;" data-i18n="about.title">Satu visi, disatukan lewat sinergi antar anak perusahaan.</h2>
-      <p data-i18n="about.p1">PT Diana Karya Gemilang merupakan perusahaan induk (holding company) yang membawahi berbagai unit usaha di bidang Lifestyle, Hospitality, Food &amp; Beverage, serta Manufacturing — didirikan dengan komitmen menghadirkan produk dan layanan premium yang memberikan nilai tambah bagi pelanggan, mitra usaha, serta masyarakat.</p>
-      <p data-i18n="about.p2" data-i18n-html>Dengan tata kelola perusahaan yang baik (<em>Good Corporate Governance</em>), sumber daya manusia yang profesional, serta budaya kerja yang berlandaskan integritas, kami berkomitmen tumbuh secara berkelanjutan dan bersaing di tingkat nasional maupun internasional.</p>
-      <div class="stat-row">
-        <div class="stat"><b>3</b><span data-i18n="about.stat1">Lini Bisnis</span></div>
-        <div class="stat"><b>5</b><span data-i18n="about.stat2">Brand Utama</span></div>
-        <div class="stat"><b>5</b><span data-i18n="about.stat3">Nilai Inti</span></div>
-      </div>
+      <h2 style="margin-bottom:24px;" data-i18n="about.title">Satu Visi, Bersatu Melalui Sinergi Anak Perusahaan Kami</h2>
+      <p data-i18n="about.p1">PT Diana Karya Gemilang adalah grup perusahaan yang mengawasi beragam portofolio bisnis di bidang Manufaktur, Makanan &amp; Minuman, dan Perhotelan. Didirikan dengan komitmen untuk memberikan produk dan layanan premium, kami berupaya menciptakan nilai berkelanjutan bagi pelanggan, mitra bisnis, dan komunitas yang kami layani.</p>
+      <p data-i18n="about.p2">Dipandu oleh prinsip-prinsip Tata Kelola Perusahaan yang Baik, didukung oleh talenta profesional, dan didorong oleh budaya integritas, kami berkomitmen pada pertumbuhan berkelanjutan dan inovasi terus-menerus sambil memperkuat daya saing kami di pasar nasional dan internasional.</p>
     </div>
   </div>
 
   <div class="wrap reveal" style="margin-top:90px; padding-top:70px; border-top:1px solid var(--line);">
     <span class="eyebrow" data-i18n="vision.eyebrow">Visi Perusahaan</span>
     <div class="section-head" style="margin-bottom:0;">
-      <h2 data-i18n="vision.title">Menjadi Premium Lifestyle and Hospitality Group terkemuka di Indonesia dan kawasan regional.</h2>
+      <h2 data-i18n="vision.title">Menjadi grup perusahaan gaya hidup terkemuka yang menginspirasi kehidupan yang lebih baik melalui keunggulan, inovasi, dan kualitas abadi.</h2>
     </div>
   </div>
 
   <div class="wrap misi-block reveal" style="margin-top:70px; padding-top:70px; border-top:1px solid var(--line);">
     <span class="eyebrow" data-i18n="mission.eyebrow">Misi Perusahaan</span>
     <div class="misi-grid">
-      <div class="misi-item"><span class="misi-num">01</span><p data-i18n="mission.1">Mengembangkan portofolio bisnis premium yang berorientasi pada kualitas, inovasi, dan kepuasan pelanggan.</p></div>
+      <div class="misi-item"><span class="misi-num">01</span><p data-i18n="mission.1">Mengembangkan portofolio bisnis premium yang didorong oleh kualitas, inovasi, dan kepuasan pelanggan.</p></div>
       <div class="misi-item"><span class="misi-num">02</span><p data-i18n="mission.2">Membangun budaya perusahaan yang menjunjung tinggi integritas, profesionalisme, dan kolaborasi.</p></div>
-      <div class="misi-item"><span class="misi-num">03</span><p data-i18n="mission.3">Menerapkan tata kelola perusahaan yang baik (GCG) dalam setiap aktivitas bisnis.</p></div>
-      <div class="misi-item"><span class="misi-num">04</span><p data-i18n="mission.4">Menciptakan pertumbuhan berkelanjutan melalui inovasi, efisiensi, dan pengembangan sumber daya manusia.</p></div>
-      <div class="misi-item"><span class="misi-num">05</span><p data-i18n="mission.5">Memberikan kontribusi positif bagi masyarakat, lingkungan, serta seluruh pemangku kepentingan.</p></div>
+      <div class="misi-item"><span class="misi-num">03</span><p data-i18n="mission.3">Menerapkan prinsip-prinsip Tata Kelola Perusahaan yang Baik (GCG) di seluruh aktivitas bisnis.</p></div>
+      <div class="misi-item"><span class="misi-num">04</span><p data-i18n="mission.4">Menciptakan pertumbuhan berkelanjutan melalui inovasi, keunggulan operasional, dan pengembangan sumber daya manusia yang berkelanjutan.</p></div>
+      <div class="misi-item"><span class="misi-num">05</span><p data-i18n="mission.5">Memberikan kontribusi positif kepada masyarakat, lingkungan, dan semua pemangku kepentingan.</p></div>
     </div>
   </div>
 </section>
@@ -1045,7 +1037,7 @@
         <strong>PT Diana Karya Gemilang</strong>
         Flow Coworking Space, Lt.2 DS-11.<br>
         Gedung Midplaza 1<br>
-        Jl. Jenderal Sudirman No. Kav 10-11<br>
+        Jl. Jenderal Sudirman Kav 10-11<br>
         Jakarta Pusat, DKI Jakarta 10220
       </div>
     </div>
@@ -1071,7 +1063,7 @@
         <p class="footer-address">
           Flow Coworking Space, Lt.2 DS-11.<br>
           Gedung Midplaza 1<br>
-          Jl. Jenderal Sudirman No. Kav 10-11<br>
+          Jl. Jenderal Sudirman Kav 10-11<br>
           Jakarta Pusat, DKI Jakarta 10220
         </p>
       </div>
@@ -1117,7 +1109,7 @@
   let cmsContent = null;
 
   let googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' +
-    encodeURIComponent('PT Diana Karya Gemilang, Flow Coworking Space, Lt.2 DS-11, Gedung Midplaza 1, Jl. Jenderal Sudirman No. Kav 10-11, Jakarta Pusat, DKI Jakarta 10220');
+    encodeURIComponent('PT Diana Karya Gemilang, Flow Coworking Space, Lt.2 DS-11, Gedung Midplaza 1, Jl. Jenderal Sudirman Kav 10-11, Jakarta Pusat, DKI Jakarta 10220');
   let mailToUrl = 'mailto:info@dianakaryagroup.com?subject=' +
     encodeURIComponent('Inquiry - PT Diana Karya Gemilang');
 
@@ -1422,7 +1414,7 @@
     const company = s?.addressCompany || 'PT Diana Karya Gemilang';
     const line1 = s?.addressLine1 || 'Flow Coworking Space, Lt.2 DS-11.';
     const line2 = s?.addressLine2 || 'Gedung Midplaza 1';
-    const line3 = s?.addressLine3 || 'Jl. Jenderal Sudirman No. Kav 10-11';
+    const line3 = s?.addressLine3 || 'Jl. Jenderal Sudirman Kav 10-11';
     const line4 = s?.addressLine4 || 'Jakarta Pusat, DKI Jakarta 10220';
     marker.bindPopup(
       '<strong>' + company + '</strong>' +
