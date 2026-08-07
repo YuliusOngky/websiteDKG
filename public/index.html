@@ -1502,22 +1502,6 @@
     // re-bind mail after settings applied
     if (emailBtn) emailBtn.setAttribute('href', mailToUrl);
   });
-
-  if (location.search.includes('debugwidth')) {
-    const badge = document.createElement('div');
-    badge.style.cssText = 'position:fixed; top:0; left:0; right:0; z-index:99999; background:#ff0055; color:#fff; font:12px monospace; padding:6px; text-align:center;';
-    function upd() {
-      badge.textContent = 'innerWidth=' + window.innerWidth + ' outerWidth=' + window.outerWidth +
-        ' clientWidth=' + document.documentElement.clientWidth +
-        ' scrollWidth=' + document.documentElement.scrollWidth +
-        ' dpr=' + window.devicePixelRatio +
-        ' visualVW=' + (window.visualViewport ? Math.round(window.visualViewport.width) : 'n/a') +
-        ' heroWidth=' + Math.round(document.querySelector('.hero')?.getBoundingClientRect().width);
-    }
-    upd();
-    window.addEventListener('resize', upd);
-    document.body.appendChild(badge);
-  }
 </script>
 
 </body>
