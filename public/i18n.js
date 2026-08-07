@@ -69,7 +69,7 @@ window.DKG_I18N = {
     "articles.a3.t": "Sound Session every Friday at Terrata Social Dining",
     "articles.a3.d": "Setiap Jumat pukul 19.00, Terrata Social Dining hidup dengan Sound Session, pengalaman musik live mingguan yang menyatukan musik hebat, makanan istimewa, dan koneksi yang bermakna.",
     "contact.eyebrow": "Kontak",
-    "contact.title": "Mari terhubung dengan kami.",
+    "contact.title": "Mari terhubung dengan kami",
     "contact.map": "Buka di Google Maps",
     "contact.mapAria": "Peta lokasi PT Diana Karya Gemilang",
     "footer.nav": "Navigasi",
