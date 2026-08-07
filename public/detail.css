@@ -28,7 +28,7 @@ a{color:inherit;}
 .detail-nav{display:flex; align-items:center; justify-content:space-between; gap:16px; max-width:1180px;}
 .logo{display:flex; align-items:center; gap:10px; text-decoration:none; font-family:'DM Sans',sans-serif; font-weight:700; font-size:16px;}
 .logo img{width:28px; height:28px; object-fit:contain;}
-.logo span{color:var(--brass);}
+.logo span{color:var(--brass-soft);}
 .detail-actions{display:flex; align-items:center; gap:14px;}
 .lang-switch{
   display:inline-flex; border:1px solid var(--line); font-size:11.5px; letter-spacing:.08em;
