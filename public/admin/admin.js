@@ -25,7 +25,6 @@
 
   const SETTINGS_FIELDS = [
     { key: 'phone', label: 'Telepon (PSTN)' },
-    { key: 'whatsapp', label: 'WhatsApp (08…)' },
     { key: 'email', label: 'Email' },
     { key: 'addressCompany', label: 'Nama perusahaan (alamat)' },
     { key: 'addressLine1', label: 'Alamat baris 1' },
