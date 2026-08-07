@@ -281,10 +281,10 @@
   }
 
   /* VALUES */
-  .values-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--line); border:1px solid var(--line);}
-  .value-col{background:var(--paper); padding:36px 22px; text-align:left;}
+  .values-grid{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:2px; background:var(--line); border:1px solid var(--line);}
+  .value-col{background:var(--paper); padding:36px 22px; text-align:left; min-width:0;}
   .value-mark{font-family:'DM Sans',sans-serif; font-style:normal; font-size:34px; font-weight:700; color:var(--brass); display:block; margin-bottom:14px;}
-  .value-col h3{font-size:18px; margin-bottom:10px;}
+  .value-col h3{font-size:18px; margin-bottom:10px; overflow-wrap:break-word;}
   .value-col p{font-size:13px; line-height:1.65; color:var(--muted); margin:0;}
 
   /* BUSINESS */
@@ -618,6 +618,10 @@
   .contact-map{
     aspect-ratio:4/3; border:1px solid var(--line); overflow:hidden;
     background:var(--paper-2); position:relative; min-height:320px;
+    /* min-height + aspect-ratio would otherwise force a 427px min width
+       (320 * 4/3), overflowing narrow viewports and triggering the
+       browser's shrink-to-fit zoom-out. */
+    max-width:100%;
   }
   .contact-map #officeMap{width:100%; height:100%; min-height:320px; z-index:1;}
   .leaflet-container{font-family:'DM Sans',sans-serif; cursor:pointer;}
@@ -701,7 +705,7 @@
   }
   @media (max-width:1024px){
     .unit-grid{grid-template-columns:repeat(2,1fr);}
-    .values-grid{grid-template-columns:repeat(3,1fr);}
+    .values-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
     .misi-grid{grid-template-columns:repeat(3,1fr);}
     .logo{max-width:min(180px, 32vw);}
   }
@@ -759,13 +763,15 @@
     .about-grid{grid-template-columns:1fr;}
     .unit-grid{grid-template-columns:1fr;}
     .unit{border-right:none; border-bottom:1px solid rgba(255,255,255,.15);}
-    .values-grid{grid-template-columns:repeat(2,1fr);}
+    .values-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .value-col{padding:28px 16px;}
     .misi-grid{grid-template-columns:1fr; gap:14px;}
     .carousel-head{flex-direction:column; align-items:flex-start;}
     .carousel-stage{gap:6px; --carousel-nav-w:36px;}
     .carousel-stage .carousel-btn{width:36px; height:36px; font-size:18px;}
     .carousel-stage .carousel-track{max-width:calc(100% - (2 * var(--carousel-nav-w)) - 12px);}
     .contact-grid{grid-template-columns:1fr;}
+    .contact-map{aspect-ratio:auto; height:320px;}
     .footer-top{flex-direction:column;}
     .hero-inner{grid-template-columns:1fr; gap:40px;}
     .mark-wrap{min-height:220px; order:-1;}
@@ -773,6 +779,13 @@
   }
   @media (min-width:901px){
     .mobile-panel{display:none !important;}
+  }
+  /* Very narrow phones (e.g. 338px CSS width on 1080p devices). Must come
+     after the max-width:900px block, which otherwise re-widens the logo to
+     58vw and pushes the burger past the right edge. */
+  @media (max-width:420px){
+    .nav-inner{padding:0 16px; gap:10px;}
+    .logo{max-width:min(150px, 46vw);}
   }
 </style>
 </head>
