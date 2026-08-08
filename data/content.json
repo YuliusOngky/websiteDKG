@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08T02:01:47.554Z",
+  "updatedAt": "2026-08-08T02:22:00.935Z",
   "settings": {
     "email": "info@dianakaryagroup.com",
     "addressCompany": "PT Diana Karya Gemilang",
@@ -10,6 +10,14 @@
     "mapsQuery": "PT Diana Karya Gemilang, Flow Coworking Space, Lt.2 DS-11, Gedung Midplaza 1, Jl. Jenderal Sudirman Kav 10-11, Jakarta Pusat, DKI Jakarta 10220",
     "phone": "+6221 573 5975",
     "aboutImage": "images/about-building.jpg",
+    "colors": {
+      "prestige": "#b48040",
+      "goldDust": "#eac17f",
+      "clearWhite": "#FFFFFF",
+      "richBlack": "#000000",
+      "gradientStart": "#23E396",
+      "gradientEnd": "#b48040"
+    },
     "siteUrl": "https://testingwebsite.web.id",
     "gaMeasurementId": "",
     "gscVerification": ""

@@ -216,6 +216,7 @@
     renderOverview();
     renderContentFields();
     renderSeo();
+    renderColorPalette();
     renderSettings();
     renderAboutImage();
     ['brands', 'products', 'gallery', 'articles'].forEach(renderEntityPanel);
@@ -404,6 +405,35 @@
       ${key === 'gscVerification' ? '<p class="field-hint muted">Tempel kode verifikasi dari Google Search Console (meta content saja).</p>' : ''}
       ${key === 'siteUrl' ? '<p class="field-hint muted">Dipakai untuk canonical, OG, dan link Health.</p>' : ''}
     </div>`).join('');
+  }
+
+  function renderColorPalette() {
+    const colors = content.settings?.colors || {};
+    const colorFields = [
+      { key: 'prestige', label: 'Prestige Brown' },
+      { key: 'goldDust', label: 'Gold Dust' },
+      { key: 'clearWhite', label: 'Clear White' },
+      { key: 'richBlack', label: 'Rich Black' },
+      { key: 'gradientStart', label: 'Gradient Start' },
+      { key: 'gradientEnd', label: 'Gradient End' }
+    ];
+    document.getElementById('colorPaletteFields').innerHTML = colorFields.map(({ key, label }) => `<div class="field">
+      <label for="col-${key}">${escapeHtml(label)}</label>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <input type="color" id="col-${key}" data-color="${key}" value="${escapeAttr(colors[key] || '#000000')}" style="width:60px; height:40px; cursor:pointer; border:1px solid #ccc;">
+        <input type="text" data-color="${key}" value="${escapeAttr(colors[key] || '')}" placeholder="#000000" style="flex:1; font-family:monospace;" readonly>
+      </div>
+    </div>`).join('');
+
+    document.querySelectorAll('#colorPaletteFields [type="color"]').forEach((el) => {
+      el.addEventListener('input', (e) => {
+        const key = e.target.getAttribute('data-color');
+        const value = e.target.value;
+        if (!content.settings.colors) content.settings.colors = {};
+        content.settings.colors[key] = value;
+        document.querySelector(`#colorPaletteFields [data-color="${key}"][type="text"]`).value = value;
+      });
+    });
   }
 
   function collectSettings() {

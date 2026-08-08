@@ -1283,6 +1283,21 @@
     const aboutImg = document.getElementById('aboutImage');
     if (aboutImg && s.aboutImage) aboutImg.src = s.aboutImage;
 
+    // Apply color palette from CMS
+    if (s.colors) {
+      const colors = s.colors;
+      const root = document.documentElement;
+      root.style.setProperty('--brass', colors.prestige || '#b48040');
+      root.style.setProperty('--accent', colors.goldDust || '#eac17f');
+      root.style.setProperty('--paper', colors.clearWhite || '#FFFFFF');
+      root.style.setProperty('--ink', colors.richBlack || '#000000');
+      root.style.setProperty('--gradient-start', colors.gradientStart || '#23E396');
+      root.style.setProperty('--gradient-end', colors.gradientEnd || '#b48040');
+      // Also update charcoal (slightly darker for body text)
+      root.style.setProperty('--charcoal', colors.richBlack || '#000000');
+      root.style.setProperty('--line', colors.prestige || '#b48040');
+    }
+
     document.querySelectorAll('#callBtn, #callFooter').forEach(a => {
       a.href = telUrl;
     });
