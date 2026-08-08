@@ -258,9 +258,9 @@
   .divider{height:1px; background:var(--line); border:none; margin:0;}
 
   /* ABOUT */
-  .about-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:70px; align-items:start;}
+  .about-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:70px; align-items:start;}
   .about-figure{
-    aspect-ratio:1; position:relative; border:1px solid var(--line); overflow:hidden;
+    aspect-ratio:3/2; position:relative; border:1px solid var(--line); overflow:hidden;
     background:var(--paper-2);
   }
   .about-figure img{width:100%; height:100%; object-fit:cover; display:block;}
@@ -804,22 +804,22 @@
       >
     </a>
     <div class="nav-links">
-      <a href="#tentang" data-i18n="nav.about">Tentang Kami</a>
+      <a href="#tentang" data-i18n="nav.about">About Us</a>
       <div class="nav-item-has-sub">
         <div class="nav-sub-head">
           <a href="#bisnis" class="nav-sub-trigger" aria-haspopup="true">
-            <span data-i18n="nav.business">Lini Bisnis</span>
+            <span data-i18n="nav.business">Business Lines</span>
             <span class="nav-sub-chevron nav-sub-chevron-inline" aria-hidden="true"></span>
           </a>
         </div>
         <div class="nav-submenu" role="menu">
-          <a href="#brands" role="menuitem" data-i18n="nav.brands">Label Produk</a>
-          <a href="#produk" role="menuitem" data-i18n="nav.products">Produk Kami</a>
-          <a href="#galeri" role="menuitem" data-i18n="nav.gallery">F&amp;B dan Hospitality</a>
+          <a href="#brands" role="menuitem" data-i18n="nav.brands">Our Brand</a>
+          <a href="#produk" role="menuitem" data-i18n="nav.products">Our Product</a>
+          <a href="#galeri" role="menuitem" data-i18n="nav.gallery">Our F&amp;B and Hospitality</a>
         </div>
       </div>
-      <a href="#artikel" data-i18n="nav.articles">Artikel &amp; Editorial</a>
-      <a href="#kontak" data-i18n="nav.contact">Hubungi Kami</a>
+      <a href="#artikel" data-i18n="nav.articles">Articles &amp; Editorials</a>
+      <a href="#kontak" data-i18n="nav.contact">Contact Us</a>
     </div>
     <div class="nav-actions">
       <div class="lang-switch" role="group" aria-label="Language">
@@ -832,22 +832,22 @@
     </div>
   </div>
   <div class="mobile-panel" id="mobilePanel">
-    <a href="#tentang" data-i18n="nav.about">Tentang Kami</a>
+    <a href="#tentang" data-i18n="nav.about">About Us</a>
     <div class="nav-item-has-sub" data-nav-sub>
       <div class="nav-sub-head">
-        <a href="#bisnis" class="nav-sub-trigger" data-i18n="nav.business">Lini Bisnis</a>
-        <button type="button" class="nav-sub-toggle" aria-expanded="false" data-i18n-aria="nav.business" aria-label="Lini Bisnis">
+        <a href="#bisnis" class="nav-sub-trigger" data-i18n="nav.business">Business Lines</a>
+        <button type="button" class="nav-sub-toggle" aria-expanded="false" data-i18n-aria="nav.business" aria-label="Business Lines">
           <span class="nav-sub-chevron" aria-hidden="true"></span>
         </button>
       </div>
       <div class="nav-submenu" role="menu">
-        <a href="#brands" role="menuitem" data-i18n="nav.brands">Label Produk</a>
-        <a href="#produk" role="menuitem" data-i18n="nav.products">Produk Kami</a>
-        <a href="#galeri" role="menuitem" data-i18n="nav.gallery">F&amp;B dan Hospitality</a>
+        <a href="#brands" role="menuitem" data-i18n="nav.brands">Our Brand</a>
+        <a href="#produk" role="menuitem" data-i18n="nav.products">Our Product</a>
+        <a href="#galeri" role="menuitem" data-i18n="nav.gallery">Our F&amp;B and Hospitality</a>
       </div>
     </div>
-    <a href="#artikel" data-i18n="nav.articles">Artikel &amp; Editorial</a>
-    <a href="#kontak" data-i18n="nav.contact">Hubungi Kami</a>
+    <a href="#artikel" data-i18n="nav.articles">Articles &amp; Editorials</a>
+    <a href="#kontak" data-i18n="nav.contact">Contact Us</a>
   </div>
 </nav>
 </header>
@@ -857,10 +857,10 @@
   <div class="wrap hero-inner">
     <div class="reveal in">
       <h1>Elevating <em>Lifestyle</em><br>Experiences</h1>
-      <p class="lede" data-i18n="hero.lede" data-i18n-html>PT Diana Karya Gemilang adalah perusahaan Indonesia yang berdedikasi meningkatkan pengalaman lifestyle melalui desain, craftsmanship, dan hospitality yang luar biasa.<br><br>Portofolio kami meliputi Elementi Domus dan Legnotura, yang mengkhususkan diri dalam pembuatan interior kelas atas; Lenore Exquisite Dining dan Terrata Social Dining, yang menawarkan masakan fusion Barat, Italia, Asia, dan Indonesia yang dikurasi dengan cermat; dan De Diana's Home, merek perhotelan kami yang berdedikasi untuk menyediakan akomodasi mewah dengan kenyamanan, layanan personal, dan pengalaman tamu yang tak terlupakan.<br><br>Bersama-sama, merek-merek kami mencerminkan semangat yang sama untuk keahlian, inovasi, dan kualitas abadi.</p>
+      <p class="lede" data-i18n="hero.lede" data-i18n-html>PT Diana Karya Gemilang is an Indonesian company dedicated to elevating lifestyle experiences through exceptional design, craftsmanship, and hospitality.<br><br>Our portfolio includes Elementi Domus and Legnotura, specializing in high-end interior manufacturing; Lenore Exquisite Dining and Terrata Social Dining, offering thoughtfully curated Western, Italian, Asian, and Indonesian fusion cuisine; and De Diana's Home, our hospitality brand dedicated to providing refined accommodations with comfort, personalized service, and memorable guest experiences.<br><br>Together, our brands reflect a shared passion for craftsmanship, innovation, and timeless quality.</p>
       <div class="hero-ctas">
-        <a href="#bisnis" class="btn-primary" data-i18n="hero.cta1">Jelajahi Lini Bisnis</a>
-        <a href="#tentang" class="btn-ghost" data-i18n="hero.cta2">Tentang Kami</a>
+        <a href="#bisnis" class="btn-primary" data-i18n="hero.cta1">Explore Business Lines</a>
+        <a href="#tentang" class="btn-ghost" data-i18n="hero.cta2">About Us</a>
       </div>
     </div>
     <div class="mark-wrap reveal in">
@@ -873,31 +873,31 @@
 <section class="section-pad" id="tentang">
   <div class="wrap about-grid">
     <div class="about-figure reveal">
-      <img src="images/about-building.jpg" alt="Gedung PT Diana Karya Gemilang dengan papan nama emas">
+      <img id="aboutImage" src="images/about-building.jpg" alt="Gedung PT Diana Karya Gemilang dengan papan nama emas">
     </div>
     <div class="about-copy reveal">
-      <span class="eyebrow" data-i18n="about.eyebrow">Tentang Kami</span>
-      <h2 style="margin-bottom:24px;" data-i18n="about.title">Satu Visi, Bersatu Melalui Sinergi Anak Perusahaan Kami</h2>
-      <p data-i18n="about.p1">PT Diana Karya Gemilang adalah grup perusahaan yang mengawasi beragam portofolio bisnis di bidang Manufaktur, Makanan &amp; Minuman, dan Perhotelan. Didirikan dengan komitmen untuk memberikan produk dan layanan premium, kami berupaya menciptakan nilai berkelanjutan bagi pelanggan, mitra bisnis, dan komunitas yang kami layani.</p>
-      <p data-i18n="about.p2">Dipandu oleh prinsip-prinsip Tata Kelola Perusahaan yang Baik, didukung oleh talenta profesional, dan didorong oleh budaya integritas, kami berkomitmen pada pertumbuhan berkelanjutan dan inovasi terus-menerus sambil memperkuat daya saing kami di pasar nasional dan internasional.</p>
+      <span class="eyebrow" data-i18n="about.eyebrow">About Us</span>
+      <h2 style="margin-bottom:24px;" data-i18n="about.title">One Vision, United Through the Synergy of Our Subsidiaries</h2>
+      <p data-i18n="about.p1">PT Diana Karya Gemilang is a holding company overseeing a diverse portfolio of businesses across Manufacturing, Food &amp; Beverage, and Hospitality. Established with a commitment to delivering premium products and services, we strive to create lasting value for our customers, business partners, and the communities we serve.</p>
+      <p data-i18n="about.p2">Guided by the principles of Good Corporate Governance, supported by professional talent, and driven by a culture of integrity, we are committed to sustainable growth and continuous innovation while strengthening our competitiveness in both national and international markets.</p>
     </div>
   </div>
 
   <div class="wrap reveal" style="margin-top:90px; padding-top:70px; border-top:1px solid var(--line);">
-    <span class="eyebrow" data-i18n="vision.eyebrow">Visi Perusahaan</span>
+    <span class="eyebrow" data-i18n="vision.eyebrow">Company Vision</span>
     <div class="section-head" style="margin-bottom:0;">
-      <h2 data-i18n="vision.title">Menjadi grup perusahaan gaya hidup terkemuka yang menginspirasi kehidupan yang lebih baik melalui keunggulan, inovasi, dan kualitas abadi.</h2>
+      <h2 data-i18n="vision.title">To be a leading lifestyle holding company that inspires better living through excellence, innovation, and timeless quality.</h2>
     </div>
   </div>
 
   <div class="wrap misi-block reveal" style="margin-top:70px; padding-top:70px; border-top:1px solid var(--line);">
-    <span class="eyebrow" data-i18n="mission.eyebrow">Misi Perusahaan</span>
+    <span class="eyebrow" data-i18n="mission.eyebrow">Company Mission</span>
     <div class="misi-grid">
-      <div class="misi-item"><span class="misi-num">01</span><p data-i18n="mission.1">Mengembangkan portofolio bisnis premium yang didorong oleh kualitas, inovasi, dan kepuasan pelanggan.</p></div>
-      <div class="misi-item"><span class="misi-num">02</span><p data-i18n="mission.2">Membangun budaya perusahaan yang menjunjung tinggi integritas, profesionalisme, dan kolaborasi.</p></div>
-      <div class="misi-item"><span class="misi-num">03</span><p data-i18n="mission.3">Menerapkan prinsip-prinsip Tata Kelola Perusahaan yang Baik (GCG) di seluruh aktivitas bisnis.</p></div>
-      <div class="misi-item"><span class="misi-num">04</span><p data-i18n="mission.4">Menciptakan pertumbuhan berkelanjutan melalui inovasi, keunggulan operasional, dan pengembangan sumber daya manusia yang berkelanjutan.</p></div>
-      <div class="misi-item"><span class="misi-num">05</span><p data-i18n="mission.5">Memberikan kontribusi positif kepada masyarakat, lingkungan, dan semua pemangku kepentingan.</p></div>
+      <div class="misi-item"><span class="misi-num">01</span><p data-i18n="mission.1">Developing a premium business portfolio driven by quality, innovation, and customer satisfaction.</p></div>
+      <div class="misi-item"><span class="misi-num">02</span><p data-i18n="mission.2">Building a corporate culture that upholds integrity, professionalism, and collaboration.</p></div>
+      <div class="misi-item"><span class="misi-num">03</span><p data-i18n="mission.3">Implementing Good Corporate Governance (GCG) principles across all business activities.</p></div>
+      <div class="misi-item"><span class="misi-num">04</span><p data-i18n="mission.4">Creating sustainable growth through innovation, operational excellence, and continuous human resource development.</p></div>
+      <div class="misi-item"><span class="misi-num">05</span><p data-i18n="mission.5">Delivering positive contributions to society, the environment, and all stakeholders.</p></div>
     </div>
   </div>
 </section>
@@ -905,15 +905,15 @@
 <section class="section-pad tight values-strip" id="nilai" style="background:var(--paper-2);">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow" data-i18n="values.eyebrow">Nilai Inti</span>
-      <h2 data-i18n="values.title">Lima pilar yang menjadi fondasi setiap keputusan kami.</h2>
+      <span class="eyebrow" data-i18n="values.eyebrow">Core Values</span>
+      <h2 data-i18n="values.title">Five pillars that guide every decision we make.</h2>
     </div>
     <div class="values-grid">
-      <div class="value-col reveal"><span class="value-mark">I</span><h3>Integrity</h3><p data-i18n="values.integrity">Menjalankan bisnis secara jujur, transparan, dan menjunjung tinggi etika profesional.</p></div>
-      <div class="value-col reveal"><span class="value-mark">E</span><h3>Excellence</h3><p data-i18n="values.excellence">Berkomitmen memberikan kualitas terbaik di setiap produk, layanan, dan proses bisnis.</p></div>
-      <div class="value-col reveal"><span class="value-mark">I</span><h3>Innovation</h3><p data-i18n="values.innovation">Terus beradaptasi dan mendorong lahirnya ide baru yang memberi nilai tambah.</p></div>
-      <div class="value-col reveal"><span class="value-mark">C</span><h3>Collaboration</h3><p data-i18n="values.collaboration">Percaya bahwa keberhasilan dibangun lewat kerja sama dan sinergi antar pihak.</p></div>
-      <div class="value-col reveal"><span class="value-mark">S</span><h3>Sustainability</h3><p data-i18n="values.sustainability">Menyeimbangkan pertumbuhan ekonomi dengan tanggung jawab sosial dan lingkungan.</p></div>
+      <div class="value-col reveal"><span class="value-mark">I</span><h3>Integrity</h3><p data-i18n="values.integrity">Conducting business with honesty, transparency, and professional ethics.</p></div>
+      <div class="value-col reveal"><span class="value-mark">E</span><h3>Excellence</h3><p data-i18n="values.excellence">Committed to delivering the highest quality in every product, service, and process.</p></div>
+      <div class="value-col reveal"><span class="value-mark">I</span><h3>Innovation</h3><p data-i18n="values.innovation">Continuously adapting and driving new ideas that create added value.</p></div>
+      <div class="value-col reveal"><span class="value-mark">C</span><h3>Collaboration</h3><p data-i18n="values.collaboration">Believing success is built through partnership and synergy.</p></div>
+      <div class="value-col reveal"><span class="value-mark">S</span><h3>Sustainability</h3><p data-i18n="values.sustainability">Balancing economic growth with social and environmental responsibility.</p></div>
     </div>
   </div>
 </section>
@@ -921,8 +921,8 @@
 <section class="bisnis-strip section-pad" id="bisnis">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow" data-i18n="business.eyebrow">Lini Bisnis</span>
-      <h2 data-i18n="business.title">Tiga Lini Bisnis, Satu Standar Kualitas Premium</h2>
+      <span class="eyebrow" data-i18n="business.eyebrow">Business Lines</span>
+      <h2 data-i18n="business.title">Three Business Lines, One Standard of Premium Quality</h2>
       <p aria-hidden="true"></p>
     </div>
     <div class="unit-grid">
@@ -931,12 +931,12 @@
         <span class="unit-num">01</span>
         <h3>Manufacturing</h3>
         <p class="unit-company" data-i18n="business.m.company">PT Diana Gaharu Gemilang</p>
-        <p data-i18n="business.m.desc">Merancang dan memproduksi furnitur dan solusi interior premium dengan komitmen kuat terhadap keahlian luar biasa, teknik presisi, desain inovatif, dan layanan pelanggan yang luar biasa.</p>
+        <p data-i18n="business.m.desc">Designing and manufacturing premium furniture and interior solutions with a strong commitment to exceptional craftsmanship, precision engineering, innovative design, and outstanding customer service.</p>
         <div class="extra-text">
-          <p data-i18n="business.m.more">Fasilitas manufaktur kami didukung oleh teknologi modern dan pengrajin berpengalaman untuk menciptakan karya-karya berkualitas estetika tinggi.</p>
+          <p data-i18n="business.m.more">Our manufacturing facilities are supported by modern technology and experienced craftsmen to create works of high aesthetic quality.</p>
         </div>
       </div>
-      <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
+      <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Learn More</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
       </a>
     </div>
@@ -945,12 +945,12 @@
         <span class="unit-num">02</span>
         <h3>Food &amp; Beverage</h3>
         <p class="unit-company" data-i18n="business.f.company">PT Diana Boga Gemilang</p>
-        <p data-i18n="business.f.desc">Mengembangkan dan mengoperasikan restoran, kafe, dan konsep kuliner premium yang menyajikan masakan luar biasa, keramahan yang berkelas, dan pengalaman bersantap yang tak terlupakan.</p>
+        <p data-i18n="business.f.desc">Developing and operating premium restaurants, cafes, and culinary concepts that deliver exceptional cuisine, refined hospitality, and memorable dining experiences.</p>
         <div class="extra-text">
-          <p data-i18n="business.f.more">Kami menghadirkan inovasi menu berkelanjutan, manajemen rantai pasokan kuliner, dan pengalaman bersantap eksklusif di setiap lini bisnis.</p>
+          <p data-i18n="business.f.more">We deliver sustainable menu innovation, culinary supply-chain management, and exclusive dining experiences across every business line.</p>
         </div>
       </div>
-      <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
+      <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Learn More</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
       </a>
     </div>
@@ -959,12 +959,12 @@
         <span class="unit-num">03</span>
         <h3>Hospitality</h3>
         <p class="unit-company" data-i18n="business.h.company">PT Diana Grha Gemilang</p>
-        <p data-i18n="business.h.desc">Mengembangkan dan mengelola bisnis perhotelan yang didedikasikan untuk menyediakan akomodasi yang berkelas, layanan yang dipersonalisasi, dan pengalaman tamu yang luar biasa dengan standar kenyamanan dan kualitas tertinggi.</p>
+        <p data-i18n="business.h.desc">Developing and managing hospitality businesses dedicated to providing refined accommodations, personalized service, and exceptional guest experiences with the highest standards of comfort and quality.</p>
         <div class="extra-text">
-          <p data-i18n="business.h.more">Layanan kami mencakup pengelolaan akomodasi premium serta strategi pengalaman tamu dengan standar layanan tinggi.</p>
+          <p data-i18n="business.h.more">Our services include premium accommodation management and guest-experience strategies with high service standards.</p>
         </div>
       </div>
-      <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Selengkapnya</span>
+      <a href="javascript:void(0)" class="unit-link"><span class="link-label" data-i18n="business.more">Learn More</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
       </a>
     </div>
@@ -977,7 +977,7 @@
     <div class="carousel" data-carousel>
       <div class="carousel-head">
         <div class="section-head reveal">
-          <span class="eyebrow" data-i18n="brands.eyebrow">Brand Kami</span>
+          <span class="eyebrow" data-i18n="brands.eyebrow">Our Brands</span>
         </div>
       </div>
       <div class="carousel-stage">
@@ -998,7 +998,7 @@
     <div class="carousel" data-carousel>
       <div class="carousel-head">
         <div class="section-head reveal">
-          <span class="eyebrow" data-i18n="products.eyebrow">Galeri Produk Kami</span>
+          <span class="eyebrow" data-i18n="products.eyebrow">Our Product Gallery</span>
         </div>
       </div>
       <div class="carousel-stage">
@@ -1019,7 +1019,7 @@
     <div class="carousel" data-carousel>
       <div class="carousel-head">
         <div class="section-head reveal">
-          <span class="eyebrow" data-i18n="gallery.eyebrow">F&amp;B dan hospitality</span>
+          <span class="eyebrow" data-i18n="gallery.eyebrow">Our F&amp;B and Hospitality</span>
         </div>
       </div>
       <div class="carousel-stage">
@@ -1040,7 +1040,7 @@
     <div class="carousel" data-carousel>
       <div class="carousel-head">
         <div class="section-head reveal">
-          <span class="eyebrow" data-i18n="articles.eyebrow">Artikel</span>
+          <span class="eyebrow" data-i18n="articles.eyebrow">Articles &amp; Editorials</span>
         </div>
       </div>
       <div class="carousel-stage">
@@ -1059,8 +1059,8 @@
 <section class="section-pad contact-strip" id="kontak">
   <div class="wrap contact-grid">
     <div class="contact-copy reveal">
-      <span class="eyebrow" data-i18n="contact.eyebrow">Kontak</span>
-      <h2 data-i18n="contact.title">Mari terhubung dengan kami</h2>
+      <span class="eyebrow" data-i18n="contact.eyebrow">Contact Us</span>
+      <h2 data-i18n="contact.title">Let's connect with us.</h2>
       <div class="contact-actions">
         <a href="tel:+62215735975" class="btn-primary btn-call" id="callBtn" aria-label="Telepon +6221 573 5975">
           <svg class="phone-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
@@ -1084,7 +1084,7 @@
       </div>
     </div>
     <div class="contact-map reveal">
-      <div id="officeMap" role="application" aria-label="Peta lokasi PT Diana Karya Gemilang" data-i18n-aria="contact.mapAria"></div>
+      <div id="officeMap" role="application" aria-label="Map location of PT Diana Karya Gemilang" data-i18n-aria="contact.mapAria"></div>
     </div>
   </div>
 </section>
@@ -1112,17 +1112,17 @@
       </div>
       <div class="footer-cols">
         <div class="footer-col">
-          <h3 data-i18n="footer.nav">Navigasi</h3>
-          <a href="#tentang" data-i18n="nav.about">Tentang Kami</a>
-          <a href="#bisnis" data-i18n="footer.businessLine">Lini Bisnis</a>
-          <a href="#artikel" data-i18n="nav.articles">Artikel &amp; Editorial</a>
-          <a href="#kontak" data-i18n="nav.contact">Hubungi Kami</a>
+          <h3 data-i18n="footer.nav">Navigation</h3>
+          <a href="#tentang" data-i18n="nav.about">About Us</a>
+          <a href="#bisnis" data-i18n="footer.businessLine">Business Lines</a>
+          <a href="#artikel" data-i18n="nav.articles">Articles &amp; Editorials</a>
+          <a href="#kontak" data-i18n="nav.contact">Contact Us</a>
         </div>
         <div class="footer-col">
-          <h3 data-i18n="footer.contact">Kontak</h3>
+          <h3 data-i18n="footer.contact">Contact</h3>
           <a class="phone-inline" href="tel:+62215735975" id="callFooter" aria-label="Telepon">
             <svg class="phone-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-            <span data-i18n="contact.call">Telepon</span>
+            <span data-i18n="contact.call">Call</span>
           </a>
           <a class="phone-inline" href="mailto:info@dianakaryagroup.com" id="emailFooter" aria-label="Email">
             <svg class="mail-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -1130,19 +1130,42 @@
           </a>
           <a class="phone-inline" href="#kontak" aria-label="Lokasi">
             <svg class="pin-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            <span data-i18n="footer.location">Lokasi</span>
+            <span data-i18n="footer.location">Location</span>
           </a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <span data-i18n="footer.rights">&copy; 2026 PT Diana Karya Gemilang. Hak cipta dilindungi.</span>
+      <span data-i18n="footer.rights">&copy; 2026 PT Diana Karya Gemilang. All rights reserved.</span>
     </div>
   </div>
 </footer>
 
 <script src="i18n.js"></script>
 <script src="media-ui.js"></script>
+<script>
+  // Apply the saved/default language to text immediately, before the
+  // Leaflet CDN <script> below blocks parsing on its own network round-trip.
+  (function () {
+    var lang = localStorage.getItem('dkg-lang') === 'id' ? 'id' : 'en';
+    document.documentElement.lang = lang;
+    var pack = (window.DKG_I18N && window.DKG_I18N[lang]) || {};
+    var fallback = (window.DKG_I18N && window.DKG_I18N.id) || {};
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var val = pack[el.getAttribute('data-i18n')] ?? fallback[el.getAttribute('data-i18n')];
+      if (val == null) return;
+      if (el.hasAttribute('data-i18n-html')) el.innerHTML = val;
+      else el.textContent = val;
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+      var val = pack[el.getAttribute('data-i18n-aria')] ?? fallback[el.getAttribute('data-i18n-aria')];
+      if (val != null) el.setAttribute('aria-label', val);
+    });
+    document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+  })();
+</script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
   const nav = document.getElementById('nav');
@@ -1256,6 +1279,9 @@
       encodeURIComponent('Inquiry - PT Diana Karya Gemilang');
     googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' +
       encodeURIComponent(s.mapsQuery || '');
+
+    const aboutImg = document.getElementById('aboutImage');
+    if (aboutImg && s.aboutImage) aboutImg.src = s.aboutImage;
 
     document.querySelectorAll('#callBtn, #callFooter').forEach(a => {
       a.href = telUrl;
@@ -1509,6 +1535,10 @@
   window.__dkgRevealObserver = observer;
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   window.addEventListener('load', () => officeMap.invalidateSize());
+
+  // Paint the correct language immediately from the static i18n pack so the page
+  // never flashes the Indonesian markup fallback while /api/content is in flight.
+  applyLanguage(currentLang);
 
   loadCmsContent().finally(() => {
     applyLanguage(currentLang);

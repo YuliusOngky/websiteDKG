@@ -217,6 +217,7 @@
     renderContentFields();
     renderSeo();
     renderSettings();
+    renderAboutImage();
     ['brands', 'products', 'gallery', 'articles'].forEach(renderEntityPanel);
   }
 
@@ -682,8 +683,85 @@
     brands: { ratio: 16 / 10, outW: 1600, outH: 1000, label: '16:10 · 1600×1000' },
     products: { ratio: 1, outW: 1000, outH: 1000, label: '1:1 · 1000×1000' },
     gallery: { ratio: 16 / 10, outW: 1600, outH: 1000, label: '16:10 · 1600×1000' },
-    articles: { ratio: 16 / 10, outW: 1200, outH: 750, label: '16:10 · 1200×750' }
+    articles: { ratio: 16 / 10, outW: 1200, outH: 750, label: '16:10 · 1200×750' },
+    about: { ratio: 3 / 2, outW: 1200, outH: 800, label: '3:2 · 1200×800' }
   };
+
+  function renderAboutImage() {
+    const box = document.getElementById('aboutImageBox');
+    if (!box) return;
+    if (!content.settings) content.settings = {};
+    const img = content.settings.aboutImage || 'images/about-building.jpg';
+    box.innerHTML = `
+      <div class="entity-toolbar">
+        <p class="muted" style="margin:0">Foto section "About Us" di halaman utama.</p>
+      </div>
+      <div class="media-card">
+        <div class="media-preview-frame ratio-wide" id="aboutPreviewFrame">
+          <img class="media-thumb wide" id="aboutImagePreview" src="${escapeAttr(mediaUrl(img))}" alt="Preview foto About" onerror="this.style.opacity=.3">
+          <span class="media-preview-badge">Preview terpasang</span>
+        </div>
+        <div class="media-meta">
+          <label>Foto About (gedung)</label>
+          <p class="media-hint">Rasio 3:2 · 1200×800. Ganti gambar → atur zoom/posisi di canvas, lalu potong sesuai rasio.</p>
+          <div class="media-actions">
+            <input type="file" accept="image/*" hidden id="aboutFile">
+            <button type="button" class="btn-primary" id="aboutUploadBtn">Ganti gambar</button>
+            <p class="media-status" id="aboutUploadStatus"></p>
+          </div>
+          <input data-set="aboutImage" id="aboutImagePath" value="${escapeAttr(img)}" placeholder="Path / URL gambar">
+        </div>
+      </div>
+    `;
+
+    const fileInput = document.getElementById('aboutFile');
+    const pathInput = document.getElementById('aboutImagePath');
+    const previewImg = document.getElementById('aboutImagePreview');
+
+    pathInput?.addEventListener('input', () => {
+      content.settings.aboutImage = pathInput.value;
+      if (previewImg) {
+        previewImg.style.opacity = '1';
+        previewImg.src = mediaUrl(pathInput.value);
+      }
+    });
+
+    document.getElementById('aboutUploadBtn')?.addEventListener('click', () => fileInput?.click());
+    fileInput?.addEventListener('change', async () => {
+      const file = fileInput.files?.[0];
+      const status = document.getElementById('aboutUploadStatus');
+      if (!file) return;
+      status.className = 'media-status';
+      status.textContent = 'Membuka editor gambar...';
+      try {
+        const cropped = await openImageCropper(file, 'about');
+        if (!cropped) {
+          status.textContent = 'Dibatalkan.';
+          return;
+        }
+        status.textContent = 'Mengunggah...';
+        const fd = new FormData();
+        fd.append('file', cropped, cropped.name || 'crop.jpg');
+        const res = await fetch('/api/upload', { method: 'POST', body: fd, credentials: 'same-origin' });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Upload gagal');
+        content.settings.aboutImage = data.path;
+        if (pathInput) pathInput.value = data.path;
+        if (previewImg) {
+          previewImg.style.opacity = '1';
+          const src = mediaUrl(data.path);
+          previewImg.src = src + (src.includes('?') ? '&' : '?') + 't=' + Date.now();
+        }
+        status.className = 'media-status ok';
+        status.textContent = 'Gambar dipotong & dipasang. Klik Simpan Perubahan.';
+      } catch (err) {
+        status.className = 'media-status err';
+        status.textContent = err.message;
+      } finally {
+        fileInput.value = '';
+      }
+    });
+  }
 
   function openImageCropper(file, type) {
     const preset = CROP_PRESETS[type] || CROP_PRESETS.brands;

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-06T07:46:01.441Z",
+  "updatedAt": "2026-08-08T02:01:47.554Z",
   "settings": {
     "email": "info@dianakaryagroup.com",
     "addressCompany": "PT Diana Karya Gemilang",
@@ -9,6 +9,7 @@
     "addressLine4": "Jakarta Pusat, DKI Jakarta 10220",
     "mapsQuery": "PT Diana Karya Gemilang, Flow Coworking Space, Lt.2 DS-11, Gedung Midplaza 1, Jl. Jenderal Sudirman Kav 10-11, Jakarta Pusat, DKI Jakarta 10220",
     "phone": "+6221 573 5975",
+    "aboutImage": "images/about-building.jpg",
     "siteUrl": "https://testingwebsite.web.id",
     "gaMeasurementId": "",
     "gscVerification": ""
@@ -332,7 +333,7 @@
       "nav.articles": "Artikel & Editorial",
       "nav.contact": "Hubungi Kami",
       "nav.menu": "Menu",
-      "hero.lede": "101111111PT Diana Karya Gemilang adalah perusahaan Indonesia yang berdedikasi meningkatkan pengalaman lifestyle melalui desain, craftsmanship, dan hospitality yang luar biasa.<br><br>Portofolio kami meliputi Elementi Domus dan Legnotura, yang mengkhususkan diri dalam pembuatan interior kelas atas; Lenore Exquisite Dining dan Terrata Social Dining, yang menawarkan masakan fusion Barat, Italia, Asia, dan Indonesia yang dikurasi dengan cermat; dan De Diana's Home, merek perhotelan kami yang berdedikasi untuk menyediakan akomodasi mewah dengan kenyamanan, layanan personal, dan pengalaman tamu yang tak terlupakan.<br><br>Bersama-sama, merek-merek kami mencerminkan semangat yang sama untuk keahlian, inovasi, dan kualitas abadi.",
+      "hero.lede": "PT Diana Karya Gemilang adalah perusahaan Indonesia yang berdedikasi meningkatkan pengalaman lifestyle melalui desain, craftsmanship, dan hospitality yang luar biasa.<br><br>Portofolio kami meliputi Elementi Domus dan Legnotura, yang mengkhususkan diri dalam pembuatan interior kelas atas; Lenore Exquisite Dining dan Terrata Social Dining, yang menawarkan masakan fusion Barat, Italia, Asia, dan Indonesia yang dikurasi dengan cermat; dan De Diana's Home, merek perhotelan kami yang berdedikasi untuk menyediakan akomodasi mewah dengan kenyamanan, layanan personal, dan pengalaman tamu yang tak terlupakan.<br><br>Bersama-sama, merek-merek kami mencerminkan semangat yang sama untuk keahlian, inovasi, dan kualitas abadi.",
       "hero.cta1": "Jelajahi Lini Bisnis",
       "hero.cta2": "Tentang Kami",
       "about.eyebrow": "Tentang Kami",
