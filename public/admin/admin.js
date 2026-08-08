@@ -994,6 +994,7 @@
       gallery: ['Galeri', 'CRUD galeri — maks 10, klik → lightbox'],
       articles: ['Artikel', 'CRUD artikel — maks 15, klik → halaman detail'],
       seo: ['SEO', 'Title, description, Open Graph, robots — fokus pencarian Google'],
+      'color-palette': ['Color Palette', 'Edit VI brand colors — perubahan langsung diterapkan ke website'],
       settings: ['Kontak & Settings', 'Telepon, email, alamat, GA4, Search Console']
     };
     pageTitle.textContent = titles[view][0];
