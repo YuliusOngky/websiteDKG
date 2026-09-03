@@ -235,7 +235,7 @@ a{color:inherit;}
 }
 
 @media (max-width:760px){
-  .wrap{padding:0 20px;}
+  .wrap{padding:0 24px;}
   .logo img{height:47px;}
   .detail-main{padding:48px 0 72px;}
 }
