@@ -432,6 +432,7 @@
       "detail.article": "Artikel",
       "detail.visitWebsite": "Kunjungi website kami",
       "detail.visitInstagram": "Kunjungi Instagram kami",
+      "detail.linkToInstagram": "(Tautan ke Instagram {name})",
       "hero.scroll": ""
     },
     "en": {
@@ -534,7 +535,8 @@
       "detail.product": "Product",
       "detail.article": "Article",
       "detail.visitWebsite": "Visit our website",
-      "detail.visitInstagram": "Visit our Instagram"
+      "detail.visitInstagram": "Visit our Instagram",
+      "detail.linkToInstagram": "(Link to Instagram {name})"
     }
   }
 }

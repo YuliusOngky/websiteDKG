@@ -91,12 +91,21 @@
           if (!href) return '';
           const handle = formatInstagramHandle(href);
           if (!handle) return '';
+          const brandShort = String(item.name || handle).trim().split(/\s+/)[0] || handle;
+          const igGlyph = `<img class="brand-ext-logo" src="images/instagram-icon.svg" alt="Instagram" width="40" height="40">`;
           return `
-          <div class="brand-visit-web">
-            <p class="brand-visit-label">${esc(DKGMedia.t('detail.visitInstagram'))}</p>
-            <p class="brand-visit-line">
-              <a class="brand-visit-url" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(handle)}</a>
-            </p>
+          <div class="brand-visit-ig">
+            <a class="brand-ext" href="${esc(href)}" target="_blank" rel="noopener noreferrer">
+              ${igGlyph}
+              <span class="brand-ext-url">${esc(formatWebsiteDisplay(href))}</span>
+            </a>
+            <div class="brand-visit-web">
+              <p class="brand-visit-label">${esc(DKGMedia.t('detail.visitInstagram'))}</p>
+              <p class="brand-visit-line">
+                <a class="brand-visit-handle" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(handle)}</a>
+                <span class="brand-visit-hint">${esc(DKGMedia.t('detail.linkToInstagram').replace('{name}', brandShort))}</span>
+              </p>
+            </div>
           </div>`;
         }
 
