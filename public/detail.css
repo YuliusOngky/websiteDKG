@@ -52,8 +52,8 @@ a{color:inherit;}
 .detail-hero img{width:100%; height:auto; display:block; max-height:520px; object-fit:cover;}
 .detail-hero.square{max-width:520px;}
 .detail-hero.square img{aspect-ratio:1; object-fit:cover; max-height:none;}
-.detail-body{font-size:16.5px; line-height:1.85; color:var(--charcoal); max-width:680px;}
-.detail-page-footer{margin:40px 0 0; max-width:680px;}
+.detail-body{font-size:16.5px; line-height:1.85; color:var(--charcoal); max-width:none;}
+.detail-page-footer{margin:40px 0 0; max-width:none;}
 .detail-page-footer .detail-back-wrap{margin:0;}
 .detail-page-footer .brand-ext-stack{margin:20px 0 0; max-width:none;}
 .brand-visit-web{margin:0;}
