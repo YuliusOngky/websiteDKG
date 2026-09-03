@@ -257,33 +257,36 @@ a{color:inherit;}
   .wrap{
     padding-top:0;
     padding-bottom:0;
-    padding-left:calc(32px + env(safe-area-inset-left));
-    padding-right:calc(32px + env(safe-area-inset-right));
+    padding-left:calc(28px + env(safe-area-inset-left));
+    padding-right:calc(28px + env(safe-area-inset-right));
   }
-  .detail-nav{align-items:center;}
-  .logo{max-width:min(150px, 40vw); flex-shrink:1;}
-  .logo img{height:47px; width:auto; max-width:100%;}
+  .detail-nav{align-items:center; gap:10px;}
+  .logo{max-width:min(132px, 36vw); flex-shrink:1; min-width:0;}
+  .logo img{height:42px; width:auto; max-width:100%;}
   .detail-header-back{
     display:inline-flex; align-items:center; gap:6px;
-    font-size:11px; letter-spacing:.05em; white-space:nowrap;
-    border-bottom-width:1px; padding-bottom:1px;
+    font-size:13px; letter-spacing:.06em; white-space:nowrap;
+    border-bottom:1px solid var(--ink); padding-bottom:2px;
+    color:var(--ink); flex-shrink:0;
   }
-  .detail-actions{gap:10px;}
-  .detail-main{padding-top:40px; padding-bottom:calc(200px + env(safe-area-inset-bottom));}
+  .detail-actions{gap:10px; flex-shrink:0;}
+  .detail-main{padding-top:36px; padding-bottom:calc(88px + env(safe-area-inset-bottom));}
   .detail-hero{margin:0 0 22px;}
-  .detail-hero img{max-height:360px;}
+  .detail-hero img{max-height:340px;}
+  .brand-ext-stack{margin:28px 0 0;}
   .detail-page-footer{
     position:fixed; left:0; right:0;
-    bottom:calc(10px + env(safe-area-inset-bottom)); z-index:50;
+    bottom:0; z-index:50;
     margin:0;
-    padding-top:12px;
-    padding-bottom:calc(12px + env(safe-area-inset-bottom));
-    padding-left:calc(32px + env(safe-area-inset-left));
-    padding-right:calc(32px + env(safe-area-inset-right));
+    padding-top:14px;
+    padding-bottom:calc(14px + env(safe-area-inset-bottom));
+    padding-left:calc(28px + env(safe-area-inset-left));
+    padding-right:calc(28px + env(safe-area-inset-right));
     max-width:none;
-    background:rgba(255,255,255,.94);
+    background:rgba(255,255,255,.96);
     backdrop-filter:blur(10px);
     border-top:1px solid rgba(0,0,0,.08);
   }
-  .back-link-below{font-size:13px;}
+  .detail-page-footer .brand-ext-stack{display:none;}
+  .back-link-below{font-size:14px;}
 }

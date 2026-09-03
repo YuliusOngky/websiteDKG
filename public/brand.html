@@ -113,7 +113,12 @@
           ? `<div class="brand-ext-stack">${websiteSection}${instagramSection}</div>`
           : '';
 
-        const footerBlock = `
+        return `
+          <p class="eyebrow">${esc(cat || DKGMedia.t('detail.brand'))}</p>
+          <h1>${esc(item.name || '')}</h1>
+          ${item.image ? `<figure class="detail-hero"><img src="${esc(item.image)}" alt="${esc(item.name || '')}"></figure>` : ''}
+          <div class="detail-body">${esc(body).replace(/\n/g, '<br>')}</div>
+          ${externalBlock}
           <div class="detail-page-footer">
             <p class="detail-back-wrap">
               <a class="back-link back-link-below" href="index.html#brands">
@@ -121,15 +126,7 @@
                 <span data-back-label>${esc(DKGMedia.t('ui.back'))}</span>
               </a>
             </p>
-            ${externalBlock}
-          </div>`;
-
-        return `
-          <p class="eyebrow">${esc(cat || DKGMedia.t('detail.brand'))}</p>
-          <h1>${esc(item.name || '')}</h1>
-          ${item.image ? `<figure class="detail-hero"><img src="${esc(item.image)}" alt="${esc(item.name || '')}"></figure>` : ''}
-          <div class="detail-body">${esc(body).replace(/\n/g, '<br>')}</div>
-          ${footerBlock}
+          </div>
         `;
       }
     });
