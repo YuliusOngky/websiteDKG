@@ -237,8 +237,14 @@ a{color:inherit;}
 @media (max-width:760px){
   .wrap{padding:0 40px;}
   .logo img{height:47px;}
-  .detail-main{padding:40px 0 64px;}
+   .detail-main{padding:40px 0 128px;}
   .detail-hero{margin:0 0 22px;}
   .detail-hero img{max-height:380px;}
-  .detail-back-wrap{margin:14px 0 0;}
+  .detail-back-wrap{
+    position:fixed; left:0; right:0; bottom:18px; z-index:50;
+    margin:0; padding:12px 40px; max-width:none;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(10px);
+    border-top:1px solid rgba(0,0,0,.08);
+  }
 }
