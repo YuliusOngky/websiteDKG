@@ -251,7 +251,7 @@
         },
         "name": "Lenore Exquisite Dining",
         "image": "images/brand-lenore.webp",
-        "instagramUrl": "https://www.instagram.com/",
+        "instagramUrl": "https://www.instagram.com/lenore.jkt/",
         "instagramLogo": "",
         "short": {
           "id": "Filosofi bersantap mewah yang menerangi indera.",
@@ -431,7 +431,7 @@
       "detail.product": "Produk",
       "detail.article": "Artikel",
       "detail.visitWebsite": "Kunjungi website kami",
-      "detail.linkToWebsite": "(Tautan ke website)",
+      "detail.visitInstagram": "Kunjungi Instagram kami",
       "hero.scroll": ""
     },
     "en": {
@@ -534,7 +534,7 @@
       "detail.product": "Product",
       "detail.article": "Article",
       "detail.visitWebsite": "Visit our website",
-      "detail.linkToWebsite": "(Link to website)"
+      "detail.visitInstagram": "Visit our Instagram"
     }
   }
 }

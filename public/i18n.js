@@ -96,7 +96,7 @@ window.DKG_I18N = {
     "ui.readMore": "Selengkapnya",
     "ui.notFound": "Konten tidak ditemukan.",
     "detail.visitWebsite": "Kunjungi website kami",
-    "detail.linkToWebsite": "(Tautan ke website)",
+    "detail.visitInstagram": "Kunjungi Instagram kami",
     "detail.brand": "Brand",
     "detail.product": "Produk",
     "detail.article": "Artikel"
@@ -198,7 +198,7 @@ window.DKG_I18N = {
     "ui.readMore": "Read more",
     "ui.notFound": "Content not found.",
     "detail.visitWebsite": "Visit our website",
-    "detail.linkToWebsite": "(Link to website)",
+    "detail.visitInstagram": "Visit our Instagram",
     "detail.brand": "Brand",
     "detail.product": "Product",
     "detail.article": "Article"

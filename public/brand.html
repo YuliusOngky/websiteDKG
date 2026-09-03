@@ -50,9 +50,8 @@
       render(item, l, bi, esc) {
         const cat = bi(item.category, l);
         const body = bi(item.body, l);
-        const igGlyph = `<img class="brand-ext-logo" src="images/instagram-icon.svg" alt="Instagram" width="40" height="40">`;
 
-        function formatExtDisplay(url) {
+        function formatWebsiteDisplay(url) {
           let display = url;
           try {
             const u = new URL(url);
@@ -64,6 +63,17 @@
           return display;
         }
 
+        function formatInstagramHandle(url) {
+          try {
+            const u = new URL(url);
+            const handle = u.pathname.replace(/^\/+|\/+$/g, '').split('/')[0];
+            if (!handle) return '';
+            return handle.charAt(0).toUpperCase() + handle.slice(1);
+          } catch (_) {
+            return String(url || '').replace(/^@/, '');
+          }
+        }
+
         function websiteBlock(url) {
           const href = String(url || '').trim();
           if (!href) return '';
@@ -71,7 +81,7 @@
           <div class="brand-visit-web">
             <p class="brand-visit-label">${esc(DKGMedia.t('detail.visitWebsite'))}</p>
             <p class="brand-visit-line">
-              <a class="brand-visit-url" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(formatExtDisplay(href))}</a>
+              <a class="brand-visit-url" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(formatWebsiteDisplay(href))}</a>
             </p>
           </div>`;
         }
@@ -79,12 +89,14 @@
         function instagramBlock(url) {
           const href = String(url || '').trim();
           if (!href) return '';
+          const handle = formatInstagramHandle(href);
+          if (!handle) return '';
           return `
-          <div class="brand-ext-wrap">
-            <a class="brand-ext" href="${esc(href)}" target="_blank" rel="noopener noreferrer">
-              ${igGlyph}
-              <span class="brand-ext-url">${esc(formatExtDisplay(href))}</span>
-            </a>
+          <div class="brand-visit-web">
+            <p class="brand-visit-label">${esc(DKGMedia.t('detail.visitInstagram'))}</p>
+            <p class="brand-visit-line">
+              <a class="brand-visit-url" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(handle)}</a>
+            </p>
           </div>`;
         }
 
