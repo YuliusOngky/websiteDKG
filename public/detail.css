@@ -71,7 +71,6 @@ a{color:inherit;}
   color:var(--ink); font-weight:700; text-decoration:none;
 }
 .brand-visit-handle:hover{color:var(--brass);}
-.brand-visit-hint{color:var(--muted); font-weight:400;}
 .brand-ext-stack{margin:32px 0 0; max-width:680px; display:flex; flex-direction:column; gap:16px;}
 .brand-ext-wrap{margin:0;}
 .brand-ext{
