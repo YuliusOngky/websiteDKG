@@ -238,5 +238,7 @@ a{color:inherit;}
   .wrap{padding:0 28px;}
   .logo img{height:47px;}
   .detail-main{padding:48px 0 72px;}
-  .detail-back-wrap{margin:24px 0 0;}
+  .detail-hero{margin:0 0 28px;}
+  .detail-hero img{max-height:420px;}
+  .detail-back-wrap{margin:18px 0 0;}
 }
