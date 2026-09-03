@@ -38,6 +38,11 @@
     const M = global.DKGMedia;
     let content = null;
     let item = null;
+    const headerBack = document.querySelector('[data-detail-back]');
+    if (headerBack && options.backHref) {
+      headerBack.href = options.backHref;
+      headerBack.removeAttribute('hidden');
+    }
 
     function paint() {
       const l = setLang(localStorage.getItem('dkg-lang') === 'id' ? 'id' : 'en');

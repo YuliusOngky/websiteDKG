@@ -23,6 +23,10 @@
         >
       </a>
       <div class="detail-actions">
+        <a class="detail-header-back back-link" href="index.html#brands" data-detail-back hidden>
+          <span class="back-arrow" aria-hidden="true">←</span>
+          <span data-i18n="ui.back">Back</span>
+        </a>
         <div class="lang-switch">
           <button type="button" data-lang="en" class="active">EN</button>
           <button type="button" data-lang="id">ID</button>
@@ -68,7 +72,6 @@
             <p class="brand-visit-label">${esc(DKGMedia.t('detail.visitWebsite'))}</p>
             <p class="brand-visit-line">
               <a class="brand-visit-url" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(formatExtDisplay(href))}</a>
-              <span class="brand-visit-hint">${esc(DKGMedia.t('detail.linkToWebsite'))}</span>
             </p>
           </div>`;
         }
