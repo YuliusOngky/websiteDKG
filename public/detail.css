@@ -234,7 +234,7 @@ a{color:inherit;}
   .lightbox-slide img{max-width:min(72vw, 480px); max-height:56vh; border-radius:10px;}
 }
 
-@media (max-width:760px){
+@media (max-width:900px){
   .wrap{padding:0 40px;}
   .logo img{height:47px;}
    .detail-main{padding:40px 0 128px;}
