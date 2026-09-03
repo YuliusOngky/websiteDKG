@@ -18,7 +18,7 @@ body{
 }
 h1,h2,h3{font-family:'DM Sans',sans-serif; font-weight:700; letter-spacing:-0.01em; margin:0;}
 a{color:inherit;}
-.wrap{max-width:860px; margin:0 auto; padding:0 48px;}
+.wrap{max-width:860px; margin:0 auto; padding:0 24px;}
 .detail-top{
   position:sticky; top:0; z-index:20;
   background:rgba(247,245,241,.94); backdrop-filter:blur(12px);
@@ -238,8 +238,8 @@ a{color:inherit;}
   .wrap{
     padding-top:0;
     padding-bottom:0;
-    padding-left:calc(72px + env(safe-area-inset-left));
-    padding-right:calc(72px + env(safe-area-inset-right));
+    padding-left:calc(20px + env(safe-area-inset-left));
+    padding-right:calc(20px + env(safe-area-inset-right));
   }
   .logo img{height:47px;}
    .detail-main{padding-top:40px; padding-bottom:128px;}
@@ -250,8 +250,8 @@ a{color:inherit;}
     margin:0;
     padding-top:12px;
     padding-bottom:12px;
-    padding-left:calc(72px + env(safe-area-inset-left));
-    padding-right:calc(72px + env(safe-area-inset-right));
+    padding-left:calc(20px + env(safe-area-inset-left));
+    padding-right:calc(20px + env(safe-area-inset-right));
     max-width:none;
     background:rgba(255,255,255,.9);
     backdrop-filter:blur(10px);
