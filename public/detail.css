@@ -235,10 +235,10 @@ a{color:inherit;}
 }
 
 @media (max-width:760px){
-  .wrap{padding:0 32px;}
+  .wrap{padding:0 30px;}
   .logo img{height:47px;}
-  .detail-main{padding:48px 0 72px;}
-  .detail-hero{margin:0 0 28px;}
-  .detail-hero img{max-height:420px;}
-  .detail-back-wrap{margin:18px 0 0;}
+  .detail-main{padding:40px 0 64px;}
+  .detail-hero{margin:0 0 22px;}
+  .detail-hero img{max-height:380px;}
+  .detail-back-wrap{margin:14px 0 0;}
 }
