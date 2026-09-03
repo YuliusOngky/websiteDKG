@@ -238,8 +238,8 @@ a{color:inherit;}
   .wrap{
     padding-top:0;
     padding-bottom:0;
-    padding-left:calc(56px + env(safe-area-inset-left));
-    padding-right:calc(56px + env(safe-area-inset-right));
+    padding-left:calc(72px + env(safe-area-inset-left));
+    padding-right:calc(72px + env(safe-area-inset-right));
   }
   .logo img{height:47px;}
    .detail-main{padding:40px 0 128px;}
@@ -250,8 +250,8 @@ a{color:inherit;}
     margin:0;
     padding-top:12px;
     padding-bottom:12px;
-    padding-left:calc(56px + env(safe-area-inset-left));
-    padding-right:calc(56px + env(safe-area-inset-right));
+    padding-left:calc(72px + env(safe-area-inset-left));
+    padding-right:calc(72px + env(safe-area-inset-right));
     max-width:none;
     background:rgba(255,255,255,.9);
     backdrop-filter:blur(10px);
