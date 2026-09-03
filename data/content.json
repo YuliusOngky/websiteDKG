@@ -209,7 +209,7 @@
         },
         "name": "Elementi Domus",
         "image": "images/brand-elementi-domus.webp",
-        "websiteUrl": "https://testingwebsite.web.id/index.html",
+        "websiteUrl": "https://www.elementidomus.com/",
         "websiteLogo": "",
         "short": {
           "id": "Furnitur kelas atas dengan desain berkelas dan kualitas produk kelas satu.",
@@ -430,6 +430,8 @@
       "detail.brand": "Brand",
       "detail.product": "Produk",
       "detail.article": "Artikel",
+      "detail.visitWebsite": "Kunjungi website kami",
+      "detail.linkToWebsite": "(Tautan ke website)",
       "hero.scroll": ""
     },
     "en": {
@@ -530,7 +532,9 @@
       "ui.notFound": "Content not found.",
       "detail.brand": "Brand",
       "detail.product": "Product",
-      "detail.article": "Article"
+      "detail.article": "Article",
+      "detail.visitWebsite": "Visit our website",
+      "detail.linkToWebsite": "(Link to website)"
     }
   }
 }
