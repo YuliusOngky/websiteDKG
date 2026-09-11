@@ -411,9 +411,9 @@
   #articlesTrack .blog-card{flex-basis:min(328px, 78vw); background:var(--paper); padding:0 0 8px;}
   .blog-card .blog-img{aspect-ratio:16/10; margin-bottom:20px; border:1px solid var(--line); overflow:hidden; background:var(--paper-2);}
   .blog-card .blog-img img{width:100%; height:100%; object-fit:cover; display:block;}
-  .blog-card .tag{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); display:inline-block; padding:0 4px;}
-  .blog-card h3{font-size:19px; margin:10px 0 8px; line-height:1.4; padding:0 4px;}
-  .blog-card p{font-size:14px; color:var(--muted); line-height:1.6; margin:0; padding:0 4px;}
+  .blog-card .tag{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); display:inline-block; padding:0 24px;}
+  .blog-card h3{font-size:19px; margin:10px 0 8px; line-height:1.4; padding:0 24px;}
+  .blog-card p{font-size:14px; color:var(--muted); line-height:1.6; margin:0; padding:0 24px;}
 
   /* LIGHTBOX — MacBook-style cover flow */
   .lightbox{position:fixed; inset:0; z-index:200; display:grid; place-items:center; padding:24px 16px;}
@@ -773,6 +773,18 @@
     .carousel-stage{gap:6px; --carousel-nav-w:36px;}
     .carousel-stage .carousel-btn{width:36px; height:36px; font-size:18px;}
     .carousel-stage .carousel-track{max-width:calc(100% - (2 * var(--carousel-nav-w)) - 12px);}
+    /* Fit card to track so text isn't clipped by side navs */
+    #brandsTrack .brand-card,
+    #articlesTrack .blog-card,
+    #productsTrack .showcase-item,
+    #galleryTrack .gallery-item{
+      flex-basis:100%;
+      max-width:100%;
+      min-width:0;
+      box-sizing:border-box;
+    }
+    .brand-card .tag, .brand-card h3, .brand-card p{padding-left:20px; padding-right:20px;}
+    .blog-card .tag, .blog-card h3, .blog-card p{padding-left:20px; padding-right:20px;}
     .contact-grid{grid-template-columns:1fr;}
     .contact-map{aspect-ratio:auto; height:320px;}
     .footer-top{flex-direction:column;}
