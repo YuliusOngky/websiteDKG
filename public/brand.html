@@ -93,8 +93,8 @@
         function instagramBlock(url) {
           const href = String(url || '').trim();
           if (!href) return '';
-          const handle = formatInstagramHandle(href);
-          if (!handle) return '';
+          // Require a real profile path (not bare instagram.com/).
+          if (!formatInstagramHandle(href)) return '';
           const igGlyph = `<img class="brand-ext-logo" src="images/instagram-icon.svg" alt="Instagram" width="40" height="40">`;
           return `
           <div class="brand-visit-ig">
@@ -103,9 +103,8 @@
               <span class="brand-ext-url">${esc(formatWebsiteDisplay(href))}</span>
             </a>
             <div class="brand-visit-web">
-              <p class="brand-visit-label">${esc(DKGMedia.t('detail.visitInstagram'))}</p>
-              <p class="brand-visit-line">
-                <a class="brand-visit-handle" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(handle)}</a>
+              <p class="brand-visit-label">
+                <a class="brand-visit-label-link" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(DKGMedia.t('detail.visitInstagram'))}</a>
               </p>
             </div>
           </div>`;

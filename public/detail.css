@@ -67,10 +67,8 @@ a{color:inherit;}
   color:#2563eb; text-decoration:underline; text-underline-offset:3px;
 }
 .brand-visit-url:hover{color:#1d4ed8;}
-.brand-visit-handle{
-  color:var(--ink); font-weight:700; text-decoration:none;
-}
-.brand-visit-handle:hover{color:var(--brass);}
+.brand-visit-label-link{color:inherit; text-decoration:none;}
+.brand-visit-label-link:hover{color:var(--brass);}
 .brand-ext-stack{margin:32px 0 0; max-width:680px; display:flex; flex-direction:column; gap:16px;}
 .brand-ext-wrap{margin:0;}
 .brand-ext{
