@@ -15,7 +15,7 @@ const {
 const app = express();
 const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = path.join(ROOT, 'public');
-const ADMIN_PASSWORD = String(process.env.ADMIN_PASSWORD || 'admin123').trim();
+const ADMIN_PASSWORD = String(process.env.ADMIN_PASSWORD || '').trim();
 const SESSION_SECRET = process.env.SESSION_SECRET || 'dkg-dev-secret';
 const isProd = process.env.VERCEL === '1' || process.env.NODE_ENV === 'production';
 
@@ -25,6 +25,7 @@ function requireAuth(req, res, next) {
 }
 
 function isValidPassword(password) {
+  if (!ADMIN_PASSWORD) return false;
   return String(password || '').trim() === ADMIN_PASSWORD;
 }
 
