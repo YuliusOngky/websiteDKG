@@ -373,10 +373,12 @@
     transition:background .35s ease;
   }
   .brand-card:hover{background:var(--paper-2);}
-  .brand-card .brand-thumb{
+  .brand-card .brand-thumb,
+  .brand-card picture{
     width:100%; aspect-ratio:16/10; object-fit:cover; display:block; margin-bottom:18px;
     background:var(--paper-2);
   }
+  .brand-card picture .brand-thumb{margin-bottom:0; height:100%;}
   .brand-card .tag, .brand-card h3, .brand-card p{padding-left:24px; padding-right:24px;}
   .brand-card .tag{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--brass);}
   .brand-card h3{font-size:22px; margin:12px 0 8px;}
@@ -391,10 +393,12 @@
     aspect-ratio:1/1.08; background:var(--paper);
     display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
   }
-  .showcase-item img{
+  .showcase-item img,
+  .showcase-item picture{
     width:100%; height:100%; object-fit:cover; display:block;
     transition:transform .6s ease;
   }
+  .showcase-item picture{overflow:hidden;}
   .showcase-item:hover img{transform:scale(1.04);}
 
   /* GALLERY */
@@ -403,14 +407,18 @@
   .gallery-item{
     position:relative; overflow:hidden; background:var(--paper-2); cursor:pointer; color:inherit;
   }
-  .gallery-item img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .7s ease; min-height:280px;}
+  .gallery-item img,
+  .gallery-item picture{width:100%; height:100%; object-fit:cover; display:block; transition:transform .7s ease; min-height:280px;}
+  .gallery-item picture{overflow:hidden;}
   .gallery-item:hover img{transform:scale(1.05);}
 
   /* BLOG */
   #artikel .carousel-stage{--carousel-media-h:calc(min(328px, 78vw) * 10 / 16);}
   #articlesTrack .blog-card{flex-basis:min(328px, 78vw); background:var(--paper); padding:0 0 8px;}
   .blog-card .blog-img{aspect-ratio:16/10; margin-bottom:20px; border:1px solid var(--line); overflow:hidden; background:var(--paper-2);}
-  .blog-card .blog-img img{width:100%; height:100%; object-fit:cover; display:block;}
+  .blog-card .blog-img img,
+  .blog-card .blog-img picture{width:100%; height:100%; object-fit:cover; display:block;}
+  .blog-card .blog-img picture{height:100%;}
   .blog-card .tag{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); display:inline-block; padding:0 24px;}
   .blog-card h3{font-size:19px; margin:10px 0 8px; line-height:1.4; padding:0 24px;}
   .blog-card p{font-size:14px; color:var(--muted); line-height:1.6; margin:0; padding:0 24px;}

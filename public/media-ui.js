@@ -499,15 +499,40 @@
     });
   }
 
+  function jpgFallback(src) {
+    const s = String(src || '');
+    if (/\.webp$/i.test(s)) return s.replace(/\.webp$/i, '.jpg');
+    if (/\.png$/i.test(s)) return s.replace(/\.png$/i, '.jpg');
+    return s;
+  }
+
+  function carouselImg(opts) {
+    const src = String(opts.src || '').trim();
+    if (!src) return '';
+    const alt = escapeHtml(opts.alt || '');
+    const cls = opts.className ? ` class="${escapeHtml(opts.className)}"` : '';
+    const eager = opts.eager !== false;
+    const loading = eager ? 'eager' : 'lazy';
+    const priority = opts.priority ? ' fetchpriority="high"' : '';
+    const fallback = jpgFallback(src);
+    if (fallback !== src && /\.webp$/i.test(src)) {
+      return `<picture>
+        <source srcset="${escapeHtml(src)}" type="image/webp">
+        <img${cls} src="${escapeHtml(fallback)}" alt="${alt}" loading="${loading}" decoding="async"${priority} width="1024" height="640">
+      </picture>`;
+    }
+    return `<img${cls} src="${escapeHtml(src)}" alt="${alt}" loading="${loading}" decoding="async"${priority} width="1024" height="640">`;
+  }
+
   function renderBrands(container, brands, l) {
     if (!container) return;
     const list = limitList(brands, 'brands');
-    container.innerHTML = list.map((b) => {
+    container.innerHTML = list.map((b, i) => {
       const cat = bi(b.category, l);
       const short = bi(b.short, l);
       const img = b.image || 'images/placeholder-brand-dd.svg';
       return `<a class="brand-card reveal carousel-card" href="brand.html?slug=${encodeURIComponent(b.slug)}">
-        <img class="brand-thumb" src="${escapeHtml(img)}" alt="${escapeHtml(b.name || '')}" loading="lazy">
+        ${carouselImg({ src: img, alt: b.name || '', className: 'brand-thumb', eager: true, priority: i === 0 })}
         <span class="tag">${escapeHtml(cat)}</span>
         <h3>${escapeHtml(b.name || '')}</h3>
         <p>${escapeHtml(short)}</p>
@@ -522,11 +547,11 @@
       const title = bi(p.title, l) || p.caption || '';
       return { src: p.image || '', caption: '', alt: title };
     }).filter((it) => it.src);
-    container.innerHTML = list.map((p) => {
+    container.innerHTML = list.map((p, i) => {
       const title = bi(p.title, l) || p.caption || '';
       const src = p.image || '';
       return `<button type="button" class="showcase-item reveal carousel-card" data-product-src="${escapeHtml(src)}" aria-label="${escapeHtml(title || 'View image')}">
-        <img src="${escapeHtml(src)}" alt="${escapeHtml(title)}" loading="lazy">
+        ${carouselImg({ src, alt: title, eager: true, priority: i === 0 })}
       </button>`;
     }).join('');
 
@@ -556,7 +581,7 @@
       const wide = i === 0 ? ' wide' : '';
       const src = g.image || '';
       return `<button type="button" class="gallery-item${wide} reveal carousel-card" data-gallery-src="${escapeHtml(src)}" aria-label="${escapeHtml(title || 'View image')}">
-        <img src="${escapeHtml(src)}" alt="${escapeHtml(title)}" loading="lazy">
+        ${carouselImg({ src, alt: title, eager: true, priority: i === 0 })}
       </button>`;
     }).join('');
 
@@ -577,12 +602,12 @@
   function renderArticles(container, articles, l) {
     if (!container) return;
     const list = limitList(articles, 'articles');
-    container.innerHTML = list.map((a) => {
+    container.innerHTML = list.map((a, i) => {
       const tag = bi(a.tag, l);
       const title = bi(a.title, l);
       const summary = bi(a.summary, l);
       return `<a class="blog-card reveal carousel-card" href="article.html?slug=${encodeURIComponent(a.slug)}">
-        <div class="blog-img"><img src="${escapeHtml(a.image || '')}" alt="${escapeHtml(title)}" loading="lazy"></div>
+        <div class="blog-img">${carouselImg({ src: a.image || '', alt: title, eager: true, priority: i === 0 })}</div>
         <span class="tag">${escapeHtml(tag)}</span>
         <h3>${escapeHtml(title)}</h3>
         <p>${escapeHtml(summary)}</p>
