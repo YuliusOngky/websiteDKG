@@ -21,3 +21,8 @@ uploads/*
 !uploads/.gitkeep
 
 .vercel
+
+# NailArt microsite (local only — do not commit)
+public/nailart/
+data/nailart.json
+data/nailart-bookings.json
