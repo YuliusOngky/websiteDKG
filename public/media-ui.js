@@ -692,6 +692,32 @@
     root.style.setProperty('--heading-scale', String(headingScale));
     document.body.style.fontFamily = font.stack;
     document.body.style.fontSize = size + 'px';
+
+    applyFieldStyles(settings.fieldStyles);
+  }
+
+  function applyFieldStyles(styles) {
+    const map = styles && typeof styles === 'object' ? styles : {};
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      const st = map[key];
+      if (!st) {
+        el.style.removeProperty('color');
+        el.style.removeProperty('font-size');
+        el.style.removeProperty('font-family');
+        return;
+      }
+      if (st.color) el.style.color = st.color;
+      else el.style.removeProperty('color');
+      if (st.fontSize) el.style.fontSize = st.fontSize;
+      else el.style.removeProperty('font-size');
+      if (st.fontFamily && FONT_MAP[st.fontFamily]) {
+        ensureFontLink(FONT_MAP[st.fontFamily].href);
+        el.style.fontFamily = FONT_MAP[st.fontFamily].stack;
+      } else {
+        el.style.removeProperty('font-family');
+      }
+    });
   }
 
   global.DKGMedia = {
@@ -711,6 +737,7 @@
     renderArticles,
     findBySlug,
     querySlug,
-    applySiteTheme
+    applySiteTheme,
+    applyFieldStyles
   };
 })(window);

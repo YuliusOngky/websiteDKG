@@ -326,19 +326,89 @@
     return /lede|desc|more|p1|p2|title$|a\d|\.q|\.a\d|mission\.\d|vision\.title/.test(key);
   }
 
+  function fieldStyle(key) {
+    ensureThemeSettings();
+    return content.settings.fieldStyles[key] || {};
+  }
+
+  function setFieldStyle(key, prop, value) {
+    ensureThemeSettings();
+    if (!content.settings.fieldStyles[key]) content.settings.fieldStyles[key] = {};
+    if (!value) {
+      delete content.settings.fieldStyles[key][prop];
+      if (!Object.keys(content.settings.fieldStyles[key]).length) {
+        delete content.settings.fieldStyles[key];
+      }
+      return;
+    }
+    content.settings.fieldStyles[key][prop] = value;
+  }
+
   function renderContentFields() {
+    ensureThemeSettings();
     const box = document.getElementById('fieldsBox');
     const keys = SECTIONS[currentSection] || [];
     box.innerHTML = keys.map((key) => {
       const val = content.i18n?.[editLang]?.[key] || '';
       const long = isLongKey(key) || String(val).length > 90;
-      return `<div class="field">
+      const st = fieldStyle(key);
+      const colorVal = st.color || '#000000';
+      const hasColor = !!st.color;
+      return `<div class="field field-with-style">
         <label for="f-${key}">${key}</label>
         ${long
           ? `<textarea id="f-${key}" data-key="${key}">${escapeHtml(val)}</textarea>`
           : `<input id="f-${key}" data-key="${key}" value="${escapeAttr(val)}">`}
+        <div class="field-style-row">
+          <label class="field-style-item">
+            <span>Warna</span>
+            <span class="color-row compact">
+              <input type="color" data-style-key="${key}" data-style-prop="color" value="${escapeAttr(colorVal)}" ${hasColor ? '' : 'data-unset="1"'}>
+              <button type="button" class="btn-reset-style" data-reset-key="${key}" data-reset-prop="color" title="Reset warna">Reset</button>
+            </span>
+          </label>
+          <label class="field-style-item">
+            <span>Ukuran</span>
+            <select data-style-key="${key}" data-style-prop="fontSize">
+              <option value="">Default</option>
+              ${['12px','14px','16px','18px','20px','24px','28px','32px','40px','48px'].map((n) =>
+                `<option value="${n}" ${st.fontSize === n ? 'selected' : ''}>${n}</option>`).join('')}
+            </select>
+          </label>
+          <label class="field-style-item">
+            <span>Huruf</span>
+            <select data-style-key="${key}" data-style-prop="fontFamily">
+              <option value="">Default</option>
+              ${FONT_OPTIONS.map((f) =>
+                `<option value="${f.id}" ${st.fontFamily === f.id ? 'selected' : ''}>${escapeHtml(f.label)}</option>`).join('')}
+            </select>
+          </label>
+        </div>
       </div>`;
     }).join('');
+
+    box.querySelectorAll('[data-style-key]').forEach((el) => {
+      const handler = () => {
+        const key = el.getAttribute('data-style-key');
+        const prop = el.getAttribute('data-style-prop');
+        setFieldStyle(key, prop, el.value);
+        if (prop === 'color') el.removeAttribute('data-unset');
+      };
+      el.addEventListener('change', handler);
+      el.addEventListener('input', handler);
+    });
+    box.querySelectorAll('[data-reset-key]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-reset-key');
+        const prop = btn.getAttribute('data-reset-prop');
+        setFieldStyle(key, prop, '');
+        const colorInput = box.querySelector(`[data-style-key="${key}"][data-style-prop="${prop}"]`);
+        if (colorInput) {
+          colorInput.value = '#000000';
+          colorInput.setAttribute('data-unset', '1');
+        }
+      });
+    });
   }
 
   function collectContentFields() {
@@ -346,6 +416,15 @@
       const key = el.getAttribute('data-key');
       if (!content.i18n[editLang]) content.i18n[editLang] = {};
       content.i18n[editLang][key] = el.value;
+    });
+    document.querySelectorAll('#fieldsBox [data-style-key]').forEach((el) => {
+      const key = el.getAttribute('data-style-key');
+      const prop = el.getAttribute('data-style-prop');
+      if (prop === 'color' && el.getAttribute('data-unset') === '1') {
+        setFieldStyle(key, prop, '');
+        return;
+      }
+      setFieldStyle(key, prop, el.value);
     });
   }
 
@@ -444,6 +523,9 @@
         fontSize: 16,
         headingSize: 100
       };
+    }
+    if (!content.settings.fieldStyles || typeof content.settings.fieldStyles !== 'object') {
+      content.settings.fieldStyles = {};
     }
   }
 
@@ -1045,7 +1127,6 @@
   }
 
   function switchView(view) {
-    if (view === 'color-palette') view = 'content';
     if (entityEdit.type && ['brands', 'products', 'gallery', 'articles'].includes(currentView)) {
       collectEntityEditor(entityEdit.type, entityEdit.index);
     }
@@ -1059,17 +1140,22 @@
 
     const titles = {
       overview: ['Overview', 'Health, checklist SEO, dan ringkasan konten'],
-      content: ['Konten', 'Edit teks, tipografi, dan warna brand'],
+      content: ['Konten', 'Edit teks + warna/ukuran/huruf per field'],
       brands: ['Brand Kami / Our Brand', 'CRUD brand — maks 10, klik → halaman detail'],
       products: ['Our Product Gallery', 'CRUD produk — maks 10, klik → halaman detail'],
       gallery: ['Galeri', 'CRUD galeri — maks 10, klik → lightbox'],
       articles: ['Artikel', 'CRUD artikel — maks 15, klik → halaman detail'],
       seo: ['SEO', 'Title, description, Open Graph, robots — fokus pencarian Google'],
+      'color-palette': ['Color Palette', 'Warna VI + tipografi global website'],
       settings: ['Kontak & Settings', 'Telepon, email, alamat, GA4, Search Console']
     };
     pageTitle.textContent = titles[view][0];
     pageSub.textContent = titles[view][1];
 
+    if (view === 'color-palette') {
+      renderColorPalette();
+      renderTypographyFields();
+    }
     if (ENTITY_META[view]) renderEntityPanel(view);
   }
 

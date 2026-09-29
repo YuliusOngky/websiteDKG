@@ -1428,6 +1428,9 @@
     applySeo(currentLang);
     if (typeof updateMapPopup === 'function') updateMapPopup();
     if (cmsContent?.media) applyMedia();
+    if (cmsContent?.settings && window.DKGMedia?.applyFieldStyles) {
+      window.DKGMedia.applyFieldStyles(cmsContent.settings.fieldStyles);
+    }
   }
 
   async function loadCmsContent() {

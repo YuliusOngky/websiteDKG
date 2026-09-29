@@ -8,7 +8,7 @@
   <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-  <link rel="stylesheet" href="/admin/admin.css?v=10">
+  <link rel="stylesheet" href="/admin/admin.css?v=11">
 </head>
 <body>
   <div id="loginView" class="login-view">
@@ -41,6 +41,7 @@
         <button type="button" data-view="gallery" class="nav-item">Galeri</button>
         <button type="button" data-view="articles" class="nav-item">Artikel</button>
         <button type="button" data-view="seo" class="nav-item">SEO</button>
+        <button type="button" data-view="color-palette" class="nav-item">Color Palette</button>
         <button type="button" data-view="settings" class="nav-item">Kontak &amp; Settings</button>
       </nav>
       <div class="side-foot">
@@ -95,12 +96,6 @@
       </section>
 
       <section id="view-content" class="panel" hidden>
-        <div class="content-style-panel">
-          <h3>Tipografi &amp; Warna</h3>
-          <p class="muted content-style-hint">Atur jenis huruf, ukuran, dan warna brand. Klik <strong>Simpan Perubahan</strong> lalu refresh website publik.</p>
-          <div id="typographyFields" class="fields typography-grid"></div>
-          <div id="colorPaletteFields" class="fields color-grid"></div>
-        </div>
         <div class="toolbar">
           <label>Section
             <select id="sectionSelect"></select>
@@ -110,6 +105,7 @@
             <button type="button" class="lang-tab" data-lang="en">EN</button>
           </div>
         </div>
+        <p class="muted content-style-hint">Tiap field punya pengaturan warna, ukuran, dan jenis huruf sendiri. Simpan lalu hard refresh website.</p>
         <div id="fieldsBox" class="fields"></div>
       </section>
 
@@ -136,6 +132,17 @@
         <p class="seo-hint muted">Tips: title ~50–60 karakter · description ~150–160 karakter · canonical &amp; og:image sebaiknya URL absolut (https://…).</p>
         <div id="seoPreview" class="seo-preview"></div>
         <div id="seoFields" class="fields"></div>
+      </section>
+
+      <section id="view-color-palette" class="panel" hidden>
+        <div style="padding:0;">
+          <h3 style="margin:0 0 8px; font-size:16px;">VI Color Palette</h3>
+          <p class="muted" style="margin:0 0 24px; font-size:13px;">Warna brand global website. Untuk warna teks per field, pakai menu Konten.</p>
+          <div id="colorPaletteFields" class="fields color-grid"></div>
+          <h3 style="margin:28px 0 8px; font-size:16px;">Tipografi global</h3>
+          <p class="muted" style="margin:0 0 16px; font-size:13px;">Default huruf seluruh situs (bisa dioverride per field di Konten).</p>
+          <div id="typographyFields" class="fields typography-grid"></div>
+        </div>
       </section>
 
       <section id="view-settings" class="panel" hidden>
@@ -171,6 +178,6 @@
     </div>
   </div>
 
-  <script src="/admin/admin.js?v=10"></script>
+  <script src="/admin/admin.js?v=11"></script>
 </body>
 </html>

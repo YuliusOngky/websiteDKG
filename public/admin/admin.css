@@ -266,6 +266,54 @@ button, input, select, textarea {
   margin: 0 0 16px;
   font-size: 13px;
 }
+.field-with-style .field-style-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #faf8f4;
+  border: 1px solid var(--line);
+}
+.field-style-item {
+  display: grid;
+  gap: 4px;
+  font-size: 11px !important;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+  margin: 0 !important;
+}
+.field-style-item select {
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink);
+}
+.color-row.compact {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.color-row.compact input[type="color"] {
+  width: 44px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+.btn-reset-style {
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 6px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  color: var(--muted);
+}
+.btn-reset-style:hover { color: var(--ink); border-color: var(--ink); }
+@media (max-width: 900px) {
+  .field-with-style .field-style-row { grid-template-columns: 1fr; }
+}
 .typography-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
