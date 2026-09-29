@@ -185,7 +185,7 @@
       history.replaceState({}, '', '/admin/');
     }
     try {
-      const status = await api('/api/auth/status');
+      const status = await api('/api/session');
       if (status.authenticated) {
         showDash();
         await loadContent();
@@ -1008,7 +1008,7 @@
   });
 
   document.getElementById('logoutBtn').addEventListener('click', async () => {
-    await api('/api/auth/logout', { method: 'POST', body: '{}' });
+    await api('/api/logout', { method: 'POST', body: '{}' });
     showLogin();
   });
 

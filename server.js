@@ -88,11 +88,11 @@ app.get('/api/content', async (_req, res) => {
   }
 });
 
-app.get('/api/auth/status', (req, res) => {
+app.get('/api/session', (req, res) => {
   res.json({ authenticated: !!(req.session && req.session.authenticated) });
 });
 
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   const password = (req.body && req.body.password) != null ? req.body.password : '';
   if (!isValidPassword(password)) {
     return res.status(401).json({ error: 'Password salah' });
@@ -101,7 +101,7 @@ app.post('/api/auth/login', (req, res) => {
   return res.json({ ok: true });
 });
 
-app.post('/api/auth/login-form', (req, res) => {
+app.post('/api/login-form', (req, res) => {
   const password = (req.body && req.body.password) != null ? req.body.password : '';
   if (!isValidPassword(password)) {
     return res.redirect('/admin/?error=1');
@@ -110,6 +110,31 @@ app.post('/api/auth/login-form', (req, res) => {
   return res.redirect('/admin/');
 });
 
+app.post('/api/logout', (req, res) => {
+  req.session = null;
+  res.json({ ok: true });
+});
+
+/* Legacy nested auth paths (local Express). On Vercel, nested /api/*/*/ returns NOT_FOUND. */
+app.get('/api/auth/status', (req, res) => {
+  res.json({ authenticated: !!(req.session && req.session.authenticated) });
+});
+app.post('/api/auth/login', (req, res) => {
+  const password = (req.body && req.body.password) != null ? req.body.password : '';
+  if (!isValidPassword(password)) {
+    return res.status(401).json({ error: 'Password salah' });
+  }
+  req.session.authenticated = true;
+  return res.json({ ok: true });
+});
+app.post('/api/auth/login-form', (req, res) => {
+  const password = (req.body && req.body.password) != null ? req.body.password : '';
+  if (!isValidPassword(password)) {
+    return res.redirect('/admin/?error=1');
+  }
+  req.session.authenticated = true;
+  return res.redirect('/admin/');
+});
 app.post('/api/auth/logout', (req, res) => {
   req.session = null;
   res.json({ ok: true });
