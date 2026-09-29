@@ -266,6 +266,14 @@ button, input, select, textarea {
   margin: 0 0 16px;
   font-size: 13px;
 }
+.field-preview {
+  transition: color .15s ease, font-size .15s ease, font-family .15s ease;
+  line-height: 1.45;
+  min-height: 2.5em;
+}
+.field textarea.field-preview {
+  min-height: 140px;
+}
 .field-with-style .field-style-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
