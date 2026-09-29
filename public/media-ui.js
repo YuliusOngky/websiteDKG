@@ -641,6 +641,46 @@
       stack: "'Manrope', sans-serif",
       href: 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap'
     },
+    outfit: {
+      stack: "'Outfit', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap'
+    },
+    figtree: {
+      stack: "'Figtree', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap'
+    },
+    sora: {
+      stack: "'Sora', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap'
+    },
+    'space-grotesk': {
+      stack: "'Space Grotesk', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap'
+    },
+    montserrat: {
+      stack: "'Montserrat', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap'
+    },
+    poppins: {
+      stack: "'Poppins', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap'
+    },
+    'nunito-sans': {
+      stack: "'Nunito Sans', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400;1,6..12,700&display=swap'
+    },
+    'work-sans': {
+      stack: "'Work Sans', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap'
+    },
+    'source-sans-3': {
+      stack: "'Source Sans 3', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap'
+    },
+    lato: {
+      stack: "'Lato', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap'
+    },
     playfair: {
       stack: "'Playfair Display', serif",
       href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap'
@@ -648,19 +688,54 @@
     'libre-baskerville': {
       stack: "'Libre Baskerville', serif",
       href: 'https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap'
+    },
+    cormorant: {
+      stack: "'Cormorant Garamond', serif",
+      href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap'
+    },
+    lora: {
+      stack: "'Lora', serif",
+      href: 'https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap'
+    },
+    'eb-garamond': {
+      stack: "'EB Garamond', serif",
+      href: 'https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap'
+    },
+    merriweather: {
+      stack: "'Merriweather', serif",
+      href: 'https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap'
+    },
+    spectral: {
+      stack: "'Spectral', serif",
+      href: 'https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap'
+    },
+    'crimson-pro': {
+      stack: "'Crimson Pro', serif",
+      href: 'https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap'
+    },
+    'instrument-serif': {
+      stack: "'Instrument Serif', serif",
+      href: 'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap'
+    },
+    cinzel: {
+      stack: "'Cinzel', serif",
+      href: 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap'
+    },
+    'bebas-neue': {
+      stack: "'Bebas Neue', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'
     }
   };
 
   function ensureFontLink(href) {
     if (!href) return;
-    let link = document.getElementById('dkg-theme-font');
-    if (!link) {
-      link = document.createElement('link');
-      link.id = 'dkg-theme-font';
-      link.rel = 'stylesheet';
-      document.head.appendChild(link);
-    }
-    if (link.href !== href) link.href = href;
+    const id = 'dkg-font-' + href.replace(/[^a-z0-9]+/gi, '-').slice(-80);
+    if (document.getElementById(id)) return;
+    const link = document.createElement('link');
+    link.id = id;
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
   }
 
   function applySiteTheme(settings) {

@@ -522,12 +522,34 @@
   }
 
   const FONT_OPTIONS = [
+    // Sans
     { id: 'dm-sans', label: 'DM Sans', stack: "'DM Sans', sans-serif", href: 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,700&display=swap' },
     { id: 'plus-jakarta', label: 'Plus Jakarta Sans', stack: "'Plus Jakarta Sans', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap' },
     { id: 'inter', label: 'Inter', stack: "'Inter', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap' },
     { id: 'manrope', label: 'Manrope', stack: "'Manrope', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap' },
+    { id: 'outfit', label: 'Outfit', stack: "'Outfit', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap' },
+    { id: 'figtree', label: 'Figtree', stack: "'Figtree', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'sora', label: 'Sora', stack: "'Sora', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap' },
+    { id: 'space-grotesk', label: 'Space Grotesk', stack: "'Space Grotesk', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap' },
+    { id: 'montserrat', label: 'Montserrat', stack: "'Montserrat', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'poppins', label: 'Poppins', stack: "'Poppins', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'nunito-sans', label: 'Nunito Sans', stack: "'Nunito Sans', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400;1,6..12,700&display=swap' },
+    { id: 'work-sans', label: 'Work Sans', stack: "'Work Sans', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'source-sans-3', label: 'Source Sans 3', stack: "'Source Sans 3', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'lato', label: 'Lato', stack: "'Lato', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap' },
+    // Serif
     { id: 'playfair', label: 'Playfair Display', stack: "'Playfair Display', serif", href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap' },
-    { id: 'libre-baskerville', label: 'Libre Baskerville', stack: "'Libre Baskerville', serif", href: 'https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap' }
+    { id: 'libre-baskerville', label: 'Libre Baskerville', stack: "'Libre Baskerville', serif", href: 'https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap' },
+    { id: 'cormorant', label: 'Cormorant Garamond', stack: "'Cormorant Garamond', serif", href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'lora', label: 'Lora', stack: "'Lora', serif", href: 'https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'eb-garamond', label: 'EB Garamond', stack: "'EB Garamond', serif", href: 'https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'merriweather', label: 'Merriweather', stack: "'Merriweather', serif", href: 'https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap' },
+    { id: 'spectral', label: 'Spectral', stack: "'Spectral', serif", href: 'https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'crimson-pro', label: 'Crimson Pro', stack: "'Crimson Pro', serif", href: 'https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'instrument-serif', label: 'Instrument Serif', stack: "'Instrument Serif', serif", href: 'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap' },
+    // Display
+    { id: 'cinzel', label: 'Cinzel', stack: "'Cinzel', serif", href: 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap' },
+    { id: 'bebas-neue', label: 'Bebas Neue', stack: "'Bebas Neue', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap' }
   ];
 
   const COLOR_FIELDS = [
