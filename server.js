@@ -115,31 +115,6 @@ app.post('/api/logout', (req, res) => {
   res.json({ ok: true });
 });
 
-/* Legacy nested auth paths (local Express). On Vercel, nested /api/*/*/ returns NOT_FOUND. */
-app.get('/api/auth/status', (req, res) => {
-  res.json({ authenticated: !!(req.session && req.session.authenticated) });
-});
-app.post('/api/auth/login', (req, res) => {
-  const password = (req.body && req.body.password) != null ? req.body.password : '';
-  if (!isValidPassword(password)) {
-    return res.status(401).json({ error: 'Password salah' });
-  }
-  req.session.authenticated = true;
-  return res.json({ ok: true });
-});
-app.post('/api/auth/login-form', (req, res) => {
-  const password = (req.body && req.body.password) != null ? req.body.password : '';
-  if (!isValidPassword(password)) {
-    return res.redirect('/admin/?error=1');
-  }
-  req.session.authenticated = true;
-  return res.redirect('/admin/');
-});
-app.post('/api/auth/logout', (req, res) => {
-  req.session = null;
-  res.json({ ok: true });
-});
-
 app.put('/api/content', requireAuth, async (req, res) => {
   try {
     const incoming = req.body;
