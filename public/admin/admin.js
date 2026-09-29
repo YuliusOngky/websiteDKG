@@ -344,6 +344,36 @@
     content.settings.fieldStyles[key][prop] = value;
   }
 
+  function ensureAdminFontLink(fontId) {
+    const font = FONT_OPTIONS.find((f) => f.id === fontId);
+    if (!font?.href) return font;
+    const id = 'admin-font-' + fontId;
+    if (!document.getElementById(id)) {
+      const link = document.createElement('link');
+      link.id = id;
+      link.rel = 'stylesheet';
+      link.href = font.href;
+      document.head.appendChild(link);
+    }
+    return font;
+  }
+
+  function applyFieldPreview(key) {
+    const input = document.getElementById('f-' + key);
+    if (!input) return;
+    const st = fieldStyle(key);
+    if (st.color) input.style.color = st.color;
+    else input.style.removeProperty('color');
+    if (st.fontSize) input.style.fontSize = st.fontSize;
+    else input.style.removeProperty('font-size');
+    if (st.fontFamily) {
+      const font = ensureAdminFontLink(st.fontFamily);
+      input.style.fontFamily = font ? font.stack : '';
+    } else {
+      input.style.removeProperty('font-family');
+    }
+  }
+
   function renderContentFields() {
     ensureThemeSettings();
     const box = document.getElementById('fieldsBox');
@@ -357,8 +387,8 @@
       return `<div class="field field-with-style">
         <label for="f-${key}">${key}</label>
         ${long
-          ? `<textarea id="f-${key}" data-key="${key}">${escapeHtml(val)}</textarea>`
-          : `<input id="f-${key}" data-key="${key}" value="${escapeAttr(val)}">`}
+          ? `<textarea id="f-${key}" data-key="${key}" class="field-preview">${escapeHtml(val)}</textarea>`
+          : `<input id="f-${key}" data-key="${key}" class="field-preview" value="${escapeAttr(val)}">`}
         <div class="field-style-row">
           <label class="field-style-item">
             <span>Warna</span>
@@ -387,12 +417,15 @@
       </div>`;
     }).join('');
 
+    keys.forEach((key) => applyFieldPreview(key));
+
     box.querySelectorAll('[data-style-key]').forEach((el) => {
       const handler = () => {
         const key = el.getAttribute('data-style-key');
         const prop = el.getAttribute('data-style-prop');
         setFieldStyle(key, prop, el.value);
         if (prop === 'color') el.removeAttribute('data-unset');
+        applyFieldPreview(key);
       };
       el.addEventListener('change', handler);
       el.addEventListener('input', handler);
@@ -407,6 +440,7 @@
           colorInput.value = '#000000';
           colorInput.setAttribute('data-unset', '1');
         }
+        applyFieldPreview(key);
       });
     });
   }
