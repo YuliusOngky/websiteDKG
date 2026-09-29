@@ -69,6 +69,7 @@
 
     loadContent().then((data) => {
       content = data;
+      if (data?.settings && M.applySiteTheme) M.applySiteTheme(data.settings);
       const slug = M.querySlug();
       const list = content?.media?.[options.collection] || [];
       item = M.findBySlug(list, slug);

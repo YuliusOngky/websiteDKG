@@ -624,6 +624,76 @@
     return new URLSearchParams(location.search).get('slug') || '';
   }
 
+  const FONT_MAP = {
+    'dm-sans': {
+      stack: "'DM Sans', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,700&display=swap'
+    },
+    'plus-jakarta': {
+      stack: "'Plus Jakarta Sans', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap'
+    },
+    inter: {
+      stack: "'Inter', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap'
+    },
+    manrope: {
+      stack: "'Manrope', sans-serif",
+      href: 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap'
+    },
+    playfair: {
+      stack: "'Playfair Display', serif",
+      href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap'
+    },
+    'libre-baskerville': {
+      stack: "'Libre Baskerville', serif",
+      href: 'https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap'
+    }
+  };
+
+  function ensureFontLink(href) {
+    if (!href) return;
+    let link = document.getElementById('dkg-theme-font');
+    if (!link) {
+      link = document.createElement('link');
+      link.id = 'dkg-theme-font';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    }
+    if (link.href !== href) link.href = href;
+  }
+
+  function applySiteTheme(settings) {
+    if (!settings || typeof settings !== 'object') return;
+    const root = document.documentElement;
+    const colors = settings.colors || {};
+    if (colors.prestige) root.style.setProperty('--brass', colors.prestige);
+    if (colors.goldDust) {
+      root.style.setProperty('--brass-soft', colors.goldDust);
+      root.style.setProperty('--accent', colors.goldDust);
+    }
+    if (colors.clearWhite) root.style.setProperty('--paper', colors.clearWhite);
+    if (colors.richBlack) {
+      root.style.setProperty('--ink', colors.richBlack);
+      root.style.setProperty('--charcoal', colors.richBlack);
+    }
+    if (colors.gradientStart) root.style.setProperty('--gradient-start', colors.gradientStart);
+    if (colors.gradientEnd) root.style.setProperty('--gradient-end', colors.gradientEnd);
+    if (colors.prestige) root.style.setProperty('--line', colors.prestige);
+
+    const typo = settings.typography || {};
+    const font = FONT_MAP[typo.fontFamily] || FONT_MAP['dm-sans'];
+    ensureFontLink(font.href);
+    root.style.setProperty('--font-body', font.stack);
+    root.style.setProperty('--font-heading', font.stack);
+    const size = Number(typo.fontSize) || 16;
+    const headingScale = (Number(typo.headingSize) || 100) / 100;
+    root.style.setProperty('--font-size-base', size + 'px');
+    root.style.setProperty('--heading-scale', String(headingScale));
+    document.body.style.fontFamily = font.stack;
+    document.body.style.fontSize = size + 'px';
+  }
+
   global.DKGMedia = {
     LIMITS,
     lang,
@@ -640,6 +710,7 @@
     renderGallery,
     renderArticles,
     findBySlug,
-    querySlug
+    querySlug,
+    applySiteTheme
   };
 })(window);

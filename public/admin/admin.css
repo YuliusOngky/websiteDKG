@@ -245,13 +245,59 @@ button, input, select, textarea {
   color: var(--muted);
   margin-bottom: 6px;
 }
-.field input, .field textarea {
+.field input, .field textarea, .field select {
   width: 100%;
   border: 1px solid var(--line);
   padding: 10px 12px;
   background: #fff;
 }
 .field textarea { min-height: 110px; resize: vertical; }
+.content-style-panel {
+  border: 1px solid var(--line);
+  background: #faf8f4;
+  padding: 20px 18px;
+  margin-bottom: 22px;
+}
+.content-style-panel h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+.content-style-hint {
+  margin: 0 0 16px;
+  font-size: 13px;
+}
+.typography-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.color-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.color-row input[type="color"] {
+  width: 56px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.color-row input[type="text"] {
+  flex: 1;
+  font-family: ui-monospace, monospace;
+}
+@media (max-width: 900px) {
+  .typography-grid,
+  .color-grid { grid-template-columns: 1fr; }
+}
 .seo-preview {
   border: 1px solid var(--line);
   background: #faf8f4;

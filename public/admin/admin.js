@@ -216,6 +216,7 @@
     renderOverview();
     renderContentFields();
     renderSeo();
+    renderTypographyFields();
     renderColorPalette();
     renderSettings();
     renderAboutImage();
@@ -407,31 +408,100 @@
     </div>`).join('');
   }
 
+  const FONT_OPTIONS = [
+    { id: 'dm-sans', label: 'DM Sans', stack: "'DM Sans', sans-serif", href: 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,700&display=swap' },
+    { id: 'plus-jakarta', label: 'Plus Jakarta Sans', stack: "'Plus Jakarta Sans', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'inter', label: 'Inter', stack: "'Inter', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'manrope', label: 'Manrope', stack: "'Manrope', sans-serif", href: 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap' },
+    { id: 'playfair', label: 'Playfair Display', stack: "'Playfair Display', serif", href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap' },
+    { id: 'libre-baskerville', label: 'Libre Baskerville', stack: "'Libre Baskerville', serif", href: 'https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap' }
+  ];
+
+  const COLOR_FIELDS = [
+    { key: 'prestige', label: 'Warna aksen (Prestige Brown)' },
+    { key: 'goldDust', label: 'Warna aksen lembut (Gold Dust)' },
+    { key: 'richBlack', label: 'Warna huruf utama (Rich Black)' },
+    { key: 'clearWhite', label: 'Warna latar (Clear White)' },
+    { key: 'gradientStart', label: 'Gradient Start' },
+    { key: 'gradientEnd', label: 'Gradient End' }
+  ];
+
+  function ensureThemeSettings() {
+    if (!content.settings) content.settings = {};
+    if (!content.settings.colors) {
+      content.settings.colors = {
+        prestige: '#b48040',
+        goldDust: '#eac17f',
+        clearWhite: '#FFFFFF',
+        richBlack: '#000000',
+        gradientStart: '#23E396',
+        gradientEnd: '#b48040'
+      };
+    }
+    if (!content.settings.typography) {
+      content.settings.typography = {
+        fontFamily: 'dm-sans',
+        fontSize: 16,
+        headingSize: 100
+      };
+    }
+  }
+
+  function renderTypographyFields() {
+    ensureThemeSettings();
+    const typo = content.settings.typography;
+    const box = document.getElementById('typographyFields');
+    if (!box) return;
+    box.innerHTML = `
+      <div class="field">
+        <label for="typo-font">Jenis huruf</label>
+        <select id="typo-font" data-typo="fontFamily">
+          ${FONT_OPTIONS.map((f) => `<option value="${f.id}" ${typo.fontFamily === f.id ? 'selected' : ''}>${escapeHtml(f.label)}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field">
+        <label for="typo-size">Ukuran huruf dasar</label>
+        <select id="typo-size" data-typo="fontSize">
+          ${[14, 15, 16, 17, 18].map((n) => `<option value="${n}" ${Number(typo.fontSize) === n ? 'selected' : ''}>${n}px</option>`).join('')}
+        </select>
+      </div>
+      <div class="field">
+        <label for="typo-heading">Ukuran judul (skala)</label>
+        <select id="typo-heading" data-typo="headingSize">
+          ${[90, 100, 110, 120].map((n) => `<option value="${n}" ${Number(typo.headingSize) === n ? 'selected' : ''}>${n}%</option>`).join('')}
+        </select>
+      </div>
+    `;
+    box.querySelectorAll('[data-typo]').forEach((el) => {
+      el.addEventListener('change', () => {
+        ensureThemeSettings();
+        const key = el.getAttribute('data-typo');
+        content.settings.typography[key] = key === 'fontFamily' ? el.value : Number(el.value);
+      });
+    });
+  }
+
   function renderColorPalette() {
-    const colors = content.settings?.colors || {};
-    const colorFields = [
-      { key: 'prestige', label: 'Prestige Brown' },
-      { key: 'goldDust', label: 'Gold Dust' },
-      { key: 'clearWhite', label: 'Clear White' },
-      { key: 'richBlack', label: 'Rich Black' },
-      { key: 'gradientStart', label: 'Gradient Start' },
-      { key: 'gradientEnd', label: 'Gradient End' }
-    ];
-    document.getElementById('colorPaletteFields').innerHTML = colorFields.map(({ key, label }) => `<div class="field">
+    ensureThemeSettings();
+    const colors = content.settings.colors;
+    const box = document.getElementById('colorPaletteFields');
+    if (!box) return;
+    box.innerHTML = COLOR_FIELDS.map(({ key, label }) => `<div class="field">
       <label for="col-${key}">${escapeHtml(label)}</label>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <input type="color" id="col-${key}" data-color="${key}" value="${escapeAttr(colors[key] || '#000000')}" style="width:60px; height:40px; cursor:pointer; border:1px solid #ccc;">
-        <input type="text" data-color="${key}" value="${escapeAttr(colors[key] || '')}" placeholder="#000000" style="flex:1; font-family:monospace;" readonly>
+      <div class="color-row">
+        <input type="color" id="col-${key}" data-color="${key}" value="${escapeAttr(colors[key] || '#000000')}">
+        <input type="text" data-color-text="${key}" value="${escapeAttr(colors[key] || '')}" placeholder="#000000" readonly>
       </div>
     </div>`).join('');
 
-    document.querySelectorAll('#colorPaletteFields [type="color"]').forEach((el) => {
+    box.querySelectorAll('[type="color"]').forEach((el) => {
       el.addEventListener('input', (e) => {
         const key = e.target.getAttribute('data-color');
         const value = e.target.value;
-        if (!content.settings.colors) content.settings.colors = {};
+        ensureThemeSettings();
         content.settings.colors[key] = value;
-        document.querySelector(`#colorPaletteFields [data-color="${key}"][type="text"]`).value = value;
+        const text = box.querySelector(`[data-color-text="${key}"]`);
+        if (text) text.value = value;
       });
     });
   }
@@ -975,6 +1045,7 @@
   }
 
   function switchView(view) {
+    if (view === 'color-palette') view = 'content';
     if (entityEdit.type && ['brands', 'products', 'gallery', 'articles'].includes(currentView)) {
       collectEntityEditor(entityEdit.type, entityEdit.index);
     }
@@ -988,13 +1059,12 @@
 
     const titles = {
       overview: ['Overview', 'Health, checklist SEO, dan ringkasan konten'],
-      content: ['Konten', 'Edit teks bilingual per section (header section)'],
+      content: ['Konten', 'Edit teks, tipografi, dan warna brand'],
       brands: ['Brand Kami / Our Brand', 'CRUD brand — maks 10, klik → halaman detail'],
       products: ['Our Product Gallery', 'CRUD produk — maks 10, klik → halaman detail'],
       gallery: ['Galeri', 'CRUD galeri — maks 10, klik → lightbox'],
       articles: ['Artikel', 'CRUD artikel — maks 15, klik → halaman detail'],
       seo: ['SEO', 'Title, description, Open Graph, robots — fokus pencarian Google'],
-      'color-palette': ['Color Palette', 'Edit VI brand colors — perubahan langsung diterapkan ke website'],
       settings: ['Kontak & Settings', 'Telepon, email, alamat, GA4, Search Console']
     };
     pageTitle.textContent = titles[view][0];

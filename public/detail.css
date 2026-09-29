@@ -7,16 +7,22 @@
   --brass:#b48040;
   --brass-soft:#eac17f;
   --muted:#6f6b63;
+  --font-body:'DM Sans',sans-serif;
+  --font-heading:'DM Sans',sans-serif;
+  --font-size-base:16px;
+  --heading-scale:1;
 }
 *{box-sizing:border-box;}
 body{
   margin:0;
   background:var(--paper);
   color:var(--ink);
-  font-family:'DM Sans',sans-serif;
+  font-family:var(--font-body);
+  font-size:var(--font-size-base);
   -webkit-font-smoothing:antialiased;
 }
-h1,h2,h3{font-family:'DM Sans',sans-serif; font-weight:700; letter-spacing:-0.01em; margin:0;}
+h1,h2,h3{font-family:var(--font-heading); font-weight:700; letter-spacing:-0.01em; margin:0;}
+h1{font-size:calc(clamp(32px,5vw,48px) * var(--heading-scale));}
 a{color:inherit;}
 .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
 .detail-top{
@@ -34,7 +40,7 @@ a{color:inherit;}
 }
 .lang-switch button{
   background:none; border:none; cursor:pointer; padding:7px 10px;
-  font-family:'DM Sans',sans-serif; font-size:11.5px; letter-spacing:.08em; color:var(--muted);
+  font-family:var(--font-heading); font-size:11.5px; letter-spacing:.08em; color:var(--muted);
 }
 .lang-switch button.active{background:var(--ink); color:var(--paper);}
 .back-link{
@@ -60,7 +66,7 @@ a{color:inherit;}
 .brand-visit-ig{display:flex; flex-direction:column; gap:16px;}
 .brand-visit-label{
   margin:0 0 6px; font-size:15px; font-weight:700; color:var(--ink);
-  font-family:'DM Sans',sans-serif; letter-spacing:-0.01em;
+  font-family:var(--font-heading); letter-spacing:-0.01em;
 }
 .brand-visit-line{margin:0; font-size:14px; line-height:1.5;}
 .brand-visit-url{
@@ -83,7 +89,7 @@ a{color:inherit;}
 }
 .brand-ext-icon{padding:4px; box-sizing:border-box;}
 .brand-ext-name{
-  font-family:'DM Sans',sans-serif; font-size:15px; font-weight:700;
+  font-family:var(--font-heading); font-size:15px; font-weight:700;
   letter-spacing:-0.01em; line-height:1.2;
 }
 .brand-ext-url{
