@@ -565,7 +565,6 @@
           const val = el.value;
           if ((cmd === 'size' || cmd === 'font') && !val) return;
           runRteCommand(editor, cmd, val, savedRange);
-          if (cmd === 'size' || cmd === 'font') el.value = '';
         };
         if (el.tagName === 'BUTTON') el.addEventListener('click', fire);
         else {
