@@ -315,6 +315,10 @@ button, input, select, textarea {
   text-transform: none;
   letter-spacing: normal;
   color: var(--ink);
+  pointer-events: auto;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
 }
 .rte-tool input[type="color"] {
   width: 34px;

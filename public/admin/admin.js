@@ -457,22 +457,27 @@
     }
   }
 
-  function wrapSelectionWithSpan(styleProp, styleValue) {
+  function wrapSelectionWithSpan(styleProp, styleValue, range) {
     const sel = window.getSelection();
-    if (!sel || !sel.rangeCount || sel.isCollapsed) return false;
-    const range = sel.getRangeAt(0);
-    const editor = range.commonAncestorContainer.nodeType === 1
-      ? range.commonAncestorContainer.closest('.rte-editor')
-      : range.commonAncestorContainer.parentElement?.closest('.rte-editor');
+    if (!sel) return false;
+    let useRange = range;
+    if (!useRange) {
+      if (!sel.rangeCount || sel.isCollapsed) return false;
+      useRange = sel.getRangeAt(0);
+    }
+    if (!useRange || useRange.collapsed) return false;
+    const editor = useRange.commonAncestorContainer.nodeType === 1
+      ? useRange.commonAncestorContainer.closest('.rte-editor')
+      : useRange.commonAncestorContainer.parentElement?.closest('.rte-editor');
     if (!editor) return false;
     const span = document.createElement('span');
     span.style[styleProp] = styleValue;
     try {
-      range.surroundContents(span);
+      useRange.surroundContents(span);
     } catch {
-      const frag = range.extractContents();
+      const frag = useRange.extractContents();
       span.appendChild(frag);
-      range.insertNode(span);
+      useRange.insertNode(span);
     }
     sel.removeAllRanges();
     const next = document.createRange();
@@ -481,8 +486,29 @@
     return true;
   }
 
-  function runRteCommand(editor, cmd, value) {
+  function restoreRteSelection(editor, range) {
+    if (!editor || !range) return false;
     editor.focus();
+    const sel = window.getSelection();
+    if (!sel) return false;
+    try {
+      sel.removeAllRanges();
+      sel.addRange(range);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function runRteCommand(editor, cmd, value, savedRange) {
+    if (savedRange) restoreRteSelection(editor, savedRange);
+    else editor.focus();
+    const activeRange = (() => {
+      const sel = window.getSelection();
+      if (sel && sel.rangeCount) return sel.getRangeAt(0).cloneRange();
+      return savedRange || null;
+    })();
+
     if (cmd === 'bold' || cmd === 'italic') {
       document.execCommand(cmd, false, null);
       return;
@@ -497,35 +523,54 @@
       return;
     }
     if (cmd === 'size') {
-      wrapSelectionWithSpan('fontSize', value);
+      wrapSelectionWithSpan('fontSize', value, activeRange);
       return;
     }
     if (cmd === 'font') {
       const font = ensureAdminFontLink(value);
-      if (font) wrapSelectionWithSpan('fontFamily', font.stack);
+      if (font) wrapSelectionWithSpan('fontFamily', font.stack, activeRange);
     }
   }
 
   function bindRteToolbar(box) {
     box.querySelectorAll('.rte-toolbar').forEach((bar) => {
-      bar.addEventListener('mousedown', (e) => {
-        if (e.target.closest('button, input, select')) e.preventDefault();
-      });
+      let savedRange = null;
       const key = bar.getAttribute('data-rte-key');
       const editor = document.getElementById('f-' + key);
       if (!editor) return;
+
+      const rememberSelection = () => {
+        const sel = window.getSelection();
+        if (!sel || !sel.rangeCount) return;
+        const range = sel.getRangeAt(0);
+        const inEditor = range.commonAncestorContainer.nodeType === 1
+          ? range.commonAncestorContainer.closest('.rte-editor')
+          : range.commonAncestorContainer.parentElement?.closest('.rte-editor');
+        if (inEditor === editor && !range.collapsed) {
+          savedRange = range.cloneRange();
+        }
+      };
+
+      // Keep text selection when clicking B/I/Clear; allow native select/color UI to open.
+      bar.addEventListener('mousedown', (e) => {
+        rememberSelection();
+        if (e.target.closest('button')) e.preventDefault();
+      });
+      editor.addEventListener('mouseup', rememberSelection);
+      editor.addEventListener('keyup', rememberSelection);
 
       bar.querySelectorAll('[data-rte-cmd]').forEach((el) => {
         const cmd = el.getAttribute('data-rte-cmd');
         const fire = () => {
           const val = el.value;
           if ((cmd === 'size' || cmd === 'font') && !val) return;
-          runRteCommand(editor, cmd, val);
+          runRteCommand(editor, cmd, val, savedRange);
+          if (cmd === 'size' || cmd === 'font') el.value = '';
         };
         if (el.tagName === 'BUTTON') el.addEventListener('click', fire);
         else {
           el.addEventListener('change', fire);
-          el.addEventListener('input', fire);
+          if (cmd === 'color') el.addEventListener('input', fire);
         }
       });
 
