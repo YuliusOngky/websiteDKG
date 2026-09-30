@@ -493,6 +493,37 @@
       ? useRange.commonAncestorContainer.closest('.rte-editor')
       : useRange.commonAncestorContainer.parentElement?.closest('.rte-editor');
     if (!editor) return false;
+
+    // Strip the same style inside the selection so the new value always wins
+    // (nested old color/size/font otherwise overrides the outer wrap).
+    if (styleProp === 'color' || styleProp === 'fontSize' || styleProp === 'fontFamily') {
+      const frag = useRange.extractContents();
+      const clearProp = styleProp === 'color' ? 'color'
+        : styleProp === 'fontSize' ? 'font-size' : 'font-family';
+      const walkClear = (node) => {
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+        if (node.style) node.style.removeProperty(clearProp);
+        if (node.tagName === 'FONT' && styleProp === 'color') node.removeAttribute('color');
+        [...node.childNodes].forEach(walkClear);
+        if (node.tagName === 'SPAN' && !(node.getAttribute('style') || '').trim()) {
+          const parent = node.parentNode;
+          if (!parent) return;
+          while (node.firstChild) parent.insertBefore(node.firstChild, node);
+          node.remove();
+        }
+      };
+      [...frag.childNodes].forEach(walkClear);
+      const span = document.createElement('span');
+      span.style[styleProp] = styleValue;
+      span.appendChild(frag);
+      useRange.insertNode(span);
+      sel.removeAllRanges();
+      const next = document.createRange();
+      next.selectNodeContents(span);
+      sel.addRange(next);
+      return true;
+    }
+
     const span = document.createElement('span');
     span.style[styleProp] = styleValue;
     try {
@@ -644,7 +675,7 @@
           </div>
           <div id="f-${key}" data-key="${key}" class="rte-editor field-preview${long ? ' is-long' : ''}" contenteditable="true" role="textbox" aria-multiline="true">${editorHtml}</div>
         </div>
-        <p class="rte-hint muted">Seleksi kata lalu pakai toolbar (B / I / warna / ukuran / huruf).</p>
+        <p class="rte-hint muted">Seleksi kata lalu pakai toolbar (B / I / warna / ukuran / huruf). Baris “Default field” di bawah = warna dasar seluruh teks tanpa format per kata.</p>
         <div class="field-style-row">
           <label class="field-style-item">
             <span>Default field — Warna</span>
