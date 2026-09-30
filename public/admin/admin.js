@@ -377,6 +377,10 @@
           [...child.attributes].forEach((a) => child.removeAttribute(a.name));
           if (style) child.setAttribute('style', style);
           walk(child);
+          // Drop empty decorative spans (no text and no line breaks)
+          if (tag === 'SPAN' && !style && !child.textContent && !child.querySelector('br')) {
+            child.remove();
+          }
           return;
         }
         if (tag === 'FONT') {
@@ -416,7 +420,28 @@
     }
 
     walk(template.content);
+
+    // Plain newlines in text nodes collapse on the public site — turn them into <br>.
+    const convertNewlines = (parent) => {
+      [...parent.childNodes].forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          if (!/\n/.test(node.nodeValue || '')) return;
+          const parts = String(node.nodeValue).split('\n');
+          const frag = document.createDocumentFragment();
+          parts.forEach((part, i) => {
+            if (part) frag.appendChild(document.createTextNode(part));
+            if (i < parts.length - 1) frag.appendChild(document.createElement('br'));
+          });
+          parent.replaceChild(frag, node);
+          return;
+        }
+        if (node.nodeType === Node.ELEMENT_NODE) convertNewlines(node);
+      });
+    };
+    convertNewlines(template.content);
+
     return template.innerHTML
+      .replace(/(?:<br\s*\/?>\s*){3,}/gi, '<br><br>')
       .replace(/(?:<br\s*\/?>\s*)+$/i, '')
       .replace(/^(\s*<br\s*\/?>)+/i, '');
   }
@@ -626,10 +651,18 @@
         }
       });
 
+      editor.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        // Enter = paragraf baru (jarak), Shift+Enter = baris tunggal
+        document.execCommand('insertHTML', false, e.shiftKey ? '<br>' : '<br><br>');
+      });
+
       editor.addEventListener('paste', (e) => {
         e.preventDefault();
-        const text = (e.clipboardData || window.clipboardData).getData('text/plain');
-        document.execCommand('insertText', false, text);
+        const text = (e.clipboardData || window.clipboardData).getData('text/plain') || '';
+        const html = escapeHtml(text).replace(/\r\n/g, '\n').replace(/\n/g, '<br>');
+        document.execCommand('insertHTML', false, html);
       });
     });
   }
@@ -675,7 +708,7 @@
           </div>
           <div id="f-${key}" data-key="${key}" class="rte-editor field-preview${long ? ' is-long' : ''}" contenteditable="true" role="textbox" aria-multiline="true">${editorHtml}</div>
         </div>
-        <p class="rte-hint muted">Seleksi kata lalu pakai toolbar (B / I / warna / ukuran / huruf). Baris “Default field” di bawah = warna dasar seluruh teks tanpa format per kata.</p>
+        <p class="rte-hint muted">Seleksi kata lalu pakai toolbar (B / I / warna / ukuran / huruf). Enter = paragraf baru, Shift+Enter = baris saja. Baris “Default field” = warna dasar seluruh teks tanpa format per kata.</p>
         <div class="field-style-row">
           <label class="field-style-item">
             <span>Default field — Warna</span>

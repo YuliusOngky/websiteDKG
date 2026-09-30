@@ -74,6 +74,9 @@
           [...child.attributes].forEach((a) => child.removeAttribute(a.name));
           if (style) child.setAttribute('style', style);
           walk(child);
+          if (tag === 'SPAN' && !style && !child.textContent && !child.querySelector('br')) {
+            child.remove();
+          }
           return;
         }
         if (tag === 'FONT') {
@@ -114,7 +117,27 @@
     }
 
     walk(template.content);
+
+    const convertNewlines = (parent) => {
+      [...parent.childNodes].forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          if (!/\n/.test(node.nodeValue || '')) return;
+          const parts = String(node.nodeValue).split('\n');
+          const frag = document.createDocumentFragment();
+          parts.forEach((part, i) => {
+            if (part) frag.appendChild(document.createTextNode(part));
+            if (i < parts.length - 1) frag.appendChild(document.createElement('br'));
+          });
+          parent.replaceChild(frag, node);
+          return;
+        }
+        if (node.nodeType === Node.ELEMENT_NODE) convertNewlines(node);
+      });
+    };
+    convertNewlines(template.content);
+
     return template.innerHTML
+      .replace(/(?:<br\s*\/?>\s*){3,}/gi, '<br><br>')
       .replace(/(?:<br\s*\/?>\s*)+$/i, '')
       .replace(/^(\s*<br\s*\/?>)+/i, '');
   }
