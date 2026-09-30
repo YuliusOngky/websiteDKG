@@ -42,7 +42,7 @@
         const prop = part.slice(0, idx).trim().toLowerCase();
         const val = part.slice(idx + 1).trim();
         if (!val) return;
-        if (prop === 'color' && /^(#[0-9a-f]{3,8}|rgb\(|rgba\(|hsl\(|hsla\(|[a-z]+)$/i.test(val)) {
+        if (prop === 'color' && /^(#[0-9a-f]{3,8}|rgba?\(\s*[\d.]+\s*,\s*[\d.]+\s*,\s*[\d.]+(?:\s*,\s*[\d.]+)?\s*\)|hsla?\([^)]+\)|[a-z]+)$/i.test(val)) {
           kept.push('color:' + val);
         } else if (prop === 'font-size' && /^\d+(\.\d+)?(px|rem|em|%)$/i.test(val)) {
           kept.push('font-size:' + val);
@@ -74,6 +74,29 @@
           [...child.attributes].forEach((a) => child.removeAttribute(a.name));
           if (style) child.setAttribute('style', style);
           walk(child);
+          return;
+        }
+        if (tag === 'FONT') {
+          const color = child.getAttribute('color');
+          const face = child.getAttribute('face');
+          const size = child.getAttribute('size');
+          const span = document.createElement('span');
+          const styles = [];
+          if (color && /^(#[0-9a-f]{3,8}|rgba?\([^)]+\)|[a-z]+)$/i.test(color.trim())) {
+            styles.push('color:' + color.trim());
+          }
+          if (face && !/url\s*\(|expression|javascript/i.test(face)) {
+            styles.push('font-family:' + face.replace(/["<>]/g, ''));
+          }
+          if (size) {
+            const pxMap = { 1: '10px', 2: '13px', 3: '16px', 4: '18px', 5: '24px', 6: '32px', 7: '48px' };
+            if (pxMap[size]) styles.push('font-size:' + pxMap[size]);
+          }
+          walk(child);
+          while (child.firstChild) span.appendChild(child.firstChild);
+          if (styles.length) span.setAttribute('style', styles.join(';'));
+          parent.insertBefore(span, child);
+          child.remove();
           return;
         }
         if (tag === 'DIV' || tag === 'P') {
