@@ -1202,12 +1202,16 @@
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       var val = pack[el.getAttribute('data-i18n')] ?? fallback[el.getAttribute('data-i18n')];
       if (val == null) return;
-      if (el.hasAttribute('data-i18n-html')) el.innerHTML = val;
+      if (window.DKGMedia && window.DKGMedia.applyI18nValue) window.DKGMedia.applyI18nValue(el, val);
+      else if (el.hasAttribute('data-i18n-html')) el.innerHTML = val;
       else el.textContent = val;
     });
     document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
       var val = pack[el.getAttribute('data-i18n-aria')] ?? fallback[el.getAttribute('data-i18n-aria')];
-      if (val != null) el.setAttribute('aria-label', val);
+      if (val != null) {
+        var plain = (window.DKGMedia && window.DKGMedia.stripHtml) ? window.DKGMedia.stripHtml(val) : val;
+        el.setAttribute('aria-label', plain);
+      }
     });
     document.querySelectorAll('.lang-switch button').forEach(function (btn) {
       btn.classList.toggle('active', btn.dataset.lang === lang);
@@ -1413,11 +1417,13 @@
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       const val = t(key);
-      if (el.hasAttribute('data-i18n-html')) el.innerHTML = val;
+      if (window.DKGMedia?.applyI18nValue) window.DKGMedia.applyI18nValue(el, val);
+      else if (el.hasAttribute('data-i18n-html')) el.innerHTML = val;
       else el.textContent = val;
     });
     document.querySelectorAll('[data-i18n-aria]').forEach(el => {
-      el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+      const raw = t(el.getAttribute('data-i18n-aria'));
+      el.setAttribute('aria-label', window.DKGMedia?.stripHtml ? window.DKGMedia.stripHtml(raw) : raw);
     });
     burger.setAttribute('aria-label', t('nav.menu'));
     document.querySelectorAll('.unit').forEach(u => {

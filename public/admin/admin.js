@@ -326,6 +326,89 @@
     return /lede|desc|more|p1|p2|title$|a\d|\.q|\.a\d|mission\.\d|vision\.title/.test(key);
   }
 
+  function looksLikeRichHtml(str) {
+    return /<\/?(?:b|strong|i|em|br|span)\b/i.test(String(str || ''));
+  }
+
+  function sanitizeRichHtml(html) {
+    const input = String(html || '');
+    if (!input) return '';
+    const template = document.createElement('template');
+    template.innerHTML = input;
+
+    function cleanStyle(styleText) {
+      if (!styleText) return '';
+      const kept = [];
+      String(styleText).split(';').forEach((part) => {
+        const idx = part.indexOf(':');
+        if (idx < 0) return;
+        const prop = part.slice(0, idx).trim().toLowerCase();
+        const val = part.slice(idx + 1).trim();
+        if (!val) return;
+        if (prop === 'color' && /^(#[0-9a-f]{3,8}|rgb\(|rgba\(|hsl\(|hsla\(|[a-z]+)$/i.test(val)) {
+          kept.push('color:' + val);
+        } else if (prop === 'font-size' && /^\d+(\.\d+)?(px|rem|em|%)$/i.test(val)) {
+          kept.push('font-size:' + val);
+        } else if (prop === 'font-family' && !/url\s*\(|expression|javascript/i.test(val)) {
+          kept.push('font-family:' + val.replace(/["<>]/g, ''));
+        } else if (prop === 'font-weight' && /^(bold|bolder|normal|[1-9]00)$/i.test(val)) {
+          kept.push('font-weight:' + val);
+        } else if (prop === 'font-style' && /^(italic|oblique|normal)$/i.test(val)) {
+          kept.push('font-style:' + val);
+        }
+      });
+      return kept.join(';');
+    }
+
+    function walk(parent) {
+      [...parent.childNodes].forEach((child) => {
+        if (child.nodeType === Node.TEXT_NODE) return;
+        if (child.nodeType !== Node.ELEMENT_NODE) {
+          child.remove();
+          return;
+        }
+        const tag = child.tagName;
+        if (tag === 'BR') {
+          [...child.attributes].forEach((a) => child.removeAttribute(a.name));
+          return;
+        }
+        if (tag === 'B' || tag === 'STRONG' || tag === 'I' || tag === 'EM' || tag === 'SPAN') {
+          const style = cleanStyle(child.getAttribute('style'));
+          [...child.attributes].forEach((a) => child.removeAttribute(a.name));
+          if (style) child.setAttribute('style', style);
+          walk(child);
+          return;
+        }
+        if (tag === 'DIV' || tag === 'P') {
+          walk(child);
+          parent.insertBefore(document.createElement('br'), child);
+          while (child.firstChild) parent.insertBefore(child.firstChild, child);
+          child.remove();
+          return;
+        }
+        walk(child);
+        while (child.firstChild) parent.insertBefore(child.firstChild, child);
+        child.remove();
+      });
+    }
+
+    walk(template.content);
+    return template.innerHTML
+      .replace(/(?:<br\s*\/?>\s*)+$/i, '')
+      .replace(/^(\s*<br\s*\/?>)+/i, '');
+  }
+
+  function valueToEditorHtml(val) {
+    const s = String(val || '');
+    if (!s) return '';
+    if (looksLikeRichHtml(s)) return sanitizeRichHtml(s);
+    return escapeHtml(s).replace(/\n/g, '<br>');
+  }
+
+  function normalizeEditorHtml(el) {
+    return sanitizeRichHtml(el.innerHTML || '');
+  }
+
   function fieldStyle(key) {
     ensureThemeSettings();
     return content.settings.fieldStyles[key] || {};
@@ -374,31 +457,138 @@
     }
   }
 
+  function wrapSelectionWithSpan(styleProp, styleValue) {
+    const sel = window.getSelection();
+    if (!sel || !sel.rangeCount || sel.isCollapsed) return false;
+    const range = sel.getRangeAt(0);
+    const editor = range.commonAncestorContainer.nodeType === 1
+      ? range.commonAncestorContainer.closest('.rte-editor')
+      : range.commonAncestorContainer.parentElement?.closest('.rte-editor');
+    if (!editor) return false;
+    const span = document.createElement('span');
+    span.style[styleProp] = styleValue;
+    try {
+      range.surroundContents(span);
+    } catch {
+      const frag = range.extractContents();
+      span.appendChild(frag);
+      range.insertNode(span);
+    }
+    sel.removeAllRanges();
+    const next = document.createRange();
+    next.selectNodeContents(span);
+    sel.addRange(next);
+    return true;
+  }
+
+  function runRteCommand(editor, cmd, value) {
+    editor.focus();
+    if (cmd === 'bold' || cmd === 'italic') {
+      document.execCommand(cmd, false, null);
+      return;
+    }
+    if (cmd === 'removeFormat') {
+      document.execCommand('removeFormat', false, null);
+      return;
+    }
+    if (cmd === 'color') {
+      document.execCommand('styleWithCSS', false, true);
+      document.execCommand('foreColor', false, value);
+      return;
+    }
+    if (cmd === 'size') {
+      wrapSelectionWithSpan('fontSize', value);
+      return;
+    }
+    if (cmd === 'font') {
+      const font = ensureAdminFontLink(value);
+      if (font) wrapSelectionWithSpan('fontFamily', font.stack);
+    }
+  }
+
+  function bindRteToolbar(box) {
+    box.querySelectorAll('.rte-toolbar').forEach((bar) => {
+      bar.addEventListener('mousedown', (e) => {
+        if (e.target.closest('button, input, select')) e.preventDefault();
+      });
+      const key = bar.getAttribute('data-rte-key');
+      const editor = document.getElementById('f-' + key);
+      if (!editor) return;
+
+      bar.querySelectorAll('[data-rte-cmd]').forEach((el) => {
+        const cmd = el.getAttribute('data-rte-cmd');
+        const fire = () => {
+          const val = el.value;
+          if ((cmd === 'size' || cmd === 'font') && !val) return;
+          runRteCommand(editor, cmd, val);
+        };
+        if (el.tagName === 'BUTTON') el.addEventListener('click', fire);
+        else {
+          el.addEventListener('change', fire);
+          el.addEventListener('input', fire);
+        }
+      });
+
+      editor.addEventListener('paste', (e) => {
+        e.preventDefault();
+        const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+        document.execCommand('insertText', false, text);
+      });
+    });
+  }
+
   function renderContentFields() {
     ensureThemeSettings();
     const box = document.getElementById('fieldsBox');
     const keys = SECTIONS[currentSection] || [];
     box.innerHTML = keys.map((key) => {
       const val = content.i18n?.[editLang]?.[key] || '';
-      const long = isLongKey(key) || String(val).length > 90;
+      const long = isLongKey(key) || String(val).length > 90 || looksLikeRichHtml(val);
       const st = fieldStyle(key);
       const colorVal = st.color || '#000000';
       const hasColor = !!st.color;
+      const editorHtml = valueToEditorHtml(val);
       return `<div class="field field-with-style">
         <label for="f-${key}">${key}</label>
-        ${long
-          ? `<textarea id="f-${key}" data-key="${key}" class="field-preview">${escapeHtml(val)}</textarea>`
-          : `<input id="f-${key}" data-key="${key}" class="field-preview" value="${escapeAttr(val)}">`}
+        <div class="rte-wrap">
+          <div class="rte-toolbar" data-rte-key="${escapeAttr(key)}">
+            <button type="button" class="rte-btn" data-rte-cmd="bold" title="Bold (per kata)"><b>B</b></button>
+            <button type="button" class="rte-btn" data-rte-cmd="italic" title="Italic (per kata)"><i>I</i></button>
+            <label class="rte-tool" title="Warna kata">
+              <span>Warna</span>
+              <input type="color" data-rte-cmd="color" value="#b48040">
+            </label>
+            <label class="rte-tool" title="Ukuran kata">
+              <span>Ukuran</span>
+              <select data-rte-cmd="size">
+                <option value="">—</option>
+                ${['12px','14px','16px','18px','20px','24px','28px','32px','40px','48px'].map((n) =>
+                  `<option value="${n}">${n}</option>`).join('')}
+              </select>
+            </label>
+            <label class="rte-tool" title="Jenis huruf kata">
+              <span>Huruf</span>
+              <select data-rte-cmd="font">
+                <option value="">—</option>
+                ${FONT_OPTIONS.map((f) =>
+                  `<option value="${f.id}">${escapeHtml(f.label)}</option>`).join('')}
+              </select>
+            </label>
+            <button type="button" class="rte-btn rte-btn-clear" data-rte-cmd="removeFormat" title="Hapus format seleksi">Clear</button>
+          </div>
+          <div id="f-${key}" data-key="${key}" class="rte-editor field-preview${long ? ' is-long' : ''}" contenteditable="true" role="textbox" aria-multiline="true">${editorHtml}</div>
+        </div>
+        <p class="rte-hint muted">Seleksi kata lalu pakai toolbar (B / I / warna / ukuran / huruf).</p>
         <div class="field-style-row">
           <label class="field-style-item">
-            <span>Warna</span>
+            <span>Default field — Warna</span>
             <span class="color-row compact">
               <input type="color" data-style-key="${key}" data-style-prop="color" value="${escapeAttr(colorVal)}" ${hasColor ? '' : 'data-unset="1"'}>
               <button type="button" class="btn-reset-style" data-reset-key="${key}" data-reset-prop="color" title="Reset warna">Reset</button>
             </span>
           </label>
           <label class="field-style-item">
-            <span>Ukuran</span>
+            <span>Default field — Ukuran</span>
             <select data-style-key="${key}" data-style-prop="fontSize">
               <option value="">Default</option>
               ${['12px','14px','16px','18px','20px','24px','28px','32px','40px','48px'].map((n) =>
@@ -406,7 +596,7 @@
             </select>
           </label>
           <label class="field-style-item">
-            <span>Huruf</span>
+            <span>Default field — Huruf</span>
             <select data-style-key="${key}" data-style-prop="fontFamily">
               <option value="">Default</option>
               ${FONT_OPTIONS.map((f) =>
@@ -418,6 +608,7 @@
     }).join('');
 
     keys.forEach((key) => applyFieldPreview(key));
+    bindRteToolbar(box);
 
     box.querySelectorAll('[data-style-key]').forEach((el) => {
       const handler = () => {
@@ -449,7 +640,7 @@
     document.querySelectorAll('#fieldsBox [data-key]').forEach((el) => {
       const key = el.getAttribute('data-key');
       if (!content.i18n[editLang]) content.i18n[editLang] = {};
-      content.i18n[editLang][key] = el.value;
+      content.i18n[editLang][key] = el.isContentEditable ? normalizeEditorHtml(el) : el.value;
     });
     document.querySelectorAll('#fieldsBox [data-style-key]').forEach((el) => {
       const key = el.getAttribute('data-style-key');

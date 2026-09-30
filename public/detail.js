@@ -19,7 +19,9 @@
 
   function applyStaticI18n() {
     document.querySelectorAll('[data-i18n]').forEach((el) => {
-      el.textContent = global.DKGMedia.t(el.getAttribute('data-i18n'));
+      const val = global.DKGMedia.t(el.getAttribute('data-i18n'));
+      if (global.DKGMedia.applyI18nValue) global.DKGMedia.applyI18nValue(el, val);
+      else el.textContent = val;
     });
   }
 

@@ -274,6 +274,69 @@ button, input, select, textarea {
 .field textarea.field-preview {
   min-height: 140px;
 }
+.rte-wrap {
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.rte-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+  background: #faf8f4;
+}
+.rte-btn {
+  min-width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ink);
+}
+.rte-btn:hover { border-color: var(--ink); }
+.rte-btn-clear { font-size: 11px; padding: 0 8px; color: var(--muted); }
+.rte-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+.rte-tool select {
+  min-width: 110px;
+  height: 34px;
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink);
+}
+.rte-tool input[type="color"] {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  background: #fff;
+}
+.rte-editor {
+  min-height: 48px;
+  padding: 10px 12px;
+  outline: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.rte-editor.is-long { min-height: 140px; }
+.rte-editor:focus { box-shadow: inset 0 0 0 1px var(--brass, #b48040); }
+.rte-hint {
+  margin: 6px 0 0;
+  font-size: 12px;
+}
 .field-with-style .field-style-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

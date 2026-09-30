@@ -23,6 +23,106 @@
       .replace(/"/g, '&quot;');
   }
 
+  function looksLikeRichHtml(str) {
+    return /<\/?(?:b|strong|i|em|br|span)\b/i.test(String(str || ''));
+  }
+
+  function sanitizeRichHtml(html) {
+    const input = String(html || '');
+    if (!input) return '';
+    const template = document.createElement('template');
+    template.innerHTML = input;
+
+    function cleanStyle(styleText) {
+      if (!styleText) return '';
+      const kept = [];
+      String(styleText).split(';').forEach((part) => {
+        const idx = part.indexOf(':');
+        if (idx < 0) return;
+        const prop = part.slice(0, idx).trim().toLowerCase();
+        const val = part.slice(idx + 1).trim();
+        if (!val) return;
+        if (prop === 'color' && /^(#[0-9a-f]{3,8}|rgb\(|rgba\(|hsl\(|hsla\(|[a-z]+)$/i.test(val)) {
+          kept.push('color:' + val);
+        } else if (prop === 'font-size' && /^\d+(\.\d+)?(px|rem|em|%)$/i.test(val)) {
+          kept.push('font-size:' + val);
+        } else if (prop === 'font-family' && !/url\s*\(|expression|javascript/i.test(val)) {
+          kept.push('font-family:' + val.replace(/["<>]/g, ''));
+        } else if (prop === 'font-weight' && /^(bold|bolder|normal|[1-9]00)$/i.test(val)) {
+          kept.push('font-weight:' + val);
+        } else if (prop === 'font-style' && /^(italic|oblique|normal)$/i.test(val)) {
+          kept.push('font-style:' + val);
+        }
+      });
+      return kept.join(';');
+    }
+
+    function walk(parent) {
+      [...parent.childNodes].forEach((child) => {
+        if (child.nodeType === Node.TEXT_NODE) return;
+        if (child.nodeType !== Node.ELEMENT_NODE) {
+          child.remove();
+          return;
+        }
+        const tag = child.tagName;
+        if (tag === 'BR') {
+          [...child.attributes].forEach((a) => child.removeAttribute(a.name));
+          return;
+        }
+        if (tag === 'B' || tag === 'STRONG' || tag === 'I' || tag === 'EM' || tag === 'SPAN') {
+          const style = cleanStyle(child.getAttribute('style'));
+          [...child.attributes].forEach((a) => child.removeAttribute(a.name));
+          if (style) child.setAttribute('style', style);
+          walk(child);
+          return;
+        }
+        if (tag === 'DIV' || tag === 'P') {
+          walk(child);
+          const br = document.createElement('br');
+          parent.insertBefore(br, child);
+          while (child.firstChild) parent.insertBefore(child.firstChild, child);
+          child.remove();
+          return;
+        }
+        walk(child);
+        while (child.firstChild) parent.insertBefore(child.firstChild, child);
+        child.remove();
+      });
+    }
+
+    walk(template.content);
+    return template.innerHTML
+      .replace(/(?:<br\s*\/?>\s*)+$/i, '')
+      .replace(/^(\s*<br\s*\/?>)+/i, '');
+  }
+
+  function ensureFontsFromHtml(html) {
+    const s = String(html || '');
+    Object.keys(FONT_MAP).forEach((id) => {
+      const font = FONT_MAP[id];
+      const name = font.stack.split(',')[0].replace(/'/g, '').trim();
+      if (name && s.includes(name)) ensureFontLink(font.href);
+    });
+  }
+
+  function applyI18nValue(el, val) {
+    if (val == null) return;
+    const str = String(val);
+    if (el.hasAttribute('data-i18n-html') || looksLikeRichHtml(str)) {
+      const clean = sanitizeRichHtml(str);
+      el.innerHTML = clean;
+      ensureFontsFromHtml(clean);
+    } else {
+      el.textContent = str;
+    }
+  }
+
+  function stripHtml(str) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = sanitizeRichHtml(str);
+    return tmp.textContent || tmp.innerText || '';
+  }
+
   function t(key) {
     const pack = (global.DKG_I18N && (global.DKG_I18N[lang()] || global.DKG_I18N.id)) || {};
     const fallback = (global.DKG_I18N && global.DKG_I18N.id) || {};
@@ -800,6 +900,10 @@
     lang,
     bi,
     escapeHtml,
+    sanitizeRichHtml,
+    looksLikeRichHtml,
+    applyI18nValue,
+    stripHtml,
     t,
     limitList,
     initCarousel,
